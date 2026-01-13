@@ -98,7 +98,7 @@ div[class*="vfrc-header"] {
 }
 
 /* ==========================================================
-   CONTENEUR PRINCIPAL - Bord à bord, transparent
+   CONTENEUR PRINCIPAL - Bord à bord, transparent, COMPACT
    ========================================================== */
 .vfrc-chat,
 .vfrc-chat__container,
@@ -107,14 +107,27 @@ div[class*="vfrc-header"] {
   margin: 0 !important;
   width: 100% !important;
   max-width: 100% !important;
+  gap: 0 !important;
 }
 
 .vfrc-chat--dialog,
 .vfrc-chat-dialog,
 .vfrc-chat-dialog__container {
-  padding: 16px 12px !important;
+  padding: 16px 12px 8px 12px !important;
   margin: 0 !important;
   background: transparent !important;
+  gap: 0 !important;
+}
+
+/* FIX : Réduire l'espace après les messages/boutons */
+.vfrc-system-response,
+.vfrc-user-response {
+  margin-bottom: 8px !important;
+}
+
+.vfrc-system-response:last-child,
+.vfrc-user-response:last-child {
+  margin-bottom: 4px !important;
 }
 
 /* ==========================================================
@@ -373,14 +386,15 @@ button.vfrc-button:not(.vfrc-header--button):active {
     0 2px 15px -4px var(--glow-fuchsia) !important;
 }
 
-/* Container boutons */
+/* Container boutons - COMPACT */
 .vfrc-button-container,
 .vfrc-card--buttons {
   display: flex !important;
   flex-wrap: wrap !important;
   gap: 8px !important;
-  padding: 12px 0 !important;
+  padding: 8px 0 !important;
   justify-content: flex-start !important;
+  margin-bottom: 0 !important;
 }
 
 /* ==========================================================
@@ -396,13 +410,46 @@ div[class*="chat-input"] {
   border: none !important;
   border-top: none !important;
   box-shadow: none !important;
-  padding: 16px 8px !important;
+  padding: 8px 8px 12px 8px !important;
+  margin: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* FIX : Réduire l'espace entre le contenu et l'input */
+.vfrc-chat--dialog,
+.vfrc-chat-dialog,
+.vfrc-chat-dialog__container {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* FIX : Footer collé au contenu */
+.vfrc-footer,
+div[class*="footer"] {
+  margin-top: 8px !important;
+  padding-top: 8px !important;
+}
+
+/* FIX : Supprimer les gaps excessifs */
+.vfrc-chat__container,
+.vfrc-chat__container-inner {
+  gap: 0 !important;
+}
+
+/* FIX : Boutons - réduire margin bottom */
+.vfrc-button-container,
+.vfrc-card--buttons,
+div[class*="button-container"] {
+  margin-bottom: 8px !important;
+  padding-bottom: 0 !important;
 }
 
 /* Container input - avec bordure gradient */
 .vfrc-chat-input__container,
 .vfrc-chat-input {
   position: relative !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
 }
 
 /* Textarea - Dark glass avec bordure gradient */
@@ -745,6 +792,34 @@ div[class*="input-container"] {
   box-shadow: none !important;
 }
 
+/* FIX : Supprimer TOUT espace/padding/margin excessif dans la structure */
+.vfrc-chat,
+.vfrc-chat__container,
+.vfrc-chat__container-inner,
+.vfrc-widget {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.vfrc-chat--dialog,
+.vfrc-chat-dialog {
+  flex: 1 !important;
+  min-height: 0 !important;
+}
+
+/* FIX : Le spacer ou élément vide qui prend de la place */
+.vfrc-chat > div:empty,
+.vfrc-chat__container > div:empty,
+.vfrc-chat__container-inner > div:empty,
+.vfrc-spacer,
+div[class*="spacer"] {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
 /* Input spécifique - override agressif du blanc */
 input[type="text"],
 textarea {
@@ -786,7 +861,8 @@ textarea {
   }
 }
 
-.vfrc-message {
+.vfrc-message:not([class*="extension"]) { 
+  margin: 8px 0 !important;
   animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
