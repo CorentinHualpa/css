@@ -1,0 +1,660 @@
+/* ==========================================================
+   Revolution Agency × Voiceflow — Thème Fondu v1.0
+   
+   Design : Intégration seamless dans landing page sombre
+   Couleurs : Violet → Fuchsia → Rose → Orange
+   Fonts : Syne (titres) + Outfit (corps)
+   Style : Glassmorphism, pas de header, pas de bordures
+   ========================================================== */
+
+/* ==========================================================
+   Import des polices
+   ========================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap');
+
+/* ==========================================================
+   Variables du thème Revolution Agency
+   ========================================================== */
+:root {
+  /* Fonts */
+  --font-heading: 'Syne', sans-serif;
+  --font-body: 'Outfit', sans-serif;
+  
+  /* Couleurs fond */
+  --bg-primary: #0a0a0b;
+  --bg-secondary: #0f0f11;
+  --bg-card: #141416;
+  --bg-card-hover: #1a1a1d;
+  
+  /* Gradient signature */
+  --gradient-main: linear-gradient(135deg, #7c3aed 0%, #c026d3 35%, #e11d48 65%, #f97316 100%);
+  --gradient-subtle: linear-gradient(135deg, rgba(124,58,237,0.15) 0%, rgba(192,38,211,0.15) 50%, rgba(249,115,22,0.15) 100%);
+  
+  /* Accents */
+  --accent-violet: #7c3aed;
+  --accent-fuchsia: #c026d3;
+  --accent-rose: #e11d48;
+  --accent-orange: #f97316;
+  
+  /* Glow */
+  --glow-violet: rgba(124, 58, 237, 0.4);
+  --glow-fuchsia: rgba(192, 38, 211, 0.4);
+  
+  /* Texte */
+  --text-primary: #fafafa;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  
+  /* Glass & Borders */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-glow: rgba(255, 255, 255, 0.15);
+  --glass: rgba(255, 255, 255, 0.03);
+  --glass-strong: rgba(255, 255, 255, 0.06);
+  
+  /* Tailles */
+  --fs-h1: 24px;
+  --fs-h2: 20px;
+  --fs-h3: 16px;
+  --fs-body: 14px;
+  --fs-small: 12px;
+  --fs-button: 13px;
+}
+
+/* ==========================================================
+   RESET COMPLET - Fond transparent, pas de conteneur visible
+   ========================================================== */
+.vfrc-widget,
+.vfrc-chat,
+.vfrc-chat__container,
+.vfrc-chat__container-inner,
+.vfrc-chat-dialog,
+.vfrc-chat-dialog__container,
+.vfrc-chat--dialog {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+/* ==========================================================
+   HEADER - COMPLÈTEMENT MASQUÉ
+   ========================================================== */
+.vfrc-header,
+.vfrc-header--container,
+.vfrc-header--container-inner,
+div.vfrc-header,
+div[class*="vfrc-header"] {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* ==========================================================
+   CONTENEUR PRINCIPAL - Bord à bord, transparent
+   ========================================================== */
+.vfrc-chat,
+.vfrc-chat__container,
+.vfrc-chat__container-inner {
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.vfrc-chat--dialog,
+.vfrc-chat-dialog,
+.vfrc-chat-dialog__container {
+  padding: 16px 12px !important;
+  margin: 0 !important;
+  background: transparent !important;
+}
+
+/* ==========================================================
+   BULLES SYSTÈME (Bot) - Glassmorphism subtil
+   ========================================================== */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) {
+  font-family: var(--font-body) !important;
+  font-weight: 400 !important;
+  font-size: var(--fs-body) !important;
+  line-height: 1.6 !important;
+  color: var(--text-primary) !important;
+  background: var(--glass-strong) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 16px !important;
+  padding: 14px 18px !important;
+  max-width: 85% !important;
+  margin: 8px 0 !important;
+  box-shadow: 
+    0 4px 24px -8px rgba(0, 0, 0, 0.3),
+    inset 0 0 20px rgba(124, 58, 237, 0.03) !important;
+}
+
+/* Hover subtil sur les bulles bot */
+.vfrc-system-response .vfrc-message:not([class*="extension"]):hover {
+  border-color: var(--border-glow) !important;
+  box-shadow: 
+    0 4px 30px -8px rgba(124, 58, 237, 0.15),
+    inset 0 0 20px rgba(124, 58, 237, 0.05) !important;
+}
+
+/* ==========================================================
+   BULLES UTILISATEUR - Gradient signature
+   ========================================================== */
+.vfrc-user-response > div,
+.vfrc-user-response .vfrc-message {
+  font-family: var(--font-body) !important;
+  font-weight: 400 !important;
+  font-size: var(--fs-body) !important;
+  line-height: 1.6 !important;
+  color: #ffffff !important;
+  background: var(--gradient-main) !important;
+  border: none !important;
+  border-radius: 16px !important;
+  padding: 14px 18px !important;
+  max-width: 85% !important;
+  margin: 8px 0 !important;
+  box-shadow: 
+    0 4px 20px -4px var(--glow-fuchsia),
+    0 0 40px -10px var(--glow-violet) !important;
+}
+
+.vfrc-user-response > div *,
+.vfrc-user-response .vfrc-message * {
+  color: #ffffff !important;
+}
+
+/* ==========================================================
+   TYPOGRAPHIE - Titres avec gradient
+   ========================================================== */
+/* H1 - Grand titre gradient */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) h1,
+.vfrc-system-response .vfrc-message:not([class*="extension"]) .markdown h1,
+._11kfxpg1 h1,
+._11kfxpg3 h1 {
+  font-family: var(--font-heading) !important;
+  font-weight: 700 !important;
+  font-size: var(--fs-h1) !important;
+  line-height: 1.2 !important;
+  background: var(--gradient-main) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  margin: 0 0 12px 0 !important;
+  padding: 0 !important;
+}
+
+/* H2 - Titre secondaire gradient */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) h2,
+.vfrc-system-response .vfrc-message:not([class*="extension"]) .markdown h2,
+._11kfxpg1 h2,
+._11kfxpg3 h2 {
+  font-family: var(--font-heading) !important;
+  font-weight: 600 !important;
+  font-size: var(--fs-h2) !important;
+  line-height: 1.3 !important;
+  background: var(--gradient-main) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  margin: 16px 0 10px 0 !important;
+  padding: 0 !important;
+}
+
+/* H3 - Sous-titre violet */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) h3,
+.vfrc-system-response .vfrc-message:not([class*="extension"]) .markdown h3,
+._11kfxpg1 h3,
+._11kfxpg3 h3 {
+  font-family: var(--font-heading) !important;
+  font-weight: 600 !important;
+  font-size: var(--fs-h3) !important;
+  line-height: 1.3 !important;
+  color: var(--accent-violet) !important;
+  margin: 14px 0 8px 0 !important;
+  padding: 0 !important;
+}
+
+/* H4, H5, H6 - Fuchsia */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) h4,
+.vfrc-system-response .vfrc-message:not([class*="extension"]) h5,
+.vfrc-system-response .vfrc-message:not([class*="extension"]) h6,
+._11kfxpg1 h4, ._11kfxpg1 h5, ._11kfxpg1 h6,
+._11kfxpg3 h4, ._11kfxpg3 h5, ._11kfxpg3 h6 {
+  font-family: var(--font-heading) !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  line-height: 1.4 !important;
+  color: var(--accent-fuchsia) !important;
+  margin: 12px 0 6px 0 !important;
+}
+
+/* ==========================================================
+   PARAGRAPHES & TEXTE
+   ========================================================== */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) p,
+.vfrc-system-response .vfrc-message:not([class*="extension"]) .markdown p,
+._11kfxpg1 p,
+._11kfxpg3 p {
+  font-family: var(--font-body) !important;
+  font-size: var(--fs-body) !important;
+  font-weight: 400 !important;
+  line-height: 1.6 !important;
+  color: var(--text-primary) !important;
+  margin: 8px 0 !important;
+}
+
+/* Texte en gras - Blanc pur */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) strong,
+._11kfxpg1 strong,
+._11kfxpg3 strong {
+  font-weight: 600 !important;
+  color: #ffffff !important;
+}
+
+/* Liens - Gradient au hover */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) a,
+._11kfxpg1 a,
+._11kfxpg3 a {
+  color: var(--accent-fuchsia) !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid transparent !important;
+  transition: all 0.3s ease !important;
+}
+
+.vfrc-system-response .vfrc-message:not([class*="extension"]) a:hover,
+._11kfxpg1 a:hover,
+._11kfxpg3 a:hover {
+  color: var(--accent-violet) !important;
+  border-bottom-color: var(--accent-violet) !important;
+}
+
+/* ==========================================================
+   LISTES - Puces stylées
+   ========================================================== */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) ul,
+._11kfxpg1 ul,
+._11kfxpg3 ul {
+  list-style: none !important;
+  padding-left: 1.5em !important;
+  margin: 10px 0 !important;
+}
+
+.vfrc-system-response .vfrc-message:not([class*="extension"]) ul li,
+._11kfxpg1 ul li,
+._11kfxpg3 ul li {
+  position: relative !important;
+  margin: 6px 0 !important;
+  padding-left: 8px !important;
+  font-size: var(--fs-body) !important;
+  line-height: 1.6 !important;
+}
+
+/* Puce custom gradient */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) ul li::before,
+._11kfxpg1 ul li::before,
+._11kfxpg3 ul li::before {
+  content: "▸" !important;
+  position: absolute !important;
+  left: -1em !important;
+  color: var(--accent-fuchsia) !important;
+  font-size: 1em !important;
+}
+
+/* Listes numérotées */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) ol,
+._11kfxpg1 ol,
+._11kfxpg3 ol {
+  padding-left: 1.5em !important;
+  margin: 10px 0 !important;
+}
+
+.vfrc-system-response .vfrc-message:not([class*="extension"]) ol li,
+._11kfxpg1 ol li,
+._11kfxpg3 ol li {
+  margin: 6px 0 !important;
+  font-size: var(--fs-body) !important;
+}
+
+/* ==========================================================
+   BOUTONS - Ghost style avec glow
+   ========================================================== */
+.vfrc-button:not(.vfrc-header--button),
+button.vfrc-button:not(.vfrc-header--button) {
+  font-family: var(--font-body) !important;
+  font-weight: 500 !important;
+  font-size: var(--fs-button) !important;
+  line-height: 1.4 !important;
+  letter-spacing: 0.02em !important;
+  background: transparent !important;
+  border: 1px solid var(--border-glow) !important;
+  color: var(--text-primary) !important;
+  border-radius: 12px !important;
+  padding: 12px 20px !important;
+  margin: 6px 4px !important;
+  cursor: pointer !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* Hover - Glow violet */
+.vfrc-button:not(.vfrc-header--button):hover,
+button.vfrc-button:not(.vfrc-header--button):hover {
+  background: rgba(124, 58, 237, 0.1) !important;
+  border-color: var(--accent-violet) !important;
+  color: #ffffff !important;
+  box-shadow: 
+    0 0 20px -5px var(--glow-violet),
+    inset 0 0 20px rgba(124, 58, 237, 0.1) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Active - Press effect */
+.vfrc-button:not(.vfrc-header--button):active,
+button.vfrc-button:not(.vfrc-header--button):active {
+  transform: translateY(0) !important;
+  box-shadow: 
+    0 0 15px -5px var(--glow-fuchsia),
+    inset 0 0 30px rgba(192, 38, 211, 0.15) !important;
+}
+
+/* Container boutons */
+.vfrc-button-container,
+.vfrc-card--buttons {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  padding: 12px 0 !important;
+  justify-content: flex-start !important;
+}
+
+/* ==========================================================
+   ZONE DE SAISIE - Glass effect
+   ========================================================== */
+.vfrc-chat-input,
+.vfrc-chat-input__container,
+.vfrc-footer,
+.vfrc-footer__content {
+  background: var(--glass) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: none !important;
+  border-top: 1px solid var(--border-subtle) !important;
+  box-shadow: none !important;
+  padding: 12px 16px !important;
+}
+
+/* Textarea */
+.vfrc-chat-input textarea,
+.vfrc-chat-input input,
+textarea.vfrc-chat-input,
+textarea._1gdvh9ta {
+  font-family: var(--font-body) !important;
+  font-weight: 400 !important;
+  font-size: var(--fs-body) !important;
+  line-height: 1.5 !important;
+  color: var(--text-primary) !important;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 12px !important;
+  padding: 12px 16px !important;
+  min-height: 44px !important;
+  max-height: 200px !important;
+  resize: none !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Focus state */
+.vfrc-chat-input textarea:focus,
+textarea._1gdvh9ta:focus {
+  outline: none !important;
+  border-color: var(--accent-violet) !important;
+  box-shadow: 
+    0 0 0 3px rgba(124, 58, 237, 0.15),
+    0 0 20px -5px var(--glow-violet) !important;
+}
+
+/* Placeholder */
+.vfrc-chat-input textarea::placeholder,
+textarea._1gdvh9ta::placeholder {
+  color: var(--text-muted) !important;
+  font-style: italic !important;
+}
+
+/* ==========================================================
+   BOUTON ENVOYER - Gradient avec glow
+   ========================================================== */
+#vfrc-send-message,
+.vfrc-chat-input__send {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 12px !important;
+  padding: 10px 20px !important;
+  color: var(--text-muted) !important;
+  font-family: var(--font-body) !important;
+  font-weight: 500 !important;
+  font-size: var(--fs-small) !important;
+  cursor: not-allowed !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  min-width: 90px !important;
+}
+
+/* État actif - Gradient */
+#vfrc-send-message:not([disabled]),
+.vfrc-chat-input__send:not([disabled]) {
+  background: var(--gradient-main) !important;
+  border: none !important;
+  color: #ffffff !important;
+  cursor: pointer !important;
+  box-shadow: 
+    0 4px 20px -4px var(--glow-fuchsia),
+    0 0 30px -10px var(--glow-violet) !important;
+}
+
+#vfrc-send-message:not([disabled]):hover,
+.vfrc-chat-input__send:not([disabled]):hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 
+    0 6px 30px -4px var(--glow-fuchsia),
+    0 0 40px -10px var(--glow-violet) !important;
+}
+
+/* Masquer l'icône SVG, afficher texte */
+#vfrc-send-message svg,
+.vfrc-chat-input__send svg {
+  display: none !important;
+}
+
+#vfrc-send-message::after,
+.vfrc-chat-input__send::after {
+  content: "Enviar";
+  font-family: var(--font-body);
+  font-weight: 500;
+}
+
+/* ==========================================================
+   SCROLLBAR - Custom violet
+   ========================================================== */
+.vfrc-chat--dialog,
+.vfrc-chat-dialog,
+.vfrc-chat-dialog__container {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-violet) transparent;
+}
+
+.vfrc-chat--dialog::-webkit-scrollbar,
+.vfrc-chat-dialog::-webkit-scrollbar {
+  width: 6px;
+}
+
+.vfrc-chat--dialog::-webkit-scrollbar-thumb,
+.vfrc-chat-dialog::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--accent-violet), var(--accent-fuchsia));
+  border-radius: 10px;
+}
+
+.vfrc-chat--dialog::-webkit-scrollbar-track,
+.vfrc-chat-dialog::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ==========================================================
+   BLOCKQUOTES - Style élégant
+   ========================================================== */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) blockquote,
+._11kfxpg1 blockquote,
+._11kfxpg3 blockquote {
+  border-left: 3px solid var(--accent-fuchsia) !important;
+  background: rgba(192, 38, 211, 0.08) !important;
+  padding: 12px 16px !important;
+  margin: 12px 0 !important;
+  border-radius: 0 8px 8px 0 !important;
+  font-style: italic !important;
+  color: var(--text-secondary) !important;
+}
+
+/* ==========================================================
+   CODE BLOCKS
+   ========================================================== */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) code,
+._11kfxpg1 code,
+._11kfxpg3 code {
+  font-family: 'Fira Code', 'Monaco', monospace !important;
+  font-size: 12px !important;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 6px !important;
+  padding: 2px 6px !important;
+  color: var(--accent-orange) !important;
+}
+
+.vfrc-system-response .vfrc-message:not([class*="extension"]) pre,
+._11kfxpg1 pre,
+._11kfxpg3 pre {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 12px !important;
+  padding: 16px !important;
+  overflow-x: auto !important;
+  margin: 12px 0 !important;
+}
+
+/* ==========================================================
+   LIGNE HORIZONTALE
+   ========================================================== */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) hr,
+._11kfxpg1 hr,
+._11kfxpg3 hr {
+  border: none !important;
+  height: 1px !important;
+  background: var(--gradient-main) !important;
+  opacity: 0.3 !important;
+  margin: 20px 0 !important;
+}
+
+/* ==========================================================
+   IMAGES
+   ========================================================== */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) img,
+._11kfxpg1 img,
+._11kfxpg3 img {
+  max-width: 100% !important;
+  border-radius: 12px !important;
+  margin: 12px 0 !important;
+  box-shadow: 0 4px 20px -8px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* ==========================================================
+   CAROUSELS & CARDS - Glass effect
+   ========================================================== */
+.vfrc-carousel,
+.vfrc-card {
+  background: var(--glass-strong) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  transition: all 0.3s ease !important;
+}
+
+.vfrc-carousel:hover,
+.vfrc-card:hover {
+  border-color: var(--border-glow) !important;
+  box-shadow: 0 8px 30px -10px var(--glow-violet) !important;
+  transform: translateY(-4px) !important;
+}
+
+.vfrc-card__title {
+  font-family: var(--font-heading) !important;
+  font-weight: 600 !important;
+  color: var(--text-primary) !important;
+}
+
+.vfrc-card__description {
+  font-family: var(--font-body) !important;
+  color: var(--text-secondary) !important;
+}
+
+/* ==========================================================
+   PROTECTION EXTENSIONS
+   ========================================================== */
+.vfrc-message[class*="extension"] {
+  background: transparent !important;
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* ==========================================================
+   ANIMATIONS D'ENTRÉE
+   ========================================================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.vfrc-message {
+  animation: fadeInUp 0.3s ease-out !important;
+}
+
+/* ==========================================================
+   RESPONSIVE - Mobile optimizations
+   ========================================================== */
+@media (max-width: 768px) {
+  .vfrc-system-response .vfrc-message:not([class*="extension"]),
+  .vfrc-user-response > div,
+  .vfrc-user-response .vfrc-message {
+    max-width: 95% !important;
+    padding: 12px 14px !important;
+    font-size: 13px !important;
+  }
+  
+  .vfrc-button:not(.vfrc-header--button) {
+    padding: 10px 16px !important;
+    font-size: 12px !important;
+  }
+  
+  :root {
+    --fs-h1: 20px;
+    --fs-h2: 18px;
+    --fs-h3: 15px;
+    --fs-body: 13px;
+  }
+}
