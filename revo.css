@@ -1,10 +1,12 @@
 /* ==========================================================
-   Revolution Agency × Voiceflow — Thème Fondu v1.0
+   Revolution Agency × Voiceflow — Thème Fondu v1.1
    
    Design : Intégration seamless dans landing page sombre
    Couleurs : Violet → Fuchsia → Rose → Orange
    Fonts : Syne (titres) + Outfit (corps)
    Style : Glassmorphism, pas de header, pas de bordures
+   
+   v1.1 - Fix espace vide footer
    ========================================================== */
 
 /* ==========================================================
@@ -84,7 +86,9 @@
 .vfrc-header--container,
 .vfrc-header--container-inner,
 div.vfrc-header,
-div[class*="vfrc-header"] {
+div[class*="vfrc-header"],
+.jyiuei2,
+.jyiuei3 {
   display: none !important;
   visibility: hidden !important;
   height: 0 !important;
@@ -128,6 +132,92 @@ div[class*="vfrc-header"] {
 .vfrc-system-response:last-child,
 .vfrc-user-response:last-child {
   margin-bottom: 4px !important;
+}
+
+/* ==========================================================
+   FIX ESPACE VIDE FOOTER - Masquer éléments superflus
+   ========================================================== */
+
+/* Spacer bottom - MASQUER COMPLÈTEMENT */
+.vfrc-chat--bottom-spacer,
+div[class*="bottom-spacer"],
+.s9t60i2,
+.s9t60i4 {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  visibility: hidden !important;
+}
+
+/* Bouton Start new chat - MASQUER */
+.vfrc-footer__start-button,
+div[class*="start-button"],
+#vfrc-start-chat {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Bouton scroll to bottom - MASQUER */
+.vfrc-footer__content-scroll-to-bottom,
+div[class*="scroll-to-bottom"],
+.oq48l92,
+._1cosygz0 {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  visibility: hidden !important;
+}
+
+/* Footer links vide - MASQUER */
+.vfrc-footer__links,
+.jsli361,
+.jsli363 {
+  display: none !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Overlay et prompt - MASQUER */
+.vfrc-chat--overlay,
+.vfrc-prompt,
+._5x612k3 {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Footer principal - Compact */
+.vfrc-footer,
+._1vj16242 {
+  padding: 8px 12px !important;
+  margin: 0 !important;
+  gap: 0 !important;
+  min-height: auto !important;
+  background: transparent !important;
+}
+
+.vfrc-footer__content,
+._1vj16245 {
+  padding: 0 !important;
+  margin: 0 !important;
+  gap: 8px !important;
+  display: flex !important;
+  flex-direction: column !important;
 }
 
 /* ==========================================================
@@ -345,8 +435,8 @@ div[class*="vfrc-header"] {
 /* ==========================================================
    BOUTONS - Bordure gradient + hover plein
    ========================================================== */
-.vfrc-button:not(.vfrc-header--button),
-button.vfrc-button:not(.vfrc-header--button) {
+.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat),
+button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat) {
   font-family: var(--font-body) !important;
   font-weight: 500 !important;
   font-size: var(--fs-button) !important;
@@ -367,8 +457,8 @@ button.vfrc-button:not(.vfrc-header--button) {
 }
 
 /* Hover - Fond gradient plein */
-.vfrc-button:not(.vfrc-header--button):hover,
-button.vfrc-button:not(.vfrc-header--button):hover {
+.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):hover,
+button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):hover {
   background: var(--gradient-main) !important;
   border-color: transparent !important;
   color: #ffffff !important;
@@ -379,8 +469,8 @@ button.vfrc-button:not(.vfrc-header--button):hover {
 }
 
 /* Active - Press effect */
-.vfrc-button:not(.vfrc-header--button):active,
-button.vfrc-button:not(.vfrc-header--button):active {
+.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):active,
+button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):active {
   transform: translateY(0) scale(0.98) !important;
   box-shadow: 
     0 2px 15px -4px var(--glow-fuchsia) !important;
@@ -388,7 +478,8 @@ button.vfrc-button:not(.vfrc-header--button):active {
 
 /* Container boutons - COMPACT */
 .vfrc-button-container,
-.vfrc-card--buttons {
+.vfrc-card--buttons,
+.vfrc-system-response--actions {
   display: flex !important;
   flex-wrap: wrap !important;
   gap: 8px !important;
@@ -410,9 +501,6 @@ div[class*="chat-input"] {
   border: none !important;
   border-top: none !important;
   box-shadow: none !important;
-  padding: 8px 8px 12px 8px !important;
-  margin: 0 !important;
-  margin-top: 0 !important;
 }
 
 /* FIX : Réduire l'espace entre le contenu et l'input */
@@ -423,33 +511,30 @@ div[class*="chat-input"] {
   margin-bottom: 0 !important;
 }
 
-/* FIX : Footer collé au contenu */
-.vfrc-footer,
-div[class*="footer"] {
-  margin-top: 8px !important;
-  padding-top: 8px !important;
-}
-
-/* FIX : Supprimer les gaps excessifs */
-.vfrc-chat__container,
-.vfrc-chat__container-inner {
-  gap: 0 !important;
-}
-
-/* FIX : Boutons - réduire margin bottom */
-.vfrc-button-container,
-.vfrc-card--buttons,
-div[class*="button-container"] {
-  margin-bottom: 8px !important;
-  padding-bottom: 0 !important;
-}
-
 /* Container input - avec bordure gradient */
 .vfrc-chat-input__container,
-.vfrc-chat-input {
+.vfrc-chat-input,
+._1gdvh9t0 {
   position: relative !important;
   margin-top: 0 !important;
   padding-top: 0 !important;
+}
+
+/* Input container inner */
+.vfrc-input-container,
+._1gdvh9t2,
+._1gdvh9t3 {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Focus ring - masquer */
+.vfrc-chat-focus-ring,
+._1gdvh9t7,
+._1gdvh9t8,
+._1gdvh9t9 {
+  display: none !important;
 }
 
 /* Textarea - Dark glass avec bordure gradient */
@@ -511,7 +596,7 @@ textarea._1gdvh9ta:focus,
 .vfrc-chat-input textarea::placeholder,
 textarea._1gdvh9ta::placeholder,
 .vfrc-chat-input__input::placeholder {
-  color: rgba(167, 139, 250, 0.5) !important; /* Violet clair transparent */
+  color: rgba(167, 139, 250, 0.5) !important;
   font-style: normal !important;
   font-weight: 400 !important;
   transition: all 0.3s ease !important;
@@ -551,7 +636,8 @@ textarea._1gdvh9ta:placeholder-shown:not(:focus) {
    ========================================================== */
 #vfrc-send-message,
 .vfrc-chat-input__send,
-button[class*="send"] {
+button[class*="send"],
+._1gdvh9tf {
   background: linear-gradient(135deg, rgba(30,30,35,0.95) 0%, rgba(40,40,45,0.9) 100%) !important;
   border: none !important;
   border-radius: 14px !important;
@@ -598,12 +684,14 @@ button[class*="send"]:not([disabled]) {
 
 /* Masquer l'icône SVG, afficher texte */
 #vfrc-send-message svg,
-.vfrc-chat-input__send svg {
+.vfrc-chat-input__send svg,
+._1gdvh9tf svg {
   display: none !important;
 }
 
 #vfrc-send-message::after,
-.vfrc-chat-input__send::after {
+.vfrc-chat-input__send::after,
+._1gdvh9tf::after {
   content: "Enviar";
   font-family: var(--font-body);
   font-weight: 600;
@@ -867,7 +955,7 @@ textarea {
 }
 
 /* Animation subtile sur les boutons au repos */
-.vfrc-button:not(.vfrc-header--button) {
+.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat) {
   animation: glowPulse 3s ease-in-out infinite !important;
 }
 
@@ -883,7 +971,7 @@ textarea {
     font-size: 13px !important;
   }
   
-  .vfrc-button:not(.vfrc-header--button) {
+  .vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat) {
     padding: 10px 16px !important;
     font-size: 12px !important;
   }
