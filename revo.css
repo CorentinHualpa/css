@@ -384,98 +384,164 @@ button.vfrc-button:not(.vfrc-header--button):active {
 }
 
 /* ==========================================================
-   ZONE DE SAISIE - Intégrée au fond sombre
+   ZONE DE SAISIE - Dark & Attractive
    ========================================================== */
 .vfrc-chat-input,
 .vfrc-chat-input__container,
 .vfrc-footer,
-.vfrc-footer__content {
+.vfrc-footer__content,
+div[class*="vfrc-footer"],
+div[class*="chat-input"] {
   background: transparent !important;
   border: none !important;
-  border-top: 1px solid rgba(124, 58, 237, 0.15) !important;
-  box-shadow: 0 -10px 30px -10px rgba(0,0,0,0.3) !important;
-  padding: 16px 12px !important;
+  border-top: none !important;
+  box-shadow: none !important;
+  padding: 16px 8px !important;
 }
 
-/* Textarea - Style unifié avec le reste */
+/* Container input - avec bordure gradient */
+.vfrc-chat-input__container,
+.vfrc-chat-input {
+  position: relative !important;
+}
+
+/* Textarea - Dark glass avec bordure gradient */
 .vfrc-chat-input textarea,
 .vfrc-chat-input input,
 textarea.vfrc-chat-input,
-textarea._1gdvh9ta {
+textarea._1gdvh9ta,
+.vfrc-chat-input__input,
+input[class*="chat-input"] {
   font-family: var(--font-body) !important;
   font-weight: 400 !important;
   font-size: var(--fs-body) !important;
   line-height: 1.5 !important;
-  color: var(--text-primary) !important;
-  background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(20,20,22,0.95) 100%) !important;
-  border: 1px solid rgba(124, 58, 237, 0.2) !important;
+  color: #ffffff !important;
+  background: linear-gradient(135deg, rgba(20,20,22,0.95) 0%, rgba(30,30,35,0.9) 100%) !important;
+  border: 1.5px solid transparent !important;
+  background-clip: padding-box !important;
   border-radius: 16px !important;
-  padding: 14px 18px !important;
-  min-height: 48px !important;
+  padding: 16px 20px !important;
+  min-height: 52px !important;
   max-height: 150px !important;
   resize: none !important;
-  transition: all 0.3s ease !important;
-  box-shadow: inset 0 0 20px rgba(0,0,0,0.2) !important;
-}
-
-/* Focus state - Glow violet */
-.vfrc-chat-input textarea:focus,
-textarea._1gdvh9ta:focus {
-  outline: none !important;
-  border-color: var(--accent-violet) !important;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative !important;
+  
+  /* Bordure gradient subtile */
   box-shadow: 
-    0 0 0 3px rgba(124, 58, 237, 0.1),
-    0 0 25px -5px var(--glow-violet),
-    inset 0 0 20px rgba(124, 58, 237, 0.05) !important;
+    inset 0 0 0 1.5px rgba(124, 58, 237, 0.25),
+    0 4px 20px -10px rgba(0,0,0,0.5),
+    0 0 30px -15px var(--glow-violet) !important;
 }
 
-/* Placeholder stylé */
+/* Hover state - bordure plus visible */
+.vfrc-chat-input textarea:hover,
+textarea._1gdvh9ta:hover,
+.vfrc-chat-input__input:hover {
+  box-shadow: 
+    inset 0 0 0 1.5px rgba(124, 58, 237, 0.4),
+    0 4px 25px -10px rgba(0,0,0,0.5),
+    0 0 40px -15px var(--glow-violet) !important;
+}
+
+/* Focus state - Glow intense + bordure gradient */
+.vfrc-chat-input textarea:focus,
+textarea._1gdvh9ta:focus,
+.vfrc-chat-input__input:focus {
+  outline: none !important;
+  background: linear-gradient(135deg, rgba(25,25,30,0.98) 0%, rgba(35,35,40,0.95) 100%) !important;
+  box-shadow: 
+    inset 0 0 0 2px rgba(124, 58, 237, 0.5),
+    0 0 0 4px rgba(124, 58, 237, 0.1),
+    0 8px 30px -10px rgba(0,0,0,0.6),
+    0 0 50px -10px var(--glow-violet),
+    0 0 80px -20px var(--glow-fuchsia) !important;
+  transform: scale(1.01) !important;
+}
+
+/* Placeholder - Invitant et stylé */
 .vfrc-chat-input textarea::placeholder,
-textarea._1gdvh9ta::placeholder {
-  color: var(--text-muted) !important;
+textarea._1gdvh9ta::placeholder,
+.vfrc-chat-input__input::placeholder {
+  color: rgba(167, 139, 250, 0.5) !important; /* Violet clair transparent */
   font-style: normal !important;
-  opacity: 0.6 !important;
+  font-weight: 400 !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Placeholder disparaît au focus */
+.vfrc-chat-input textarea:focus::placeholder,
+textarea._1gdvh9ta:focus::placeholder {
+  opacity: 0.3 !important;
+  transform: translateX(10px) !important;
+}
+
+/* Animation pulse subtile pour attirer l'attention */
+@keyframes inputPulse {
+  0%, 100% {
+    box-shadow: 
+      inset 0 0 0 1.5px rgba(124, 58, 237, 0.25),
+      0 4px 20px -10px rgba(0,0,0,0.5),
+      0 0 30px -15px rgba(124, 58, 237, 0.4);
+  }
+  50% {
+    box-shadow: 
+      inset 0 0 0 1.5px rgba(192, 38, 211, 0.4),
+      0 4px 25px -10px rgba(0,0,0,0.5),
+      0 0 45px -15px rgba(192, 38, 211, 0.5);
+  }
+}
+
+/* Animation active quand l'input est vide - attire l'oeil */
+.vfrc-chat-input textarea:placeholder-shown:not(:focus),
+textarea._1gdvh9ta:placeholder-shown:not(:focus) {
+  animation: inputPulse 4s ease-in-out infinite !important;
 }
 
 /* ==========================================================
-   BOUTON ENVOYER - Style unifié
+   BOUTON ENVOYER - Cohérent avec l'input dark
    ========================================================== */
 #vfrc-send-message,
-.vfrc-chat-input__send {
-  background: linear-gradient(var(--bg-card), var(--bg-card)) padding-box,
-              linear-gradient(135deg, rgba(124,58,237,0.3), rgba(192,38,211,0.3)) border-box !important;
-  border: 1px solid transparent !important;
+.vfrc-chat-input__send,
+button[class*="send"] {
+  background: linear-gradient(135deg, rgba(30,30,35,0.95) 0%, rgba(40,40,45,0.9) 100%) !important;
+  border: none !important;
   border-radius: 14px !important;
-  padding: 12px 24px !important;
-  color: var(--text-muted) !important;
+  padding: 14px 28px !important;
+  color: rgba(167, 139, 250, 0.6) !important;
   font-family: var(--font-body) !important;
   font-weight: 500 !important;
   font-size: var(--fs-button) !important;
   cursor: not-allowed !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  min-width: 100px !important;
-  opacity: 0.6 !important;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  min-width: 110px !important;
+  box-shadow: 
+    inset 0 0 0 1.5px rgba(124, 58, 237, 0.2),
+    0 4px 15px -8px rgba(0,0,0,0.4) !important;
 }
 
-/* État actif - Gradient plein */
+/* État actif - Gradient plein avec glow */
 #vfrc-send-message:not([disabled]),
-.vfrc-chat-input__send:not([disabled]) {
+.vfrc-chat-input__send:not([disabled]),
+button[class*="send"]:not([disabled]) {
   background: var(--gradient-main) !important;
   border: none !important;
   color: #ffffff !important;
   cursor: pointer !important;
-  opacity: 1 !important;
   box-shadow: 
-    0 4px 20px -4px var(--glow-fuchsia),
-    0 0 30px -10px var(--glow-violet) !important;
+    0 4px 25px -4px var(--glow-fuchsia),
+    0 0 40px -10px var(--glow-violet),
+    0 0 60px -20px var(--glow-rose) !important;
 }
 
 #vfrc-send-message:not([disabled]):hover,
 .vfrc-chat-input__send:not([disabled]):hover {
-  transform: translateY(-2px) scale(1.03) !important;
+  transform: translateY(-3px) scale(1.05) !important;
   box-shadow: 
-    0 6px 30px -4px var(--glow-fuchsia),
-    0 0 50px -10px var(--glow-violet) !important;
+    0 8px 35px -4px var(--glow-fuchsia),
+    0 0 60px -10px var(--glow-violet),
+    0 0 80px -15px var(--glow-rose) !important;
 }
 
 #vfrc-send-message:not([disabled]):active,
@@ -493,8 +559,8 @@ textarea._1gdvh9ta::placeholder {
 .vfrc-chat-input__send::after {
   content: "Enviar";
   font-family: var(--font-body);
-  font-weight: 500;
-  letter-spacing: 0.03em;
+  font-weight: 600;
+  letter-spacing: 0.05em;
 }
 
 /* ==========================================================
@@ -652,6 +718,49 @@ textarea._1gdvh9ta::placeholder {
   border: none !important;
   border-radius: 0 !important;
   box-shadow: none !important;
+}
+
+/* ==========================================================
+   OVERRIDE COMPLET - Suppression fonds blancs/gris
+   ========================================================== */
+/* Cibler tous les éléments qui pourraient avoir un fond clair */
+.vfrc-widget *,
+.vfrc-chat *,
+#voiceflow-chat-container * {
+  --vf-bg: transparent;
+  --vf-input-bg: transparent;
+}
+
+/* Footer et input wrapper - FORCER transparent */
+.vfrc-footer,
+.vfrc-footer *,
+.vfrc-chat-input__wrapper,
+.vfrc-chat-input__inner,
+div[class*="footer"],
+div[class*="input-wrapper"],
+div[class*="input-container"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Input spécifique - override agressif du blanc */
+input[type="text"],
+textarea {
+  background: linear-gradient(135deg, rgba(20,20,22,0.95) 0%, rgba(30,30,35,0.9) 100%) !important;
+  color: #ffffff !important;
+}
+
+/* Supprimer tout background inline qui pourrait être injecté */
+[style*="background: rgb(255"],
+[style*="background-color: rgb(255"],
+[style*="background: white"],
+[style*="background-color: white"],
+[style*="background: #fff"],
+[style*="background-color: #fff"] {
+  background: transparent !important;
+  background-color: transparent !important;
 }
 
 /* ==========================================================
