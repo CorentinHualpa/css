@@ -1,12 +1,12 @@
 /* ==========================================================
-   Revolution Agency × Voiceflow — Thème Fondu v1.2
+   Revolution Agency × Voiceflow — Thème Fondu v1.3
    
    Design : Intégration seamless dans landing page sombre
    Couleurs : Violet → Fuchsia → Rose → Orange
    Fonts : Syne (titres) + Outfit (corps)
    Style : Glassmorphism, pas de header, pas de bordures
    
-   v1.2 - Fix espace vide + Zone input/boutons améliorée
+   v1.3 - Bouton restart discret (trait horizontal)
    ========================================================== */
 
 /* ==========================================================
@@ -152,17 +152,65 @@ div[class*="bottom-spacer"],
   visibility: hidden !important;
 }
 
-/* Bouton Start new chat - MASQUER */
+/* ==========================================================
+   BOUTON RESTART - Trait discret en haut au centre
+   ========================================================== */
 .vfrc-footer__start-button,
 div[class*="start-button"],
 #vfrc-start-chat {
-  display: none !important;
-  height: 0 !important;
-  min-height: 0 !important;
+  position: fixed !important;
+  top: 10px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 50px !important;
+  height: 5px !important;
+  min-width: 50px !important;
+  min-height: 5px !important;
+  max-height: 5px !important;
   padding: 0 !important;
   margin: 0 !important;
+  background: linear-gradient(90deg, var(--accent-violet), var(--accent-fuchsia)) !important;
+  border: none !important;
+  border-radius: 3px !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  text-indent: -9999px !important;
+  cursor: pointer !important;
+  opacity: 0.3 !important;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  z-index: 100 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  overflow: hidden !important;
+}
+
+/* Masquer tout contenu interne du bouton */
+.vfrc-footer__start-button *,
+div[class*="start-button"] *,
+#vfrc-start-chat * {
+  display: none !important;
   visibility: hidden !important;
-  pointer-events: none !important;
+}
+
+/* Hover - Plus visible et élargi */
+.vfrc-footer__start-button:hover,
+div[class*="start-button"]:hover,
+#vfrc-start-chat:hover {
+  opacity: 1 !important;
+  width: 80px !important;
+  height: 6px !important;
+  background: linear-gradient(90deg, var(--accent-violet), var(--accent-fuchsia), var(--accent-rose)) !important;
+  box-shadow: 
+    0 0 20px -4px var(--glow-fuchsia),
+    0 0 40px -8px var(--glow-violet) !important;
+}
+
+/* Active - Press effect */
+.vfrc-footer__start-button:active,
+div[class*="start-button"]:active,
+#vfrc-start-chat:active {
+  transform: translateX(-50%) scaleX(0.9) !important;
+  opacity: 0.8 !important;
 }
 
 /* Bouton scroll to bottom - MASQUER */
@@ -474,8 +522,8 @@ div[class*="scroll-to-bottom"],
 }
 
 /* Boutons de choix - Style pill épuré */
-.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]),
-button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send) {
+.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]),
+button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]) {
   font-family: var(--font-body) !important;
   font-weight: 500 !important;
   font-size: var(--fs-button) !important;
@@ -500,8 +548,8 @@ button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-cha
 }
 
 /* Hover - Bordure gradient + glow */
-.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):hover,
-button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):hover {
+.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):hover,
+button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]):hover {
   background: linear-gradient(135deg, rgba(124,58,237,0.15) 0%, rgba(192,38,211,0.1) 100%) !important;
   border-color: rgba(192, 38, 211, 0.5) !important;
   color: #ffffff !important;
@@ -513,8 +561,8 @@ button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-cha
 }
 
 /* Active - Press effect */
-.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):active,
-button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):active {
+.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):active,
+button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]):active {
   transform: translateY(0) scale(0.98) !important;
   box-shadow: 
     0 2px 10px -4px var(--glow-fuchsia) !important;
@@ -926,7 +974,7 @@ div[class*="spacer"] {
     font-size: 13px !important;
   }
   
-  .vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send) {
+  .vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]) {
     padding: 10px 16px !important;
     font-size: 12px !important;
   }
@@ -941,5 +989,17 @@ div[class*="spacer"] {
     --fs-h2: 18px;
     --fs-h3: 15px;
     --fs-body: 13px;
+  }
+  
+  /* Bouton restart mobile - légèrement plus grand pour touch */
+  .vfrc-footer__start-button,
+  div[class*="start-button"],
+  #vfrc-start-chat {
+    width: 60px !important;
+    height: 6px !important;
+    min-width: 60px !important;
+    min-height: 6px !important;
+    max-height: 6px !important;
+    opacity: 0.4 !important;
   }
 }
