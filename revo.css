@@ -153,23 +153,25 @@ div[class*="bottom-spacer"],
 }
 
 /* ==========================================================
-   BOUTON RESTART - Trait discret en haut au centre
+   BOUTON RESTART - Trait discret AU-DESSUS de l'input
    ========================================================== */
+
+/* Le footer content doit être en position relative pour le positionnement */
+.vfrc-footer__content,
+._1vj16245 {
+  position: relative !important;
+}
+
+/* CIBLAGE ULTRA-AGRESSIF - Tout bouton dans le chat sauf send */
+.vfrc-widget button:not(.vfrc-chat-input__send):not([id*="send"]):not(._1gdvh9tf):not(.vfrc-button),
+.vfrc-chat button:not(.vfrc-chat-input__send):not([id*="send"]):not(._1gdvh9tf):not(.vfrc-button),
+#voiceflow-chat button:not(.vfrc-chat-input__send):not([id*="send"]):not(._1gdvh9tf):not(.vfrc-button),
 .vfrc-footer__start-button,
 div[class*="start-button"],
 #vfrc-start-chat,
-button[class*="start"],
-.vfrc-chat button:first-of-type:not(.vfrc-chat-input__send):not([id*="send"]),
-.vfrc-widget button[class*="reset"],
-.vfrc-widget button[class*="restart"],
-.vfrc-widget button[class*="new"],
-button.c1f7bj40,
-.c1f7bj40,
-.vfrc-footer button:not(.vfrc-chat-input__send) {
-  position: absolute !important;
-  top: 8px !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
+button[class*="start"]:not(.vfrc-chat-input__send) {
+  position: relative !important;
+  display: block !important;
   width: 50px !important;
   height: 5px !important;
   min-width: 50px !important;
@@ -177,7 +179,7 @@ button.c1f7bj40,
   min-height: 5px !important;
   max-height: 5px !important;
   padding: 0 !important;
-  margin: 0 !important;
+  margin: 0 auto 12px auto !important;
   background: linear-gradient(90deg, var(--accent-violet), var(--accent-fuchsia)) !important;
   border: none !important;
   border-radius: 3px !important;
@@ -188,7 +190,7 @@ button.c1f7bj40,
   cursor: pointer !important;
   opacity: 0.35 !important;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  z-index: 100 !important;
+  z-index: 10 !important;
   visibility: visible !important;
   pointer-events: auto !important;
   overflow: hidden !important;
@@ -197,12 +199,11 @@ button.c1f7bj40,
 }
 
 /* Masquer tout contenu interne du bouton */
+.vfrc-widget button:not(.vfrc-chat-input__send):not([id*="send"]):not(._1gdvh9tf):not(.vfrc-button) *,
+.vfrc-chat button:not(.vfrc-chat-input__send):not([id*="send"]):not(._1gdvh9tf):not(.vfrc-button) *,
 .vfrc-footer__start-button *,
 div[class*="start-button"] *,
-#vfrc-start-chat *,
-button[class*="start"] *,
-button.c1f7bj40 *,
-.c1f7bj40 * {
+#vfrc-start-chat * {
   display: none !important;
   visibility: hidden !important;
   font-size: 0 !important;
@@ -210,13 +211,11 @@ button.c1f7bj40 *,
 }
 
 /* Hover - Plus visible et élargi */
+.vfrc-widget button:not(.vfrc-chat-input__send):not([id*="send"]):not(._1gdvh9tf):not(.vfrc-button):hover,
+.vfrc-chat button:not(.vfrc-chat-input__send):not([id*="send"]):not(._1gdvh9tf):not(.vfrc-button):hover,
 .vfrc-footer__start-button:hover,
 div[class*="start-button"]:hover,
-#vfrc-start-chat:hover,
-button[class*="start"]:hover,
-button.c1f7bj40:hover,
-.c1f7bj40:hover,
-.vfrc-footer button:not(.vfrc-chat-input__send):hover {
+#vfrc-start-chat:hover {
   opacity: 1 !important;
   width: 80px !important;
   max-width: 80px !important;
@@ -229,13 +228,12 @@ button.c1f7bj40:hover,
 }
 
 /* Active - Press effect */
+.vfrc-widget button:not(.vfrc-chat-input__send):not([id*="send"]):not(._1gdvh9tf):not(.vfrc-button):active,
+.vfrc-chat button:not(.vfrc-chat-input__send):not([id*="send"]):not(._1gdvh9tf):not(.vfrc-button):active,
 .vfrc-footer__start-button:active,
 div[class*="start-button"]:active,
-#vfrc-start-chat:active,
-button[class*="start"]:active,
-button.c1f7bj40:active,
-.c1f7bj40:active {
-  transform: translateX(-50%) scaleX(0.9) !important;
+#vfrc-start-chat:active {
+  transform: scaleX(0.9) !important;
   opacity: 0.8 !important;
 }
 
@@ -1018,13 +1016,11 @@ div[class*="spacer"] {
   }
   
   /* Bouton restart mobile - légèrement plus grand pour touch */
+  .vfrc-widget button:not(.vfrc-chat-input__send):not([id*="send"]):not(._1gdvh9tf):not(.vfrc-button),
+  .vfrc-chat button:not(.vfrc-chat-input__send):not([id*="send"]):not(._1gdvh9tf):not(.vfrc-button),
   .vfrc-footer__start-button,
   div[class*="start-button"],
-  #vfrc-start-chat,
-  button[class*="start"],
-  button.c1f7bj40,
-  .c1f7bj40,
-  .vfrc-footer button:not(.vfrc-chat-input__send) {
+  #vfrc-start-chat {
     width: 60px !important;
     max-width: 60px !important;
     height: 6px !important;
@@ -1032,5 +1028,6 @@ div[class*="spacer"] {
     min-height: 6px !important;
     max-height: 6px !important;
     opacity: 0.4 !important;
+    margin: 0 auto 10px auto !important;
   }
 }
