@@ -157,14 +157,23 @@ div[class*="bottom-spacer"],
    ========================================================== */
 .vfrc-footer__start-button,
 div[class*="start-button"],
-#vfrc-start-chat {
-  position: fixed !important;
-  top: 10px !important;
+#vfrc-start-chat,
+button[class*="start"],
+.vfrc-chat button:first-of-type:not(.vfrc-chat-input__send):not([id*="send"]),
+.vfrc-widget button[class*="reset"],
+.vfrc-widget button[class*="restart"],
+.vfrc-widget button[class*="new"],
+button.c1f7bj40,
+.c1f7bj40,
+.vfrc-footer button:not(.vfrc-chat-input__send) {
+  position: absolute !important;
+  top: 8px !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
   width: 50px !important;
   height: 5px !important;
   min-width: 50px !important;
+  max-width: 50px !important;
   min-height: 5px !important;
   max-height: 5px !important;
   padding: 0 !important;
@@ -175,30 +184,44 @@ div[class*="start-button"],
   font-size: 0 !important;
   line-height: 0 !important;
   text-indent: -9999px !important;
+  color: transparent !important;
   cursor: pointer !important;
-  opacity: 0.3 !important;
+  opacity: 0.35 !important;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
   z-index: 100 !important;
   visibility: visible !important;
   pointer-events: auto !important;
   overflow: hidden !important;
+  letter-spacing: -9999px !important;
+  white-space: nowrap !important;
 }
 
 /* Masquer tout contenu interne du bouton */
 .vfrc-footer__start-button *,
 div[class*="start-button"] *,
-#vfrc-start-chat * {
+#vfrc-start-chat *,
+button[class*="start"] *,
+button.c1f7bj40 *,
+.c1f7bj40 * {
   display: none !important;
   visibility: hidden !important;
+  font-size: 0 !important;
+  color: transparent !important;
 }
 
 /* Hover - Plus visible et élargi */
 .vfrc-footer__start-button:hover,
 div[class*="start-button"]:hover,
-#vfrc-start-chat:hover {
+#vfrc-start-chat:hover,
+button[class*="start"]:hover,
+button.c1f7bj40:hover,
+.c1f7bj40:hover,
+.vfrc-footer button:not(.vfrc-chat-input__send):hover {
   opacity: 1 !important;
   width: 80px !important;
+  max-width: 80px !important;
   height: 6px !important;
+  max-height: 6px !important;
   background: linear-gradient(90deg, var(--accent-violet), var(--accent-fuchsia), var(--accent-rose)) !important;
   box-shadow: 
     0 0 20px -4px var(--glow-fuchsia),
@@ -208,7 +231,10 @@ div[class*="start-button"]:hover,
 /* Active - Press effect */
 .vfrc-footer__start-button:active,
 div[class*="start-button"]:active,
-#vfrc-start-chat:active {
+#vfrc-start-chat:active,
+button[class*="start"]:active,
+button.c1f7bj40:active,
+.c1f7bj40:active {
   transform: translateX(-50%) scaleX(0.9) !important;
   opacity: 0.8 !important;
 }
@@ -994,8 +1020,13 @@ div[class*="spacer"] {
   /* Bouton restart mobile - légèrement plus grand pour touch */
   .vfrc-footer__start-button,
   div[class*="start-button"],
-  #vfrc-start-chat {
+  #vfrc-start-chat,
+  button[class*="start"],
+  button.c1f7bj40,
+  .c1f7bj40,
+  .vfrc-footer button:not(.vfrc-chat-input__send) {
     width: 60px !important;
+    max-width: 60px !important;
     height: 6px !important;
     min-width: 60px !important;
     min-height: 6px !important;
