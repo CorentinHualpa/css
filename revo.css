@@ -6,7 +6,7 @@
    Fonts : Syne (titres) + Outfit (corps)
    Style : Glassmorphism, pas de header, pas de bordures
    
-   v1.4 - Bouton restart discret (trait au-dessus de l'input)
+   v1.4 - Header minimaliste avec bouton restart en trait
    ========================================================== */
 
 /* ==========================================================
@@ -80,7 +80,7 @@
 }
 
 /* ==========================================================
-   HEADER - COMPLÈTEMENT MASQUÉ
+   HEADER - Minimaliste, juste pour le bouton restart
    ========================================================== */
 .vfrc-header,
 .vfrc-header--container,
@@ -89,16 +89,100 @@ div.vfrc-header,
 div[class*="vfrc-header"],
 .jyiuei2,
 .jyiuei3 {
+  display: flex !important;
+  visibility: visible !important;
+  height: 24px !important;
+  min-height: 24px !important;
+  max-height: 24px !important;
+  overflow: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+/* Masquer TOUT le contenu du header SAUF les boutons */
+.vfrc-header > *:not(button),
+.vfrc-header span,
+.vfrc-header img,
+.vfrc-header svg,
+.vfrc-header__title,
+.vfrc-header__logo,
+.vfrc-header__image,
+.vfrc-header--title,
+.vfrc-header--logo,
+.vfrc-header--image,
+div[class*="vfrc-header"] > *:not(button),
+div[class*="vfrc-header"] span,
+div[class*="vfrc-header"] img,
+div[class*="vfrc-header"] svg {
   display: none !important;
   visibility: hidden !important;
   height: 0 !important;
-  min-height: 0 !important;
-  max-height: 0 !important;
-  overflow: hidden !important;
+  width: 0 !important;
   opacity: 0 !important;
-  pointer-events: none !important;
-  margin: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Bouton dans le header - Style trait */
+.vfrc-header button,
+.vfrc-header--button,
+div[class*="vfrc-header"] button {
+  display: block !important;
+  visibility: visible !important;
+  width: 50px !important;
+  height: 5px !important;
+  min-width: 50px !important;
+  max-width: 50px !important;
+  min-height: 5px !important;
+  max-height: 5px !important;
   padding: 0 !important;
+  margin: 0 auto !important;
+  background: linear-gradient(90deg, var(--accent-violet), var(--accent-fuchsia)) !important;
+  border: none !important;
+  border-radius: 3px !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  text-indent: -9999px !important;
+  color: transparent !important;
+  cursor: pointer !important;
+  opacity: 0.35 !important;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  overflow: hidden !important;
+  letter-spacing: -9999px !important;
+}
+
+.vfrc-header button *,
+.vfrc-header--button *,
+div[class*="vfrc-header"] button * {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+.vfrc-header button:hover,
+.vfrc-header--button:hover,
+div[class*="vfrc-header"] button:hover {
+  opacity: 1 !important;
+  width: 80px !important;
+  max-width: 80px !important;
+  height: 6px !important;
+  max-height: 6px !important;
+  background: linear-gradient(90deg, var(--accent-violet), var(--accent-fuchsia), var(--accent-rose)) !important;
+  box-shadow: 
+    0 0 20px -4px var(--glow-fuchsia),
+    0 0 40px -8px var(--glow-violet) !important;
+}
+
+.vfrc-header button:active,
+.vfrc-header--button:active,
+div[class*="vfrc-header"] button:active {
+  transform: scaleX(0.9) !important;
+  opacity: 0.8 !important;
 }
 
 /* ==========================================================
@@ -153,25 +237,15 @@ div[class*="bottom-spacer"],
 }
 
 /* ==========================================================
-   BOUTON RESTART - Trait discret AU-DESSUS de l'input
+   BOUTON RESTART - Fallback pour autres emplacements
    ========================================================== */
 
-/* Le footer content doit être en position relative pour le positionnement */
-.vfrc-footer__content,
-._1vj16245 {
-  position: relative !important;
-}
-
-/* CIBLAGE ULTRA-AGRESSIF - Tout bouton dans le chat sauf send */
-.vfrc-widget button:not(.vfrc-chat-input__send):not([id*="send"]):not(._1gdvh9tf):not(.vfrc-button),
-.vfrc-chat button:not(.vfrc-chat-input__send):not([id*="send"]):not(._1gdvh9tf):not(.vfrc-button),
-#voiceflow-chat button:not(.vfrc-chat-input__send):not([id*="send"]):not(._1gdvh9tf):not(.vfrc-button),
+/* Si le bouton est ailleurs que dans le header */
 .vfrc-footer__start-button,
 div[class*="start-button"],
-#vfrc-start-chat,
-button[class*="start"]:not(.vfrc-chat-input__send) {
-  position: relative !important;
+#vfrc-start-chat {
   display: block !important;
+  visibility: visible !important;
   width: 50px !important;
   height: 5px !important;
   min-width: 50px !important;
@@ -190,29 +264,16 @@ button[class*="start"]:not(.vfrc-chat-input__send) {
   cursor: pointer !important;
   opacity: 0.35 !important;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  z-index: 10 !important;
-  visibility: visible !important;
-  pointer-events: auto !important;
   overflow: hidden !important;
-  letter-spacing: -9999px !important;
-  white-space: nowrap !important;
 }
 
-/* Masquer tout contenu interne du bouton */
-.vfrc-widget button:not(.vfrc-chat-input__send):not([id*="send"]):not(._1gdvh9tf):not(.vfrc-button) *,
-.vfrc-chat button:not(.vfrc-chat-input__send):not([id*="send"]):not(._1gdvh9tf):not(.vfrc-button) *,
 .vfrc-footer__start-button *,
 div[class*="start-button"] *,
 #vfrc-start-chat * {
   display: none !important;
   visibility: hidden !important;
-  font-size: 0 !important;
-  color: transparent !important;
 }
 
-/* Hover - Plus visible et élargi */
-.vfrc-widget button:not(.vfrc-chat-input__send):not([id*="send"]):not(._1gdvh9tf):not(.vfrc-button):hover,
-.vfrc-chat button:not(.vfrc-chat-input__send):not([id*="send"]):not(._1gdvh9tf):not(.vfrc-button):hover,
 .vfrc-footer__start-button:hover,
 div[class*="start-button"]:hover,
 #vfrc-start-chat:hover {
@@ -220,21 +281,10 @@ div[class*="start-button"]:hover,
   width: 80px !important;
   max-width: 80px !important;
   height: 6px !important;
-  max-height: 6px !important;
   background: linear-gradient(90deg, var(--accent-violet), var(--accent-fuchsia), var(--accent-rose)) !important;
   box-shadow: 
     0 0 20px -4px var(--glow-fuchsia),
     0 0 40px -8px var(--glow-violet) !important;
-}
-
-/* Active - Press effect */
-.vfrc-widget button:not(.vfrc-chat-input__send):not([id*="send"]):not(._1gdvh9tf):not(.vfrc-button):active,
-.vfrc-chat button:not(.vfrc-chat-input__send):not([id*="send"]):not(._1gdvh9tf):not(.vfrc-button):active,
-.vfrc-footer__start-button:active,
-div[class*="start-button"]:active,
-#vfrc-start-chat:active {
-  transform: scaleX(0.9) !important;
-  opacity: 0.8 !important;
 }
 
 /* Bouton scroll to bottom - MASQUER */
@@ -1016,8 +1066,9 @@ div[class*="spacer"] {
   }
   
   /* Bouton restart mobile - légèrement plus grand pour touch */
-  .vfrc-widget button:not(.vfrc-chat-input__send):not([id*="send"]):not(._1gdvh9tf):not(.vfrc-button),
-  .vfrc-chat button:not(.vfrc-chat-input__send):not([id*="send"]):not(._1gdvh9tf):not(.vfrc-button),
+  .vfrc-header button,
+  .vfrc-header--button,
+  div[class*="vfrc-header"] button,
   .vfrc-footer__start-button,
   div[class*="start-button"],
   #vfrc-start-chat {
@@ -1028,6 +1079,5 @@ div[class*="spacer"] {
     min-height: 6px !important;
     max-height: 6px !important;
     opacity: 0.4 !important;
-    margin: 0 auto 10px auto !important;
   }
 }
