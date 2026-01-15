@@ -157,13 +157,10 @@
 }
 
 /* ==========================================================
-   BOUTON RESTART - Zone cliquable + trait visuel
+   BOUTON RESTART HEADER - Zone cliquable + trait visuel
    ========================================================== */
 .vfrc-header--button,
-.jyiueib,
-.jyiueic,
 button.vfrc-header--button,
-button.jyiueib,
 .vfrc-header--actions button,
 .jyiueia button {
   display: flex !important;
@@ -196,8 +193,6 @@ button.jyiueib,
 
 /* Trait visuel via pseudo-élément */
 .vfrc-header--button::after,
-.jyiueib::after,
-.jyiueic::after,
 button.vfrc-header--button::after,
 .vfrc-header--actions button::after,
 .jyiueia button::after {
@@ -216,16 +211,14 @@ button.vfrc-header--button::after,
   pointer-events: none !important;
 }
 
-/* Masquer l'icône SVG et la div interne */
+/* Masquer l'icône SVG et la div interne du bouton header */
 .vfrc-header--button *,
 .vfrc-header--button svg,
 .vfrc-header--button .vfrc-icon,
 .vfrc-header--button .vfrc-header--icon,
 .vfrc-header--button div,
-.jyiueib *,
-.jyiueib svg,
-.jyiueib div,
-.jyiueic *,
+.vfrc-header--actions button *,
+.jyiueia button *,
 .jyiueih,
 ._1t7e06e0,
 .vfrc-header--icon {
@@ -239,8 +232,6 @@ button.vfrc-header--button::after,
 
 /* Hover - Trait plus visible et élargi */
 .vfrc-header--button:hover::after,
-.jyiueib:hover::after,
-.jyiueic:hover::after,
 button.vfrc-header--button:hover::after,
 .vfrc-header--actions button:hover::after,
 .jyiueia button:hover::after {
@@ -255,8 +246,6 @@ button.vfrc-header--button:hover::after,
 
 /* Active - Press effect */
 .vfrc-header--button:active::after,
-.jyiueib:active::after,
-.jyiueic:active::after,
 button.vfrc-header--button:active::after,
 .vfrc-header--actions button:active::after,
 .jyiueia button:active::after {
@@ -389,17 +378,114 @@ div[class*="scroll-to-bottom"],
   margin: 0 !important;
 }
 
-/* Overlay et prompt - MASQUER */
+/* Overlay - semi-transparent */
 .vfrc-chat--overlay,
+._5x612k3,
+._5x612k4 {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  background: rgba(10, 10, 11, 0.8) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+}
+
+/* ==========================================================
+   POPUP CONFIRMATION RESTART - Stylisé
+   ========================================================== */
 .vfrc-prompt,
-._5x612k3 {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-  height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
+._5x612k0,
+._5x612k1 {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+  padding: 20px !important;
+  margin: 0 auto !important;
+  background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(20,20,22,0.95) 100%) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(124, 58, 237, 0.3) !important;
+  border-radius: 16px !important;
+  box-shadow: 
+    0 0 40px -10px var(--glow-violet),
+    0 8px 32px -8px rgba(0, 0, 0, 0.5) !important;
+  max-width: 280px !important;
+}
+
+/* Bouton Start new chat - Style principal */
+.vfrc-prompt button:first-child,
+.vfrc-prompt .vfrc-button:first-child,
+._5x612k0 button:first-child,
+._5x612k1 button:first-child,
+button._1q15b0b2:not(.vfrc-header--button):not(.vfrc-chat-input__send) {
+  font-family: var(--font-body) !important;
+  font-weight: 500 !important;
+  font-size: var(--fs-button) !important;
+  color: #ffffff !important;
+  background: var(--gradient-main) !important;
+  border: none !important;
+  border-radius: 12px !important;
+  padding: 14px 24px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 
+    0 4px 20px -4px var(--glow-fuchsia),
+    0 0 30px -10px var(--glow-violet) !important;
+  text-indent: 0 !important;
+  font-size: var(--fs-button) !important;
+  letter-spacing: normal !important;
+  width: auto !important;
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
+  opacity: 1 !important;
+}
+
+.vfrc-prompt button:first-child:hover,
+._5x612k0 button:first-child:hover,
+._5x612k1 button:first-child:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 
+    0 6px 25px -4px var(--glow-fuchsia),
+    0 0 40px -10px var(--glow-violet) !important;
+}
+
+/* Bouton Cancel - Style secondaire */
+.vfrc-prompt button:last-child,
+.vfrc-prompt .vfrc-button:last-child,
+._5x612k0 button:last-child,
+._5x612k1 button:last-child,
+button._1q15b0b3 {
+  font-family: var(--font-body) !important;
+  font-weight: 500 !important;
+  font-size: var(--fs-button) !important;
+  color: var(--text-secondary) !important;
+  background: transparent !important;
+  border: 1px solid rgba(124, 58, 237, 0.3) !important;
+  border-radius: 12px !important;
+  padding: 12px 24px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  text-indent: 0 !important;
+  font-size: var(--fs-button) !important;
+  letter-spacing: normal !important;
+  width: auto !important;
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
+  opacity: 1 !important;
+}
+
+.vfrc-prompt button:last-child:hover,
+._5x612k0 button:last-child:hover,
+._5x612k1 button:last-child:hover {
+  color: var(--text-primary) !important;
+  border-color: rgba(124, 58, 237, 0.5) !important;
+  background: rgba(124, 58, 237, 0.1) !important;
 }
 
 /* ==========================================================
@@ -675,8 +761,8 @@ div[class*="scroll-to-bottom"],
 }
 
 /* Boutons de choix - Style pill épuré */
-.vfrc-button:not(.vfrc-header--button):not(.jyiueib):not(.jyiueic):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]),
-button.vfrc-button:not(.vfrc-header--button):not(.jyiueib):not(.jyiueic):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]) {
+.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3),
+button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3) {
   font-family: var(--font-body) !important;
   font-weight: 500 !important;
   font-size: var(--fs-button) !important;
@@ -701,8 +787,8 @@ button.vfrc-button:not(.vfrc-header--button):not(.jyiueib):not(.jyiueic):not(#vf
 }
 
 /* Hover - Bordure gradient + glow */
-.vfrc-button:not(.vfrc-header--button):not(.jyiueib):not(.jyiueic):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):hover,
-button.vfrc-button:not(.vfrc-header--button):not(.jyiueib):not(.jyiueic):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]):hover {
+.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3):hover,
+button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3):hover {
   background: linear-gradient(135deg, rgba(124,58,237,0.15) 0%, rgba(192,38,211,0.1) 100%) !important;
   border-color: rgba(192, 38, 211, 0.5) !important;
   color: #ffffff !important;
@@ -714,8 +800,8 @@ button.vfrc-button:not(.vfrc-header--button):not(.jyiueib):not(.jyiueic):not(#vf
 }
 
 /* Active - Press effect */
-.vfrc-button:not(.vfrc-header--button):not(.jyiueib):not(.jyiueic):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):active,
-button.vfrc-button:not(.vfrc-header--button):not(.jyiueib):not(.jyiueic):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]):active {
+.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3):active,
+button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3):active {
   transform: translateY(0) scale(0.98) !important;
   box-shadow: 
     0 2px 10px -4px var(--glow-fuchsia) !important;
@@ -1146,8 +1232,6 @@ div[class*="spacer"] {
   
   /* Bouton restart mobile - zone cliquable plus grande */
   .vfrc-header--button,
-  .jyiueib,
-  .jyiueic,
   button.vfrc-header--button,
   .vfrc-header--actions button,
   .jyiueia button {
@@ -1160,8 +1244,6 @@ div[class*="spacer"] {
   }
   
   .vfrc-header--button::after,
-  .jyiueib::after,
-  .jyiueic::after,
   button.vfrc-header--button::after,
   .vfrc-header--actions button::after,
   .jyiueia button::after {
