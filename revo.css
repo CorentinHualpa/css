@@ -98,7 +98,7 @@ div[class*="vfrc-header"],
   opacity: 1 !important;
   pointer-events: auto !important;
   margin: 0 !important;
-  padding: 0 !important;
+  padding: 8px 0 0 0 !important;
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
@@ -106,21 +106,17 @@ div[class*="vfrc-header"],
   align-items: center !important;
 }
 
-/* Masquer TOUT le contenu du header SAUF les boutons */
-.vfrc-header > *:not(button),
-.vfrc-header span,
+/* Masquer TOUT le contenu du header SAUF le bouton restart */
+.vfrc-header > *:not(button):not(.vfrc-header--button):not(.jyiueib),
+.vfrc-header span:not(.vfrc-header--button span),
 .vfrc-header img,
-.vfrc-header svg,
 .vfrc-header__title,
 .vfrc-header__logo,
 .vfrc-header__image,
 .vfrc-header--title,
 .vfrc-header--logo,
 .vfrc-header--image,
-div[class*="vfrc-header"] > *:not(button),
-div[class*="vfrc-header"] span,
-div[class*="vfrc-header"] img,
-div[class*="vfrc-header"] svg {
+div[class*="vfrc-header"] > *:not(button):not(.vfrc-header--button):not(.jyiueib) {
   display: none !important;
   visibility: hidden !important;
   height: 0 !important;
@@ -129,11 +125,15 @@ div[class*="vfrc-header"] svg {
   overflow: hidden !important;
 }
 
-/* Bouton dans le header - Style trait */
-.vfrc-header button,
+/* ==========================================================
+   BOUTON RESTART - Ciblage exact avec classes Voiceflow
+   ========================================================== */
 .vfrc-header--button,
-div[class*="vfrc-header"] button {
-  display: block !important;
+.jyiueib,
+._1q15b0b0,
+button.vfrc-header--button,
+button.jyiueib {
+  display: flex !important;
   visibility: visible !important;
   width: 50px !important;
   height: 5px !important;
@@ -155,18 +155,33 @@ div[class*="vfrc-header"] button {
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
   overflow: hidden !important;
   letter-spacing: -9999px !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
-.vfrc-header button *,
+/* Masquer l'icône SVG et la div interne */
 .vfrc-header--button *,
-div[class*="vfrc-header"] button * {
+.vfrc-header--button svg,
+.vfrc-header--button .vfrc-icon,
+.vfrc-header--button .vfrc-header--icon,
+.vfrc-header--button div,
+.jyiueib *,
+.jyiueib svg,
+.jyiueib div,
+.jyiueih,
+._1t7e06e0 {
   display: none !important;
   visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  opacity: 0 !important;
 }
 
-.vfrc-header button:hover,
+/* Hover - Plus visible et élargi */
 .vfrc-header--button:hover,
-div[class*="vfrc-header"] button:hover {
+.jyiueib:hover,
+._1q15b0b0:hover,
+button.vfrc-header--button:hover {
   opacity: 1 !important;
   width: 80px !important;
   max-width: 80px !important;
@@ -178,9 +193,11 @@ div[class*="vfrc-header"] button:hover {
     0 0 40px -8px var(--glow-violet) !important;
 }
 
-.vfrc-header button:active,
+/* Active - Press effect */
 .vfrc-header--button:active,
-div[class*="vfrc-header"] button:active {
+.jyiueib:active,
+._1q15b0b0:active,
+button.vfrc-header--button:active {
   transform: scaleX(0.9) !important;
   opacity: 0.8 !important;
 }
@@ -596,8 +613,8 @@ div[class*="scroll-to-bottom"],
 }
 
 /* Boutons de choix - Style pill épuré */
-.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]),
-button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]) {
+.vfrc-button:not(.vfrc-header--button):not(.jyiueib):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]),
+button.vfrc-button:not(.vfrc-header--button):not(.jyiueib):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]) {
   font-family: var(--font-body) !important;
   font-weight: 500 !important;
   font-size: var(--fs-button) !important;
@@ -622,8 +639,8 @@ button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-cha
 }
 
 /* Hover - Bordure gradient + glow */
-.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):hover,
-button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]):hover {
+.vfrc-button:not(.vfrc-header--button):not(.jyiueib):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):hover,
+button.vfrc-button:not(.vfrc-header--button):not(.jyiueib):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]):hover {
   background: linear-gradient(135deg, rgba(124,58,237,0.15) 0%, rgba(192,38,211,0.1) 100%) !important;
   border-color: rgba(192, 38, 211, 0.5) !important;
   color: #ffffff !important;
@@ -635,8 +652,8 @@ button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-cha
 }
 
 /* Active - Press effect */
-.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):active,
-button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]):active {
+.vfrc-button:not(.vfrc-header--button):not(.jyiueib):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):active,
+button.vfrc-button:not(.vfrc-header--button):not(.jyiueib):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]):active {
   transform: translateY(0) scale(0.98) !important;
   box-shadow: 
     0 2px 10px -4px var(--glow-fuchsia) !important;
@@ -1066,9 +1083,10 @@ div[class*="spacer"] {
   }
   
   /* Bouton restart mobile - légèrement plus grand pour touch */
-  .vfrc-header button,
   .vfrc-header--button,
-  div[class*="vfrc-header"] button,
+  .jyiueib,
+  ._1q15b0b0,
+  button.vfrc-header--button,
   .vfrc-footer__start-button,
   div[class*="start-button"],
   #vfrc-start-chat {
