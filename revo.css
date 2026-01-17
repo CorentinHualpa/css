@@ -1,12 +1,12 @@
 /* ==========================================================
-   Revolution Agency × Voiceflow — Thème Fondu v1.4
+   Revolution Agency × Voiceflow — Thème Fondu v1.5
    
    Design : Intégration seamless dans landing page sombre
    Couleurs : Violet → Fuchsia → Rose → Orange
    Fonts : Syne (titres) + Outfit (corps)
    Style : Glassmorphism, pas de header, pas de bordures
    
-   v1.4 - Header minimaliste avec bouton restart en trait
+   v1.5 - Input attractif avec animations (glow, shine, pulse)
    ========================================================== */
 
 /* ==========================================================
@@ -808,7 +808,7 @@ button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-cha
 }
 
 /* ==========================================================
-   ZONE DE SAISIE - Conteneur épuré et distinct
+   ZONE DE SAISIE - Conteneur ATTRACTIF avec animations
    ========================================================== */
 
 /* Wrapper principal de l'input */
@@ -822,31 +822,96 @@ button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-cha
   background: transparent !important;
 }
 
-/* Input container */
+/* Input container - Avec bordure gradient animée */
 .vfrc-input-container,
 ._1gdvh9t2,
 ._1gdvh9t3 {
   flex: 1 !important;
   display: flex !important;
   align-items: center !important;
-  background: rgba(15, 15, 17, 0.9) !important;
-  border: 1px solid rgba(124, 58, 237, 0.2) !important;
-  border-radius: 16px !important;
+  background: rgba(15, 15, 17, 0.95) !important;
+  border: 2px solid transparent !important;
+  border-radius: 18px !important;
   padding: 4px !important;
-  transition: all 0.3s ease !important;
+  transition: all 0.4s ease !important;
+  position: relative !important;
+  /* Gradient border via background */
+  background: 
+    linear-gradient(rgba(15, 15, 17, 0.95), rgba(15, 15, 17, 0.95)) padding-box,
+    linear-gradient(135deg, rgba(124, 58, 237, 0.5), rgba(192, 38, 211, 0.5), rgba(124, 58, 237, 0.5)) border-box !important;
   box-shadow: 
-    0 4px 20px -10px rgba(0, 0, 0, 0.5),
+    0 4px 24px -8px rgba(124, 58, 237, 0.3),
+    0 0 40px -15px var(--glow-fuchsia),
     inset 0 0 20px rgba(124, 58, 237, 0.03) !important;
+  animation: inputGlow 3s ease-in-out infinite !important;
 }
 
+/* Animation du glow pulsant */
+@keyframes inputGlow {
+  0%, 100% {
+    box-shadow: 
+      0 4px 24px -8px rgba(124, 58, 237, 0.3),
+      0 0 40px -15px var(--glow-fuchsia),
+      inset 0 0 20px rgba(124, 58, 237, 0.03);
+  }
+  50% {
+    box-shadow: 
+      0 4px 30px -8px rgba(192, 38, 211, 0.5),
+      0 0 60px -10px var(--glow-violet),
+      inset 0 0 30px rgba(192, 38, 211, 0.05);
+  }
+}
+
+/* Effet shine qui passe sur l'input */
+.vfrc-input-container::before,
+._1gdvh9t2::before,
+._1gdvh9t3::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: -100% !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.05),
+    transparent
+  ) !important;
+  border-radius: 18px !important;
+  animation: inputShine 4s ease-in-out infinite !important;
+  pointer-events: none !important;
+}
+
+@keyframes inputShine {
+  0% {
+    left: -100%;
+  }
+  50%, 100% {
+    left: 100%;
+  }
+}
+
+/* Focus - Bordure plus intense + arrêt des animations */
 .vfrc-input-container:focus-within,
 ._1gdvh9t2:focus-within,
 ._1gdvh9t3:focus-within {
-  border-color: rgba(124, 58, 237, 0.4) !important;
+  background: 
+    linear-gradient(rgba(15, 15, 17, 0.98), rgba(15, 15, 17, 0.98)) padding-box,
+    linear-gradient(135deg, var(--accent-violet), var(--accent-fuchsia), var(--accent-rose)) border-box !important;
   box-shadow: 
-    0 0 0 3px rgba(124, 58, 237, 0.1),
-    0 8px 30px -10px rgba(0, 0, 0, 0.6),
+    0 0 0 4px rgba(124, 58, 237, 0.15),
+    0 8px 40px -10px var(--glow-fuchsia),
+    0 0 60px -15px var(--glow-violet),
     inset 0 0 30px rgba(124, 58, 237, 0.05) !important;
+  animation: none !important;
+}
+
+.vfrc-input-container:focus-within::before,
+._1gdvh9t2:focus-within::before,
+._1gdvh9t3:focus-within::before {
+  animation: none !important;
+  opacity: 0 !important;
 }
 
 /* Focus ring - masquer */
@@ -878,9 +943,9 @@ textarea._1gdvh9ta,
   color: #ffffff !important;
   background: transparent !important;
   border: none !important;
-  border-radius: 12px !important;
-  padding: 12px 16px !important;
-  min-height: 44px !important;
+  border-radius: 14px !important;
+  padding: 14px 18px !important;
+  min-height: 48px !important;
   max-height: 120px !important;
   resize: none !important;
   transition: all 0.3s ease !important;
@@ -895,13 +960,22 @@ textarea._1gdvh9ta:focus,
   box-shadow: none !important;
 }
 
-/* Placeholder */
+/* Placeholder avec animation subtile */
 .vfrc-chat-input textarea::placeholder,
 textarea._1gdvh9ta::placeholder,
 .vfrc-chat-input__input::placeholder {
-  color: rgba(161, 161, 170, 0.6) !important;
+  color: rgba(167, 139, 250, 0.6) !important;
   font-style: normal !important;
   font-weight: 400 !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Placeholder disparaît au focus */
+.vfrc-chat-input textarea:focus::placeholder,
+textarea._1gdvh9ta:focus::placeholder,
+.vfrc-chat-input__input:focus::placeholder {
+  color: rgba(167, 139, 250, 0.3) !important;
+  transform: translateX(10px) !important;
 }
 
 /* Actions container (bouton send) */
@@ -913,23 +987,23 @@ textarea._1gdvh9ta::placeholder,
 }
 
 /* ==========================================================
-   BOUTON ENVOYER - Style épuré
+   BOUTON ENVOYER - Style attractif avec animation
    ========================================================== */
 #vfrc-send-message,
 .vfrc-chat-input__send,
 ._1gdvh9tf,
 button[class*="send"] {
-  width: 40px !important;
-  height: 40px !important;
-  min-width: 40px !important;
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
   padding: 0 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  background: rgba(124, 58, 237, 0.2) !important;
-  border: 1px solid rgba(124, 58, 237, 0.3) !important;
-  border-radius: 12px !important;
-  color: rgba(167, 139, 250, 0.5) !important;
+  background: rgba(124, 58, 237, 0.15) !important;
+  border: 1px solid rgba(124, 58, 237, 0.25) !important;
+  border-radius: 14px !important;
+  color: rgba(167, 139, 250, 0.4) !important;
   cursor: not-allowed !important;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
@@ -941,6 +1015,7 @@ button[class*="send"] {
   display: block !important;
   width: 20px !important;
   height: 20px !important;
+  transition: transform 0.3s ease !important;
 }
 
 /* Masquer le texte ajouté */
@@ -951,7 +1026,7 @@ button[class*="send"] {
   display: none !important;
 }
 
-/* État actif - Gradient avec glow */
+/* État actif - Gradient avec glow pulsant */
 #vfrc-send-message:not([disabled]),
 .vfrc-chat-input__send:not([disabled]),
 ._1gdvh9tf:not([disabled]) {
@@ -962,6 +1037,22 @@ button[class*="send"] {
   box-shadow: 
     0 4px 20px -4px var(--glow-fuchsia),
     0 0 30px -10px var(--glow-violet) !important;
+  animation: sendButtonPulse 2s ease-in-out infinite !important;
+}
+
+@keyframes sendButtonPulse {
+  0%, 100% {
+    box-shadow: 
+      0 4px 20px -4px var(--glow-fuchsia),
+      0 0 30px -10px var(--glow-violet);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 
+      0 6px 30px -4px var(--glow-fuchsia),
+      0 0 50px -5px var(--glow-violet);
+    transform: scale(1.05);
+  }
 }
 
 #vfrc-send-message:not([disabled]):hover,
@@ -969,14 +1060,22 @@ button[class*="send"] {
 ._1gdvh9tf:not([disabled]):hover {
   transform: scale(1.1) !important;
   box-shadow: 
-    0 6px 25px -4px var(--glow-fuchsia),
-    0 0 40px -10px var(--glow-violet) !important;
+    0 6px 30px -4px var(--glow-fuchsia),
+    0 0 50px -10px var(--glow-violet) !important;
+  animation: none !important;
+}
+
+#vfrc-send-message:not([disabled]):hover svg,
+.vfrc-chat-input__send:not([disabled]):hover svg,
+._1gdvh9tf:not([disabled]):hover svg {
+  transform: translateX(2px) !important;
 }
 
 #vfrc-send-message:not([disabled]):active,
 .vfrc-chat-input__send:not([disabled]):active,
 ._1gdvh9tf:not([disabled]):active {
   transform: scale(0.95) !important;
+  animation: none !important;
 }
 
 /* ==========================================================
@@ -1262,5 +1361,44 @@ div[class*="spacer"] {
     min-height: 6px !important;
     max-height: 6px !important;
     opacity: 0.4 !important;
+  }
+  
+  /* Réduire les animations sur mobile pour performance */
+  .vfrc-input-container,
+  ._1gdvh9t2,
+  ._1gdvh9t3 {
+    animation: none !important;
+  }
+  
+  .vfrc-input-container::before,
+  ._1gdvh9t2::before,
+  ._1gdvh9t3::before {
+    animation: none !important;
+    display: none !important;
+  }
+  
+  #vfrc-send-message:not([disabled]),
+  .vfrc-chat-input__send:not([disabled]),
+  ._1gdvh9tf:not([disabled]) {
+    animation: none !important;
+  }
+}
+
+/* ==========================================================
+   PREFERS-REDUCED-MOTION - Respect accessibilité
+   ========================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .vfrc-input-container,
+  ._1gdvh9t2,
+  ._1gdvh9t3,
+  .vfrc-input-container::before,
+  ._1gdvh9t2::before,
+  ._1gdvh9t3::before,
+  #vfrc-send-message:not([disabled]),
+  .vfrc-chat-input__send:not([disabled]),
+  ._1gdvh9tf:not([disabled]),
+  .vfrc-message:not([class*="extension"]) {
+    animation: none !important;
+    transition: none !important;
   }
 }
