@@ -1,5 +1,5 @@
 /* ==========================================================
-   Revolution Agency × Voiceflow — Thème Fondu v1.8
+   Revolution Agency × Voiceflow — Thème Fondu v1.9
    
    Design : Intégration seamless dans landing page sombre
    Couleurs : Violet → Fuchsia → Rose → Orange
@@ -8,6 +8,7 @@
    
    v1.7 - Questions distinctives avec classe .revo-question
    v1.8 - Barre de progression avec classe .revo-progress
+   v1.9 - Typing indicator stylisé + points progress plus visibles
    ========================================================== */
 
 /* ==========================================================
@@ -694,15 +695,17 @@ button._1q15b0b3 {
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-/* Points complétés (done) - Gradient animé */
+/* Points complétés (done) - TRÈS VISIBLE avec couleur solide */
 .vfrc-system-response .vfrc-message .revo-progress span.done,
 .vfrc-message .revo-progress span.done,
 .revo-progress span.done {
-  background: var(--gradient-main) !important;
+  background: #c026d3 !important;  /* Fuchsia solide, pas de gradient */
   box-shadow: 
-    0 0 8px var(--glow-fuchsia),
-    0 0 16px -4px var(--glow-violet) !important;
+    0 0 6px 2px rgba(192, 38, 211, 0.8),
+    0 0 12px 4px rgba(124, 58, 237, 0.5),
+    inset 0 0 4px rgba(255, 255, 255, 0.3) !important;
   animation: progressPulse 2s ease-in-out infinite !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
 }
 
 /* Points en attente (pending) - Gris subtil */
@@ -714,19 +717,21 @@ button._1q15b0b3 {
   box-shadow: none !important;
 }
 
-/* Animation subtile des points complétés */
+/* Animation des points complétés - plus visible */
 @keyframes progressPulse {
   0%, 100% {
     box-shadow: 
-      0 0 8px var(--glow-fuchsia),
-      0 0 16px -4px var(--glow-violet);
+      0 0 6px 2px rgba(192, 38, 211, 0.8),
+      0 0 12px 4px rgba(124, 58, 237, 0.5),
+      inset 0 0 4px rgba(255, 255, 255, 0.3);
     transform: scale(1);
   }
   50% {
     box-shadow: 
-      0 0 12px var(--glow-fuchsia),
-      0 0 24px -4px var(--glow-violet);
-    transform: scale(1.1);
+      0 0 10px 3px rgba(192, 38, 211, 1),
+      0 0 20px 6px rgba(124, 58, 237, 0.7),
+      inset 0 0 6px rgba(255, 255, 255, 0.5);
+    transform: scale(1.15);
   }
 }
 
@@ -1454,6 +1459,77 @@ div[class*="spacer"] {
 }
 
 /* ==========================================================
+   ⭐ TYPING INDICATOR - Animation "Revo écrit..."
+   ========================================================== */
+
+/* Container du typing indicator */
+.vfrc-typing-indicator--container,
+.vfrc-typing-indicator--container-inner,
+._1ayyscc0,
+._1ayyscc1 {
+  background: linear-gradient(135deg, rgba(124,58,237,0.12) 0%, rgba(20,20,22,0.85) 100%) !important;
+  border: 1px solid rgba(124, 58, 237, 0.3) !important;
+  border-radius: 16px !important;
+  padding: 14px 20px !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  box-shadow: 
+    0 0 20px -8px var(--glow-violet),
+    inset 0 0 20px rgba(124, 58, 237, 0.05) !important;
+}
+
+/* Container des points */
+.vfrc-typing-indicator,
+.vfrc-typing-indicator.xaffbq1 {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+/* Points individuels - Base */
+.vfrc-typing-indicator span,
+.vfrc-typing-indicator span.xaffbq2 {
+  display: block !important;
+  width: 10px !important;
+  height: 10px !important;
+  background: rgba(124, 58, 237, 0.3) !important;
+  border-radius: 50% !important;
+  animation: typingGlowPulse 1.5s ease-in-out infinite !important;
+}
+
+/* Délais pour effet de vague */
+.vfrc-typing-indicator span.xaffbq3,
+.vfrc-typing-indicator span:nth-child(1) {
+  animation-delay: 0s !important;
+}
+
+.vfrc-typing-indicator span.xaffbq4,
+.vfrc-typing-indicator span:nth-child(2) {
+  animation-delay: 0.3s !important;
+}
+
+.vfrc-typing-indicator span.xaffbq5,
+.vfrc-typing-indicator span:nth-child(3) {
+  animation-delay: 0.6s !important;
+}
+
+/* Animation Glow Pulse */
+@keyframes typingGlowPulse {
+  0%, 100% { 
+    background: rgba(124, 58, 237, 0.3) !important;
+    box-shadow: none;
+    transform: scale(1);
+  }
+  50% { 
+    background: #c026d3 !important;
+    box-shadow: 
+      0 0 8px 2px rgba(192, 38, 211, 0.9),
+      0 0 16px 4px rgba(124, 58, 237, 0.6);
+    transform: scale(1.4);
+  }
+}
+
+/* ==========================================================
    ANIMATIONS D'ENTRÉE
    ========================================================== */
 @keyframes fadeInUp {
@@ -1542,6 +1618,19 @@ div[class*="spacer"] {
     animation: none !important;
   }
   
+  /* Typing indicator responsive */
+  .vfrc-typing-indicator--container-inner,
+  ._1ayyscc1 {
+    padding: 10px 14px !important;
+    border-radius: 12px !important;
+  }
+  
+  .vfrc-typing-indicator span,
+  .vfrc-typing-indicator span.xaffbq2 {
+    width: 8px !important;
+    height: 8px !important;
+  }
+  
   /* Bouton restart mobile - zone cliquable plus grande */
   .vfrc-header--button,
   button.vfrc-header--button,
@@ -1619,7 +1708,9 @@ div[class*="spacer"] {
   ._1gdvh9tf:not([disabled]),
   .vfrc-message:not([class*="extension"]),
   .revo-question,
-  .revo-progress span.done {
+  .revo-progress span.done,
+  .vfrc-typing-indicator span,
+  .vfrc-typing-indicator span.xaffbq2 {
     animation: none !important;
     transition: none !important;
   }
