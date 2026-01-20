@@ -1,5 +1,5 @@
 /* ==========================================================
-   Revolution Agency × Voiceflow — Thème Fondu v1.7
+   Revolution Agency × Voiceflow — Thème Fondu v1.8
    
    Design : Intégration seamless dans landing page sombre
    Couleurs : Violet → Fuchsia → Rose → Orange
@@ -7,6 +7,7 @@
    Style : Glassmorphism, pas de header, pas de bordures
    
    v1.7 - Questions distinctives avec classe .revo-question
+   v1.8 - Barre de progression avec classe .revo-progress
    ========================================================== */
 
 /* ==========================================================
@@ -646,6 +647,105 @@ button._1q15b0b3 {
     0 0 50px -15px var(--glow-violet),
     inset 0 0 40px rgba(192, 38, 211, 0.08) !important;
   animation: none !important;
+}
+
+/* ==========================================================
+   ⭐ BARRE DE PROGRESSION - Classe .revo-progress
+   ========================================================== */
+
+/* Container de la barre */
+.vfrc-system-response .vfrc-message .revo-progress,
+.vfrc-message .revo-progress,
+.revo-progress {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  padding: 10px 16px !important;
+  margin-bottom: 14px !important;
+  background: linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(20,20,22,0.6) 100%) !important;
+  border: 1px solid rgba(124, 58, 237, 0.2) !important;
+  border-radius: 12px !important;
+  position: relative !important;
+}
+
+/* Label de la barre (ex: "3/7 piliers") */
+.vfrc-system-response .vfrc-message .revo-progress::after,
+.vfrc-message .revo-progress::after,
+.revo-progress::after {
+  content: attr(data-label) !important;
+  position: absolute !important;
+  right: 12px !important;
+  font-family: var(--font-body) !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  color: var(--text-secondary) !important;
+  letter-spacing: 0.02em !important;
+}
+
+/* Points de progression - Base commune */
+.vfrc-system-response .vfrc-message .revo-progress span,
+.vfrc-message .revo-progress span,
+.revo-progress span {
+  display: block !important;
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 50% !important;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Points complétés (done) - Gradient animé */
+.vfrc-system-response .vfrc-message .revo-progress span.done,
+.vfrc-message .revo-progress span.done,
+.revo-progress span.done {
+  background: var(--gradient-main) !important;
+  box-shadow: 
+    0 0 8px var(--glow-fuchsia),
+    0 0 16px -4px var(--glow-violet) !important;
+  animation: progressPulse 2s ease-in-out infinite !important;
+}
+
+/* Points en attente (pending) - Gris subtil */
+.vfrc-system-response .vfrc-message .revo-progress span.pending,
+.vfrc-message .revo-progress span.pending,
+.revo-progress span.pending {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: none !important;
+}
+
+/* Animation subtile des points complétés */
+@keyframes progressPulse {
+  0%, 100% {
+    box-shadow: 
+      0 0 8px var(--glow-fuchsia),
+      0 0 16px -4px var(--glow-violet);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 
+      0 0 12px var(--glow-fuchsia),
+      0 0 24px -4px var(--glow-violet);
+    transform: scale(1.1);
+  }
+}
+
+/* Hover sur la barre - Effet glow */
+.vfrc-system-response .vfrc-message .revo-progress:hover,
+.vfrc-message .revo-progress:hover,
+.revo-progress:hover {
+  border-color: rgba(124, 58, 237, 0.4) !important;
+  box-shadow: 0 0 20px -8px var(--glow-violet) !important;
+}
+
+/* Quand tous les points sont done - Effet spécial */
+.revo-progress:has(span:nth-child(7).done) {
+  background: linear-gradient(135deg, rgba(124,58,237,0.15) 0%, rgba(192,38,211,0.1) 50%, rgba(249,115,22,0.08) 100%) !important;
+  border-color: rgba(192, 38, 211, 0.4) !important;
+}
+
+.revo-progress:has(span:nth-child(7).done)::after {
+  color: var(--accent-fuchsia) !important;
 }
 
 /* ==========================================================
@@ -1419,6 +1519,29 @@ div[class*="spacer"] {
     margin-top: 10px !important;
   }
   
+  /* Progress bar responsive */
+  .vfrc-system-response .vfrc-message .revo-progress,
+  .vfrc-message .revo-progress,
+  .revo-progress {
+    gap: 5px !important;
+    padding: 8px 12px !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .revo-progress span {
+    width: 10px !important;
+    height: 10px !important;
+  }
+  
+  .revo-progress::after {
+    font-size: 10px !important;
+    right: 10px !important;
+  }
+  
+  .revo-progress span.done {
+    animation: none !important;
+  }
+  
   /* Bouton restart mobile - zone cliquable plus grande */
   .vfrc-header--button,
   button.vfrc-header--button,
@@ -1495,7 +1618,8 @@ div[class*="spacer"] {
   .vfrc-chat-input__send:not([disabled]),
   ._1gdvh9tf:not([disabled]),
   .vfrc-message:not([class*="extension"]),
-  .revo-question {
+  .revo-question,
+  .revo-progress span.done {
     animation: none !important;
     transition: none !important;
   }
