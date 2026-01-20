@@ -1,12 +1,12 @@
 /* ==========================================================
-   Revolution Agency × Voiceflow — Thème Fondu v1.6
+   Revolution Agency × Voiceflow — Thème Fondu v1.7
    
    Design : Intégration seamless dans landing page sombre
    Couleurs : Violet → Fuchsia → Rose → Orange
    Fonts : Syne (titres) + Outfit (corps)
    Style : Glassmorphism, pas de header, pas de bordures
    
-   v1.6 - Paddings optimisés + Input attractif avec animations
+   v1.7 - Questions distinctives avec classe .revo-question
    ========================================================== */
 
 /* ==========================================================
@@ -592,6 +592,63 @@ button._1q15b0b3 {
 }
 
 /* ==========================================================
+   ⭐ QUESTIONS DISTINCTIVES - Classe .revo-question
+   ========================================================== */
+
+/* Style principal des questions */
+.vfrc-system-response .vfrc-message .revo-question,
+.vfrc-message .revo-question,
+.revo-question {
+  display: block !important;
+  font-family: var(--font-heading) !important;
+  font-weight: 600 !important;
+  font-size: 15px !important;
+  line-height: 1.4 !important;
+  color: #ffffff !important;
+  margin-top: 14px !important;
+  margin-bottom: 4px !important;
+  padding: 12px 16px !important;
+  background: linear-gradient(135deg, rgba(124,58,237,0.18) 0%, rgba(192,38,211,0.12) 50%, rgba(249,115,22,0.08) 100%) !important;
+  border: 1px solid rgba(192, 38, 211, 0.35) !important;
+  border-left: 4px solid var(--accent-fuchsia) !important;
+  border-radius: 0 12px 12px 0 !important;
+  position: relative !important;
+  box-shadow: 
+    0 4px 20px -8px var(--glow-fuchsia),
+    inset 0 0 30px rgba(124, 58, 237, 0.05) !important;
+  animation: questionPulse 3s ease-in-out infinite !important;
+}
+
+/* Animation subtile de pulsation */
+@keyframes questionPulse {
+  0%, 100% {
+    box-shadow: 
+      0 4px 20px -8px var(--glow-fuchsia),
+      inset 0 0 30px rgba(124, 58, 237, 0.05);
+    border-left-color: var(--accent-fuchsia);
+  }
+  50% {
+    box-shadow: 
+      0 6px 28px -8px var(--glow-violet),
+      inset 0 0 40px rgba(192, 38, 211, 0.08);
+    border-left-color: var(--accent-violet);
+  }
+}
+
+/* Hover sur la question */
+.vfrc-system-response .vfrc-message .revo-question:hover,
+.vfrc-message .revo-question:hover,
+.revo-question:hover {
+  background: linear-gradient(135deg, rgba(124,58,237,0.25) 0%, rgba(192,38,211,0.18) 50%, rgba(249,115,22,0.12) 100%) !important;
+  border-color: rgba(192, 38, 211, 0.5) !important;
+  box-shadow: 
+    0 8px 30px -8px var(--glow-fuchsia),
+    0 0 50px -15px var(--glow-violet),
+    inset 0 0 40px rgba(192, 38, 211, 0.08) !important;
+  animation: none !important;
+}
+
+/* ==========================================================
    TYPOGRAPHIE - Titres avec gradient (compacts)
    ========================================================== */
 /* H1 - Grand titre gradient */
@@ -685,10 +742,10 @@ button._1q15b0b3 {
   margin-bottom: 0 !important;
 }
 
-/* Texte en gras - Blanc pur */
-.vfrc-system-response .vfrc-message:not([class*="extension"]) strong,
-._11kfxpg1 strong,
-._11kfxpg3 strong {
+/* Texte en gras - Blanc pur (mais pas les questions) */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) strong:not(.revo-question),
+._11kfxpg1 strong:not(.revo-question),
+._11kfxpg3 strong:not(.revo-question) {
   font-weight: 600 !important;
   color: #ffffff !important;
 }
@@ -1353,6 +1410,15 @@ div[class*="spacer"] {
     --fs-button: 12px;
   }
   
+  /* Questions responsive */
+  .vfrc-system-response .vfrc-message .revo-question,
+  .vfrc-message .revo-question,
+  .revo-question {
+    font-size: 14px !important;
+    padding: 10px 14px !important;
+    margin-top: 10px !important;
+  }
+  
   /* Bouton restart mobile - zone cliquable plus grande */
   .vfrc-header--button,
   button.vfrc-header--button,
@@ -1406,6 +1472,13 @@ div[class*="spacer"] {
   ._1gdvh9tf:not([disabled]) {
     animation: none !important;
   }
+  
+  /* Réduire animation question sur mobile */
+  .vfrc-system-response .vfrc-message .revo-question,
+  .vfrc-message .revo-question,
+  .revo-question {
+    animation: none !important;
+  }
 }
 
 /* ==========================================================
@@ -1421,7 +1494,8 @@ div[class*="spacer"] {
   #vfrc-send-message:not([disabled]),
   .vfrc-chat-input__send:not([disabled]),
   ._1gdvh9tf:not([disabled]),
-  .vfrc-message:not([class*="extension"]) {
+  .vfrc-message:not([class*="extension"]),
+  .revo-question {
     animation: none !important;
     transition: none !important;
   }
