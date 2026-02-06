@@ -1,74 +1,454 @@
-/* H2 - Sous-titre rose */
+/* ==========================================================
+   PulpMeUp × Voiceflow — Thème Premium v2.0
+   
+   Design : Basé sur les CSS Infortive/Revo
+   Couleurs : Rose/Fuchsia #E91E63 + Navy #1A237E
+   Fonts : Inter (corps) + DM Sans (titres)
+   
+   Auteur : Evolution Agency
+   ========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
+
+/* ==========================================================
+   STRUCTURE PRINCIPALE - HAUTEUR 100%
+   ========================================================== */
+.vfrc-chat,
+.vfrc-chat__container,
+.vfrc-chat__container-inner {
+  height: 100% !important;
+  max-height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.vfrc-chat-dialog__container {
+  flex: 1 !important;
+  min-height: 0 !important;
+  overflow-y: auto !important;
+}
+
+/* ==========================================================
+   SUPPRIMER FOND BLANC + OMBRE DU CHAT
+   ========================================================== */
+.vfrc-chat__container-inner,
+.vfrc-chat,
+.vfrc-chat-dialog__container,
+.vfrc-chat--dialog,
+.vfrc-chat-dialog,
+.vfrc-chat--bottom-spacer,
+.vfrc-chat-focus-ring,
+.vfrc-chat--overlay {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* ==========================================================
+   HEADER - MASQUÉ COMPLÈTEMENT
+   ========================================================== */
+.vfrc-header,
+.vfrc-header--container,
+.vfrc-header--container-inner,
+.vfrc-header--title,
+.vfrc-header--button,
+.vfrc-header--actions {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+/* ==========================================================
+   CHAT CONTAINER RESET
+   ========================================================== */
+.vfrc-chat,
+.vfrc-chat__container,
+.vfrc-chat__container-inner,
+.vfrc-chat-dialog,
+.vfrc-chat-dialog__container,
+.vfrc-chat--dialog {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* ==========================================================
+   AVATAR - VISIBLE avec bordure rose
+   ========================================================== */
+.vfrc-system-response,
+div.vfrc-system-response {
+  display: flex !important;
+  align-items: flex-start !important;
+  padding-left: 0 !important;
+  padding-right: 8px !important;
+}
+
+.vfrc-avatar,
+img.vfrc-avatar {
+  flex-shrink: 0 !important;
+  width: 40px !important;
+  height: 40px !important;
+  margin-right: 12px !important;
+  margin-top: 12px !important;
+  align-self: flex-start !important;
+  border-radius: 50% !important;
+  border: 2px solid #E91E63 !important;
+  box-shadow: 0 4px 12px rgba(233, 30, 99, 0.25) !important;
+  transition: all 0.3s ease !important;
+}
+
+.vfrc-avatar:hover,
+img.vfrc-avatar:hover {
+  transform: scale(1.05) !important;
+  box-shadow: 0 6px 16px rgba(233, 30, 99, 0.35) !important;
+}
+
+/* ==========================================================
+   BOUTONS D'ACTION (conteneur) - ALIGNÉ AVEC BULLES
+   ========================================================== */
+.vfrc-system-response--actions,
+.vfrc-system-response--actions.g3dqfd6 {
+  margin-left: 52px !important;
+  padding-left: 0 !important;
+  padding-right: 8px !important;
+  width: calc(100% - 60px) !important;
+  max-width: calc(100% - 60px) !important;
+  box-sizing: border-box !important;
+}
+
+/* ==========================================================
+   FOOTER - FOND BLANC + FLEX SHRINK 0
+   ========================================================== */
+.vfrc-footer {
+  background: #ffffff !important;
+  position: relative !important;
+  z-index: 100 !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-top: 1px solid #E0E0E0 !important;
+  padding: 12px 8px 12px 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  flex-shrink: 0 !important;
+}
+
+.vfrc-footer__content {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  margin-left: 52px !important;
+  width: calc(100% - 52px) !important;
+  max-width: calc(100% - 52px) !important;
+  box-sizing: border-box !important;
+}
+
+/* ==========================================================
+   ZONE INPUT CONTENEUR : TRANSPARENT
+   ========================================================== */
+.vfrc-input-container,
+._1gdvh9t2,
+._1gdvh9t3,
+div.vfrc-input-container {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.vfrc-input-container:focus,
+.vfrc-input-container:focus-within,
+.vfrc-input-container:focus-visible,
+._1gdvh9t2:focus,
+._1gdvh9t2:focus-within,
+._1gdvh9t2:focus-visible {
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.vfrc-chat-input__container-inner,
+._1gdvh9tc {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* ==========================================================
+   BOUTONS CHOIX (STYLE)
+   ========================================================== */
+.vfrc-button:not(.vfrc-header--button),
+button.vfrc-button:not(.vfrc-header--button) {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-weight: 500 !important;
+  font-size: 13px !important;
+  line-height: 1.4 !important;
+  letter-spacing: -0.01em !important;
+  padding: 12px 18px !important;
+  background: #ffffff !important;
+  border: 2px solid #E0E0E0 !important;
+  color: #424242 !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06) !important;
+  border-radius: 50px !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  cursor: pointer !important;
+  margin-top: 6px !important;
+  margin-bottom: 6px !important;
+  margin-right: 8px !important;
+  width: auto !important;
+  max-width: fit-content !important;
+  text-align: left !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 8px !important;
+  white-space: nowrap !important;
+}
+
+.vfrc-button:not(.vfrc-header--button):hover {
+  background: rgba(233, 30, 99, 0.04) !important;
+  border-color: #E91E63 !important;
+  color: #E91E63 !important;
+  box-shadow: 0 4px 12px rgba(233, 30, 99, 0.15) !important;
+  transform: translateY(-2px) !important;
+}
+
+.vfrc-button:not(.vfrc-header--button):active {
+  transform: translateY(0) scale(0.98) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06) !important;
+}
+
+.vfrc-button-container,
+.vfrc-card--buttons {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 8px !important;
+  padding: 8px 0 !important;
+}
+
+/* ==========================================================
+   BOUTON ENVOYER
+   ========================================================== */
+#vfrc-send-message svg,
+.vfrc-chat-input__send svg {
+  display: block !important;
+  width: 20px !important;
+  height: 20px !important;
+}
+
+#vfrc-send-message::after,
+.vfrc-chat-input__send::after {
+  content: none !important;
+  display: none !important;
+}
+
+#vfrc-send-message,
+.vfrc-chat-input__send {
+  background: rgba(233, 30, 99, 0.1) !important;
+  border: 1px solid rgba(233, 30, 99, 0.3) !important;
+  border-radius: 10px !important;
+  padding: 10px 14px !important;
+  color: rgba(233, 30, 99, 0.5) !important;
+  box-shadow: none !important;
+  transition: all 0.25s ease-in-out !important;
+  cursor: not-allowed;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  text-align: center;
+  user-select: none;
+  flex-shrink: 0 !important;
+  margin-left: 12px !important;
+}
+
+#vfrc-send-message:not([disabled]),
+.vfrc-chat-input__send:not([disabled]) {
+  background: linear-gradient(135deg, #E91E63, #C2185B) !important;
+  border: none !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(233, 30, 99, 0.3) !important;
+  cursor: pointer;
+  opacity: 1;
+}
+
+#vfrc-send-message:not([disabled]):hover,
+.vfrc-chat-input__send:not([disabled]):hover {
+  background: linear-gradient(135deg, #C2185B, #AD1457) !important;
+  box-shadow: 0 6px 16px rgba(233, 30, 99, 0.4) !important;
+  transform: scale(1.05) !important;
+}
+
+#vfrc-send-message:not([disabled]):hover svg,
+.vfrc-chat-input__send:not([disabled]):hover svg {
+  transform: translateX(2px) !important;
+}
+
+#vfrc-send-message:not([disabled]):active,
+.vfrc-chat-input__send:not([disabled]):active {
+  transform: scale(0.95) !important;
+}
+
+.vfrc-chat-input__actions {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 auto !important;
+  width: auto !important;
+  padding-right: 0 !important;
+  overflow: visible !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* ==========================================================
+   BULLES AGENT - Fond blanc élégant
+   ========================================================== */
+.vfrc-system-response .vfrc-message:not([class*="extension"]),
+.vfrc-message._11kfxpg0 {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+  letter-spacing: -0.01em !important;
+  display: inline-block !important;
+  background: #ffffff !important;
+  color: #212121 !important;
+  border: 1px solid #E0E0E0 !important;
+  border-radius: 14px !important;
+  padding: 12px 16px !important;
+  max-width: 85%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative !important;
+}
+
+.vfrc-system-response .vfrc-message:not([class*="extension"]):hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+  transform: translateY(-1px) !important;
+  border-color: #BDBDBD !important;
+}
+
+/* Petit triangle pour effet bulle */
+.vfrc-system-response .vfrc-message:not([class*="extension"])::before {
+  content: "" !important;
+  position: absolute !important;
+  left: -6px !important;
+  top: 16px !important;
+  width: 0 !important;
+  height: 0 !important;
+  border-style: solid !important;
+  border-width: 6px 6px 6px 0 !important;
+  border-color: transparent #ffffff transparent transparent !important;
+  filter: drop-shadow(-1px 0 0 #E0E0E0) !important;
+}
+
+.vfrc-system-response .vfrc-message:not([class*="extension"]) p,
+.vfrc-system-response .vfrc-message:not([class*="extension"]) li {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  line-height: 1.6 !important;
+  color: #212121 !important;
+}
+
+/* ==========================================================
+   TITRES MARKDOWN DANS LES BULLES
+   ========================================================== */
+.vfrc-message h1,
+.vfrc-message .markdown h1,
+._11kfxpg0 h1 {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  line-height: 1.3 !important;
+  margin: 16px 0 10px 0 !important;
+  color: #1A237E !important;
+  padding-bottom: 8px !important;
+  border-bottom: 3px solid #E91E63 !important;
+}
+
 .vfrc-message h2,
 .vfrc-message .markdown h2,
 ._11kfxpg0 h2 {
-  font-family: var(--font-heading) !important;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 19px !important;
   font-weight: 600 !important;
-  font-size: var(--fs-h2) !important;
-  line-height: 1.4 !important;
-  color: var(--primary-pink) !important;
-  margin: var(--spacing-lg) 0 var(--spacing-sm) 0 !important;
+  line-height: 1.3 !important;
+  margin: 14px 0 8px 0 !important;
+  color: #E91E63 !important;
 }
 
-/* H3 - Sous-titre navy */
 .vfrc-message h3,
 .vfrc-message .markdown h3,
 ._11kfxpg0 h3 {
-  font-family: var(--font-heading) !important;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 17px !important;
   font-weight: 600 !important;
-  font-size: var(--fs-h3) !important;
   line-height: 1.4 !important;
-  color: var(--primary-navy-light) !important;
-  margin: var(--spacing-md) 0 var(--spacing-sm) 0 !important;
+  margin: 12px 0 6px 0 !important;
+  color: #283593 !important;
 }
 
-/* H4, H5, H6 */
 .vfrc-message h4,
 .vfrc-message h5,
 .vfrc-message h6,
+.vfrc-message .markdown h4,
+.vfrc-message .markdown h5,
+.vfrc-message .markdown h6,
 ._11kfxpg0 h4,
 ._11kfxpg0 h5,
 ._11kfxpg0 h6 {
-  font-family: var(--font-heading) !important;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
   font-weight: 600 !important;
-  font-size: var(--fs-body) !important;
-  line-height: 1.5 !important;
-  color: var(--text-medium) !important;
-  margin: var(--spacing-md) 0 var(--spacing-xs) 0 !important;
+  font-size: 15px !important;
+  line-height: 1.4 !important;
+  margin: 10px 0 6px 0 !important;
+  color: #424242 !important;
 }
 
-/* Paragraphes */
-.vfrc-message p,
-.vfrc-message .markdown p,
-._11kfxpg0 p {
-  font-family: var(--font-body) !important;
-  font-size: var(--fs-body) !important;
-  font-weight: 400 !important;
-  line-height: 1.6 !important;
-  color: var(--text-dark) !important;
-  margin: var(--spacing-sm) 0 !important;
-}
-
-.vfrc-message p:first-child {
+.vfrc-message h1:first-child,
+.vfrc-message h2:first-child,
+.vfrc-message h3:first-child,
+.vfrc-message h4:first-child,
+.vfrc-message .markdown h1:first-child,
+.vfrc-message .markdown h2:first-child,
+.vfrc-message .markdown h3:first-child,
+.vfrc-message .markdown h4:first-child {
   margin-top: 0 !important;
 }
 
-.vfrc-message p:last-child {
-  margin-bottom: 0 !important;
-}
-
-/* Texte en gras - Navy */
 .vfrc-message strong,
 .vfrc-message .markdown strong,
 ._11kfxpg0 strong {
   font-weight: 600 !important;
-  color: var(--primary-navy) !important;
+  color: #1A237E !important;
 }
 
-/* Liens - Rose */
 .vfrc-message a,
 ._11kfxpg0 a {
-  color: var(--primary-pink) !important;
+  color: #E91E63 !important;
   text-decoration: none !important;
   font-weight: 500 !important;
   border-bottom: 1px solid transparent !important;
@@ -77,336 +457,177 @@
 
 .vfrc-message a:hover,
 ._11kfxpg0 a:hover {
-  color: var(--primary-pink-dark) !important;
-  border-bottom-color: var(--primary-pink-dark) !important;
+  color: #C2185B !important;
+  border-bottom-color: #C2185B !important;
 }
 
 /* ==========================================================
-   LISTES - Puces stylées rose
+   LISTES (ul/ol) - FIX ALIGNEMENT PUCES
    ========================================================== */
 .vfrc-message ul,
-._11kfxpg0 ul {
-  list-style: none !important;
-  padding-left: 1.4em !important;
-  margin: var(--spacing-md) 0 !important;
+.vfrc-message ol,
+.vfrc-message .markdown ul,
+.vfrc-message .markdown ol,
+._11kfxpg0 ul,
+._11kfxpg0 ol {
+  margin: 10px 0 !important;
+  padding-left: 24px !important;
+  list-style-position: outside !important;
 }
 
-.vfrc-message ul li,
-._11kfxpg0 ul li {
-  position: relative !important;
-  margin: var(--spacing-xs) 0 !important;
-  padding-left: var(--spacing-sm) !important;
-  font-size: var(--fs-body) !important;
+.vfrc-message ul,
+.vfrc-message .markdown ul,
+._11kfxpg0 ul {
+  list-style-type: none !important;
+}
+
+.vfrc-message ol,
+.vfrc-message .markdown ol,
+._11kfxpg0 ol {
+  list-style-type: decimal !important;
+}
+
+.vfrc-message li,
+.vfrc-message .markdown li,
+._11kfxpg0 li {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 400 !important;
   line-height: 1.6 !important;
+  margin-bottom: 6px !important;
+  padding-left: 6px !important;
+  display: list-item !important;
+  position: relative !important;
+  list-style: none !important;
+}
+
+.vfrc-message li:last-child,
+.vfrc-message .markdown li:last-child,
+._11kfxpg0 li:last-child {
+  margin-bottom: 0 !important;
 }
 
 /* Puce custom rose */
+.vfrc-message .markdown ul li::before,
 .vfrc-message ul li::before,
-._11kfxpg0 ul li::before {
+._11kfxpg0 ul li::before,
+.markdown ul li::before {
   content: "" !important;
-  position: absolute !important;
-  left: -1.1em !important;
-  top: 0.6em !important;
-  width: 6px !important;
   height: 6px !important;
-  background: var(--primary-pink) !important;
+  width: 6px !important;
+  background-color: #E91E63 !important;
   border-radius: 50% !important;
-}
-
-/* Listes numérotées */
-.vfrc-message ol,
-._11kfxpg0 ol {
-  padding-left: 1.4em !important;
-  margin: var(--spacing-md) 0 !important;
-  counter-reset: list-counter !important;
-}
-
-.vfrc-message ol li,
-._11kfxpg0 ol li {
-  position: relative !important;
-  margin: var(--spacing-xs) 0 !important;
-  font-size: var(--fs-body) !important;
-  line-height: 1.6 !important;
-  counter-increment: list-counter !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 0.7em !important;
+  transform: translateX(-16px) !important;
 }
 
 .vfrc-message ol li::marker {
-  color: var(--primary-pink) !important;
+  color: #E91E63 !important;
   font-weight: 600 !important;
 }
 
 /* ==========================================================
-   BOUTONS DE CHOIX - Style PulpMeUp moderne
+   BULLES UTILISATEUR - Gradient rose
    ========================================================== */
-
-/* Container des boutons */
-.vfrc-system-response--actions,
-.vfrc-button-container,
-.vfrc-card--buttons,
-.g3dqfd6 {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  gap: var(--spacing-sm) !important;
-  padding: var(--spacing-md) 0 !important;
-  margin-left: 52px !important;
-  justify-content: flex-start !important;
-}
-
-/* Boutons de choix - Style outline moderne */
-.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]),
-button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]),
-._1nzwwii0 {
-  font-family: var(--font-body) !important;
-  font-weight: 500 !important;
-  font-size: var(--fs-small) !important;
-  line-height: 1.4 !important;
-  letter-spacing: -0.01em !important;
-  background: var(--bg-white) !important;
-  border: 2px solid var(--border-light) !important;
-  color: var(--text-dark) !important;
-  border-radius: var(--radius-round) !important;
-  padding: var(--spacing-md) var(--spacing-xl) !important;
-  margin: 0 !important;
-  cursor: pointer !important;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  box-shadow: var(--shadow-sm) !important;
-  white-space: nowrap !important;
-}
-
-/* Hover - Bordure rose + ombre */
-.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):hover,
-button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]):hover,
-._1nzwwii0:hover {
-  border-color: var(--primary-pink) !important;
-  color: var(--primary-pink) !important;
-  background: rgba(233, 30, 99, 0.04) !important;
-  box-shadow: var(--shadow-md) !important;
-  transform: translateY(-2px) !important;
-}
-
-/* Active - Press effect */
-.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):active,
-button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]):active,
-._1nzwwii0:active {
-  transform: translateY(0) scale(0.98) !important;
-  box-shadow: var(--shadow-sm) !important;
-}
-
-/* ==========================================================
-   FOOTER - Zone de saisie élégante
-   ========================================================== */
-.vfrc-footer,
-._1vj16242 {
-  padding: 0 !important;
-  margin: 0 !important;
-  background: transparent !important;
-  border-top: 1px solid var(--border-light) !important;
-  flex-shrink: 0 !important;
-}
-
-.vfrc-footer__content,
-._1vj16245 {
-  padding: var(--spacing-lg) var(--spacing-md) !important;
-  margin: 0 !important;
-  background: var(--bg-white) !important;
-}
-
-/* Masquer éléments superflus du footer */
-.vfrc-chat--bottom-spacer,
-.vfrc-footer__content-scroll-to-bottom,
-.vfrc-footer__links,
-.s9t60i2,
-.s9t60i4,
-.oq48l92,
-._1cosygz0,
-.jsli361,
-.jsli363 {
-  display: none !important;
-  height: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  visibility: hidden !important;
-}
-
-/* ==========================================================
-   INPUT CONTAINER - Design moderne
-   ========================================================== */
-._1gdvh9t0,
-.vfrc-chat-input__container {
-  display: flex !important;
-  align-items: center !important;
-  gap: var(--spacing-md) !important;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-.vfrc-input-container,
-._1gdvh9t2,
-._1gdvh9t3 {
-  flex: 1 !important;
-  display: flex !important;
-  align-items: center !important;
-  background: var(--bg-light-gray) !important;
-  border: 2px solid transparent !important;
-  border-radius: var(--radius-lg) !important;
-  padding: var(--spacing-xs) !important;
-  transition: all 0.3s ease !important;
-}
-
-.vfrc-input-container:focus-within,
-._1gdvh9t2:focus-within,
-._1gdvh9t3:focus-within {
-  background: var(--bg-white) !important;
-  border-color: var(--primary-pink) !important;
-  box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.08) !important;
-}
-
-.vfrc-chat-input__container-inner,
-._1gdvh9tc {
-  flex: 1 !important;
-  display: flex !important;
-  align-items: center !important;
-}
-
-/* Focus ring - masquer */
-.vfrc-chat-focus-ring,
-._1gdvh9t7,
-._1gdvh9t8,
-._1gdvh9t9 {
-  display: none !important;
-}
-
-/* ==========================================================
-   TEXTAREA - Style épuré
-   ========================================================== */
-.vfrc-chat-input textarea,
-textarea.vfrc-chat-input,
-textarea._1gdvh9ta,
-.vfrc-chat-input__input {
-  font-family: var(--font-body) !important;
+.vfrc-user-response > div,
+.vfrc-user-response .vfrc-message,
+._15emaa40 {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
   font-weight: 400 !important;
-  font-size: var(--fs-body) !important;
-  line-height: 1.5 !important;
-  color: var(--text-dark) !important;
-  background: transparent !important;
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #E91E63 0%, #C2185B 100%) !important;
   border: none !important;
-  border-radius: var(--radius-md) !important;
-  padding: var(--spacing-md) !important;
+  border-radius: 14px !important;
+  padding: 12px 16px !important;
+  max-width: 85%;
+  box-shadow: 0 4px 12px rgba(233, 30, 99, 0.25) !important;
+  margin-left: auto !important;
+}
+
+.vfrc-user-response > div *,
+.vfrc-user-response .vfrc-message *,
+._15emaa40 * {
+  color: #ffffff !important;
+}
+
+.vfrc-message:not([class*="extension"]) {
+  margin: 12px 0 !important;
+}
+
+.vfrc-user-response {
+  padding-left: 52px !important;
+  padding-right: 8px !important;
+}
+
+/* ==========================================================
+   TEXTAREA
+   ========================================================== */
+textarea.vfrc-chat-input,
+textarea._1gdvh9ta {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+  width: 100% !important;
+  min-width: 200px !important;
   min-height: 44px !important;
   max-height: 120px !important;
-  resize: none !important;
-  flex: 1 !important;
+  overflow-y: auto !important;
+  resize: vertical !important;
+  background: #F5F5F5 !important;
+  border: 2px solid transparent !important;
+  border-radius: 10px !important;
+  outline: none !important;
+  box-shadow: none !important;
+  padding: 12px 14px !important;
+  box-sizing: border-box !important;
+  flex: 1 1 auto !important;
+  margin-left: 0 !important;
   transition: all 0.2s ease !important;
 }
 
-.vfrc-chat-input textarea:focus,
+textarea.vfrc-chat-input:focus,
+textarea.vfrc-chat-input:focus-visible,
 textarea._1gdvh9ta:focus,
-.vfrc-chat-input__input:focus {
+textarea._1gdvh9ta:focus-visible {
+  border: 2px solid #E91E63 !important;
   outline: none !important;
-  box-shadow: none !important;
+  box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.08) !important;
+  background: #ffffff !important;
 }
 
-.vfrc-chat-input textarea::placeholder,
-textarea._1gdvh9ta::placeholder,
-.vfrc-chat-input__input::placeholder {
-  color: var(--text-lighter) !important;
+textarea.vfrc-chat-input::placeholder,
+textarea._1gdvh9ta::placeholder {
+  color: #9E9E9E !important;
   font-weight: 400 !important;
 }
 
 /* ==========================================================
-   BOUTON ENVOYER - Rose signature PulpMeUp
-   ========================================================== */
-.vfrc-chat-input__actions,
-._1gdvh9td {
-  display: flex !important;
-  align-items: center !important;
-  padding-right: var(--spacing-xs) !important;
-}
-
-#vfrc-send-message,
-.vfrc-chat-input__send,
-._1gdvh9tf {
-  width: 44px !important;
-  height: 44px !important;
-  min-width: 44px !important;
-  padding: 0 !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  background: var(--bg-medium-gray) !important;
-  border: none !important;
-  border-radius: var(--radius-md) !important;
-  color: var(--text-light) !important;
-  cursor: not-allowed !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-}
-
-/* Afficher l'icône SVG */
-#vfrc-send-message svg,
-.vfrc-chat-input__send svg,
-._1gdvh9tf svg {
-  display: block !important;
-  width: 20px !important;
-  height: 20px !important;
-  transition: transform 0.2s ease !important;
-}
-
-/* Masquer texte personnalisé */
-#vfrc-send-message::after,
-.vfrc-chat-input__send::after,
-._1gdvh9tf::after {
-  content: none !important;
-  display: none !important;
-}
-
-/* État actif - Gradient rose */
-#vfrc-send-message:not([disabled]),
-.vfrc-chat-input__send:not([disabled]),
-._1gdvh9tf:not([disabled]) {
-  background: linear-gradient(135deg, var(--primary-pink) 0%, var(--primary-pink-dark) 100%) !important;
-  color: var(--bg-white) !important;
-  cursor: pointer !important;
-  box-shadow: var(--shadow-pink) !important;
-}
-
-#vfrc-send-message:not([disabled]):hover,
-.vfrc-chat-input__send:not([disabled]):hover,
-._1gdvh9tf:not([disabled]):hover {
-  transform: scale(1.05) !important;
-  box-shadow: 0 6px 24px rgba(233, 30, 99, 0.35) !important;
-}
-
-#vfrc-send-message:not([disabled]):hover svg,
-.vfrc-chat-input__send:not([disabled]):hover svg,
-._1gdvh9tf:not([disabled]):hover svg {
-  transform: translateX(2px) !important;
-}
-
-#vfrc-send-message:not([disabled]):active,
-.vfrc-chat-input__send:not([disabled]):active,
-._1gdvh9tf:not([disabled]):active {
-  transform: scale(0.95) !important;
-}
-
-/* ==========================================================
-   SCROLLBAR - Élégante et discrète
+   SCROLLBAR
    ========================================================== */
 .vfrc-chat-dialog__container {
+  overflow-y: scroll !important;
   scrollbar-width: thin !important;
-  scrollbar-color: var(--primary-pink-light) transparent !important;
+  scrollbar-color: #F48FB1 transparent !important;
 }
 
 .vfrc-chat-dialog__container::-webkit-scrollbar {
   width: 6px !important;
+  -webkit-appearance: none !important;
+  display: block !important;
 }
 
 .vfrc-chat-dialog__container::-webkit-scrollbar-thumb {
-  background: var(--primary-pink-light) !important;
+  background: #F48FB1 !important;
   border-radius: 10px !important;
 }
 
 .vfrc-chat-dialog__container::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-pink) !important;
+  background: #E91E63 !important;
 }
 
 .vfrc-chat-dialog__container::-webkit-scrollbar-track {
@@ -414,17 +635,17 @@ textarea._1gdvh9ta::placeholder,
 }
 
 /* ==========================================================
-   TYPING INDICATOR - Animation élégante
+   TYPING INDICATOR
    ========================================================== */
 .vfrc-typing-indicator--container,
 .vfrc-typing-indicator--container-inner,
 ._1ayyscc0,
 ._1ayyscc1 {
-  background: var(--bg-white) !important;
-  border: 1px solid var(--border-light) !important;
-  border-radius: var(--radius-lg) !important;
-  padding: var(--spacing-md) var(--spacing-lg) !important;
-  box-shadow: var(--shadow-sm) !important;
+  background: #ffffff !important;
+  border: 1px solid #E0E0E0 !important;
+  border-radius: 14px !important;
+  padding: 12px 16px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
   margin-left: 52px !important;
 }
 
@@ -440,7 +661,7 @@ textarea._1gdvh9ta::placeholder,
   display: block !important;
   width: 8px !important;
   height: 8px !important;
-  background: var(--primary-pink-light) !important;
+  background: #F48FB1 !important;
   border-radius: 50% !important;
   animation: typingBounce 1.4s ease-in-out infinite !important;
 }
@@ -460,10 +681,300 @@ textarea._1gdvh9ta::placeholder,
 @keyframes typingBounce {
   0%, 60%, 100% {
     transform: translateY(0);
-    background: var(--primary-pink-light);
+    background: #F48FB1;
   }
   30% {
     transform: translateY(-8px);
-    background: var(--primary-pink);
+    background: #E91E63;
   }
+}
+
+/* ==========================================================
+   CAROUSELS & CARDS
+   ========================================================== */
+.vfrc-carousel,
+.vfrc-card {
+  background: #ffffff !important;
+  border: 1px solid #E0E0E0 !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+.vfrc-carousel:hover,
+.vfrc-card:hover {
+  border-color: #F48FB1 !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+  transform: translateY(-4px) !important;
+}
+
+.vfrc-card__title {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 17px !important;
+  color: #1A237E !important;
+  margin-bottom: 8px !important;
+}
+
+.vfrc-card__description {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 14px !important;
+  color: #424242 !important;
+  line-height: 1.6 !important;
+}
+
+.vfrc-card__image {
+  border-radius: 16px 16px 0 0 !important;
+  transition: opacity 0.3s ease !important;
+}
+
+.vfrc-card:hover .vfrc-card__image {
+  opacity: 0.95 !important;
+}
+
+/* ==========================================================
+   BLOCKQUOTES
+   ========================================================== */
+.vfrc-message blockquote,
+._11kfxpg0 blockquote {
+  border-left: 4px solid #E91E63 !important;
+  background: rgba(233, 30, 99, 0.05) !important;
+  padding: 12px 16px !important;
+  margin: 12px 0 !important;
+  border-radius: 0 10px 10px 0 !important;
+  font-style: italic !important;
+  color: #424242 !important;
+}
+
+/* ==========================================================
+   CODE BLOCKS
+   ========================================================== */
+.vfrc-message code,
+._11kfxpg0 code {
+  font-family: 'Fira Code', 'Monaco', 'Consolas', monospace !important;
+  font-size: 13px !important;
+  background: #F5F5F5 !important;
+  border: 1px solid #E0E0E0 !important;
+  border-radius: 6px !important;
+  padding: 2px 6px !important;
+  color: #7C4DFF !important;
+}
+
+.vfrc-message pre,
+._11kfxpg0 pre {
+  background: #F5F5F5 !important;
+  border: 1px solid #E0E0E0 !important;
+  border-radius: 10px !important;
+  padding: 16px !important;
+  overflow-x: auto !important;
+  margin: 12px 0 !important;
+}
+
+.vfrc-message pre code {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+/* ==========================================================
+   LIGNE HORIZONTALE
+   ========================================================== */
+.vfrc-message hr,
+._11kfxpg0 hr {
+  border: none !important;
+  height: 2px !important;
+  background: linear-gradient(90deg, transparent 0%, #E91E63 50%, transparent 100%) !important;
+  margin: 20px 0 !important;
+}
+
+/* ==========================================================
+   IMAGES
+   ========================================================== */
+.vfrc-message img,
+._11kfxpg0 img {
+  max-width: 100% !important;
+  border-radius: 12px !important;
+  margin: 12px 0 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* ==========================================================
+   PROTECTION EXTENSIONS
+   ========================================================== */
+.vfrc-message[class*="extension"],
+[class*="extension"].vfrc-message {
+  background: transparent !important;
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.vfrc-message[class*="extension"]::before {
+  display: none !important;
+}
+
+/* ==========================================================
+   ANIMATIONS
+   ========================================================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.vfrc-message:not([class*="extension"]) {
+  animation: fadeInUp 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* ==========================================================
+   RESPONSIVE MOBILE (< 640px)
+   ========================================================== */
+@media (max-width: 640px) {
+  .vfrc-avatar,
+  img.vfrc-avatar {
+    width: 36px !important;
+    height: 36px !important;
+    margin-right: 10px !important;
+  }
+
+  .vfrc-system-response--actions,
+  .vfrc-system-response--actions.g3dqfd6 {
+    margin-left: 46px !important;
+    width: calc(100% - 54px) !important;
+    max-width: calc(100% - 54px) !important;
+  }
+
+  .vfrc-footer__content {
+    margin-left: 46px !important;
+    width: calc(100% - 46px) !important;
+    max-width: calc(100% - 46px) !important;
+  }
+
+  .vfrc-user-response {
+    padding-left: 46px !important;
+  }
+
+  .vfrc-typing-indicator--container-inner,
+  ._1ayyscc1 {
+    margin-left: 46px !important;
+    padding: 10px 14px !important;
+  }
+
+  textarea.vfrc-chat-input,
+  textarea._1gdvh9ta {
+    min-height: 40px !important;
+    padding: 10px 12px !important;
+    font-size: 14px !important;
+  }
+
+  .vfrc-button:not(.vfrc-header--button) {
+    padding: 10px 16px !important;
+    font-size: 12px !important;
+  }
+
+  #vfrc-send-message,
+  .vfrc-chat-input__send {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+  }
+}
+
+/* ==========================================================
+   RESPONSIVE TRÈS PETIT ÉCRAN (< 400px)
+   ========================================================== */
+@media (max-width: 400px) {
+  .vfrc-avatar,
+  img.vfrc-avatar {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .vfrc-system-response--actions,
+  .vfrc-system-response--actions.g3dqfd6 {
+    margin-left: 40px !important;
+    width: calc(100% - 48px) !important;
+    max-width: calc(100% - 48px) !important;
+  }
+
+  .vfrc-footer__content {
+    margin-left: 40px !important;
+    width: calc(100% - 40px) !important;
+    max-width: calc(100% - 40px) !important;
+  }
+
+  .vfrc-user-response {
+    padding-left: 40px !important;
+  }
+
+  .vfrc-typing-indicator--container-inner,
+  ._1ayyscc1 {
+    margin-left: 40px !important;
+  }
+}
+
+/* ==========================================================
+   PREFERS-REDUCED-MOTION
+   ========================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .vfrc-message:not([class*="extension"]),
+  .vfrc-button,
+  .vfrc-avatar,
+  .vfrc-typing-indicator span {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ==========================================================
+   RESET FINAL - Suppression fonds indésirables
+   ========================================================== */
+.vfrc-widget *,
+.vfrc-chat *,
+#voiceflow-chat-container * {
+  --vf-bg: transparent;
+  --vf-input-bg: transparent;
+}
+
+.vfrc-footer *:not(.vfrc-input-container):not(._1gdvh9t2):not(._1gdvh9t3):not(textarea):not(button),
+.vfrc-chat-input__wrapper,
+.vfrc-chat-input__inner {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+.vfrc-chat > div:empty,
+.vfrc-chat__container > div:empty,
+.vfrc-chat__container-inner > div:empty,
+.vfrc-spacer,
+div[class*="spacer"] {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Masquer éléments superflus du footer */
+.vfrc-chat--bottom-spacer,
+.vfrc-footer__content-scroll-to-bottom,
+.vfrc-footer__links,
+.s9t60i2,
+.s9t60i4,
+.oq48l92,
+._1cosygz0,
+.jsli361,
+.jsli363 {
+  display: none !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  visibility: hidden !important;
 }
