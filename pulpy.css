@@ -1,9 +1,11 @@
 /* ==========================================================
-   PulpMeUp × Voiceflow — Thème Premium v2.0
+   PulpMeUp × Voiceflow — Thème Premium v2.1
    
    Design : Basé sur les CSS Infortive/Revo
    Couleurs : Rose/Fuchsia #E91E63 + Navy #1A237E
    Fonts : Inter (corps) + DM Sans (titres)
+   
+   v2.1 : Ajout support pleine largeur extensions (Calendly, Carousel)
    
    Auteur : Evolution Agency
    ========================================================== */
@@ -690,7 +692,7 @@ textarea._1gdvh9ta::placeholder {
 }
 
 /* ==========================================================
-   CAROUSELS & CARDS
+   CAROUSELS & CARDS (natifs Voiceflow)
    ========================================================== */
 .vfrc-carousel,
 .vfrc-card {
@@ -731,6 +733,107 @@ textarea._1gdvh9ta::placeholder {
 
 .vfrc-card:hover .vfrc-card__image {
   opacity: 0.95 !important;
+}
+
+/* ==========================================================
+   ⚠️ EXTENSIONS PLEINE LARGEUR — v2.1 NOUVEAU
+   
+   Force les extensions (Calendly, Carousel custom, etc.)
+   à utiliser 100% de la largeur du chat.
+   Fonctionne en mode embedded ET floating.
+   ========================================================== */
+
+/* ── Reset de base pour TOUTES les extensions ── */
+.vfrc-message[class*="extension"],
+[class*="extension"].vfrc-message,
+.vfrc-message--extension-Calendly,
+.vfrc-message--extension-Carousel {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  display: block !important;
+  overflow: visible !important;
+}
+
+/* Pas de triangle de bulle */
+.vfrc-message[class*="extension"]::before,
+.vfrc-message--extension-Calendly::before,
+.vfrc-message--extension-Carousel::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* ── Forcer tous les enfants intermédiaires à 100% ── */
+.vfrc-message[class*="extension"] > *,
+.vfrc-message--extension-Calendly > *,
+.vfrc-message--extension-Carousel > *,
+.vfrc-message[class*="extension"] > span,
+.vfrc-message[class*="extension"] > div,
+.vfrc-message--extension-Calendly > span,
+.vfrc-message--extension-Calendly > div,
+.vfrc-message--extension-Carousel > span,
+.vfrc-message--extension-Carousel > div {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+  overflow: visible !important;
+}
+
+/* ── Conteneur parent system-response : wrap quand extension ──
+   Le sélecteur :has() permet de détecter qu'un enfant est une 
+   extension et de forcer le parent à lâcher sa contrainte de largeur */
+.vfrc-system-response:has(.vfrc-message[class*="extension"]),
+.vfrc-system-response:has(.vfrc-message--extension-Calendly),
+.vfrc-system-response:has(.vfrc-message--extension-Carousel) {
+  flex-wrap: wrap !important;
+}
+
+/* Le div enfant qui wrap les messages : forcer 100% */
+.vfrc-system-response:has(.vfrc-message[class*="extension"]) > div:not(.vfrc-avatar):not(img),
+.vfrc-system-response:has(.vfrc-message--extension-Calendly) > div:not(.vfrc-avatar):not(img),
+.vfrc-system-response:has(.vfrc-message--extension-Carousel) > div:not(.vfrc-avatar):not(img) {
+  width: 100% !important;
+  max-width: 100% !important;
+  flex: 0 0 100% !important;
+}
+
+/* ── Fallback navigateurs sans :has() ──
+   Utilise la largeur du viewport comme fallback */
+@supports not selector(:has(*)) {
+  .vfrc-message[class*="extension"],
+  .vfrc-message--extension-Calendly,
+  .vfrc-message--extension-Carousel {
+    width: calc(100vw - 32px) !important;
+    max-width: 800px !important;
+    margin-left: -52px !important;
+  }
+}
+
+/* ── Calendly spécifique ── */
+.vfrc-message--extension-Calendly .calendly-inline-widget,
+.vfrc-message--extension-Calendly .vf-calendly-container {
+  width: 100% !important;
+  min-width: 100% !important;
+}
+
+.vfrc-message--extension-Calendly .calendly-inline-widget iframe {
+  width: 100% !important;
+  min-width: 100% !important;
+  border: none !important;
+}
+
+/* ── Carousel custom spécifique ── */
+.vfrc-message--extension-Carousel .vf-carousel-container {
+  width: 100% !important;
+  min-width: 100% !important;
 }
 
 /* ==========================================================
@@ -797,22 +900,6 @@ textarea._1gdvh9ta::placeholder {
   border-radius: 12px !important;
   margin: 12px 0 !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
-}
-
-/* ==========================================================
-   PROTECTION EXTENSIONS
-   ========================================================== */
-.vfrc-message[class*="extension"],
-[class*="extension"].vfrc-message {
-  background: transparent !important;
-  padding: 0 !important;
-  border: none !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-}
-
-.vfrc-message[class*="extension"]::before {
-  display: none !important;
 }
 
 /* ==========================================================
@@ -884,6 +971,13 @@ textarea._1gdvh9ta::placeholder {
     width: 40px !important;
     height: 40px !important;
     min-width: 40px !important;
+  }
+
+  /* Extensions : toujours 100% en mobile */
+  .vfrc-message[class*="extension"],
+  .vfrc-message--extension-Calendly,
+  .vfrc-message--extension-Carousel {
+    margin-left: 0 !important;
   }
 }
 
