@@ -1165,7 +1165,6 @@ div[class*="spacer"] {
   visibility: hidden !important;
 }
 
-
 /* Masquer l'avatar dans le header */
 .vfrc-header .vfrc-avatar,
 .vfrc-header img.vfrc-avatar,
@@ -1178,7 +1177,6 @@ div[class*="spacer"] {
   margin: 0 !important;
   padding: 0 !important;
 }
-
 
 /* Fix : conteneur system-response transparent (évite le fond large pendant typing) */
 .vfrc-system-response--container,
