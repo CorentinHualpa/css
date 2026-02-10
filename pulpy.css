@@ -1159,3 +1159,19 @@ div[class*="spacer"] {
   margin: 0 !important;
   padding: 0 !important;
 }
+
+
+/* Fix : conteneur system-response transparent (évite le fond large pendant typing) */
+.vfrc-system-response--container,
+div.vfrc-system-response--container {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.vfrc-system-response {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  max-width: fit-content !important;
+}
