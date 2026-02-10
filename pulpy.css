@@ -1190,5 +1190,5 @@ div.vfrc-system-response--container {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
-  max-width: fit-content !important;
+  width: 100% !important;
 }
