@@ -715,27 +715,43 @@ textarea._1gdvh9ta::placeholder {
 /* ==========================================================
    TYPING INDICATOR
    ========================================================== */
+/* Conteneur externe : transparent et pas pleine largeur */
 .vfrc-typing-indicator--container,
+.cz0qdw0,
+.cz0qdw1,
+._1b5nris0 {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  max-width: fit-content !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  padding: 0 !important;
+}
+
+/* Bulle intérieure du typing : style blanc */
 .vfrc-typing-indicator--container-inner,
 ._1ayyscc0,
-._1ayyscc1 {
+._1ayyscc1,
+._1b5nris1 {
   background: #ffffff !important;
   border: 1px solid #E0E0E0 !important;
   border-radius: 14px !important;
   padding: 12px 16px !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
-  margin-left: 52px !important;
 }
 
 .vfrc-typing-indicator,
-.vfrc-typing-indicator.xaffbq1 {
+.vfrc-typing-indicator.xaffbq1,
+._17qd5ln1 {
   display: flex !important;
   align-items: center !important;
   gap: 5px !important;
 }
 
 .vfrc-typing-indicator span,
-.vfrc-typing-indicator span.xaffbq2 {
+.vfrc-typing-indicator span.xaffbq2,
+._17qd5ln2 {
   display: block !important;
   width: 8px !important;
   height: 8px !important;
@@ -744,14 +760,17 @@ textarea._1gdvh9ta::placeholder {
   animation: typingBounce 1.4s ease-in-out infinite !important;
 }
 
+._17qd5ln3,
 .vfrc-typing-indicator span:nth-child(1) {
   animation-delay: 0s !important;
 }
 
+._17qd5ln4,
 .vfrc-typing-indicator span:nth-child(2) {
   animation-delay: 0.2s !important;
 }
 
+._17qd5ln5,
 .vfrc-typing-indicator span:nth-child(3) {
   animation-delay: 0.4s !important;
 }
