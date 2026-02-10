@@ -1,11 +1,12 @@
 /* ==========================================================
-   PulpMeUp × Voiceflow — Thème Premium v2.1
+   PulpMeUp × Voiceflow — Thème Premium v2.2
    
    Design : Basé sur les CSS Infortive/Revo
    Couleurs : Rose/Fuchsia #E91E63 + Navy #1A237E
    Fonts : Inter (corps) + DM Sans (titres)
    
    v2.1 : Ajout support pleine largeur extensions (Calendly, Carousel)
+   v2.2 : Header transparent avec bouton "Nouveau chat" visible
    
    Auteur : Evolution Agency
    ========================================================== */
@@ -48,21 +49,96 @@
 }
 
 /* ==========================================================
-   HEADER - MASQUÉ COMPLÈTEMENT
+   HEADER - TRANSPARENT, SEUL LE BOUTON NOUVEAU CHAT VISIBLE
    ========================================================== */
 .vfrc-header,
 .vfrc-header--container,
-.vfrc-header--container-inner,
-.vfrc-header--title,
-.vfrc-header--button,
-.vfrc-header--actions {
+.vfrc-header--container-inner {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  height: auto !important;
+  width: 100% !important;
+  overflow: visible !important;
+  pointer-events: auto !important;
+  padding: 8px 12px !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+  position: relative !important;
+  z-index: 50 !important;
+}
+
+/* Masquer le titre */
+.vfrc-header--title {
   display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-  width: 0 !important;
-  height: 0 !important;
-  overflow: hidden !important;
+}
+
+/* Conteneur actions visible */
+.vfrc-header--actions {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: auto !important;
+  height: auto !important;
+  overflow: visible !important;
+  pointer-events: auto !important;
+}
+
+/* Bouton Reset stylé "Nouveau chat" */
+.vfrc-header--button {
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  width: auto !important;
+  height: auto !important;
+  overflow: visible !important;
+  
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 0 !important;
+  background: transparent !important;
+  border: 1.5px solid #E0E0E0 !important;
+  border-radius: 50px !important;
+  padding: 8px 16px !important;
+  cursor: pointer !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  color: transparent !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+/* Texte personnalisé via ::after */
+.vfrc-header--button::after {
+  content: "✨ Nouveau chat" !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: #757575 !important;
+  white-space: nowrap !important;
+  letter-spacing: -0.01em !important;
+}
+
+/* Masquer l'icône SVG d'origine */
+.vfrc-header--button svg,
+.vfrc-header--button img,
+.vfrc-header--button .vfrc-header--icon {
+  display: none !important;
+}
+
+/* Hover */
+.vfrc-header--button:hover {
+  background: rgba(233, 30, 99, 0.04) !important;
+  border-color: #E91E63 !important;
+}
+.vfrc-header--button:hover::after {
+  color: #E91E63 !important;
+}
+
+/* Active */
+.vfrc-header--button:active {
+  transform: scale(0.97) !important;
 }
 
 /* ==========================================================
@@ -787,9 +863,7 @@ textarea._1gdvh9ta::placeholder {
   overflow: visible !important;
 }
 
-/* ── Conteneur parent system-response : wrap quand extension ──
-   Le sélecteur :has() permet de détecter qu'un enfant est une 
-   extension et de forcer le parent à lâcher sa contrainte de largeur */
+/* ── Conteneur parent system-response : wrap quand extension ── */
 .vfrc-system-response:has(.vfrc-message[class*="extension"]),
 .vfrc-system-response:has(.vfrc-message--extension-Calendly),
 .vfrc-system-response:has(.vfrc-message--extension-Carousel) {
@@ -805,8 +879,7 @@ textarea._1gdvh9ta::placeholder {
   flex: 0 0 100% !important;
 }
 
-/* ── Fallback navigateurs sans :has() ──
-   Utilise la largeur du viewport comme fallback */
+/* ── Fallback navigateurs sans :has() ── */
 @supports not selector(:has(*)) {
   .vfrc-message[class*="extension"],
   .vfrc-message--extension-Calendly,
