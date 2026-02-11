@@ -166,9 +166,11 @@
 .vfrc-system-response,
 div.vfrc-system-response {
   display: flex !important;
+  flex-wrap: wrap !important;
   align-items: flex-start !important;
   padding-left: 0 !important;
   padding-right: 8px !important;
+  width: 100% !important;
 }
 
 .vfrc-avatar,
@@ -1190,5 +1192,5 @@ div.vfrc-system-response--container {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
-  width: 100% !important;
+  max-width: fit-content !important;
 }
