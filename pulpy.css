@@ -193,11 +193,18 @@ img.vfrc-avatar:hover {
   box-shadow: 0 6px 16px rgba(233, 30, 99, 0.35) !important;
 }
 
+/* Forcer le wrapper message à occuper toute la largeur restante */
+.vfrc-system-response > div:not(.vfrc-system-response--actions):not(img):not(.vfrc-avatar) {
+  flex: 0 0 calc(100% - 54px) !important;
+  max-width: calc(100% - 54px) !important;
+}
+
 /* ==========================================================
    BOUTONS D'ACTION (conteneur) - ALIGNÉ AVEC BULLES
    ========================================================== */
 .vfrc-system-response--actions,
 .vfrc-system-response--actions.g3dqfd6 {
+  flex-basis: 100% !important;
   margin-left: 52px !important;
   padding-left: 0 !important;
   padding-right: 8px !important;
@@ -1192,5 +1199,5 @@ div.vfrc-system-response--container {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
-  max-width: fit-content !important;
+  width: 100% !important;
 }
