@@ -1,5 +1,5 @@
 /* ==========================================================
-   PulpMeUp × Voiceflow — Thème Premium v2.2
+   PulpMeUp × Voiceflow — Thème Premium v2.3
    
    Design : Basé sur les CSS Infortive/Revo
    Couleurs : Rose/Fuchsia #E91E63 + Navy #1A237E
@@ -7,6 +7,7 @@
    
    v2.1 : Ajout support pleine largeur extensions (Calendly, Carousel)
    v2.2 : Header transparent avec bouton "Nouveau chat" visible
+   v2.3 : Fix layout boutons — avatar absolute, plus de flex row
    
    Auteur : Evolution Agency
    ========================================================== */
@@ -161,26 +162,43 @@
 }
 
 /* ==========================================================
-   AVATAR - VISIBLE avec bordure rose
+   CONTENEUR SYSTEM-RESPONSE — COLONNE VERTICALE
+   Force bulle + boutons à s'empiler verticalement.
+   ========================================================== */
+.vfrc-system-response--container,
+div.vfrc-system-response--container {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  width: 100% !important;
+}
+
+/* ==========================================================
+   AVATAR - Position absolute (élimine le flex row)
    ========================================================== */
 .vfrc-system-response,
 div.vfrc-system-response {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  align-items: flex-start !important;
-  padding-left: 0 !important;
+  position: relative !important;
+  display: block !important;
+  padding-left: 52px !important;
   padding-right: 8px !important;
   width: 100% !important;
+  box-sizing: border-box !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 .vfrc-avatar,
 img.vfrc-avatar {
-  flex-shrink: 0 !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 12px !important;
   width: 40px !important;
   height: 40px !important;
-  margin-right: 12px !important;
-  margin-top: 12px !important;
-  align-self: flex-start !important;
   border-radius: 50% !important;
   border: 2px solid #E91E63 !important;
   box-shadow: 0 4px 12px rgba(233, 30, 99, 0.25) !important;
@@ -193,18 +211,14 @@ img.vfrc-avatar:hover {
   box-shadow: 0 6px 16px rgba(233, 30, 99, 0.35) !important;
 }
 
-/* Forcer le wrapper message à occuper toute la largeur restante */
-.vfrc-system-response > div:not(.vfrc-system-response--actions):not(img):not(.vfrc-avatar) {
-  flex: 0 0 calc(100% - 54px) !important;
-  max-width: calc(100% - 54px) !important;
-}
-
 /* ==========================================================
-   BOUTONS D'ACTION (conteneur) - ALIGNÉ AVEC BULLES
+   BOUTONS D'ACTION (conteneur) - SOUS LA BULLE
    ========================================================== */
 .vfrc-system-response--actions,
 .vfrc-system-response--actions.g3dqfd6 {
-  flex-basis: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
   margin-left: 52px !important;
   padding-left: 0 !important;
   padding-right: 8px !important;
@@ -736,6 +750,7 @@ textarea._1gdvh9ta::placeholder {
   display: flex !important;
   align-items: flex-start !important;
   padding: 0 !important;
+  margin-left: 52px !important;
 }
 
 /* Bulle intérieure du typing : style blanc */
@@ -840,11 +855,7 @@ textarea._1gdvh9ta::placeholder {
 }
 
 /* ==========================================================
-   ⚠️ EXTENSIONS PLEINE LARGEUR — v2.1 NOUVEAU
-   
-   Force les extensions (Calendly, Carousel custom, etc.)
-   à utiliser 100% de la largeur du chat.
-   Fonctionne en mode embedded ET floating.
+   ⚠️ EXTENSIONS PLEINE LARGEUR — v2.1
    ========================================================== */
 
 /* ── Reset de base pour TOUTES les extensions ── */
@@ -889,33 +900,6 @@ textarea._1gdvh9ta::placeholder {
   padding: 0 !important;
   display: block !important;
   overflow: visible !important;
-}
-
-/* ── Conteneur parent system-response : wrap quand extension ── */
-.vfrc-system-response:has(.vfrc-message[class*="extension"]),
-.vfrc-system-response:has(.vfrc-message--extension-Calendly),
-.vfrc-system-response:has(.vfrc-message--extension-Carousel) {
-  flex-wrap: wrap !important;
-}
-
-/* Le div enfant qui wrap les messages : forcer 100% */
-.vfrc-system-response:has(.vfrc-message[class*="extension"]) > div:not(.vfrc-avatar):not(img),
-.vfrc-system-response:has(.vfrc-message--extension-Calendly) > div:not(.vfrc-avatar):not(img),
-.vfrc-system-response:has(.vfrc-message--extension-Carousel) > div:not(.vfrc-avatar):not(img) {
-  width: 100% !important;
-  max-width: 100% !important;
-  flex: 0 0 100% !important;
-}
-
-/* ── Fallback navigateurs sans :has() ── */
-@supports not selector(:has(*)) {
-  .vfrc-message[class*="extension"],
-  .vfrc-message--extension-Calendly,
-  .vfrc-message--extension-Carousel {
-    width: calc(100vw - 32px) !important;
-    max-width: 800px !important;
-    margin-left: -52px !important;
-  }
 }
 
 /* ── Calendly spécifique ── */
@@ -1029,7 +1013,11 @@ textarea._1gdvh9ta::placeholder {
   img.vfrc-avatar {
     width: 36px !important;
     height: 36px !important;
-    margin-right: 10px !important;
+  }
+
+  .vfrc-system-response,
+  div.vfrc-system-response {
+    padding-left: 46px !important;
   }
 
   .vfrc-system-response--actions,
@@ -1049,10 +1037,11 @@ textarea._1gdvh9ta::placeholder {
     padding-left: 46px !important;
   }
 
-  .vfrc-typing-indicator--container-inner,
-  ._1ayyscc1 {
+  .vfrc-typing-indicator--container,
+  .cz0qdw0,
+  .cz0qdw1,
+  ._1b5nris0 {
     margin-left: 46px !important;
-    padding: 10px 14px !important;
   }
 
   textarea.vfrc-chat-input,
@@ -1092,6 +1081,11 @@ textarea._1gdvh9ta::placeholder {
     height: 32px !important;
   }
 
+  .vfrc-system-response,
+  div.vfrc-system-response {
+    padding-left: 40px !important;
+  }
+
   .vfrc-system-response--actions,
   .vfrc-system-response--actions.g3dqfd6 {
     margin-left: 40px !important;
@@ -1109,8 +1103,10 @@ textarea._1gdvh9ta::placeholder {
     padding-left: 40px !important;
   }
 
-  .vfrc-typing-indicator--container-inner,
-  ._1ayyscc1 {
+  .vfrc-typing-indicator--container,
+  .cz0qdw0,
+  .cz0qdw1,
+  ._1b5nris0 {
     margin-left: 40px !important;
   }
 }
@@ -1185,19 +1181,4 @@ div[class*="spacer"] {
   height: 0 !important;
   margin: 0 !important;
   padding: 0 !important;
-}
-
-/* Fix : conteneur system-response transparent (évite le fond large pendant typing) */
-.vfrc-system-response--container,
-div.vfrc-system-response--container {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-}
-
-.vfrc-system-response {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  width: 100% !important;
 }
