@@ -364,7 +364,7 @@ button._1q15b0b2:not(.vfrc-header--button):not(.vfrc-chat-input__send) {
   font-family: var(--font-body) !important;
   font-weight: 500 !important;
   font-size: var(--fs-button) !important;
-  color: #000000 !important;
+  color: #ffffff !important;
   background: var(--gradient-main) !important;
   border: none !important;
   border-radius: 12px !important;
@@ -439,7 +439,7 @@ button._1q15b0b3 {
   transform: translateX(-50%) !important;
   width: 80% !important;
   height: 1px !important;
-  background: linear-gradient(90deg, transparent 0%, rgba(255,140,0,0.3) 20%, rgba(255,184,0,0.4) 50%, rgba(255,140,0,0.3) 80%, transparent 100%) !important;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,140,0,0.25) 20%, rgba(255,184,0,0.30) 50%, rgba(255,140,0,0.25) 80%, transparent 100%) !important;
 }
 
 /* ==========================================================
@@ -460,14 +460,14 @@ button._1q15b0b3 {
   padding: 12px 14px !important;
   max-width: 92% !important;
   margin: 6px 0 !important;
-  /* Glow externe jaune-orangé, PAS de inset orange */
-  box-shadow: 0 0 20px -8px rgba(255, 140, 0, 0.15), 0 4px 16px -8px rgba(0,0,0,0.5) !important;
+  /* Glow externe TRÈS subtil — éviter l'effet marron */
+  box-shadow: 0 2px 12px -6px rgba(0,0,0,0.6) !important;
   transition: all 0.3s ease !important;
 }
 
 .vfrc-system-response .vfrc-message:not([class*="extension"]):hover {
   border-color: rgba(255, 140, 0, 0.30) !important;
-  box-shadow: 0 0 30px -8px rgba(255, 184, 0, 0.20), 0 6px 24px -8px rgba(0,0,0,0.5) !important;
+  box-shadow: 0 4px 16px -6px rgba(0,0,0,0.5) !important;
   transform: translateY(-1px) !important;
 }
 
@@ -480,19 +480,19 @@ button._1q15b0b3 {
   font-weight: 400 !important;
   font-size: var(--fs-body) !important;
   line-height: 1.55 !important;
-  color: #000000 !important;
+  color: #ffffff !important;
   background: var(--gradient-main) !important;
   border: none !important;
   border-radius: 14px !important;
   padding: 10px 14px !important;
   max-width: 88% !important;
   margin: 6px 0 !important;
-  box-shadow: 0 4px 20px -4px rgba(255, 140, 0, 0.3), 0 0 30px -10px rgba(255, 184, 0, 0.2) !important;
+  box-shadow: 0 4px 16px -6px rgba(255, 140, 0, 0.25) !important;
 }
 
 .vfrc-user-response > div *,
 .vfrc-user-response .vfrc-message * {
-  color: #000000 !important;
+  color: #ffffff !important;
 }
 
 /* ==========================================================
@@ -755,7 +755,7 @@ button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-cha
   background: rgba(255, 140, 0, 0.06) !important;
   border-color: rgba(255, 184, 0, 0.45) !important;
   color: #ffffff !important;
-  box-shadow: 0 0 20px -4px rgba(255, 184, 0, 0.2), 0 4px 16px -4px rgba(0,0,0,0.3) !important;
+  box-shadow: 0 4px 12px -4px rgba(0,0,0,0.4) !important;
   transform: translateY(-2px) !important;
 }
 
@@ -791,16 +791,16 @@ button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-cha
   background: 
     linear-gradient(rgba(8,8,10,0.97), rgba(8,8,10,0.97)) padding-box,
     linear-gradient(135deg, rgba(255,107,0,0.45), rgba(255,140,0,0.45), rgba(255,184,0,0.35)) border-box !important;
-  box-shadow: 0 4px 24px -8px rgba(255,140,0,0.2), 0 0 35px -12px rgba(255,184,0,0.15) !important;
+  box-shadow: 0 2px 16px -8px rgba(255,140,0,0.15) !important;
   animation: inputGlow 3s ease-in-out infinite !important;
 }
 
 @keyframes inputGlow {
   0%, 100% {
-    box-shadow: 0 4px 24px -8px rgba(255,140,0,0.2), 0 0 35px -12px rgba(255,184,0,0.15);
+    box-shadow: 0 2px 16px -8px rgba(255,140,0,0.15);
   }
   50% {
-    box-shadow: 0 4px 30px -8px rgba(255,184,0,0.35), 0 0 50px -10px rgba(255,140,0,0.25);
+    box-shadow: 0 4px 24px -8px rgba(255,184,0,0.22);
   }
 }
 
@@ -832,7 +832,7 @@ button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-cha
   background: 
     linear-gradient(rgba(8,8,10,0.98), rgba(8,8,10,0.98)) padding-box,
     linear-gradient(135deg, var(--accent-bright), var(--accent-orange), var(--accent-yellow)) border-box !important;
-  box-shadow: 0 0 0 4px rgba(255,140,0,0.08), 0 8px 40px -10px rgba(255,140,0,0.25), 0 0 50px -15px rgba(255,184,0,0.2) !important;
+  box-shadow: 0 0 0 3px rgba(255,140,0,0.06), 0 4px 20px -8px rgba(255,140,0,0.15) !important;
   animation: none !important;
 }
 
@@ -937,15 +937,15 @@ textarea._1gdvh9ta:focus::placeholder {
 .vfrc-chat-input__send:not([disabled]) {
   background: var(--gradient-main) !important;
   border: none !important;
-  color: #000000 !important;
+  color: #ffffff !important;
   cursor: pointer !important;
-  box-shadow: 0 4px 20px -4px rgba(255,140,0,0.3), 0 0 25px -8px rgba(255,184,0,0.2) !important;
+  box-shadow: 0 4px 12px -4px rgba(255,140,0,0.2) !important;
   animation: sendPulse 2s ease-in-out infinite !important;
 }
 
 @keyframes sendPulse {
   0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); box-shadow: 0 6px 30px -4px rgba(255,184,0,0.4), 0 0 40px -5px rgba(255,140,0,0.3) !important; }
+  50% { transform: scale(1.05); box-shadow: 0 4px 16px -4px rgba(255,184,0,0.25) !important; }
 }
 
 #vfrc-send-message:not([disabled]):hover,
@@ -1038,13 +1038,13 @@ textarea._1gdvh9ta:focus::placeholder {
   border-radius: 20px !important;
   overflow: hidden !important;
   transition: all 0.4s ease !important;
-  box-shadow: 0 0 25px -12px rgba(255, 140, 0, 0.15) !important;
+  box-shadow: 0 2px 12px -6px rgba(0,0,0,0.5) !important;
 }
 
 .vfrc-carousel:hover,
 .vfrc-card:hover {
   border-color: rgba(255, 184, 0, 0.35) !important;
-  box-shadow: 0 8px 40px -10px rgba(255, 140, 0, 0.2) !important;
+  box-shadow: 0 8px 24px -8px rgba(0,0,0,0.4) !important;
   transform: translateY(-6px) !important;
 }
 
@@ -1123,7 +1123,7 @@ div[class*="spacer"] {
   padding: 14px 20px !important;
   backdrop-filter: blur(10px) !important;
   -webkit-backdrop-filter: blur(10px) !important;
-  box-shadow: 0 0 20px -8px rgba(255, 140, 0, 0.12) !important;
+  box-shadow: 0 2px 12px -6px rgba(0,0,0,0.5) !important;
 }
 
 .vfrc-typing-indicator,
