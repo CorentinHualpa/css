@@ -1,0 +1,1717 @@
+/* ==========================================================
+   Revolution Agency × Voiceflow — Thème Fondu v1.9
+   
+   Design : Intégration seamless dans landing page sombre
+   Couleurs : Violet → Fuchsia → Rose → Orange
+   Fonts : Syne (titres) + Outfit (corps)
+   Style : Glassmorphism, pas de header, pas de bordures
+   
+   v1.7 - Questions distinctives avec classe .revo-question
+   v1.8 - Barre de progression avec classe .revo-progress
+   v1.9 - Typing indicator stylisé + points progress plus visibles
+   ========================================================== */
+
+/* ==========================================================
+   Import des polices
+   ========================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap');
+
+/* ==========================================================
+   Variables du thème Revolution Agency
+   ========================================================== */
+:root {
+  /* Fonts */
+  --font-heading: 'Syne', sans-serif;
+  --font-body: 'Outfit', sans-serif;
+  
+  /* Couleurs fond */
+  --bg-primary: #0a0a0b;
+  --bg-secondary: #0f0f11;
+  --bg-card: #141416;
+  --bg-card-hover: #1a1a1d;
+  
+  /* Gradient signature */
+  --gradient-main: linear-gradient(135deg, #7c3aed 0%, #c026d3 35%, #e11d48 65%, #f97316 100%);
+  --gradient-subtle: linear-gradient(135deg, rgba(124,58,237,0.15) 0%, rgba(192,38,211,0.15) 50%, rgba(249,115,22,0.15) 100%);
+  
+  /* Accents */
+  --accent-violet: #7c3aed;
+  --accent-fuchsia: #c026d3;
+  --accent-rose: #e11d48;
+  --accent-orange: #f97316;
+  
+  /* Glow */
+  --glow-violet: rgba(124, 58, 237, 0.4);
+  --glow-fuchsia: rgba(192, 38, 211, 0.4);
+  
+  /* Texte */
+  --text-primary: #fafafa;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  
+  /* Glass & Borders */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-glow: rgba(255, 255, 255, 0.15);
+  --glass: rgba(255, 255, 255, 0.03);
+  --glass-strong: rgba(255, 255, 255, 0.06);
+  
+  /* Tailles */
+  --fs-h1: 24px;
+  --fs-h2: 20px;
+  --fs-h3: 16px;
+  --fs-body: 14px;
+  --fs-small: 12px;
+  --fs-button: 13px;
+}
+
+/* ==========================================================
+   RESET COMPLET - Fond transparent, pas de conteneur visible
+   ========================================================== */
+.vfrc-widget,
+.vfrc-chat,
+.vfrc-chat__container,
+.vfrc-chat__container-inner,
+.vfrc-chat-dialog,
+.vfrc-chat-dialog__container,
+.vfrc-chat--dialog {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+/* ==========================================================
+   HEADER - Minimaliste, juste pour le bouton restart
+   ========================================================== */
+
+/* Header principal - VISIBLE mais compact */
+.vfrc-header,
+.vfrc-header.jyiuei2,
+.vfrc-header.jyiuei3,
+.jyiuei2.jyiuei3 {
+  display: flex !important;
+  visibility: visible !important;
+  height: 36px !important;
+  min-height: 36px !important;
+  max-height: 36px !important;
+  overflow: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  margin: 0 !important;
+  padding: 4px 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+/* Avatar du header - MASQUER */
+.vfrc-header > .vfrc-avatar,
+.vfrc-header > img,
+.vfrc-header .g931q10,
+.vfrc-header .g931q11 {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  opacity: 0 !important;
+}
+
+/* Container inner - centré */
+.vfrc-header--container-inner,
+.jyiuei5 {
+  display: flex !important;
+  visibility: visible !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex: 1 !important;
+  background: transparent !important;
+  pointer-events: auto !important;
+  height: 100% !important;
+}
+
+/* Titre du header - MASQUER */
+.vfrc-header--title,
+.jyiuei6,
+.jyiuei8,
+.fptyqm0,
+.fptyqm1 {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  opacity: 0 !important;
+  font-size: 0 !important;
+}
+
+/* Actions container - visible et centré */
+.vfrc-header--actions,
+.jyiueia {
+  display: flex !important;
+  visibility: visible !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: auto !important;
+}
+
+/* ==========================================================
+   BOUTON RESTART HEADER - Zone cliquable + trait visuel
+   ========================================================== */
+.vfrc-header--button,
+button.vfrc-header--button,
+.vfrc-header--actions button,
+.jyiueia button {
+  display: flex !important;
+  visibility: visible !important;
+  width: 60px !important;
+  height: 28px !important;
+  min-width: 60px !important;
+  max-width: 60px !important;
+  min-height: 28px !important;
+  max-height: 28px !important;
+  padding: 0 !important;
+  margin: 0 auto !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  text-indent: -9999px !important;
+  color: transparent !important;
+  cursor: pointer !important;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  overflow: visible !important;
+  letter-spacing: -9999px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
+  pointer-events: auto !important;
+  z-index: 100 !important;
+}
+
+/* Trait visuel via pseudo-élément */
+.vfrc-header--button::after,
+button.vfrc-header--button::after,
+.vfrc-header--actions button::after,
+.jyiueia button::after {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: 50px !important;
+  height: 5px !important;
+  background: linear-gradient(90deg, var(--accent-violet), var(--accent-fuchsia)) !important;
+  border-radius: 3px !important;
+  opacity: 0.35 !important;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  pointer-events: none !important;
+}
+
+/* Masquer l'icône SVG et la div interne du bouton header */
+.vfrc-header--button *,
+.vfrc-header--button svg,
+.vfrc-header--button .vfrc-icon,
+.vfrc-header--button .vfrc-header--icon,
+.vfrc-header--button div,
+.vfrc-header--actions button *,
+.jyiueia button *,
+.jyiueih,
+._1t7e06e0,
+.vfrc-header--icon {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Hover - Trait plus visible et élargi */
+.vfrc-header--button:hover::after,
+button.vfrc-header--button:hover::after,
+.vfrc-header--actions button:hover::after,
+.jyiueia button:hover::after {
+  opacity: 1 !important;
+  width: 80px !important;
+  height: 6px !important;
+  background: linear-gradient(90deg, var(--accent-violet), var(--accent-fuchsia), var(--accent-rose)) !important;
+  box-shadow: 
+    0 0 20px -4px var(--glow-fuchsia),
+    0 0 40px -8px var(--glow-violet) !important;
+}
+
+/* Active - Press effect */
+.vfrc-header--button:active::after,
+button.vfrc-header--button:active::after,
+.vfrc-header--actions button:active::after,
+.jyiueia button:active::after {
+  transform: translate(-50%, -50%) scaleX(0.9) !important;
+  opacity: 0.8 !important;
+}
+
+/* ==========================================================
+   CONTENEUR PRINCIPAL - Bord à bord, transparent, COMPACT
+   ========================================================== */
+.vfrc-chat,
+.vfrc-chat__container,
+.vfrc-chat__container-inner {
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  gap: 0 !important;
+}
+
+.vfrc-chat--dialog,
+.vfrc-chat-dialog,
+.vfrc-chat-dialog__container {
+  padding: 12px 10px 6px 10px !important;
+  margin: 0 !important;
+  background: transparent !important;
+  gap: 0 !important;
+}
+
+/* FIX : Réduire l'espace après les messages/boutons */
+.vfrc-system-response,
+.vfrc-user-response {
+  margin-bottom: 4px !important;
+}
+
+.vfrc-system-response:last-child,
+.vfrc-user-response:last-child {
+  margin-bottom: 2px !important;
+}
+
+/* ==========================================================
+   FIX ESPACE VIDE FOOTER - Masquer éléments superflus
+   ========================================================== */
+
+/* Spacer bottom - MASQUER COMPLÈTEMENT */
+.vfrc-chat--bottom-spacer,
+div[class*="bottom-spacer"],
+.s9t60i2,
+.s9t60i4 {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  visibility: hidden !important;
+}
+
+/* ==========================================================
+   BOUTON RESTART - Fallback pour autres emplacements
+   ========================================================== */
+
+/* Si le bouton est ailleurs que dans le header */
+.vfrc-footer__start-button,
+div[class*="start-button"],
+#vfrc-start-chat {
+  display: block !important;
+  visibility: visible !important;
+  width: 50px !important;
+  height: 5px !important;
+  min-width: 50px !important;
+  max-width: 50px !important;
+  min-height: 5px !important;
+  max-height: 5px !important;
+  padding: 0 !important;
+  margin: 0 auto 12px auto !important;
+  background: linear-gradient(90deg, var(--accent-violet), var(--accent-fuchsia)) !important;
+  border: none !important;
+  border-radius: 3px !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  text-indent: -9999px !important;
+  color: transparent !important;
+  cursor: pointer !important;
+  opacity: 0.35 !important;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  overflow: hidden !important;
+}
+
+.vfrc-footer__start-button *,
+div[class*="start-button"] *,
+#vfrc-start-chat * {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+.vfrc-footer__start-button:hover,
+div[class*="start-button"]:hover,
+#vfrc-start-chat:hover {
+  opacity: 1 !important;
+  width: 80px !important;
+  max-width: 80px !important;
+  height: 6px !important;
+  background: linear-gradient(90deg, var(--accent-violet), var(--accent-fuchsia), var(--accent-rose)) !important;
+  box-shadow: 
+    0 0 20px -4px var(--glow-fuchsia),
+    0 0 40px -8px var(--glow-violet) !important;
+}
+
+/* Bouton scroll to bottom - MASQUER */
+.vfrc-footer__content-scroll-to-bottom,
+div[class*="scroll-to-bottom"],
+.oq48l92,
+._1cosygz0 {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  visibility: hidden !important;
+}
+
+/* Footer links vide - MASQUER */
+.vfrc-footer__links,
+.jsli361,
+.jsli363 {
+  display: none !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Overlay - semi-transparent */
+.vfrc-chat--overlay,
+._5x612k3,
+._5x612k4 {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  background: rgba(10, 10, 11, 0.8) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+}
+
+/* ==========================================================
+   POPUP CONFIRMATION RESTART - Stylisé
+   ========================================================== */
+.vfrc-prompt,
+._5x612k0,
+._5x612k1 {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+  padding: 20px !important;
+  margin: 0 auto !important;
+  background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(20,20,22,0.95) 100%) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(124, 58, 237, 0.3) !important;
+  border-radius: 16px !important;
+  box-shadow: 
+    0 0 40px -10px var(--glow-violet),
+    0 8px 32px -8px rgba(0, 0, 0, 0.5) !important;
+  max-width: 280px !important;
+}
+
+/* Bouton Start new chat - Style principal */
+.vfrc-prompt button:first-child,
+.vfrc-prompt .vfrc-button:first-child,
+._5x612k0 button:first-child,
+._5x612k1 button:first-child,
+button._1q15b0b2:not(.vfrc-header--button):not(.vfrc-chat-input__send) {
+  font-family: var(--font-body) !important;
+  font-weight: 500 !important;
+  font-size: var(--fs-button) !important;
+  color: #ffffff !important;
+  background: var(--gradient-main) !important;
+  border: none !important;
+  border-radius: 12px !important;
+  padding: 14px 24px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 
+    0 4px 20px -4px var(--glow-fuchsia),
+    0 0 30px -10px var(--glow-violet) !important;
+  text-indent: 0 !important;
+  font-size: var(--fs-button) !important;
+  letter-spacing: normal !important;
+  width: auto !important;
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
+  opacity: 1 !important;
+}
+
+.vfrc-prompt button:first-child:hover,
+._5x612k0 button:first-child:hover,
+._5x612k1 button:first-child:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 
+    0 6px 25px -4px var(--glow-fuchsia),
+    0 0 40px -10px var(--glow-violet) !important;
+}
+
+/* Bouton Cancel - Style secondaire */
+.vfrc-prompt button:last-child,
+.vfrc-prompt .vfrc-button:last-child,
+._5x612k0 button:last-child,
+._5x612k1 button:last-child,
+button._1q15b0b3 {
+  font-family: var(--font-body) !important;
+  font-weight: 500 !important;
+  font-size: var(--fs-button) !important;
+  color: var(--text-secondary) !important;
+  background: transparent !important;
+  border: 1px solid rgba(124, 58, 237, 0.3) !important;
+  border-radius: 12px !important;
+  padding: 12px 24px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  text-indent: 0 !important;
+  font-size: var(--fs-button) !important;
+  letter-spacing: normal !important;
+  width: auto !important;
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
+  opacity: 1 !important;
+}
+
+.vfrc-prompt button:last-child:hover,
+._5x612k0 button:last-child:hover,
+._5x612k1 button:last-child:hover {
+  color: var(--text-primary) !important;
+  border-color: rgba(124, 58, 237, 0.5) !important;
+  background: rgba(124, 58, 237, 0.1) !important;
+}
+
+/* ==========================================================
+   FOOTER PRINCIPAL - Zone de saisie DISTINCTE et ÉPURÉE
+   ========================================================== */
+.vfrc-footer,
+._1vj16242 {
+  padding: 0 !important;
+  margin: 0 !important;
+  gap: 0 !important;
+  min-height: auto !important;
+  background: transparent !important;
+  position: relative !important;
+}
+
+.vfrc-footer__content,
+._1vj16245 {
+  padding: 12px !important;
+  margin: 0 !important;
+  gap: 10px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  background: linear-gradient(180deg, transparent 0%, rgba(10,10,11,0.8) 30%, rgba(10,10,11,0.95) 100%) !important;
+  border-top: 1px solid rgba(124, 58, 237, 0.15) !important;
+  position: relative !important;
+}
+
+/* Ligne de séparation subtile avec gradient */
+.vfrc-footer__content::before,
+._1vj16245::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 80% !important;
+  height: 1px !important;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(124, 58, 237, 0.4) 20%, 
+    rgba(192, 38, 211, 0.5) 50%, 
+    rgba(124, 58, 237, 0.4) 80%, 
+    transparent 100%) !important;
+}
+
+/* ==========================================================
+   BULLES SYSTÈME (Bot) - Glassmorphism avec glow violet
+   ========================================================== */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) {
+  font-family: var(--font-body) !important;
+  font-weight: 400 !important;
+  font-size: var(--fs-body) !important;
+  line-height: 1.55 !important;
+  color: var(--text-primary) !important;
+  background: linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(192,38,211,0.05) 50%, rgba(20,20,22,0.9) 100%) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(124, 58, 237, 0.2) !important;
+  border-radius: 16px !important;
+  padding: 12px 14px !important;
+  max-width: 92% !important;
+  margin: 6px 0 !important;
+  box-shadow: 
+    0 0 25px -10px var(--glow-violet),
+    0 4px 16px -8px rgba(0, 0, 0, 0.4),
+    inset 0 0 20px rgba(124, 58, 237, 0.03) !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Hover - Glow plus intense */
+.vfrc-system-response .vfrc-message:not([class*="extension"]):hover {
+  border-color: rgba(124, 58, 237, 0.4) !important;
+  box-shadow: 
+    0 0 35px -10px var(--glow-fuchsia),
+    0 6px 24px -8px rgba(0, 0, 0, 0.5),
+    inset 0 0 30px rgba(192, 38, 211, 0.05) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* ==========================================================
+   BULLES UTILISATEUR - Gradient signature
+   ========================================================== */
+.vfrc-user-response > div,
+.vfrc-user-response .vfrc-message {
+  font-family: var(--font-body) !important;
+  font-weight: 400 !important;
+  font-size: var(--fs-body) !important;
+  line-height: 1.55 !important;
+  color: #ffffff !important;
+  background: var(--gradient-main) !important;
+  border: none !important;
+  border-radius: 14px !important;
+  padding: 10px 14px !important;
+  max-width: 88% !important;
+  margin: 6px 0 !important;
+  box-shadow: 
+    0 4px 16px -4px var(--glow-fuchsia),
+    0 0 30px -10px var(--glow-violet) !important;
+}
+
+.vfrc-user-response > div *,
+.vfrc-user-response .vfrc-message * {
+  color: #ffffff !important;
+}
+
+/* ==========================================================
+   ⭐ QUESTIONS DISTINCTIVES - Classe .revo-question
+   ========================================================== */
+
+/* Style principal des questions */
+.vfrc-system-response .vfrc-message .revo-question,
+.vfrc-message .revo-question,
+.revo-question {
+  display: block !important;
+  font-family: var(--font-heading) !important;
+  font-weight: 600 !important;
+  font-size: 15px !important;
+  line-height: 1.4 !important;
+  color: #ffffff !important;
+  margin-top: 14px !important;
+  margin-bottom: 4px !important;
+  padding: 12px 16px !important;
+  background: linear-gradient(135deg, rgba(124,58,237,0.18) 0%, rgba(192,38,211,0.12) 50%, rgba(249,115,22,0.08) 100%) !important;
+  border: 1px solid rgba(192, 38, 211, 0.35) !important;
+  border-left: 4px solid var(--accent-fuchsia) !important;
+  border-radius: 0 12px 12px 0 !important;
+  position: relative !important;
+  box-shadow: 
+    0 4px 20px -8px var(--glow-fuchsia),
+    inset 0 0 30px rgba(124, 58, 237, 0.05) !important;
+  animation: questionPulse 3s ease-in-out infinite !important;
+}
+
+/* Animation subtile de pulsation */
+@keyframes questionPulse {
+  0%, 100% {
+    box-shadow: 
+      0 4px 20px -8px var(--glow-fuchsia),
+      inset 0 0 30px rgba(124, 58, 237, 0.05);
+    border-left-color: var(--accent-fuchsia);
+  }
+  50% {
+    box-shadow: 
+      0 6px 28px -8px var(--glow-violet),
+      inset 0 0 40px rgba(192, 38, 211, 0.08);
+    border-left-color: var(--accent-violet);
+  }
+}
+
+/* Hover sur la question */
+.vfrc-system-response .vfrc-message .revo-question:hover,
+.vfrc-message .revo-question:hover,
+.revo-question:hover {
+  background: linear-gradient(135deg, rgba(124,58,237,0.25) 0%, rgba(192,38,211,0.18) 50%, rgba(249,115,22,0.12) 100%) !important;
+  border-color: rgba(192, 38, 211, 0.5) !important;
+  box-shadow: 
+    0 8px 30px -8px var(--glow-fuchsia),
+    0 0 50px -15px var(--glow-violet),
+    inset 0 0 40px rgba(192, 38, 211, 0.08) !important;
+  animation: none !important;
+}
+
+/* ==========================================================
+   ⭐ BARRE DE PROGRESSION - Classe .revo-progress
+   ========================================================== */
+
+/* Container de la barre */
+.vfrc-system-response .vfrc-message .revo-progress,
+.vfrc-message .revo-progress,
+.revo-progress {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  padding: 10px 16px !important;
+  margin-bottom: 14px !important;
+  background: linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(20,20,22,0.6) 100%) !important;
+  border: 1px solid rgba(124, 58, 237, 0.2) !important;
+  border-radius: 12px !important;
+  position: relative !important;
+}
+
+/* Label de la barre (ex: "3/7 piliers") */
+.vfrc-system-response .vfrc-message .revo-progress::after,
+.vfrc-message .revo-progress::after,
+.revo-progress::after {
+  content: attr(data-label) !important;
+  position: absolute !important;
+  right: 12px !important;
+  font-family: var(--font-body) !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  color: var(--text-secondary) !important;
+  letter-spacing: 0.02em !important;
+}
+
+/* Points de progression - Base commune */
+.vfrc-system-response .vfrc-message .revo-progress span,
+.vfrc-message .revo-progress span,
+.revo-progress span {
+  display: block !important;
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 50% !important;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Points complétés (done) - TRÈS VISIBLE avec couleur solide */
+.vfrc-system-response .vfrc-message .revo-progress span.done,
+.vfrc-message .revo-progress span.done,
+.revo-progress span.done {
+  background: #c026d3 !important;  /* Fuchsia solide, pas de gradient */
+  box-shadow: 
+    0 0 6px 2px rgba(192, 38, 211, 0.8),
+    0 0 12px 4px rgba(124, 58, 237, 0.5),
+    inset 0 0 4px rgba(255, 255, 255, 0.3) !important;
+  animation: progressPulse 2s ease-in-out infinite !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+}
+
+/* Points en attente (pending) - Gris subtil */
+.vfrc-system-response .vfrc-message .revo-progress span.pending,
+.vfrc-message .revo-progress span.pending,
+.revo-progress span.pending {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: none !important;
+}
+
+/* Animation des points complétés - plus visible */
+@keyframes progressPulse {
+  0%, 100% {
+    box-shadow: 
+      0 0 6px 2px rgba(192, 38, 211, 0.8),
+      0 0 12px 4px rgba(124, 58, 237, 0.5),
+      inset 0 0 4px rgba(255, 255, 255, 0.3);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 
+      0 0 10px 3px rgba(192, 38, 211, 1),
+      0 0 20px 6px rgba(124, 58, 237, 0.7),
+      inset 0 0 6px rgba(255, 255, 255, 0.5);
+    transform: scale(1.15);
+  }
+}
+
+/* Hover sur la barre - Effet glow */
+.vfrc-system-response .vfrc-message .revo-progress:hover,
+.vfrc-message .revo-progress:hover,
+.revo-progress:hover {
+  border-color: rgba(124, 58, 237, 0.4) !important;
+  box-shadow: 0 0 20px -8px var(--glow-violet) !important;
+}
+
+/* Quand tous les points sont done - Effet spécial */
+.revo-progress:has(span:nth-child(7).done) {
+  background: linear-gradient(135deg, rgba(124,58,237,0.15) 0%, rgba(192,38,211,0.1) 50%, rgba(249,115,22,0.08) 100%) !important;
+  border-color: rgba(192, 38, 211, 0.4) !important;
+}
+
+.revo-progress:has(span:nth-child(7).done)::after {
+  color: var(--accent-fuchsia) !important;
+}
+
+/* ==========================================================
+   TYPOGRAPHIE - Titres avec gradient (compacts)
+   ========================================================== */
+/* H1 - Grand titre gradient */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) h1,
+.vfrc-system-response .vfrc-message:not([class*="extension"]) .markdown h1,
+._11kfxpg1 h1,
+._11kfxpg3 h1 {
+  font-family: var(--font-heading) !important;
+  font-weight: 700 !important;
+  font-size: var(--fs-h1) !important;
+  line-height: 1.2 !important;
+  background: var(--gradient-main) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  margin: 0 0 8px 0 !important;
+  padding: 0 !important;
+}
+
+/* H2 - Titre secondaire gradient */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) h2,
+.vfrc-system-response .vfrc-message:not([class*="extension"]) .markdown h2,
+._11kfxpg1 h2,
+._11kfxpg3 h2 {
+  font-family: var(--font-heading) !important;
+  font-weight: 600 !important;
+  font-size: var(--fs-h2) !important;
+  line-height: 1.3 !important;
+  background: var(--gradient-main) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  margin: 10px 0 6px 0 !important;
+  padding: 0 !important;
+}
+
+/* H3 - Sous-titre violet */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) h3,
+.vfrc-system-response .vfrc-message:not([class*="extension"]) .markdown h3,
+._11kfxpg1 h3,
+._11kfxpg3 h3 {
+  font-family: var(--font-heading) !important;
+  font-weight: 600 !important;
+  font-size: var(--fs-h3) !important;
+  line-height: 1.3 !important;
+  color: var(--accent-violet) !important;
+  margin: 8px 0 4px 0 !important;
+  padding: 0 !important;
+}
+
+/* H4, H5, H6 - Fuchsia */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) h4,
+.vfrc-system-response .vfrc-message:not([class*="extension"]) h5,
+.vfrc-system-response .vfrc-message:not([class*="extension"]) h6,
+._11kfxpg1 h4, ._11kfxpg1 h5, ._11kfxpg1 h6,
+._11kfxpg3 h4, ._11kfxpg3 h5, ._11kfxpg3 h6 {
+  font-family: var(--font-heading) !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  line-height: 1.4 !important;
+  color: var(--accent-fuchsia) !important;
+  margin: 6px 0 4px 0 !important;
+}
+
+/* ==========================================================
+   PARAGRAPHES & TEXTE (compacts)
+   ========================================================== */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) p,
+.vfrc-system-response .vfrc-message:not([class*="extension"]) .markdown p,
+._11kfxpg1 p,
+._11kfxpg3 p {
+  font-family: var(--font-body) !important;
+  font-size: var(--fs-body) !important;
+  font-weight: 400 !important;
+  line-height: 1.55 !important;
+  color: var(--text-primary) !important;
+  margin: 4px 0 !important;
+}
+
+/* Premier paragraphe - pas de margin top */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) p:first-child,
+._11kfxpg1 p:first-child,
+._11kfxpg3 p:first-child {
+  margin-top: 0 !important;
+}
+
+/* Dernier paragraphe - pas de margin bottom */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) p:last-child,
+._11kfxpg1 p:last-child,
+._11kfxpg3 p:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Texte en gras - Blanc pur (mais pas les questions) */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) strong:not(.revo-question),
+._11kfxpg1 strong:not(.revo-question),
+._11kfxpg3 strong:not(.revo-question) {
+  font-weight: 600 !important;
+  color: #ffffff !important;
+}
+
+/* Liens - Gradient au hover */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) a,
+._11kfxpg1 a,
+._11kfxpg3 a {
+  color: var(--accent-fuchsia) !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid transparent !important;
+  transition: all 0.3s ease !important;
+}
+
+.vfrc-system-response .vfrc-message:not([class*="extension"]) a:hover,
+._11kfxpg1 a:hover,
+._11kfxpg3 a:hover {
+  color: var(--accent-violet) !important;
+  border-bottom-color: var(--accent-violet) !important;
+}
+
+/* ==========================================================
+   LISTES - Puces stylées (compactes)
+   ========================================================== */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) ul,
+._11kfxpg1 ul,
+._11kfxpg3 ul {
+  list-style: none !important;
+  padding-left: 1.2em !important;
+  margin: 6px 0 !important;
+}
+
+.vfrc-system-response .vfrc-message:not([class*="extension"]) ul li,
+._11kfxpg1 ul li,
+._11kfxpg3 ul li {
+  position: relative !important;
+  margin: 3px 0 !important;
+  padding-left: 6px !important;
+  font-size: var(--fs-body) !important;
+  line-height: 1.5 !important;
+}
+
+/* Puce custom gradient */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) ul li::before,
+._11kfxpg1 ul li::before,
+._11kfxpg3 ul li::before {
+  content: "▸" !important;
+  position: absolute !important;
+  left: -1em !important;
+  color: var(--accent-fuchsia) !important;
+  font-size: 0.9em !important;
+}
+
+/* Listes numérotées */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) ol,
+._11kfxpg1 ol,
+._11kfxpg3 ol {
+  padding-left: 1.2em !important;
+  margin: 6px 0 !important;
+}
+
+.vfrc-system-response .vfrc-message:not([class*="extension"]) ol li,
+._11kfxpg1 ol li,
+._11kfxpg3 ol li {
+  margin: 3px 0 !important;
+  font-size: var(--fs-body) !important;
+  line-height: 1.5 !important;
+}
+
+/* ==========================================================
+   BOUTONS DE RÉPONSE - Style épuré et compact
+   ========================================================== */
+
+/* Container des boutons - ZONE DISTINCTE */
+.vfrc-system-response--actions,
+.vfrc-button-container,
+.vfrc-card--buttons {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  padding: 8px 2px !important;
+  justify-content: flex-start !important;
+  margin: 4px 0 2px 0 !important;
+  position: relative !important;
+}
+
+/* Boutons de choix - Style pill compact */
+.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3),
+button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3) {
+  font-family: var(--font-body) !important;
+  font-weight: 500 !important;
+  font-size: var(--fs-button) !important;
+  line-height: 1.3 !important;
+  letter-spacing: 0.01em !important;
+  background: rgba(20, 20, 22, 0.8) !important;
+  border: 1px solid rgba(124, 58, 237, 0.3) !important;
+  color: var(--text-primary) !important;
+  border-radius: 10px !important;
+  padding: 9px 14px !important;
+  margin: 0 !important;
+  cursor: pointer !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  box-shadow: 
+    0 2px 6px -4px rgba(0, 0, 0, 0.3),
+    inset 0 0 15px rgba(124, 58, 237, 0.05) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  animation: none !important;
+}
+
+/* Hover - Bordure gradient + glow */
+.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3):hover,
+button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3):hover {
+  background: linear-gradient(135deg, rgba(124,58,237,0.15) 0%, rgba(192,38,211,0.1) 100%) !important;
+  border-color: rgba(192, 38, 211, 0.5) !important;
+  color: #ffffff !important;
+  box-shadow: 
+    0 4px 20px -4px var(--glow-violet),
+    0 0 30px -10px var(--glow-fuchsia),
+    inset 0 0 30px rgba(124, 58, 237, 0.1) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Active - Press effect */
+.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3):active,
+button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3):active {
+  transform: translateY(0) scale(0.98) !important;
+  box-shadow: 
+    0 2px 10px -4px var(--glow-fuchsia) !important;
+}
+
+/* ==========================================================
+   ZONE DE SAISIE - Conteneur ATTRACTIF avec animations
+   ========================================================== */
+
+/* Wrapper principal de l'input */
+._1gdvh9t0,
+.vfrc-chat-input__container {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+}
+
+/* Input container - Avec bordure gradient animée */
+.vfrc-input-container,
+._1gdvh9t2,
+._1gdvh9t3 {
+  flex: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  background: rgba(15, 15, 17, 0.95) !important;
+  border: 2px solid transparent !important;
+  border-radius: 18px !important;
+  padding: 4px !important;
+  transition: all 0.4s ease !important;
+  position: relative !important;
+  /* Gradient border via background */
+  background: 
+    linear-gradient(rgba(15, 15, 17, 0.95), rgba(15, 15, 17, 0.95)) padding-box,
+    linear-gradient(135deg, rgba(124, 58, 237, 0.5), rgba(192, 38, 211, 0.5), rgba(124, 58, 237, 0.5)) border-box !important;
+  box-shadow: 
+    0 4px 24px -8px rgba(124, 58, 237, 0.3),
+    0 0 40px -15px var(--glow-fuchsia),
+    inset 0 0 20px rgba(124, 58, 237, 0.03) !important;
+  animation: inputGlow 3s ease-in-out infinite !important;
+}
+
+/* Animation du glow pulsant */
+@keyframes inputGlow {
+  0%, 100% {
+    box-shadow: 
+      0 4px 24px -8px rgba(124, 58, 237, 0.3),
+      0 0 40px -15px var(--glow-fuchsia),
+      inset 0 0 20px rgba(124, 58, 237, 0.03);
+  }
+  50% {
+    box-shadow: 
+      0 4px 30px -8px rgba(192, 38, 211, 0.5),
+      0 0 60px -10px var(--glow-violet),
+      inset 0 0 30px rgba(192, 38, 211, 0.05);
+  }
+}
+
+/* Effet shine qui passe sur l'input */
+.vfrc-input-container::before,
+._1gdvh9t2::before,
+._1gdvh9t3::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: -100% !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.05),
+    transparent
+  ) !important;
+  border-radius: 18px !important;
+  animation: inputShine 4s ease-in-out infinite !important;
+  pointer-events: none !important;
+}
+
+@keyframes inputShine {
+  0% {
+    left: -100%;
+  }
+  50%, 100% {
+    left: 100%;
+  }
+}
+
+/* Focus - Bordure plus intense + arrêt des animations */
+.vfrc-input-container:focus-within,
+._1gdvh9t2:focus-within,
+._1gdvh9t3:focus-within {
+  background: 
+    linear-gradient(rgba(15, 15, 17, 0.98), rgba(15, 15, 17, 0.98)) padding-box,
+    linear-gradient(135deg, var(--accent-violet), var(--accent-fuchsia), var(--accent-rose)) border-box !important;
+  box-shadow: 
+    0 0 0 4px rgba(124, 58, 237, 0.15),
+    0 8px 40px -10px var(--glow-fuchsia),
+    0 0 60px -15px var(--glow-violet),
+    inset 0 0 30px rgba(124, 58, 237, 0.05) !important;
+  animation: none !important;
+}
+
+.vfrc-input-container:focus-within::before,
+._1gdvh9t2:focus-within::before,
+._1gdvh9t3:focus-within::before {
+  animation: none !important;
+  opacity: 0 !important;
+}
+
+/* Focus ring - masquer */
+.vfrc-chat-focus-ring,
+._1gdvh9t7,
+._1gdvh9t8,
+._1gdvh9t9 {
+  display: none !important;
+}
+
+/* Container inner */
+.vfrc-chat-input__container-inner,
+._1gdvh9tc {
+  flex: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Textarea - Style épuré */
+.vfrc-chat-input textarea,
+.vfrc-chat-input input,
+textarea.vfrc-chat-input,
+textarea._1gdvh9ta,
+.vfrc-chat-input__input {
+  font-family: var(--font-body) !important;
+  font-weight: 400 !important;
+  font-size: var(--fs-body) !important;
+  line-height: 1.5 !important;
+  color: #ffffff !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 12px !important;
+  padding: 12px 14px !important;
+  min-height: 44px !important;
+  max-height: 120px !important;
+  resize: none !important;
+  transition: all 0.3s ease !important;
+  flex: 1 !important;
+  box-shadow: none !important;
+}
+
+.vfrc-chat-input textarea:focus,
+textarea._1gdvh9ta:focus,
+.vfrc-chat-input__input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Placeholder avec animation subtile */
+.vfrc-chat-input textarea::placeholder,
+textarea._1gdvh9ta::placeholder,
+.vfrc-chat-input__input::placeholder {
+  color: rgba(167, 139, 250, 0.6) !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Placeholder disparaît au focus */
+.vfrc-chat-input textarea:focus::placeholder,
+textarea._1gdvh9ta:focus::placeholder,
+.vfrc-chat-input__input:focus::placeholder {
+  color: rgba(167, 139, 250, 0.3) !important;
+  transform: translateX(10px) !important;
+}
+
+/* Actions container (bouton send) */
+.vfrc-chat-input__actions,
+._1gdvh9td {
+  display: flex !important;
+  align-items: center !important;
+  padding-right: 8px !important;
+}
+
+/* ==========================================================
+   BOUTON ENVOYER - Style attractif avec animation
+   ========================================================== */
+#vfrc-send-message,
+.vfrc-chat-input__send,
+._1gdvh9tf,
+button[class*="send"] {
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: rgba(124, 58, 237, 0.15) !important;
+  border: 1px solid rgba(124, 58, 237, 0.25) !important;
+  border-radius: 14px !important;
+  color: rgba(167, 139, 250, 0.4) !important;
+  cursor: not-allowed !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Afficher l'icône SVG */
+#vfrc-send-message svg,
+.vfrc-chat-input__send svg,
+._1gdvh9tf svg {
+  display: block !important;
+  width: 20px !important;
+  height: 20px !important;
+  transition: transform 0.3s ease !important;
+}
+
+/* Masquer le texte ajouté */
+#vfrc-send-message::after,
+.vfrc-chat-input__send::after,
+._1gdvh9tf::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* État actif - Gradient avec glow pulsant */
+#vfrc-send-message:not([disabled]),
+.vfrc-chat-input__send:not([disabled]),
+._1gdvh9tf:not([disabled]) {
+  background: var(--gradient-main) !important;
+  border: none !important;
+  color: #ffffff !important;
+  cursor: pointer !important;
+  box-shadow: 
+    0 4px 20px -4px var(--glow-fuchsia),
+    0 0 30px -10px var(--glow-violet) !important;
+  animation: sendButtonPulse 2s ease-in-out infinite !important;
+}
+
+@keyframes sendButtonPulse {
+  0%, 100% {
+    box-shadow: 
+      0 4px 20px -4px var(--glow-fuchsia),
+      0 0 30px -10px var(--glow-violet);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 
+      0 6px 30px -4px var(--glow-fuchsia),
+      0 0 50px -5px var(--glow-violet);
+    transform: scale(1.05);
+  }
+}
+
+#vfrc-send-message:not([disabled]):hover,
+.vfrc-chat-input__send:not([disabled]):hover,
+._1gdvh9tf:not([disabled]):hover {
+  transform: scale(1.1) !important;
+  box-shadow: 
+    0 6px 30px -4px var(--glow-fuchsia),
+    0 0 50px -10px var(--glow-violet) !important;
+  animation: none !important;
+}
+
+#vfrc-send-message:not([disabled]):hover svg,
+.vfrc-chat-input__send:not([disabled]):hover svg,
+._1gdvh9tf:not([disabled]):hover svg {
+  transform: translateX(2px) !important;
+}
+
+#vfrc-send-message:not([disabled]):active,
+.vfrc-chat-input__send:not([disabled]):active,
+._1gdvh9tf:not([disabled]):active {
+  transform: scale(0.95) !important;
+  animation: none !important;
+}
+
+/* ==========================================================
+   SCROLLBAR - Fine et subtile
+   ========================================================== */
+.vfrc-chat--dialog,
+.vfrc-chat-dialog,
+.vfrc-chat-dialog__container {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(124, 58, 237, 0.4) transparent;
+}
+
+.vfrc-chat--dialog::-webkit-scrollbar,
+.vfrc-chat-dialog::-webkit-scrollbar {
+  width: 4px;
+}
+
+.vfrc-chat--dialog::-webkit-scrollbar-thumb,
+.vfrc-chat-dialog::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--accent-violet), var(--accent-fuchsia));
+  border-radius: 10px;
+  opacity: 0.6;
+}
+
+.vfrc-chat--dialog::-webkit-scrollbar-thumb:hover,
+.vfrc-chat-dialog::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--accent-fuchsia), var(--accent-rose));
+}
+
+.vfrc-chat--dialog::-webkit-scrollbar-track,
+.vfrc-chat-dialog::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ==========================================================
+   BLOCKQUOTES - Style élégant
+   ========================================================== */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) blockquote,
+._11kfxpg1 blockquote,
+._11kfxpg3 blockquote {
+  border-left: 3px solid var(--accent-fuchsia) !important;
+  background: rgba(192, 38, 211, 0.08) !important;
+  padding: 12px 16px !important;
+  margin: 12px 0 !important;
+  border-radius: 0 8px 8px 0 !important;
+  font-style: italic !important;
+  color: var(--text-secondary) !important;
+}
+
+/* ==========================================================
+   CODE BLOCKS
+   ========================================================== */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) code,
+._11kfxpg1 code,
+._11kfxpg3 code {
+  font-family: 'Fira Code', 'Monaco', monospace !important;
+  font-size: 12px !important;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 6px !important;
+  padding: 2px 6px !important;
+  color: var(--accent-orange) !important;
+}
+
+.vfrc-system-response .vfrc-message:not([class*="extension"]) pre,
+._11kfxpg1 pre,
+._11kfxpg3 pre {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 12px !important;
+  padding: 16px !important;
+  overflow-x: auto !important;
+  margin: 12px 0 !important;
+}
+
+/* ==========================================================
+   LIGNE HORIZONTALE
+   ========================================================== */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) hr,
+._11kfxpg1 hr,
+._11kfxpg3 hr {
+  border: none !important;
+  height: 1px !important;
+  background: var(--gradient-main) !important;
+  opacity: 0.3 !important;
+  margin: 20px 0 !important;
+}
+
+/* ==========================================================
+   IMAGES
+   ========================================================== */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) img,
+._11kfxpg1 img,
+._11kfxpg3 img {
+  max-width: 100% !important;
+  border-radius: 12px !important;
+  margin: 12px 0 !important;
+  box-shadow: 0 4px 20px -8px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* ==========================================================
+   CAROUSELS & CARDS - Matching landing style
+   ========================================================== */
+.vfrc-carousel,
+.vfrc-card {
+  background: linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(20,20,22,0.95) 100%) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(124, 58, 237, 0.2) !important;
+  border-radius: 20px !important;
+  overflow: hidden !important;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 0 0 30px -15px var(--glow-violet) !important;
+}
+
+.vfrc-carousel:hover,
+.vfrc-card:hover {
+  border-color: rgba(192, 38, 211, 0.4) !important;
+  box-shadow: 
+    0 8px 40px -10px var(--glow-fuchsia),
+    0 0 60px -20px var(--glow-violet) !important;
+  transform: translateY(-6px) !important;
+}
+
+.vfrc-card__title {
+  font-family: var(--font-heading) !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  color: var(--text-primary) !important;
+  margin-bottom: 8px !important;
+}
+
+.vfrc-card__description {
+  font-family: var(--font-body) !important;
+  font-size: 13px !important;
+  color: var(--text-secondary) !important;
+  line-height: 1.5 !important;
+}
+
+.vfrc-card__image {
+  border-radius: 16px 16px 0 0 !important;
+  opacity: 0.9 !important;
+  transition: opacity 0.3s ease !important;
+}
+
+.vfrc-card:hover .vfrc-card__image {
+  opacity: 1 !important;
+}
+
+/* ==========================================================
+   PROTECTION EXTENSIONS
+   ========================================================== */
+.vfrc-message[class*="extension"] {
+  background: transparent !important;
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* ==========================================================
+   OVERRIDE COMPLET - Suppression fonds blancs/gris
+   ========================================================== */
+.vfrc-widget *,
+.vfrc-chat *,
+#voiceflow-chat-container * {
+  --vf-bg: transparent;
+  --vf-input-bg: transparent;
+}
+
+/* Footer et input wrapper - FORCER transparent */
+.vfrc-footer *:not(.vfrc-input-container):not(._1gdvh9t2):not(._1gdvh9t3):not(textarea):not(button),
+.vfrc-chat-input__wrapper,
+.vfrc-chat-input__inner {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* FIX : Supprimer TOUT espace/padding/margin excessif */
+.vfrc-chat,
+.vfrc-chat__container,
+.vfrc-chat__container-inner,
+.vfrc-widget {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.vfrc-chat--dialog,
+.vfrc-chat-dialog {
+  flex: 1 !important;
+  min-height: 0 !important;
+}
+
+/* FIX : Le spacer ou élément vide */
+.vfrc-chat > div:empty,
+.vfrc-chat__container > div:empty,
+.vfrc-chat__container-inner > div:empty,
+.vfrc-spacer,
+div[class*="spacer"] {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* ==========================================================
+   ⭐ TYPING INDICATOR - Animation "Revo écrit..."
+   ========================================================== */
+
+/* Container du typing indicator */
+.vfrc-typing-indicator--container,
+.vfrc-typing-indicator--container-inner,
+._1ayyscc0,
+._1ayyscc1 {
+  background: linear-gradient(135deg, rgba(124,58,237,0.12) 0%, rgba(20,20,22,0.85) 100%) !important;
+  border: 1px solid rgba(124, 58, 237, 0.3) !important;
+  border-radius: 16px !important;
+  padding: 14px 20px !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  box-shadow: 
+    0 0 20px -8px var(--glow-violet),
+    inset 0 0 20px rgba(124, 58, 237, 0.05) !important;
+}
+
+/* Container des points */
+.vfrc-typing-indicator,
+.vfrc-typing-indicator.xaffbq1 {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+/* Points individuels - Base */
+.vfrc-typing-indicator span,
+.vfrc-typing-indicator span.xaffbq2 {
+  display: block !important;
+  width: 10px !important;
+  height: 10px !important;
+  background: rgba(124, 58, 237, 0.3) !important;
+  border-radius: 50% !important;
+  animation: typingGlowPulse 1.5s ease-in-out infinite !important;
+}
+
+/* Délais pour effet de vague */
+.vfrc-typing-indicator span.xaffbq3,
+.vfrc-typing-indicator span:nth-child(1) {
+  animation-delay: 0s !important;
+}
+
+.vfrc-typing-indicator span.xaffbq4,
+.vfrc-typing-indicator span:nth-child(2) {
+  animation-delay: 0.3s !important;
+}
+
+.vfrc-typing-indicator span.xaffbq5,
+.vfrc-typing-indicator span:nth-child(3) {
+  animation-delay: 0.6s !important;
+}
+
+/* Animation Glow Pulse */
+@keyframes typingGlowPulse {
+  0%, 100% { 
+    background: rgba(124, 58, 237, 0.3) !important;
+    box-shadow: none;
+    transform: scale(1);
+  }
+  50% { 
+    background: #c026d3 !important;
+    box-shadow: 
+      0 0 8px 2px rgba(192, 38, 211, 0.9),
+      0 0 16px 4px rgba(124, 58, 237, 0.6);
+    transform: scale(1.4);
+  }
+}
+
+/* ==========================================================
+   ANIMATIONS D'ENTRÉE
+   ========================================================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.vfrc-message:not([class*="extension"]) { 
+  margin: 4px 0 !important;
+  animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* ==========================================================
+   RESPONSIVE - Mobile optimizations
+   ========================================================== */
+@media (max-width: 768px) {
+  .vfrc-system-response .vfrc-message:not([class*="extension"]),
+  .vfrc-user-response > div,
+  .vfrc-user-response .vfrc-message {
+    max-width: 96% !important;
+    padding: 10px 12px !important;
+    font-size: 13px !important;
+    border-radius: 12px !important;
+  }
+  
+  .vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]) {
+    padding: 8px 12px !important;
+    font-size: 12px !important;
+    border-radius: 8px !important;
+  }
+  
+  .vfrc-footer__content,
+  ._1vj16245 {
+    padding: 10px !important;
+  }
+  
+  .vfrc-chat--dialog,
+  .vfrc-chat-dialog,
+  .vfrc-chat-dialog__container {
+    padding: 10px 8px 4px 8px !important;
+  }
+  
+  :root {
+    --fs-h1: 20px;
+    --fs-h2: 17px;
+    --fs-h3: 14px;
+    --fs-body: 13px;
+    --fs-button: 12px;
+  }
+  
+  /* Questions responsive */
+  .vfrc-system-response .vfrc-message .revo-question,
+  .vfrc-message .revo-question,
+  .revo-question {
+    font-size: 14px !important;
+    padding: 10px 14px !important;
+    margin-top: 10px !important;
+  }
+  
+  /* Progress bar responsive */
+  .vfrc-system-response .vfrc-message .revo-progress,
+  .vfrc-message .revo-progress,
+  .revo-progress {
+    gap: 5px !important;
+    padding: 8px 12px !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .revo-progress span {
+    width: 10px !important;
+    height: 10px !important;
+  }
+  
+  .revo-progress::after {
+    font-size: 10px !important;
+    right: 10px !important;
+  }
+  
+  .revo-progress span.done {
+    animation: none !important;
+  }
+  
+  /* Typing indicator responsive */
+  .vfrc-typing-indicator--container-inner,
+  ._1ayyscc1 {
+    padding: 10px 14px !important;
+    border-radius: 12px !important;
+  }
+  
+  .vfrc-typing-indicator span,
+  .vfrc-typing-indicator span.xaffbq2 {
+    width: 8px !important;
+    height: 8px !important;
+  }
+  
+  /* Bouton restart mobile - zone cliquable plus grande */
+  .vfrc-header--button,
+  button.vfrc-header--button,
+  .vfrc-header--actions button,
+  .jyiueia button {
+    width: 70px !important;
+    max-width: 70px !important;
+    height: 32px !important;
+    min-width: 70px !important;
+    min-height: 32px !important;
+    max-height: 32px !important;
+  }
+  
+  .vfrc-header--button::after,
+  button.vfrc-header--button::after,
+  .vfrc-header--actions button::after,
+  .jyiueia button::after {
+    width: 60px !important;
+    height: 6px !important;
+    opacity: 0.4 !important;
+  }
+  
+  .vfrc-footer__start-button,
+  div[class*="start-button"],
+  #vfrc-start-chat {
+    width: 60px !important;
+    max-width: 60px !important;
+    height: 6px !important;
+    min-width: 60px !important;
+    min-height: 6px !important;
+    max-height: 6px !important;
+    opacity: 0.4 !important;
+  }
+  
+  /* Réduire les animations sur mobile pour performance */
+  .vfrc-input-container,
+  ._1gdvh9t2,
+  ._1gdvh9t3 {
+    animation: none !important;
+  }
+  
+  .vfrc-input-container::before,
+  ._1gdvh9t2::before,
+  ._1gdvh9t3::before {
+    animation: none !important;
+    display: none !important;
+  }
+  
+  #vfrc-send-message:not([disabled]),
+  .vfrc-chat-input__send:not([disabled]),
+  ._1gdvh9tf:not([disabled]) {
+    animation: none !important;
+  }
+  
+  /* Réduire animation question sur mobile */
+  .vfrc-system-response .vfrc-message .revo-question,
+  .vfrc-message .revo-question,
+  .revo-question {
+    animation: none !important;
+  }
+}
+
+/* ==========================================================
+   PREFERS-REDUCED-MOTION - Respect accessibilité
+   ========================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .vfrc-input-container,
+  ._1gdvh9t2,
+  ._1gdvh9t3,
+  .vfrc-input-container::before,
+  ._1gdvh9t2::before,
+  ._1gdvh9t3::before,
+  #vfrc-send-message:not([disabled]),
+  .vfrc-chat-input__send:not([disabled]),
+  ._1gdvh9tf:not([disabled]),
+  .vfrc-message:not([class*="extension"]),
+  .revo-question,
+  .revo-progress span.done,
+  .vfrc-typing-indicator span,
+  .vfrc-typing-indicator span.xaffbq2 {
+    animation: none !important;
+    transition: none !important;
+  }
+}
