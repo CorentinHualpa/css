@@ -1,5 +1,5 @@
 /* ==========================================================
-   MyConatus × Voiceflow — Dark Mode Theme v1.0
+   MyConatus × Voiceflow — Dark Mode Theme v2.0
    
    Design : Life Mentor Chatbot — Edgy, Cash, Zero Bullshit
    Couleurs : Coral Red #E94560 + Cyan #00D2FF + Navy Dark #0D0D12
@@ -13,6 +13,8 @@
    - accent-hover : #FF6B81
    - accent-dark  : #C2354D
    - cyan         : #00D2FF
+   - amber        : #F59E0B (progress bar)
+   - amber-dark   : #F97316 (progress bar gradient)
    - text-primary : #E8E8ED
    - text-secondary: #8B8B9E
    - text-muted   : #5A5A6E
@@ -20,10 +22,10 @@
    - border-light : #3A3A52
    
    v1.0 : Initial dark mode
-          Support pleine largeur extensions
-          Header "Nouveau chat" visible
-          Fix typing indicator
-          Avatar avec glow accent
+   v2.0 : + Spino progress bar (5 étapes)
+          + Question styling (.spino-question)
+          + Animations progress fill
+          + Responsive progress bar
    
    Auteur : Revolution Agency
    ========================================================== */
@@ -481,6 +483,90 @@ button.vfrc-button:not(.vfrc-header--button) {
   font-weight: 400 !important;
   line-height: 1.6 !important;
   color: #E8E8ED !important;
+}
+
+/* ==========================================================
+   📊 SPINO PROGRESS BAR — Amber/Orange gradient
+   ========================================================== */
+.spino-progress {
+  display: flex;
+  gap: 6px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  margin-bottom: 12px;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.spino-progress::after {
+  content: attr(data-label);
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.45);
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+.spino-progress span {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.spino-progress .done {
+  background: linear-gradient(90deg, #F59E0B, #F97316);
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.25);
+  animation: spinoProgressFill 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.spino-progress .pending {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Label complet → vert */
+.spino-progress[data-label*="✓"]::after {
+  color: #34D399;
+}
+
+.spino-progress[data-label*="✓"] .done {
+  background: linear-gradient(90deg, #34D399, #10B981);
+  box-shadow: 0 0 10px rgba(52, 211, 153, 0.25);
+}
+
+@keyframes spinoProgressFill {
+  from {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  to {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+/* ==========================================================
+   🎯 SPINO QUESTION STYLING — Amber highlight
+   ========================================================== */
+.spino-question {
+  display: block;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #F59E0B;
+  margin-top: 6px;
+  padding: 0;
+}
+
+/* Hover subtil sur la question */
+.vfrc-message:hover .spino-question {
+  color: #FBBF24;
 }
 
 /* ==========================================================
@@ -1082,6 +1168,15 @@ textarea._1gdvh9ta::placeholder {
   .vfrc-message--extension-Carousel {
     margin-left: 0 !important;
   }
+  /* Progress bar mobile */
+  .spino-progress {
+    gap: 4px;
+    padding: 8px 10px;
+  }
+  .spino-progress::after {
+    font-size: 10px;
+    right: 10px;
+  }
 }
 
 /* ==========================================================
@@ -1111,6 +1206,15 @@ textarea._1gdvh9ta::placeholder {
   ._1ayyscc1 {
     margin-left: 40px !important;
   }
+  /* Progress bar très petit écran */
+  .spino-progress {
+    gap: 3px;
+    padding: 6px 8px;
+  }
+  .spino-progress::after {
+    font-size: 9px;
+    right: 8px;
+  }
 }
 
 /* ==========================================================
@@ -1120,7 +1224,9 @@ textarea._1gdvh9ta::placeholder {
   .vfrc-message:not([class*="extension"]),
   .vfrc-button,
   .vfrc-avatar,
-  .vfrc-typing-indicator span {
+  .vfrc-typing-indicator span,
+  .spino-progress .done,
+  .spino-progress span {
     animation: none !important;
     transition: none !important;
   }
