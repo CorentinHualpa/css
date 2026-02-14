@@ -1,5 +1,5 @@
 /* ==========================================================
-   Evolution Agency × Voiceflow — Thème Fondu v2.0
+   Evolution Agency × Voiceflow — Thème Fondu v2.1
    
    Design : Intégration seamless dans landing page sombre
    Couleurs : Orange-Jaune #FF8C00 → #FFB800 sur Noir pur
@@ -7,11 +7,11 @@
    Style : Dark glassmorphism, contraste fort, glow jaune-orange
    
    v2.0 : Fix rendu marron → plus jaune, fonds plus noirs
+   v2.1 : Ajout classes .spino-progress / .spino-question
+          pour MYCONATUS (5 étapes au lieu de 7 piliers)
    ========================================================== */
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
-
 /* ==========================================================
    Variables du thème — v2 plus contrasté
    ========================================================== */
@@ -54,7 +54,6 @@
   --fs-small: 12px;
   --fs-button: 13px;
 }
-
 /* ==========================================================
    RESET COMPLET
    ========================================================== */
@@ -70,7 +69,6 @@
   border: none !important;
   border-radius: 0 !important;
 }
-
 /* ==========================================================
    HEADER - Minimaliste
    ========================================================== */
@@ -94,7 +92,6 @@
   justify-content: center !important;
   align-items: center !important;
 }
-
 .vfrc-header > .vfrc-avatar,
 .vfrc-header > img,
 .vfrc-header .g931q10,
@@ -105,7 +102,6 @@
   height: 0 !important;
   opacity: 0 !important;
 }
-
 .vfrc-header--container-inner,
 .jyiuei5 {
   display: flex !important;
@@ -117,7 +113,6 @@
   pointer-events: auto !important;
   height: 100% !important;
 }
-
 .vfrc-header--title,
 .jyiuei6, .jyiuei8,
 .fptyqm0, .fptyqm1 {
@@ -128,7 +123,6 @@
   opacity: 0 !important;
   font-size: 0 !important;
 }
-
 .vfrc-header--actions,
 .jyiueia {
   display: flex !important;
@@ -139,7 +133,6 @@
   height: 100% !important;
   pointer-events: auto !important;
 }
-
 /* ==========================================================
    BOUTON RESTART - Trait orange-jaune
    ========================================================== */
@@ -172,7 +165,6 @@ button.vfrc-header--button,
   pointer-events: auto !important;
   z-index: 100 !important;
 }
-
 .vfrc-header--button::after,
 button.vfrc-header--button::after,
 .vfrc-header--actions button::after,
@@ -191,7 +183,6 @@ button.vfrc-header--button::after,
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
   pointer-events: none !important;
 }
-
 .vfrc-header--button *,
 .vfrc-header--button svg,
 .vfrc-header--button .vfrc-icon,
@@ -208,7 +199,6 @@ button.vfrc-header--button::after,
   opacity: 0 !important;
   pointer-events: none !important;
 }
-
 .vfrc-header--button:hover::after,
 button.vfrc-header--button:hover::after {
   opacity: 1 !important;
@@ -217,12 +207,10 @@ button.vfrc-header--button:hover::after {
   background: linear-gradient(90deg, var(--accent-bright), var(--accent-orange), var(--accent-yellow)) !important;
   box-shadow: 0 0 20px -4px var(--glow-main), 0 0 40px -8px var(--glow-strong) !important;
 }
-
 .vfrc-header--button:active::after {
   transform: translate(-50%, -50%) scaleX(0.9) !important;
   opacity: 0.8 !important;
 }
-
 /* ==========================================================
    CONTENEUR PRINCIPAL
    ========================================================== */
@@ -235,7 +223,6 @@ button.vfrc-header--button:hover::after {
   max-width: 100% !important;
   gap: 0 !important;
 }
-
 .vfrc-chat--dialog,
 .vfrc-chat-dialog,
 .vfrc-chat-dialog__container {
@@ -244,12 +231,10 @@ button.vfrc-header--button:hover::after {
   background: transparent !important;
   gap: 0 !important;
 }
-
 .vfrc-system-response,
 .vfrc-user-response {
   margin-bottom: 4px !important;
 }
-
 /* ==========================================================
    MASQUER ÉLÉMENTS SUPERFLUS
    ========================================================== */
@@ -264,7 +249,6 @@ div[class*="bottom-spacer"],
   margin: 0 !important;
   visibility: hidden !important;
 }
-
 .vfrc-footer__content-scroll-to-bottom,
 div[class*="scroll-to-bottom"],
 .oq48l92, ._1cosygz0 {
@@ -274,7 +258,6 @@ div[class*="scroll-to-bottom"],
   margin: 0 !important;
   visibility: hidden !important;
 }
-
 .vfrc-footer__links,
 .jsli361, .jsli363 {
   display: none !important;
@@ -282,7 +265,6 @@ div[class*="scroll-to-bottom"],
   padding: 0 !important;
   margin: 0 !important;
 }
-
 /* Restart button fallback */
 .vfrc-footer__start-button,
 div[class*="start-button"],
@@ -308,14 +290,12 @@ div[class*="start-button"],
   transition: all 0.4s ease !important;
   overflow: hidden !important;
 }
-
 .vfrc-footer__start-button *,
 div[class*="start-button"] *,
 #vfrc-start-chat * {
   display: none !important;
   visibility: hidden !important;
 }
-
 .vfrc-footer__start-button:hover {
   opacity: 1 !important;
   width: 80px !important;
@@ -323,7 +303,6 @@ div[class*="start-button"] *,
   height: 6px !important;
   box-shadow: 0 0 20px -4px var(--glow-main) !important;
 }
-
 /* Overlay */
 .vfrc-chat--overlay,
 ._5x612k3, ._5x612k4 {
@@ -335,7 +314,6 @@ div[class*="start-button"] *,
   backdrop-filter: blur(4px) !important;
   -webkit-backdrop-filter: blur(4px) !important;
 }
-
 /* ==========================================================
    POPUP RESTART
    ========================================================== */
@@ -357,7 +335,6 @@ div[class*="start-button"] *,
   box-shadow: 0 0 40px -10px var(--glow-main), 0 8px 32px -8px rgba(0,0,0,0.5) !important;
   max-width: 280px !important;
 }
-
 .vfrc-prompt button:first-child,
 ._5x612k0 button:first-child,
 button._1q15b0b2:not(.vfrc-header--button):not(.vfrc-chat-input__send) {
@@ -378,7 +355,6 @@ button._1q15b0b2:not(.vfrc-header--button):not(.vfrc-chat-input__send) {
   height: auto !important;
   opacity: 1 !important;
 }
-
 .vfrc-prompt button:last-child,
 ._5x612k0 button:last-child,
 button._1q15b0b3 {
@@ -398,13 +374,11 @@ button._1q15b0b3 {
   height: auto !important;
   opacity: 1 !important;
 }
-
 .vfrc-prompt button:last-child:hover {
   color: var(--text-primary) !important;
   border-color: rgba(255, 140, 0, 0.4) !important;
   background: rgba(255, 140, 0, 0.06) !important;
 }
-
 /* ==========================================================
    FOOTER
    ========================================================== */
@@ -417,7 +391,6 @@ button._1q15b0b3 {
   background: transparent !important;
   position: relative !important;
 }
-
 .vfrc-footer__content,
 ._1vj16245 {
   padding: 12px !important;
@@ -429,7 +402,6 @@ button._1q15b0b3 {
   border-top: 1px solid rgba(255, 140, 0, 0.10) !important;
   position: relative !important;
 }
-
 .vfrc-footer__content::before,
 ._1vj16245::before {
   content: "" !important;
@@ -441,7 +413,6 @@ button._1q15b0b3 {
   height: 1px !important;
   background: linear-gradient(90deg, transparent 0%, rgba(255,140,0,0.25) 20%, rgba(255,184,0,0.30) 50%, rgba(255,140,0,0.25) 80%, transparent 100%) !important;
 }
-
 /* ==========================================================
    BULLES SYSTÈME (Bot) — Fond NOIR avec bordure orange fine
    ========================================================== */
@@ -451,7 +422,6 @@ button._1q15b0b3 {
   font-size: var(--fs-body) !important;
   line-height: 1.55 !important;
   color: var(--text-primary) !important;
-  /* NOIR quasi-pur avec un micro-soupçon orange — PAS de fond marron */
   background: rgba(10, 10, 12, 0.92) !important;
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
@@ -460,17 +430,14 @@ button._1q15b0b3 {
   padding: 12px 14px !important;
   max-width: 92% !important;
   margin: 6px 0 !important;
-  /* Glow externe TRÈS subtil — éviter l'effet marron */
   box-shadow: 0 2px 12px -6px rgba(0,0,0,0.6) !important;
   transition: all 0.3s ease !important;
 }
-
 .vfrc-system-response .vfrc-message:not([class*="extension"]):hover {
   border-color: rgba(255, 140, 0, 0.30) !important;
   box-shadow: 0 4px 16px -6px rgba(0,0,0,0.5) !important;
   transform: translateY(-1px) !important;
 }
-
 /* ==========================================================
    BULLES UTILISATEUR — Gradient orange-jaune vif
    ========================================================== */
@@ -489,18 +456,20 @@ button._1q15b0b3 {
   margin: 6px 0 !important;
   box-shadow: 0 4px 16px -6px rgba(255, 140, 0, 0.25) !important;
 }
-
 .vfrc-user-response > div *,
 .vfrc-user-response .vfrc-message * {
   color: #ffffff !important;
 }
-
 /* ==========================================================
-   ⭐ QUESTIONS DISTINCTIVES - .evo-question
+   ⭐ QUESTIONS DISTINCTIVES
+   Supporte : .evo-question (RevO) + .spino-question (MYCONATUS)
    ========================================================== */
 .vfrc-system-response .vfrc-message .evo-question,
+.vfrc-system-response .vfrc-message .spino-question,
 .vfrc-message .evo-question,
-.evo-question {
+.vfrc-message .spino-question,
+.evo-question,
+.spino-question {
   display: block !important;
   font-family: var(--font-heading) !important;
   font-weight: 600 !important;
@@ -518,7 +487,6 @@ button._1q15b0b3 {
   box-shadow: 0 4px 20px -8px var(--glow-main) !important;
   animation: questionPulse 3s ease-in-out infinite !important;
 }
-
 @keyframes questionPulse {
   0%, 100% {
     box-shadow: 0 4px 20px -8px var(--glow-main);
@@ -529,19 +497,23 @@ button._1q15b0b3 {
     border-left-color: var(--accent-yellow);
   }
 }
-
-.evo-question:hover {
+.evo-question:hover,
+.spino-question:hover {
   background: rgba(255, 140, 0, 0.12) !important;
   border-color: rgba(255, 140, 0, 0.35) !important;
   animation: none !important;
 }
-
 /* ==========================================================
-   ⭐ BARRE DE PROGRESSION - .evo-progress
+   ⭐ BARRE DE PROGRESSION
+   Supporte : .evo-progress (RevO, 7 piliers)
+            + .spino-progress (MYCONATUS, 5 étapes)
    ========================================================== */
 .vfrc-system-response .vfrc-message .evo-progress,
+.vfrc-system-response .vfrc-message .spino-progress,
 .vfrc-message .evo-progress,
-.evo-progress {
+.vfrc-message .spino-progress,
+.evo-progress,
+.spino-progress {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -553,8 +525,8 @@ button._1q15b0b3 {
   border-radius: 12px !important;
   position: relative !important;
 }
-
-.evo-progress::after {
+.evo-progress::after,
+.spino-progress::after {
   content: attr(data-label) !important;
   position: absolute !important;
   right: 12px !important;
@@ -563,31 +535,40 @@ button._1q15b0b3 {
   font-weight: 500 !important;
   color: var(--text-secondary) !important;
 }
-
-.evo-progress span {
+.evo-progress span,
+.spino-progress span {
   display: block !important;
   width: 12px !important;
   height: 12px !important;
   border-radius: 50% !important;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
-
-.evo-progress span.done {
+.evo-progress span.done,
+.spino-progress span.done {
   background: var(--accent-yellow) !important;
   box-shadow: 0 0 6px 2px rgba(255,184,0,0.8), 0 0 12px 4px rgba(255,140,0,0.4) !important;
   animation: progressPulse 2s ease-in-out infinite !important;
   border: 1px solid rgba(255, 255, 255, 0.4) !important;
 }
-
-.evo-progress span.pending {
+.evo-progress span.pending,
+.spino-progress span.pending {
   background: rgba(255, 255, 255, 0.08) !important;
   border: 1px solid rgba(255, 255, 255, 0.12) !important;
   box-shadow: none !important;
 }
-
 @keyframes progressPulse {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.15); box-shadow: 0 0 10px 3px rgba(255,184,0,1), 0 0 20px 6px rgba(255,140,0,0.6) !important; }
+}
+
+/* ── SPINO-SPECIFIC: étapes plus grandes (5 vs 7) ── */
+.spino-progress span {
+  width: 14px !important;
+  height: 14px !important;
+}
+.spino-progress {
+  gap: 10px !important;
+  padding: 12px 16px !important;
 }
 
 /* ==========================================================
@@ -606,7 +587,6 @@ button._1q15b0b3 {
   background-clip: text !important;
   margin: 0 0 8px 0 !important;
 }
-
 .vfrc-system-response .vfrc-message:not([class*="extension"]) h2,
 .vfrc-system-response .vfrc-message:not([class*="extension"]) .markdown h2,
 ._11kfxpg1 h2, ._11kfxpg3 h2 {
@@ -620,7 +600,6 @@ button._1q15b0b3 {
   background-clip: text !important;
   margin: 10px 0 6px 0 !important;
 }
-
 .vfrc-system-response .vfrc-message:not([class*="extension"]) h3,
 ._11kfxpg1 h3, ._11kfxpg3 h3 {
   font-family: var(--font-heading) !important;
@@ -629,7 +608,6 @@ button._1q15b0b3 {
   color: var(--accent-orange) !important;
   margin: 8px 0 4px 0 !important;
 }
-
 .vfrc-system-response .vfrc-message:not([class*="extension"]) h4,
 .vfrc-system-response .vfrc-message:not([class*="extension"]) h5,
 .vfrc-system-response .vfrc-message:not([class*="extension"]) h6,
@@ -640,7 +618,6 @@ button._1q15b0b3 {
   color: var(--accent-yellow) !important;
   margin: 6px 0 4px 0 !important;
 }
-
 /* Paragraphes */
 .vfrc-system-response .vfrc-message:not([class*="extension"]) p,
 ._11kfxpg1 p, ._11kfxpg3 p {
@@ -651,15 +628,12 @@ button._1q15b0b3 {
   color: var(--text-primary) !important;
   margin: 4px 0 !important;
 }
-
 .vfrc-system-response .vfrc-message:not([class*="extension"]) p:first-child { margin-top: 0 !important; }
 .vfrc-system-response .vfrc-message:not([class*="extension"]) p:last-child { margin-bottom: 0 !important; }
-
-.vfrc-system-response .vfrc-message:not([class*="extension"]) strong:not(.evo-question) {
+.vfrc-system-response .vfrc-message:not([class*="extension"]) strong:not(.evo-question):not(.spino-question) {
   font-weight: 600 !important;
   color: #ffffff !important;
 }
-
 /* Liens */
 .vfrc-system-response .vfrc-message:not([class*="extension"]) a,
 ._11kfxpg1 a {
@@ -668,12 +642,10 @@ button._1q15b0b3 {
   border-bottom: 1px solid transparent !important;
   transition: all 0.3s ease !important;
 }
-
 .vfrc-system-response .vfrc-message:not([class*="extension"]) a:hover {
   color: var(--accent-gold) !important;
   border-bottom-color: var(--accent-gold) !important;
 }
-
 /* ==========================================================
    LISTES
    ========================================================== */
@@ -683,7 +655,6 @@ button._1q15b0b3 {
   padding-left: 1.2em !important;
   margin: 6px 0 !important;
 }
-
 .vfrc-system-response .vfrc-message:not([class*="extension"]) ul li,
 ._11kfxpg1 ul li {
   position: relative !important;
@@ -692,7 +663,6 @@ button._1q15b0b3 {
   font-size: var(--fs-body) !important;
   line-height: 1.5 !important;
 }
-
 .vfrc-system-response .vfrc-message:not([class*="extension"]) ul li::before,
 ._11kfxpg1 ul li::before {
   content: "▸" !important;
@@ -701,20 +671,17 @@ button._1q15b0b3 {
   color: var(--accent-orange) !important;
   font-size: 0.9em !important;
 }
-
 .vfrc-system-response .vfrc-message:not([class*="extension"]) ol,
 ._11kfxpg1 ol {
   padding-left: 1.2em !important;
   margin: 6px 0 !important;
 }
-
 .vfrc-system-response .vfrc-message:not([class*="extension"]) ol li,
 ._11kfxpg1 ol li {
   margin: 3px 0 !important;
   font-size: var(--fs-body) !important;
   line-height: 1.5 !important;
 }
-
 /* ==========================================================
    BOUTONS DE RÉPONSE — Fond noir, bordure orange fine
    ========================================================== */
@@ -728,14 +695,12 @@ button._1q15b0b3 {
   justify-content: flex-start !important;
   margin: 4px 0 2px 0 !important;
 }
-
 .vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3),
 button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3) {
   font-family: var(--font-body) !important;
   font-weight: 500 !important;
   font-size: var(--fs-button) !important;
   line-height: 1.3 !important;
-  /* Fond NOIR, pas de teinte orange */
   background: rgba(10, 10, 12, 0.9) !important;
   border: 1px solid rgba(255, 140, 0, 0.20) !important;
   color: var(--text-primary) !important;
@@ -750,7 +715,6 @@ button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-cha
   -webkit-backdrop-filter: blur(8px) !important;
   animation: none !important;
 }
-
 .vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3):hover {
   background: rgba(255, 140, 0, 0.06) !important;
   border-color: rgba(255, 184, 0, 0.45) !important;
@@ -758,11 +722,9 @@ button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-cha
   box-shadow: 0 4px 12px -4px rgba(0,0,0,0.4) !important;
   transform: translateY(-2px) !important;
 }
-
 .vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3):active {
   transform: translateY(0) scale(0.98) !important;
 }
-
 /* ==========================================================
    ZONE DE SAISIE — Bordure orange-jaune, fond NOIR
    ========================================================== */
@@ -775,7 +737,6 @@ button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-cha
   margin: 0 !important;
   background: transparent !important;
 }
-
 .vfrc-input-container,
 ._1gdvh9t2,
 ._1gdvh9t3 {
@@ -787,14 +748,12 @@ button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-cha
   padding: 4px !important;
   transition: all 0.4s ease !important;
   position: relative !important;
-  /* Fond NOIR pur, bordure gradient jaune-orange */
   background: 
     linear-gradient(rgba(8,8,10,0.97), rgba(8,8,10,0.97)) padding-box,
     linear-gradient(135deg, rgba(255,107,0,0.45), rgba(255,140,0,0.45), rgba(255,184,0,0.35)) border-box !important;
   box-shadow: 0 2px 16px -8px rgba(255,140,0,0.15) !important;
   animation: inputGlow 3s ease-in-out infinite !important;
 }
-
 @keyframes inputGlow {
   0%, 100% {
     box-shadow: 0 2px 16px -8px rgba(255,140,0,0.15);
@@ -803,7 +762,6 @@ button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-cha
     box-shadow: 0 4px 24px -8px rgba(255,184,0,0.22);
   }
 }
-
 /* Shine effect */
 .vfrc-input-container::before,
 ._1gdvh9t2::before,
@@ -819,12 +777,10 @@ button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-cha
   animation: inputShine 4s ease-in-out infinite !important;
   pointer-events: none !important;
 }
-
 @keyframes inputShine {
   0% { left: -100%; }
   50%, 100% { left: 100%; }
 }
-
 /* Focus */
 .vfrc-input-container:focus-within,
 ._1gdvh9t2:focus-within,
@@ -835,25 +791,21 @@ button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-cha
   box-shadow: 0 0 0 3px rgba(255,140,0,0.06), 0 4px 20px -8px rgba(255,140,0,0.15) !important;
   animation: none !important;
 }
-
 .vfrc-input-container:focus-within::before,
 ._1gdvh9t2:focus-within::before {
   animation: none !important;
   opacity: 0 !important;
 }
-
 .vfrc-chat-focus-ring,
 ._1gdvh9t7, ._1gdvh9t8, ._1gdvh9t9 {
   display: none !important;
 }
-
 .vfrc-chat-input__container-inner,
 ._1gdvh9tc {
   flex: 1 !important;
   display: flex !important;
   align-items: center !important;
 }
-
 /* Textarea */
 .vfrc-chat-input textarea,
 textarea.vfrc-chat-input,
@@ -873,31 +825,26 @@ textarea._1gdvh9ta {
   flex: 1 !important;
   box-shadow: none !important;
 }
-
 .vfrc-chat-input textarea:focus,
 textarea._1gdvh9ta:focus {
   outline: none !important;
   box-shadow: none !important;
 }
-
 textarea.vfrc-chat-input::placeholder,
 textarea._1gdvh9ta::placeholder {
   color: rgba(255, 184, 0, 0.40) !important;
   font-weight: 400 !important;
   transition: all 0.3s ease !important;
 }
-
 textarea._1gdvh9ta:focus::placeholder {
   color: rgba(255, 184, 0, 0.20) !important;
 }
-
 .vfrc-chat-input__actions,
 ._1gdvh9td {
   display: flex !important;
   align-items: center !important;
   padding-right: 8px !important;
 }
-
 /* ==========================================================
    BOUTON ENVOYER — Orange-jaune vif
    ========================================================== */
@@ -918,7 +865,6 @@ textarea._1gdvh9ta:focus::placeholder {
   cursor: not-allowed !important;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
-
 #vfrc-send-message svg,
 .vfrc-chat-input__send svg {
   display: block !important;
@@ -926,13 +872,11 @@ textarea._1gdvh9ta:focus::placeholder {
   height: 20px !important;
   transition: transform 0.3s ease !important;
 }
-
 #vfrc-send-message::after,
 .vfrc-chat-input__send::after {
   content: none !important;
   display: none !important;
 }
-
 #vfrc-send-message:not([disabled]),
 .vfrc-chat-input__send:not([disabled]) {
   background: var(--gradient-main) !important;
@@ -942,27 +886,22 @@ textarea._1gdvh9ta:focus::placeholder {
   box-shadow: 0 4px 12px -4px rgba(255,140,0,0.2) !important;
   animation: sendPulse 2s ease-in-out infinite !important;
 }
-
 @keyframes sendPulse {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.05); box-shadow: 0 4px 16px -4px rgba(255,184,0,0.25) !important; }
 }
-
 #vfrc-send-message:not([disabled]):hover,
 .vfrc-chat-input__send:not([disabled]):hover {
   transform: scale(1.1) !important;
   animation: none !important;
 }
-
 #vfrc-send-message:not([disabled]):hover svg {
   transform: translateX(2px) !important;
 }
-
 #vfrc-send-message:not([disabled]):active {
   transform: scale(0.95) !important;
   animation: none !important;
 }
-
 /* ==========================================================
    SCROLLBAR
    ========================================================== */
@@ -972,14 +911,12 @@ textarea._1gdvh9ta:focus::placeholder {
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 140, 0, 0.3) transparent;
 }
-
 .vfrc-chat--dialog::-webkit-scrollbar { width: 4px; }
 .vfrc-chat--dialog::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, var(--accent-bright), var(--accent-yellow));
   border-radius: 10px;
 }
 .vfrc-chat--dialog::-webkit-scrollbar-track { background: transparent; }
-
 /* ==========================================================
    BLOCKQUOTES, CODE, HR, IMAGES
    ========================================================== */
@@ -992,7 +929,6 @@ textarea._1gdvh9ta:focus::placeholder {
   font-style: italic !important;
   color: var(--text-secondary) !important;
 }
-
 .vfrc-system-response .vfrc-message:not([class*="extension"]) code {
   font-family: 'Fira Code', 'Monaco', monospace !important;
   font-size: 12px !important;
@@ -1002,7 +938,6 @@ textarea._1gdvh9ta:focus::placeholder {
   padding: 2px 6px !important;
   color: var(--accent-yellow) !important;
 }
-
 .vfrc-system-response .vfrc-message:not([class*="extension"]) pre {
   background: var(--bg-card) !important;
   border: 1px solid var(--border-subtle) !important;
@@ -1011,7 +946,6 @@ textarea._1gdvh9ta:focus::placeholder {
   overflow-x: auto !important;
   margin: 12px 0 !important;
 }
-
 .vfrc-system-response .vfrc-message:not([class*="extension"]) hr {
   border: none !important;
   height: 1px !important;
@@ -1019,14 +953,12 @@ textarea._1gdvh9ta:focus::placeholder {
   opacity: 0.25 !important;
   margin: 20px 0 !important;
 }
-
 .vfrc-system-response .vfrc-message:not([class*="extension"]) img {
   max-width: 100% !important;
   border-radius: 12px !important;
   margin: 12px 0 !important;
   box-shadow: 0 4px 20px -8px rgba(0, 0, 0, 0.5) !important;
 }
-
 /* ==========================================================
    CAROUSELS & CARDS
    ========================================================== */
@@ -1040,27 +972,23 @@ textarea._1gdvh9ta:focus::placeholder {
   transition: all 0.4s ease !important;
   box-shadow: 0 2px 12px -6px rgba(0,0,0,0.5) !important;
 }
-
 .vfrc-carousel:hover,
 .vfrc-card:hover {
   border-color: rgba(255, 184, 0, 0.35) !important;
   box-shadow: 0 8px 24px -8px rgba(0,0,0,0.4) !important;
   transform: translateY(-6px) !important;
 }
-
 .vfrc-card__title {
   font-family: var(--font-heading) !important;
   font-weight: 600 !important;
   font-size: 16px !important;
   color: var(--text-primary) !important;
 }
-
 .vfrc-card__description {
   font-family: var(--font-body) !important;
   font-size: 13px !important;
   color: var(--text-secondary) !important;
 }
-
 /* Extensions protection */
 .vfrc-message[class*="extension"] {
   background: transparent !important;
@@ -1068,7 +996,6 @@ textarea._1gdvh9ta:focus::placeholder {
   border: none !important;
   box-shadow: none !important;
 }
-
 /* ==========================================================
    OVERRIDE — Fonds transparents
    ========================================================== */
@@ -1078,14 +1005,12 @@ textarea._1gdvh9ta:focus::placeholder {
   --vf-bg: transparent;
   --vf-input-bg: transparent;
 }
-
 .vfrc-footer *:not(.vfrc-input-container):not(._1gdvh9t2):not(._1gdvh9t3):not(textarea):not(button),
 .vfrc-chat-input__wrapper,
 .vfrc-chat-input__inner {
   background: transparent !important;
   background-color: transparent !important;
 }
-
 .vfrc-chat,
 .vfrc-chat__container,
 .vfrc-chat__container-inner,
@@ -1093,13 +1018,11 @@ textarea._1gdvh9ta:focus::placeholder {
   display: flex !important;
   flex-direction: column !important;
 }
-
 .vfrc-chat--dialog,
 .vfrc-chat-dialog {
   flex: 1 !important;
   min-height: 0 !important;
 }
-
 .vfrc-chat > div:empty,
 .vfrc-chat__container > div:empty,
 .vfrc-spacer,
@@ -1110,7 +1033,6 @@ div[class*="spacer"] {
   padding: 0 !important;
   margin: 0 !important;
 }
-
 /* ==========================================================
    TYPING INDICATOR — Points jaune-orangé
    ========================================================== */
@@ -1125,14 +1047,12 @@ div[class*="spacer"] {
   -webkit-backdrop-filter: blur(10px) !important;
   box-shadow: 0 2px 12px -6px rgba(0,0,0,0.5) !important;
 }
-
 .vfrc-typing-indicator,
 .vfrc-typing-indicator.xaffbq1 {
   display: flex !important;
   align-items: center !important;
   gap: 6px !important;
 }
-
 .vfrc-typing-indicator span,
 .vfrc-typing-indicator span.xaffbq2 {
   display: block !important;
@@ -1142,11 +1062,9 @@ div[class*="spacer"] {
   border-radius: 50% !important;
   animation: typingGlow 1.5s ease-in-out infinite !important;
 }
-
 .vfrc-typing-indicator span:nth-child(1) { animation-delay: 0s !important; }
 .vfrc-typing-indicator span:nth-child(2) { animation-delay: 0.3s !important; }
 .vfrc-typing-indicator span:nth-child(3) { animation-delay: 0.6s !important; }
-
 @keyframes typingGlow {
   0%, 100% { 
     background: rgba(255, 140, 0, 0.25) !important;
@@ -1159,7 +1077,6 @@ div[class*="spacer"] {
     transform: scale(1.4);
   }
 }
-
 /* ==========================================================
    ANIMATIONS
    ========================================================== */
@@ -1167,12 +1084,10 @@ div[class*="spacer"] {
   from { opacity: 0; transform: translateY(15px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
 .vfrc-message:not([class*="extension"]) { 
   margin: 4px 0 !important;
   animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
-
 /* ==========================================================
    RESPONSIVE
    ========================================================== */
@@ -1201,10 +1116,18 @@ div[class*="spacer"] {
     --fs-button: 12px;
   }
   
-  .evo-question { font-size: 14px !important; padding: 10px 14px !important; animation: none !important; }
-  .evo-progress { gap: 5px !important; padding: 8px 12px !important; }
+  .evo-question,
+  .spino-question { font-size: 14px !important; padding: 10px 14px !important; animation: none !important; }
+  
+  .evo-progress,
+  .spino-progress { gap: 5px !important; padding: 8px 12px !important; }
+  
   .evo-progress span { width: 10px !important; height: 10px !important; }
-  .evo-progress span.done { animation: none !important; }
+  .spino-progress span { width: 11px !important; height: 11px !important; }
+  
+  .evo-progress span.done,
+  .spino-progress span.done { animation: none !important; }
+  
   .vfrc-typing-indicator--container-inner, ._1ayyscc1 { padding: 10px 14px !important; }
   .vfrc-typing-indicator span { width: 8px !important; height: 8px !important; }
   
@@ -1217,7 +1140,6 @@ div[class*="spacer"] {
   .vfrc-input-container::before, ._1gdvh9t2::before { animation: none !important; display: none !important; }
   #vfrc-send-message:not([disabled]), .vfrc-chat-input__send:not([disabled]) { animation: none !important; }
 }
-
 /* ==========================================================
    PREFERS-REDUCED-MOTION
    ========================================================== */
@@ -1226,7 +1148,8 @@ div[class*="spacer"] {
   .vfrc-input-container::before, ._1gdvh9t2::before,
   #vfrc-send-message:not([disabled]),
   .vfrc-message:not([class*="extension"]),
-  .evo-question, .evo-progress span.done,
+  .evo-question, .spino-question,
+  .evo-progress span.done, .spino-progress span.done,
   .vfrc-typing-indicator span {
     animation: none !important;
     transition: none !important;
