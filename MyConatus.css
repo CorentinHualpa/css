@@ -1,5 +1,5 @@
 /* ==========================================================
-   MyConatus × Voiceflow — Dark Mode Theme v2.0
+   MyConatus × Voiceflow — Dark Mode Theme v2.1
    
    Design : Life Mentor Chatbot — Edgy, Cash, Zero Bullshit
    Couleurs : Coral Red #E94560 + Cyan #00D2FF + Navy Dark #0D0D12
@@ -25,6 +25,7 @@
           + Question styling (.spino-question)
           + Animations progress fill
           + Responsive progress bar
+   v2.1 : + Bouton "Start new chat" personnalisé
    
    Auteur : Revolution Agency
    ========================================================== */
@@ -1114,6 +1115,56 @@ textarea._1gdvh9ta::placeholder {
 
 .vfrc-message:not([class*="extension"]) {
   animation: fadeInUp 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* ==========================================================
+   BOUTON "START NEW CHAT" — Texte + style personnalisé
+   ========================================================== */
+#vfrc-start-chat,
+button#vfrc-start-chat {
+  font-size: 0 !important;
+  color: transparent !important;
+  background: linear-gradient(135deg, #E94560, #C2354D) !important;
+  border: none !important;
+  border-radius: 50px !important;
+  padding: 12px 24px !important;
+  box-shadow: 0 4px 16px rgba(233, 69, 96, 0.35) !important;
+  cursor: pointer !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+#vfrc-start-chat::after,
+button#vfrc-start-chat::after {
+  content: "🔄 Recommencer une session" !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: #ffffff !important;
+  white-space: nowrap !important;
+  letter-spacing: -0.01em !important;
+}
+
+#vfrc-start-chat:hover,
+button#vfrc-start-chat:hover {
+  background: linear-gradient(135deg, #FF6B81, #E94560) !important;
+  box-shadow: 0 6px 20px rgba(233, 69, 96, 0.45) !important;
+  transform: translateY(-2px) !important;
+}
+
+#vfrc-start-chat:active,
+button#vfrc-start-chat:active {
+  transform: translateY(0) scale(0.97) !important;
+}
+
+/* ==========================================================
+   LABEL "CHAT HAS ENDED" — Style dark cohérent
+   ========================================================== */
+.vfrc-chat--ended-label,
+.vfrc-chat-ended,
+div[class*="ended"] {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 12px !important;
+  color: #5A5A6E !important;
+  border-color: #2A2A3E !important;
 }
 
 /* ==========================================================
