@@ -1,5 +1,5 @@
 /* ==========================================================
-   Evolution Agency × Voiceflow — Thème Fondu v2.0
+   Evolution Agency × Voiceflow — Thème Fondu v2.1
    
    Design : Intégration seamless dans landing page sombre
    Couleurs : Orange-Jaune #FF8C00 → #FFB800 sur Noir pur
@@ -7,6 +7,9 @@
    Style : Dark glassmorphism, contraste fort, glow jaune-orange
    
    v2.0 : Fix rendu marron → plus jaune, fonds plus noirs
+   v2.1 : Fix distinction bulles agent/user
+          Agent = neutre gris translucide
+          User = gradient orange exclusif
    ========================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -443,7 +446,9 @@ button._1q15b0b3 {
 }
 
 /* ==========================================================
-   BULLES SYSTÈME (Bot) — Fond NOIR avec bordure orange fine
+   BULLES SYSTÈME (Bot) — v2.1 NEUTRE gris translucide
+   Plus de bordure orange → bordure blanche subtile
+   Distinction nette avec les bulles user orange
    ========================================================== */
 .vfrc-system-response .vfrc-message:not([class*="extension"]) {
   font-family: var(--font-body) !important;
@@ -451,28 +456,26 @@ button._1q15b0b3 {
   font-size: var(--fs-body) !important;
   line-height: 1.55 !important;
   color: var(--text-primary) !important;
-  /* NOIR quasi-pur avec un micro-soupçon orange — PAS de fond marron */
-  background: rgba(10, 10, 12, 0.92) !important;
+  background: rgba(255, 255, 255, 0.05) !important;
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
-  border: 1px solid rgba(255, 140, 0, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
   border-radius: 16px !important;
   padding: 12px 14px !important;
   max-width: 92% !important;
   margin: 6px 0 !important;
-  /* Glow externe TRÈS subtil — éviter l'effet marron */
-  box-shadow: 0 2px 12px -6px rgba(0,0,0,0.6) !important;
+  box-shadow: none !important;
   transition: all 0.3s ease !important;
 }
 
 .vfrc-system-response .vfrc-message:not([class*="extension"]):hover {
-  border-color: rgba(255, 140, 0, 0.30) !important;
-  box-shadow: 0 4px 16px -6px rgba(0,0,0,0.5) !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  box-shadow: 0 2px 12px -6px rgba(0,0,0,0.4) !important;
   transform: translateY(-1px) !important;
 }
 
 /* ==========================================================
-   BULLES UTILISATEUR — Gradient orange-jaune vif
+   BULLES UTILISATEUR — Gradient orange-jaune vif (exclusif)
    ========================================================== */
 .vfrc-user-response > div,
 .vfrc-user-response .vfrc-message {
@@ -487,7 +490,7 @@ button._1q15b0b3 {
   padding: 10px 14px !important;
   max-width: 88% !important;
   margin: 6px 0 !important;
-  box-shadow: 0 4px 16px -6px rgba(255, 140, 0, 0.25) !important;
+  box-shadow: 0 4px 20px -6px rgba(255, 140, 0, 0.35) !important;
 }
 
 .vfrc-user-response > div *,
@@ -735,7 +738,6 @@ button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-cha
   font-weight: 500 !important;
   font-size: var(--fs-button) !important;
   line-height: 1.3 !important;
-  /* Fond NOIR, pas de teinte orange */
   background: rgba(10, 10, 12, 0.9) !important;
   border: 1px solid rgba(255, 140, 0, 0.20) !important;
   color: var(--text-primary) !important;
@@ -787,7 +789,6 @@ button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-cha
   padding: 4px !important;
   transition: all 0.4s ease !important;
   position: relative !important;
-  /* Fond NOIR pur, bordure gradient jaune-orange */
   background: 
     linear-gradient(rgba(8,8,10,0.97), rgba(8,8,10,0.97)) padding-box,
     linear-gradient(135deg, rgba(255,107,0,0.45), rgba(255,140,0,0.45), rgba(255,184,0,0.35)) border-box !important;
@@ -1117,13 +1118,13 @@ div[class*="spacer"] {
 .vfrc-typing-indicator--container,
 .vfrc-typing-indicator--container-inner,
 ._1ayyscc0, ._1ayyscc1 {
-  background: rgba(10, 10, 12, 0.92) !important;
-  border: 1px solid rgba(255, 140, 0, 0.15) !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
   border-radius: 16px !important;
   padding: 14px 20px !important;
   backdrop-filter: blur(10px) !important;
   -webkit-backdrop-filter: blur(10px) !important;
-  box-shadow: 0 2px 12px -6px rgba(0,0,0,0.5) !important;
+  box-shadow: none !important;
 }
 
 .vfrc-typing-indicator,
