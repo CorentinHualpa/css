@@ -474,6 +474,14 @@ button._1q15b0b3 {
   transform: translateY(-1px) !important;
 }
 
+/* Config presentation — pleine largeur */
+.vfrc-system-response .vfrc-message:has(div[style*="Configuration projet"]) {
+  max-width: 100% !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+}
 /* ==========================================================
    BULLES UTILISATEUR — Gradient orange-jaune vif (exclusif)
    ========================================================== */
