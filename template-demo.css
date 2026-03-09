@@ -1256,12 +1256,8 @@ p[class*="_11kfxpg"] {
   -webkit-text-fill-color: #ffffff !important;
 }
 
-/* ── Container bulle agent — seulement HORS extensions ── */
-.vfrc-system-response .vfrc-message:not([class*="extension"]) > div,
-div._11kfxpg0,
-div._11kfxpg1,
-div._11kfxpg2,
-div._11kfxpg3 {
+/* ── Container bulle agent — seulement le wrapper markdown HORS extensions ── */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) > .markdown {
   background: rgba(255, 255, 255, 0.05) !important;
   border: 1px solid rgba(255, 255, 255, 0.10) !important;
   border-radius: 16px !important;
