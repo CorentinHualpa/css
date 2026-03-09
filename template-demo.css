@@ -486,7 +486,23 @@ button._1q15b0b3 {
 
 /* ==========================================================
    EXTENSIONS — Full width, transparent
+   Force TOUTE la chaîne parent à 100% width
    ========================================================== */
+
+/* Le system-response qui contient une extension → full width */
+.vfrc-system-response:has(.vfrc-message[class*="extension"]) {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Tous les divs intermédiaires entre system-response et le message extension */
+.vfrc-system-response:has(.vfrc-message[class*="extension"]) > div,
+.vfrc-system-response:has(.vfrc-message[class*="extension"]) > div > div {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Le message extension lui-même */
 .vfrc-message[class*="extension"] {
   background: transparent !important;
   padding: 0 !important;
@@ -532,6 +548,15 @@ button._1q15b0b3 {
   margin: 0 !important;
   display: block !important;
   box-sizing: border-box !important;
+}
+
+/* Fallback : cibler aussi les classes hachées des wrappers VF */
+._16eqxif4:has(.vfrc-message[class*="extension"]),
+._16eqxif5:has(.vfrc-message[class*="extension"]),
+._16eqxif1:has(.vfrc-message[class*="extension"]),
+div[class*="_16eqxif"]:has(.vfrc-message[class*="extension"]) {
+  width: 100% !important;
+  max-width: 100% !important;
 }
 
 /* ==========================================================
