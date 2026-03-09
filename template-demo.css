@@ -1238,42 +1238,70 @@ div[class*="spacer"] {
 
 /* ==========================================================
    OVERRIDE CLASSES HACHÉES VOICEFLOW
-   Les classes générées (_11kfxpg*, _1nzwwii*, _1o5z0oa*)
-   ont des styles inline qui overrident les sélecteurs .vfrc-*
+   Spécificité maximale pour overrider les styles internes VF
    ========================================================== */
 
-/* ── Bulles texte agent (classes hachées) ── */
-p[class*="_11kfxpg"],
-div[class*="_11kfxpg"],
-span[class*="_11kfxpg"] {
+/* ── Bulles texte agent — TOUS les paragraphes dans system-response ── */
+.vfrc-system-response p,
+.vfrc-system-response span,
+.vfrc-system-response div p,
+.vfrc-system-response div span,
+p._11kfxpgc,
+p._11kfxpgd,
+p._11kfxpgb,
+p[class*="_11kfxpg"] {
   font-family: var(--font-body) !important;
   font-size: var(--fs-body) !important;
   font-weight: 400 !important;
   line-height: 1.7 !important;
-  color: var(--text-primary) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
 }
 
-/* ── Container des bulles agent ── */
-div[class*="_11kfxpg"]:not(p):not(span) {
+/* ── Tous les textes dans le chat — fallback global ── */
+.vfrc-chat p,
+.vfrc-chat span:not(.vfrc-typing-indicator span),
+.vfrc-chat div:not([class*="extension"]) p {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+/* ── Container bulle agent (le div wrapper) ── */
+.vfrc-system-response .vfrc-message,
+.vfrc-system-response > div > div,
+div._11kfxpg0,
+div._11kfxpg1,
+div._11kfxpg2,
+div._11kfxpg3,
+div[class*="_11kfxpg"]:not(p):not(span):not(button) {
   background: rgba(255, 255, 255, 0.05) !important;
   border: 1px solid rgba(255, 255, 255, 0.10) !important;
   border-radius: 16px !important;
   padding: 14px 16px !important;
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
-  color: var(--text-primary) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
 }
 
-/* ── Boutons de réponse (classes hachées) ── */
+/* ── Boutons de réponse — classes hachées + vfrc-button ── */
+.vfrc-button._1nzwwii0,
+.vfrc-button._1nzwwii1,
+.vfrc-button._1o5z0oa0,
+button._1nzwwii0,
+button._1nzwwii1,
+button._1o5z0oa0,
 button[class*="_1nzwwii"],
-button[class*="_1o5z0oa"] {
+button[class*="_1o5z0oa"],
+.vfrc-system-response--actions button {
   font-family: var(--font-body) !important;
   font-weight: 500 !important;
   font-size: var(--fs-button) !important;
   line-height: 1.4 !important;
   background: rgba(10, 10, 12, 0.9) !important;
   border: 1px solid rgba(255, 140, 0, 0.20) !important;
-  color: var(--text-primary) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
   border-radius: 10px !important;
   padding: 10px 16px !important;
   cursor: pointer !important;
@@ -1283,24 +1311,38 @@ button[class*="_1o5z0oa"] {
   -webkit-backdrop-filter: blur(8px) !important;
 }
 
+.vfrc-button._1nzwwii0:hover,
+.vfrc-button._1nzwwii1:hover,
 button[class*="_1nzwwii"]:hover,
-button[class*="_1o5z0oa"]:hover {
+button[class*="_1o5z0oa"]:hover,
+.vfrc-system-response--actions button:hover {
   background: rgba(255, 140, 0, 0.06) !important;
   border-color: rgba(255, 184, 0, 0.45) !important;
   color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
   transform: translateY(-2px) !important;
   box-shadow: 0 4px 12px -4px rgba(0,0,0,0.4) !important;
 }
 
-button[class*="_1nzwwii"]:active,
-button[class*="_1o5z0oa"]:active {
+.vfrc-system-response--actions button:active,
+button[class*="_1nzwwii"]:active {
   transform: translateY(0) scale(0.98) !important;
 }
 
-/* ── Bouton container (row de boutons) ── */
-div[class*="_1nzwwii"],
-div[class*="_1o5z0oa"] {
+/* ── Container boutons ── */
+.vfrc-system-response--actions,
+div._16eqxif6,
+div._16eqxif7,
+div[class*="_16eqxif"] {
   display: flex !important;
   flex-wrap: wrap !important;
   gap: var(--space-sm) !important;
+  padding: var(--space-sm) 0 !important;
+}
+
+/* ── Wrapper individuel bouton ── */
+.vfrc-system-response--action,
+div.o231sh2 {
+  margin: 0 !important;
+  padding: 0 !important;
 }
