@@ -1235,3 +1235,72 @@ div[class*="spacer"] {
     transition-duration: 0.001ms !important;
   }
 }
+
+/* ==========================================================
+   OVERRIDE CLASSES HACHÉES VOICEFLOW
+   Les classes générées (_11kfxpg*, _1nzwwii*, _1o5z0oa*)
+   ont des styles inline qui overrident les sélecteurs .vfrc-*
+   ========================================================== */
+
+/* ── Bulles texte agent (classes hachées) ── */
+p[class*="_11kfxpg"],
+div[class*="_11kfxpg"],
+span[class*="_11kfxpg"] {
+  font-family: var(--font-body) !important;
+  font-size: var(--fs-body) !important;
+  font-weight: 400 !important;
+  line-height: 1.7 !important;
+  color: var(--text-primary) !important;
+}
+
+/* ── Container des bulles agent ── */
+div[class*="_11kfxpg"]:not(p):not(span) {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  border-radius: 16px !important;
+  padding: 14px 16px !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  color: var(--text-primary) !important;
+}
+
+/* ── Boutons de réponse (classes hachées) ── */
+button[class*="_1nzwwii"],
+button[class*="_1o5z0oa"] {
+  font-family: var(--font-body) !important;
+  font-weight: 500 !important;
+  font-size: var(--fs-button) !important;
+  line-height: 1.4 !important;
+  background: rgba(10, 10, 12, 0.9) !important;
+  border: 1px solid rgba(255, 140, 0, 0.20) !important;
+  color: var(--text-primary) !important;
+  border-radius: 10px !important;
+  padding: 10px 16px !important;
+  cursor: pointer !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 0 2px 8px -4px rgba(0,0,0,0.4) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+button[class*="_1nzwwii"]:hover,
+button[class*="_1o5z0oa"]:hover {
+  background: rgba(255, 140, 0, 0.06) !important;
+  border-color: rgba(255, 184, 0, 0.45) !important;
+  color: #ffffff !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px -4px rgba(0,0,0,0.4) !important;
+}
+
+button[class*="_1nzwwii"]:active,
+button[class*="_1o5z0oa"]:active {
+  transform: translateY(0) scale(0.98) !important;
+}
+
+/* ── Bouton container (row de boutons) ── */
+div[class*="_1nzwwii"],
+div[class*="_1o5z0oa"] {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: var(--space-sm) !important;
+}
