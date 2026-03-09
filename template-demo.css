@@ -1238,14 +1238,12 @@ div[class*="spacer"] {
 
 /* ==========================================================
    OVERRIDE CLASSES HACHÉES VOICEFLOW
-   Spécificité maximale pour overrider les styles internes VF
+   IMPORTANT: Exclure les extensions de ces overrides
    ========================================================== */
 
-/* ── Bulles texte agent — TOUS les paragraphes dans system-response ── */
-.vfrc-system-response p,
-.vfrc-system-response span,
-.vfrc-system-response div p,
-.vfrc-system-response div span,
+/* ── Bulles texte agent — seulement HORS extensions ── */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) p,
+.vfrc-system-response .vfrc-message:not([class*="extension"]) span,
 p._11kfxpgc,
 p._11kfxpgd,
 p._11kfxpgb,
@@ -1258,22 +1256,12 @@ p[class*="_11kfxpg"] {
   -webkit-text-fill-color: #ffffff !important;
 }
 
-/* ── Tous les textes dans le chat — fallback global ── */
-.vfrc-chat p,
-.vfrc-chat span:not(.vfrc-typing-indicator span),
-.vfrc-chat div:not([class*="extension"]) p {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-}
-
-/* ── Container bulle agent (le div wrapper) ── */
-.vfrc-system-response .vfrc-message,
-.vfrc-system-response > div > div,
+/* ── Container bulle agent — seulement HORS extensions ── */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) > div,
 div._11kfxpg0,
 div._11kfxpg1,
 div._11kfxpg2,
-div._11kfxpg3,
-div[class*="_11kfxpg"]:not(p):not(span):not(button) {
+div._11kfxpg3 {
   background: rgba(255, 255, 255, 0.05) !important;
   border: 1px solid rgba(255, 255, 255, 0.10) !important;
   border-radius: 16px !important;
@@ -1284,7 +1272,18 @@ div[class*="_11kfxpg"]:not(p):not(span):not(button) {
   -webkit-text-fill-color: #ffffff !important;
 }
 
-/* ── Boutons de réponse — classes hachées + vfrc-button ── */
+/* ── PROTECTION EXTENSIONS — ne pas toucher au contenu interne ── */
+.vfrc-message[class*="extension"] *,
+.vfrc-message--extension-FileUpload *,
+.vfrc-message--extension-Forms *,
+.vfrc-message--extension-Carousel *,
+.vfrc-message--extension-MultiSelect *,
+.vfrc-message--extension-Calendly * {
+  /* Reset : laisser les extensions gérer leurs propres styles */
+  -webkit-text-fill-color: unset;
+}
+
+/* ── Boutons de réponse VF — classes hachées + vfrc-button ── */
 .vfrc-button._1nzwwii0,
 .vfrc-button._1nzwwii1,
 .vfrc-button._1o5z0oa0,
