@@ -1,5 +1,5 @@
 /* ==========================================================
-   MyConatus × Voiceflow — Dark Mode Theme v2.1
+   MyConatus × Voiceflow — Dark Mode Theme v2.2
    
    Design : Life Mentor Chatbot — Edgy, Cash, Zero Bullshit
    Couleurs : Coral Red #E94560 + Cyan #00D2FF + Navy Dark #0D0D12
@@ -9,23 +9,20 @@
    - bg-deep      : #0D0D12
    - bg-surface   : #1A1A2E
    - bg-elevated  : #252540
-   - accent       : #E94560 (+ progress bar)
+   - accent       : #E94560
    - accent-hover : #FF6B81
-   - accent-dark  : #C2354D (+ progress bar gradient)
+   - accent-dark  : #C2354D
    - cyan         : #00D2FF
-   - green-done   : #34D399 (progress bar complète)
+   - green-done   : #34D399
    - text-primary : #E8E8ED
    - text-secondary: #8B8B9E
    - text-muted   : #5A5A6E
    - border       : #2A2A3E
    - border-light : #3A3A52
    
-   v1.0 : Initial dark mode
-   v2.0 : + Spino progress bar (5 étapes)
-          + Question styling (.spino-question)
-          + Animations progress fill
-          + Responsive progress bar
-   v2.1 : + Bouton "Start new chat" personnalisé
+   v2.2 : + Header complètement masqué
+          + Opacité bulles/boutons montée à 0.95
+          + Triangle bulle synchronisé
    
    Auteur : Revolution Agency
    ========================================================== */
@@ -66,96 +63,20 @@
 }
 
 /* ==========================================================
-   HEADER - TRANSPARENT, SEUL LE BOUTON "NOUVEAU CHAT" VISIBLE
+   HEADER — COMPLÈTEMENT MASQUÉ
    ========================================================== */
 .vfrc-header,
 .vfrc-header--container,
-.vfrc-header--container-inner {
-  display: flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  border: none !important;
-  height: auto !important;
-  width: 100% !important;
-  overflow: visible !important;
-  pointer-events: auto !important;
-  padding: 8px 12px !important;
-  justify-content: flex-end !important;
-  align-items: center !important;
-  position: relative !important;
-  z-index: 50 !important;
-}
-
-/* Masquer le titre */
+.vfrc-header--container-inner,
+.vfrc-header--actions,
+.vfrc-header--button,
 .vfrc-header--title {
   display: none !important;
-}
-
-/* Conteneur actions visible */
-.vfrc-header--actions {
-  display: flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  width: auto !important;
-  height: auto !important;
-  overflow: visible !important;
-  pointer-events: auto !important;
-}
-
-/* Bouton Reset stylé "Nouveau chat" */
-.vfrc-header--button {
-  display: inline-flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  pointer-events: auto !important;
-  width: auto !important;
-  height: auto !important;
-  overflow: visible !important;
-  
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
-  font-size: 0 !important;
-  background: rgba(233, 69, 96, 0.06) !important;
-  border: 1.5px solid #2A2A3E !important;
-  border-radius: 50px !important;
-  padding: 8px 16px !important;
-  cursor: pointer !important;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  color: transparent !important;
-  align-items: center !important;
-  gap: 6px !important;
-}
-
-/* Texte personnalisé via ::after */
-.vfrc-header--button::after {
-  content: "🔄 Nouveau chat" !important;
-  font-size: 12px !important;
-  font-weight: 500 !important;
-  color: #8B8B9E !important;
-  white-space: nowrap !important;
-  letter-spacing: -0.01em !important;
-}
-
-/* Masquer l'icône SVG d'origine */
-.vfrc-header--button svg,
-.vfrc-header--button img,
-.vfrc-header--button .vfrc-header--icon {
-  display: none !important;
-}
-
-/* Hover */
-.vfrc-header--button:hover {
-  background: rgba(233, 69, 96, 0.12) !important;
-  border-color: #E94560 !important;
-}
-.vfrc-header--button:hover::after {
-  color: #E94560 !important;
-}
-
-/* Active */
-.vfrc-header--button:active {
-  transform: scale(0.97) !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
 }
 
 /* Masquer l'avatar dans le header uniquement */
@@ -300,7 +221,7 @@ div.vfrc-input-container {
 }
 
 /* ==========================================================
-   BOUTONS CHOIX (STYLE) — Dark glassmorphism
+   BOUTONS CHOIX (STYLE) — Dark glassmorphism opaque
    ========================================================== */
 .vfrc-button:not(.vfrc-header--button),
 button.vfrc-button:not(.vfrc-header--button) {
@@ -310,7 +231,7 @@ button.vfrc-button:not(.vfrc-header--button) {
   line-height: 1.4 !important;
   letter-spacing: -0.01em !important;
   padding: 12px 18px !important;
-  background: rgba(26, 26, 46, 0.8) !important;
+  background: rgba(26, 26, 46, 0.95) !important;
   border: 1.5px solid #2A2A3E !important;
   color: #E8E8ED !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
@@ -433,7 +354,7 @@ button.vfrc-button:not(.vfrc-header--button) {
 }
 
 /* ==========================================================
-   BULLES AGENT — Dark glassmorphism + bordure subtile
+   BULLES AGENT — Dark glassmorphism opaque
    ========================================================== */
 .vfrc-system-response .vfrc-message:not([class*="extension"]),
 .vfrc-message._11kfxpg0 {
@@ -443,7 +364,7 @@ button.vfrc-button:not(.vfrc-header--button) {
   line-height: 1.6 !important;
   letter-spacing: -0.01em !important;
   display: inline-block !important;
-  background: rgba(26, 26, 46, 0.85) !important;
+  background: rgba(26, 26, 46, 0.95) !important;
   color: #E8E8ED !important;
   border: 1px solid #2A2A3E !important;
   border-radius: 14px !important;
@@ -462,7 +383,7 @@ button.vfrc-button:not(.vfrc-header--button) {
   border-color: #3A3A52 !important;
 }
 
-/* Petit triangle pour effet bulle */
+/* Petit triangle pour effet bulle — synchronisé 0.95 */
 .vfrc-system-response .vfrc-message:not([class*="extension"])::before {
   content: "" !important;
   position: absolute !important;
@@ -472,7 +393,7 @@ button.vfrc-button:not(.vfrc-header--button) {
   height: 0 !important;
   border-style: solid !important;
   border-width: 6px 6px 6px 0 !important;
-  border-color: transparent rgba(26, 26, 46, 0.85) transparent transparent !important;
+  border-color: transparent rgba(26, 26, 46, 0.95) transparent transparent !important;
   filter: drop-shadow(-1px 0 0 #2A2A3E) !important;
 }
 
@@ -486,7 +407,7 @@ button.vfrc-button:not(.vfrc-header--button) {
 }
 
 /* ==========================================================
-   📊 SPINO PROGRESS BAR — Coral gradient (cohérent thème)
+   📊 SPINO PROGRESS BAR — Coral gradient
    ========================================================== */
 .spino-progress {
   display: flex;
@@ -551,7 +472,7 @@ button.vfrc-button:not(.vfrc-header--button) {
 }
 
 /* ==========================================================
-   🎯 SPINO QUESTION STYLING — Coral highlight (cohérent thème)
+   🎯 SPINO QUESTION STYLING — Coral highlight
    ========================================================== */
 .spino-question {
   display: block;
@@ -833,7 +754,7 @@ textarea._1gdvh9ta::placeholder {
 }
 
 /* ==========================================================
-   TYPING INDICATOR — Dark compact bubble
+   TYPING INDICATOR — Dark compact bubble opaque
    ========================================================== */
 /* Conteneur EXTERNE : transparent */
 .vfrc-typing-indicator--container,
@@ -845,10 +766,10 @@ textarea._1gdvh9ta::placeholder {
   max-width: fit-content !important;
 }
 
-/* Bulle INTÉRIEURE : dark compact */
+/* Bulle INTÉRIEURE : dark compact opaque */
 .vfrc-typing-indicator--container-inner,
 ._1ayyscc1 {
-  background: rgba(26, 26, 46, 0.85) !important;
+  background: rgba(26, 26, 46, 0.95) !important;
   border: 1px solid #2A2A3E !important;
   border-radius: 14px !important;
   padding: 12px 16px !important;
