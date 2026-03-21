@@ -1,0 +1,1120 @@
+/* ==========================================================
+   Lead Magnet Stripper × Voiceflow — Dark Theme v1.0
+   
+   Design : Anti-bullshit AI — Provocateur, Dark, Factuel
+   Couleurs : Red #FF3333 + Yellow #FFD600 + Black #0A0A0A
+   Fonts : Space Mono (titres/accents) + Outfit (corps)
+   
+   Palette :
+   - bg-deep      : #0A0A0A
+   - bg-surface   : #151515
+   - bg-elevated  : #1E1E1E
+   - accent       : #FF3333
+   - accent-hover : #FF5555
+   - accent-dark  : #CC2929
+   - yellow       : #FFD600
+   - green-done   : #00E676
+   - purple       : #B388FF
+   - text-primary : #F5F0EB
+   - text-secondary: #888888
+   - text-muted   : #555555
+   - border       : #2A2A2A
+   - border-light : #3A3A3A
+   
+   Auteur : Revolution Agency
+   ========================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+
+/* ==========================================================
+   STRUCTURE PRINCIPALE - HAUTEUR 100%
+   ========================================================== */
+.vfrc-chat,
+.vfrc-chat__container,
+.vfrc-chat__container-inner {
+  height: 100% !important;
+  max-height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+.vfrc-chat-dialog__container {
+  flex: 1 !important;
+  min-height: 0 !important;
+  overflow-y: auto !important;
+}
+
+/* ==========================================================
+   SUPPRIMER FOND BLANC + OMBRE — DARK BASE
+   ========================================================== */
+.vfrc-chat__container-inner,
+.vfrc-chat,
+.vfrc-chat-dialog__container,
+.vfrc-chat--dialog,
+.vfrc-chat-dialog,
+.vfrc-chat--bottom-spacer,
+.vfrc-chat-focus-ring,
+.vfrc-chat--overlay {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* ==========================================================
+   HEADER — COMPLÈTEMENT MASQUÉ
+   ========================================================== */
+.vfrc-header,
+.vfrc-header--container,
+.vfrc-header--container-inner,
+.vfrc-header--actions,
+.vfrc-header--button,
+.vfrc-header--title {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+}
+
+.vfrc-header .vfrc-avatar,
+.vfrc-header img.vfrc-avatar,
+.vfrc-header--container-inner .vfrc-avatar,
+.vfrc-header--container-inner img {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* ==========================================================
+   CHAT CONTAINER RESET
+   ========================================================== */
+.vfrc-chat,
+.vfrc-chat__container,
+.vfrc-chat__container-inner,
+.vfrc-chat-dialog,
+.vfrc-chat-dialog__container,
+.vfrc-chat--dialog {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* ==========================================================
+   AVATAR — Red glow
+   ========================================================== */
+.vfrc-system-response,
+div.vfrc-system-response {
+  display: flex !important;
+  align-items: flex-start !important;
+  padding-left: 0 !important;
+  padding-right: 8px !important;
+}
+
+.vfrc-avatar,
+img.vfrc-avatar {
+  flex-shrink: 0 !important;
+  width: 40px !important;
+  height: 40px !important;
+  margin-right: 12px !important;
+  margin-top: 12px !important;
+  align-self: flex-start !important;
+  border-radius: 50% !important;
+  border: 2px solid #FF3333 !important;
+  box-shadow: 0 0 16px rgba(255, 51, 51, 0.3), 0 0 4px rgba(255, 51, 51, 0.15) !important;
+  transition: all 0.3s ease !important;
+}
+
+.vfrc-avatar:hover,
+img.vfrc-avatar:hover {
+  transform: scale(1.05) !important;
+  box-shadow: 0 0 24px rgba(255, 51, 51, 0.45), 0 0 8px rgba(255, 51, 51, 0.25) !important;
+}
+
+/* ==========================================================
+   BOUTONS D'ACTION (conteneur) - ALIGNÉ AVEC BULLES
+   ========================================================== */
+.vfrc-system-response--actions,
+.vfrc-system-response--actions.g3dqfd6 {
+  margin-left: 52px !important;
+  padding-left: 0 !important;
+  padding-right: 8px !important;
+  width: calc(100% - 60px) !important;
+  max-width: calc(100% - 60px) !important;
+  box-sizing: border-box !important;
+}
+
+/* ==========================================================
+   FOOTER — FOND SOMBRE + FLEX SHRINK 0
+   ========================================================== */
+.vfrc-footer {
+  background: #0A0A0A !important;
+  position: relative !important;
+  z-index: 100 !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-top: 1px solid #2A2A2A !important;
+  padding: 12px 8px 12px 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  flex-shrink: 0 !important;
+}
+
+.vfrc-footer__content {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  margin-left: 52px !important;
+  width: calc(100% - 52px) !important;
+  max-width: calc(100% - 52px) !important;
+  box-sizing: border-box !important;
+}
+
+/* ==========================================================
+   ZONE INPUT CONTENEUR : TRANSPARENT
+   ========================================================== */
+.vfrc-input-container,
+._1gdvh9t2,
+._1gdvh9t3,
+div.vfrc-input-container {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.vfrc-input-container:focus,
+.vfrc-input-container:focus-within,
+.vfrc-input-container:focus-visible,
+._1gdvh9t2:focus,
+._1gdvh9t2:focus-within,
+._1gdvh9t2:focus-visible {
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.vfrc-chat-input__container-inner,
+._1gdvh9tc {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* ==========================================================
+   BOUTONS CHOIX — Dark glassmorphism
+   ========================================================== */
+.vfrc-button:not(.vfrc-header--button),
+button.vfrc-button:not(.vfrc-header--button) {
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-weight: 500 !important;
+  font-size: 13px !important;
+  line-height: 1.4 !important;
+  letter-spacing: -0.01em !important;
+  padding: 12px 18px !important;
+  background: rgba(21, 21, 21, 0.95) !important;
+  border: 1.5px solid #2A2A2A !important;
+  color: #F5F0EB !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+  border-radius: 50px !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  cursor: pointer !important;
+  margin-top: 6px !important;
+  margin-bottom: 6px !important;
+  margin-right: 8px !important;
+  width: auto !important;
+  max-width: fit-content !important;
+  text-align: left !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 8px !important;
+  white-space: nowrap !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+.vfrc-button:not(.vfrc-header--button):hover {
+  background: rgba(255, 51, 51, 0.1) !important;
+  border-color: #FF3333 !important;
+  color: #FF5555 !important;
+  box-shadow: 0 4px 16px rgba(255, 51, 51, 0.2), 0 0 8px rgba(255, 51, 51, 0.08) !important;
+  transform: translateY(-2px) !important;
+}
+
+.vfrc-button:not(.vfrc-header--button):active {
+  transform: translateY(0) scale(0.98) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+.vfrc-button-container,
+.vfrc-card--buttons {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 8px !important;
+  padding: 8px 0 !important;
+}
+
+/* ==========================================================
+   BOUTON ENVOYER — Red gradient
+   ========================================================== */
+#vfrc-send-message svg,
+.vfrc-chat-input__send svg {
+  display: block !important;
+  width: 20px !important;
+  height: 20px !important;
+}
+
+#vfrc-send-message::after,
+.vfrc-chat-input__send::after {
+  content: none !important;
+  display: none !important;
+}
+
+#vfrc-send-message,
+.vfrc-chat-input__send {
+  background: rgba(255, 51, 51, 0.08) !important;
+  border: 1px solid rgba(255, 51, 51, 0.2) !important;
+  border-radius: 10px !important;
+  padding: 10px 14px !important;
+  color: rgba(255, 51, 51, 0.4) !important;
+  box-shadow: none !important;
+  transition: all 0.25s ease-in-out !important;
+  cursor: not-allowed;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  text-align: center;
+  user-select: none;
+  flex-shrink: 0 !important;
+  margin-left: 12px !important;
+}
+
+#vfrc-send-message:not([disabled]),
+.vfrc-chat-input__send:not([disabled]) {
+  background: linear-gradient(135deg, #FF3333, #CC2929) !important;
+  border: none !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 16px rgba(255, 51, 51, 0.3) !important;
+  cursor: pointer;
+  opacity: 1;
+}
+
+#vfrc-send-message:not([disabled]):hover,
+.vfrc-chat-input__send:not([disabled]):hover {
+  background: linear-gradient(135deg, #FF5555, #FF3333) !important;
+  box-shadow: 0 6px 20px rgba(255, 51, 51, 0.4) !important;
+  transform: scale(1.05) !important;
+}
+
+#vfrc-send-message:not([disabled]):hover svg,
+.vfrc-chat-input__send:not([disabled]):hover svg {
+  transform: translateX(2px) !important;
+}
+
+#vfrc-send-message:not([disabled]):active,
+.vfrc-chat-input__send:not([disabled]):active {
+  transform: scale(0.95) !important;
+}
+
+.vfrc-chat-input__actions {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 auto !important;
+  width: auto !important;
+  padding-right: 0 !important;
+  overflow: visible !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* ==========================================================
+   BULLES AGENT — Dark glassmorphism
+   ========================================================== */
+.vfrc-system-response .vfrc-message:not([class*="extension"]),
+.vfrc-message._11kfxpg0 {
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+  letter-spacing: -0.01em !important;
+  display: inline-block !important;
+  background: rgba(21, 21, 21, 0.95) !important;
+  color: #F5F0EB !important;
+  border: 1px solid #2A2A2A !important;
+  border-radius: 14px !important;
+  padding: 12px 16px !important;
+  max-width: 85%;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+
+.vfrc-system-response .vfrc-message:not([class*="extension"]):hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5) !important;
+  transform: translateY(-1px) !important;
+  border-color: #3A3A3A !important;
+}
+
+/* Triangle bulle agent */
+.vfrc-system-response .vfrc-message:not([class*="extension"])::before {
+  content: "" !important;
+  position: absolute !important;
+  left: -6px !important;
+  top: 16px !important;
+  width: 0 !important;
+  height: 0 !important;
+  border-style: solid !important;
+  border-width: 6px 6px 6px 0 !important;
+  border-color: transparent rgba(21, 21, 21, 0.95) transparent transparent !important;
+  filter: drop-shadow(-1px 0 0 #2A2A2A) !important;
+}
+
+.vfrc-system-response .vfrc-message:not([class*="extension"]) p,
+.vfrc-system-response .vfrc-message:not([class*="extension"]) li {
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  line-height: 1.6 !important;
+  color: #F5F0EB !important;
+}
+
+/* ==========================================================
+   TITRES MARKDOWN DANS LES BULLES
+   ========================================================== */
+.vfrc-message h1,
+.vfrc-message .markdown h1,
+._11kfxpg0 h1 {
+  font-family: 'Space Mono', monospace !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  line-height: 1.3 !important;
+  margin: 16px 0 10px 0 !important;
+  color: #FF3333 !important;
+  padding-bottom: 8px !important;
+  border-bottom: 3px solid rgba(255, 51, 51, 0.4) !important;
+}
+
+.vfrc-message h2,
+.vfrc-message .markdown h2,
+._11kfxpg0 h2 {
+  font-family: 'Space Mono', monospace !important;
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  line-height: 1.3 !important;
+  margin: 14px 0 8px 0 !important;
+  color: #FF5555 !important;
+}
+
+.vfrc-message h3,
+.vfrc-message .markdown h3,
+._11kfxpg0 h3 {
+  font-family: 'Space Mono', monospace !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  line-height: 1.4 !important;
+  margin: 12px 0 6px 0 !important;
+  color: #FFD600 !important;
+}
+
+.vfrc-message h4,
+.vfrc-message h5,
+.vfrc-message h6,
+.vfrc-message .markdown h4,
+.vfrc-message .markdown h5,
+.vfrc-message .markdown h6,
+._11kfxpg0 h4,
+._11kfxpg0 h5,
+._11kfxpg0 h6 {
+  font-family: 'Space Mono', monospace !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  line-height: 1.4 !important;
+  margin: 10px 0 6px 0 !important;
+  color: #888888 !important;
+}
+
+.vfrc-message h1:first-child,
+.vfrc-message h2:first-child,
+.vfrc-message h3:first-child,
+.vfrc-message h4:first-child,
+.vfrc-message .markdown h1:first-child,
+.vfrc-message .markdown h2:first-child,
+.vfrc-message .markdown h3:first-child,
+.vfrc-message .markdown h4:first-child {
+  margin-top: 0 !important;
+}
+
+.vfrc-message strong,
+.vfrc-message .markdown strong,
+._11kfxpg0 strong {
+  font-weight: 600 !important;
+  color: #FFD600 !important;
+}
+
+.vfrc-message a,
+._11kfxpg0 a {
+  color: #FF3333 !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+  border-bottom: 1px solid transparent !important;
+  transition: all 0.2s ease !important;
+}
+
+.vfrc-message a:hover,
+._11kfxpg0 a:hover {
+  color: #FF5555 !important;
+  border-bottom-color: #FF5555 !important;
+}
+
+/* ==========================================================
+   LISTES (ul/ol) - FIX ALIGNEMENT PUCES
+   ========================================================== */
+.vfrc-message ul,
+.vfrc-message ol,
+.vfrc-message .markdown ul,
+.vfrc-message .markdown ol,
+._11kfxpg0 ul,
+._11kfxpg0 ol {
+  margin: 10px 0 !important;
+  padding-left: 24px !important;
+  list-style-position: outside !important;
+}
+
+.vfrc-message ul,
+.vfrc-message .markdown ul,
+._11kfxpg0 ul {
+  list-style-type: none !important;
+}
+
+.vfrc-message ol,
+.vfrc-message .markdown ol,
+._11kfxpg0 ol {
+  list-style-type: decimal !important;
+}
+
+.vfrc-message li,
+.vfrc-message .markdown li,
+._11kfxpg0 li {
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  line-height: 1.6 !important;
+  margin-bottom: 6px !important;
+  padding-left: 6px !important;
+  display: list-item !important;
+  position: relative !important;
+  list-style: none !important;
+  color: #F5F0EB !important;
+}
+
+.vfrc-message li:last-child,
+.vfrc-message .markdown li:last-child,
+._11kfxpg0 li:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Puce custom rouge */
+.vfrc-message .markdown ul li::before,
+.vfrc-message ul li::before,
+._11kfxpg0 ul li::before,
+.markdown ul li::before {
+  content: "" !important;
+  height: 6px !important;
+  width: 6px !important;
+  background-color: #FF3333 !important;
+  border-radius: 50% !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 0.7em !important;
+  transform: translateX(-16px) !important;
+}
+
+.vfrc-message ol li::marker {
+  color: #FF3333 !important;
+  font-weight: 600 !important;
+}
+
+/* ==========================================================
+   BULLES UTILISATEUR — Red gradient
+   ========================================================== */
+.vfrc-user-response > div,
+.vfrc-user-response .vfrc-message,
+._15emaa40 {
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #FF3333 0%, #CC2929 100%) !important;
+  border: none !important;
+  border-radius: 14px !important;
+  padding: 12px 16px !important;
+  max-width: 85%;
+  box-shadow: 0 4px 16px rgba(255, 51, 51, 0.25) !important;
+  margin-left: auto !important;
+}
+
+.vfrc-user-response > div *,
+.vfrc-user-response .vfrc-message *,
+._15emaa40 * {
+  color: #ffffff !important;
+}
+
+.vfrc-message:not([class*="extension"]) {
+  margin: 12px 0 !important;
+}
+
+.vfrc-user-response {
+  padding-left: 52px !important;
+  padding-right: 8px !important;
+}
+
+/* ==========================================================
+   TEXTAREA — Dark input
+   ========================================================== */
+textarea.vfrc-chat-input,
+textarea._1gdvh9ta {
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+  width: 100% !important;
+  min-width: 200px !important;
+  min-height: 44px !important;
+  max-height: 120px !important;
+  overflow-y: auto !important;
+  resize: vertical !important;
+  background: #151515 !important;
+  border: 2px solid transparent !important;
+  border-radius: 10px !important;
+  outline: none !important;
+  box-shadow: none !important;
+  padding: 12px 14px !important;
+  box-sizing: border-box !important;
+  flex: 1 1 auto !important;
+  margin-left: 0 !important;
+  transition: all 0.2s ease !important;
+  color: #F5F0EB !important;
+}
+
+textarea.vfrc-chat-input:focus,
+textarea.vfrc-chat-input:focus-visible,
+textarea._1gdvh9ta:focus,
+textarea._1gdvh9ta:focus-visible {
+  border: 2px solid #FF3333 !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(255, 51, 51, 0.1) !important;
+  background: #1E1E1E !important;
+}
+
+textarea.vfrc-chat-input::placeholder,
+textarea._1gdvh9ta::placeholder {
+  color: #555555 !important;
+  font-weight: 400 !important;
+}
+
+/* ==========================================================
+   SCROLLBAR — Dark accent
+   ========================================================== */
+.vfrc-chat-dialog__container {
+  overflow-y: scroll !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: #3A3A3A transparent !important;
+}
+
+.vfrc-chat-dialog__container::-webkit-scrollbar {
+  width: 6px !important;
+  -webkit-appearance: none !important;
+  display: block !important;
+}
+
+.vfrc-chat-dialog__container::-webkit-scrollbar-thumb {
+  background: #3A3A3A !important;
+  border-radius: 10px !important;
+}
+
+.vfrc-chat-dialog__container::-webkit-scrollbar-thumb:hover {
+  background: #FF3333 !important;
+}
+
+.vfrc-chat-dialog__container::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+/* ==========================================================
+   TYPING INDICATOR — Dark compact bubble
+   ========================================================== */
+.vfrc-typing-indicator--container,
+._1ayyscc0 {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  max-width: fit-content !important;
+}
+
+.vfrc-typing-indicator--container-inner,
+._1ayyscc1 {
+  background: rgba(21, 21, 21, 0.95) !important;
+  border: 1px solid #2A2A2A !important;
+  border-radius: 14px !important;
+  padding: 12px 16px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+  margin-left: 52px !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+
+.vfrc-typing-indicator,
+.vfrc-typing-indicator.xaffbq1 {
+  display: flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+}
+
+.vfrc-typing-indicator span,
+.vfrc-typing-indicator span.xaffbq2 {
+  display: block !important;
+  width: 8px !important;
+  height: 8px !important;
+  background: #555555 !important;
+  border-radius: 50% !important;
+  animation: typingBounce 1.4s ease-in-out infinite !important;
+}
+
+.vfrc-typing-indicator span:nth-child(1) { animation-delay: 0s !important; }
+.vfrc-typing-indicator span:nth-child(2) { animation-delay: 0.2s !important; }
+.vfrc-typing-indicator span:nth-child(3) { animation-delay: 0.4s !important; }
+
+@keyframes typingBounce {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    background: #555555;
+  }
+  30% {
+    transform: translateY(-8px);
+    background: #FF3333;
+  }
+}
+
+/* ==========================================================
+   CAROUSELS & CARDS — Dark
+   ========================================================== */
+.vfrc-carousel,
+.vfrc-card {
+  background: #151515 !important;
+  border: 1px solid #2A2A2A !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+}
+
+.vfrc-carousel:hover,
+.vfrc-card:hover {
+  border-color: rgba(255, 51, 51, 0.4) !important;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5), 0 0 12px rgba(255, 51, 51, 0.08) !important;
+  transform: translateY(-4px) !important;
+}
+
+.vfrc-card__title {
+  font-family: 'Space Mono', monospace !important;
+  font-weight: 700 !important;
+  font-size: 17px !important;
+  color: #F5F0EB !important;
+  margin-bottom: 8px !important;
+}
+
+.vfrc-card__description {
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 14px !important;
+  color: #888888 !important;
+  line-height: 1.6 !important;
+}
+
+.vfrc-card__image {
+  border-radius: 16px 16px 0 0 !important;
+  transition: opacity 0.3s ease !important;
+}
+
+.vfrc-card:hover .vfrc-card__image {
+  opacity: 0.95 !important;
+}
+
+/* ==========================================================
+   EXTENSIONS PLEINE LARGEUR
+   ========================================================== */
+.vfrc-message[class*="extension"],
+[class*="extension"].vfrc-message,
+.vfrc-message--extension-Calendly,
+.vfrc-message--extension-Carousel {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  display: block !important;
+  overflow: visible !important;
+}
+
+.vfrc-message[class*="extension"]::before,
+.vfrc-message--extension-Calendly::before,
+.vfrc-message--extension-Carousel::before {
+  display: none !important;
+  content: none !important;
+}
+
+.vfrc-message[class*="extension"] > *,
+.vfrc-message--extension-Calendly > *,
+.vfrc-message--extension-Carousel > *,
+.vfrc-message[class*="extension"] > span,
+.vfrc-message[class*="extension"] > div,
+.vfrc-message--extension-Calendly > span,
+.vfrc-message--extension-Calendly > div,
+.vfrc-message--extension-Carousel > span,
+.vfrc-message--extension-Carousel > div {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+  overflow: visible !important;
+}
+
+.vfrc-system-response:has(.vfrc-message[class*="extension"]),
+.vfrc-system-response:has(.vfrc-message--extension-Calendly),
+.vfrc-system-response:has(.vfrc-message--extension-Carousel) {
+  flex-wrap: wrap !important;
+}
+
+.vfrc-system-response:has(.vfrc-message[class*="extension"]) > div:not(.vfrc-avatar):not(img),
+.vfrc-system-response:has(.vfrc-message--extension-Calendly) > div:not(.vfrc-avatar):not(img),
+.vfrc-system-response:has(.vfrc-message--extension-Carousel) > div:not(.vfrc-avatar):not(img) {
+  width: 100% !important;
+  max-width: 100% !important;
+  flex: 0 0 100% !important;
+}
+
+@supports not selector(:has(*)) {
+  .vfrc-message[class*="extension"],
+  .vfrc-message--extension-Calendly,
+  .vfrc-message--extension-Carousel {
+    width: calc(100vw - 32px) !important;
+    max-width: 800px !important;
+    margin-left: -52px !important;
+  }
+}
+
+/* ==========================================================
+   BLOCKQUOTES — Red accent
+   ========================================================== */
+.vfrc-message blockquote,
+._11kfxpg0 blockquote {
+  border-left: 4px solid #FF3333 !important;
+  background: rgba(255, 51, 51, 0.05) !important;
+  padding: 12px 16px !important;
+  margin: 12px 0 !important;
+  border-radius: 0 10px 10px 0 !important;
+  font-style: italic !important;
+  color: #888888 !important;
+}
+
+/* ==========================================================
+   CODE BLOCKS — Dark elevated
+   ========================================================== */
+.vfrc-message code,
+._11kfxpg0 code {
+  font-family: 'Space Mono', 'Fira Code', 'Consolas', monospace !important;
+  font-size: 13px !important;
+  background: #1E1E1E !important;
+  border: 1px solid #2A2A2A !important;
+  border-radius: 6px !important;
+  padding: 2px 6px !important;
+  color: #FFD600 !important;
+}
+
+.vfrc-message pre,
+._11kfxpg0 pre {
+  background: #1E1E1E !important;
+  border: 1px solid #2A2A2A !important;
+  border-radius: 10px !important;
+  padding: 16px !important;
+  overflow-x: auto !important;
+  margin: 12px 0 !important;
+}
+
+.vfrc-message pre code {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+/* ==========================================================
+   LIGNE HORIZONTALE
+   ========================================================== */
+.vfrc-message hr,
+._11kfxpg0 hr {
+  border: none !important;
+  height: 2px !important;
+  background: linear-gradient(90deg, transparent 0%, #FF3333 50%, transparent 100%) !important;
+  margin: 20px 0 !important;
+}
+
+/* ==========================================================
+   IMAGES
+   ========================================================== */
+.vfrc-message img,
+._11kfxpg0 img {
+  max-width: 100% !important;
+  border-radius: 12px !important;
+  margin: 12px 0 !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* ==========================================================
+   ANIMATIONS
+   ========================================================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.vfrc-message:not([class*="extension"]) {
+  animation: fadeInUp 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* ==========================================================
+   BOUTON "START NEW CHAT"
+   ========================================================== */
+#vfrc-start-chat,
+button#vfrc-start-chat {
+  font-size: 0 !important;
+  color: transparent !important;
+  background: linear-gradient(135deg, #FF3333, #CC2929) !important;
+  border: none !important;
+  border-radius: 50px !important;
+  padding: 12px 24px !important;
+  box-shadow: 0 4px 16px rgba(255, 51, 51, 0.3) !important;
+  cursor: pointer !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+#vfrc-start-chat::after,
+button#vfrc-start-chat::after {
+  content: "🔄 Nouvelle analyse" !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: #ffffff !important;
+  white-space: nowrap !important;
+  letter-spacing: -0.01em !important;
+}
+
+#vfrc-start-chat:hover,
+button#vfrc-start-chat:hover {
+  background: linear-gradient(135deg, #FF5555, #FF3333) !important;
+  box-shadow: 0 6px 20px rgba(255, 51, 51, 0.4) !important;
+  transform: translateY(-2px) !important;
+}
+
+#vfrc-start-chat:active,
+button#vfrc-start-chat:active {
+  transform: translateY(0) scale(0.97) !important;
+}
+
+/* ==========================================================
+   LABEL "CHAT HAS ENDED"
+   ========================================================== */
+.vfrc-chat--ended-label,
+.vfrc-chat-ended,
+div[class*="ended"] {
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 12px !important;
+  color: #555555 !important;
+  border-color: #2A2A2A !important;
+}
+
+/* ==========================================================
+   RESPONSIVE MOBILE (< 640px)
+   ========================================================== */
+@media (max-width: 640px) {
+  .vfrc-avatar,
+  img.vfrc-avatar {
+    width: 36px !important;
+    height: 36px !important;
+    margin-right: 10px !important;
+  }
+  .vfrc-system-response--actions,
+  .vfrc-system-response--actions.g3dqfd6 {
+    margin-left: 46px !important;
+    width: calc(100% - 54px) !important;
+    max-width: calc(100% - 54px) !important;
+  }
+  .vfrc-footer__content {
+    margin-left: 46px !important;
+    width: calc(100% - 46px) !important;
+    max-width: calc(100% - 46px) !important;
+  }
+  .vfrc-user-response {
+    padding-left: 46px !important;
+  }
+  .vfrc-typing-indicator--container-inner,
+  ._1ayyscc1 {
+    margin-left: 46px !important;
+    padding: 10px 14px !important;
+  }
+  textarea.vfrc-chat-input,
+  textarea._1gdvh9ta {
+    min-height: 40px !important;
+    padding: 10px 12px !important;
+    font-size: 14px !important;
+  }
+  .vfrc-button:not(.vfrc-header--button) {
+    padding: 10px 16px !important;
+    font-size: 12px !important;
+  }
+  #vfrc-send-message,
+  .vfrc-chat-input__send {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+  }
+  .vfrc-message[class*="extension"],
+  .vfrc-message--extension-Calendly,
+  .vfrc-message--extension-Carousel {
+    margin-left: 0 !important;
+  }
+}
+
+/* ==========================================================
+   RESPONSIVE TRÈS PETIT ÉCRAN (< 400px)
+   ========================================================== */
+@media (max-width: 400px) {
+  .vfrc-avatar,
+  img.vfrc-avatar {
+    width: 32px !important;
+    height: 32px !important;
+  }
+  .vfrc-system-response--actions,
+  .vfrc-system-response--actions.g3dqfd6 {
+    margin-left: 40px !important;
+    width: calc(100% - 48px) !important;
+    max-width: calc(100% - 48px) !important;
+  }
+  .vfrc-footer__content {
+    margin-left: 40px !important;
+    width: calc(100% - 40px) !important;
+    max-width: calc(100% - 40px) !important;
+  }
+  .vfrc-user-response {
+    padding-left: 40px !important;
+  }
+  .vfrc-typing-indicator--container-inner,
+  ._1ayyscc1 {
+    margin-left: 40px !important;
+  }
+}
+
+/* ==========================================================
+   PREFERS-REDUCED-MOTION
+   ========================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .vfrc-message:not([class*="extension"]),
+  .vfrc-button,
+  .vfrc-avatar,
+  .vfrc-typing-indicator span {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ==========================================================
+   RESET FINAL — Dark mode overrides
+   ========================================================== */
+.vfrc-widget *,
+.vfrc-chat *,
+#voiceflow-chat-container * {
+  --vf-bg: transparent;
+  --vf-input-bg: transparent;
+}
+
+.vfrc-footer *:not(.vfrc-input-container):not(._1gdvh9t2):not(._1gdvh9t3):not(textarea):not(button),
+.vfrc-chat-input__wrapper,
+.vfrc-chat-input__inner {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+.vfrc-chat > div:empty,
+.vfrc-chat__container > div:empty,
+.vfrc-chat__container-inner > div:empty,
+.vfrc-spacer,
+div[class*="spacer"] {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.vfrc-chat--bottom-spacer,
+.vfrc-footer__content-scroll-to-bottom,
+.vfrc-footer__links,
+.s9t60i2,
+.s9t60i4,
+.oq48l92,
+._1cosygz0,
+.jsli361,
+.jsli363 {
+  display: none !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  visibility: hidden !important;
+}
+
+.vfrc-system-response--container,
+div.vfrc-system-response--container {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.vfrc-system-response {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
