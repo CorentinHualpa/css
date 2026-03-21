@@ -1,25 +1,14 @@
 /* ==========================================================
-   Lead Magnet Stripper × Voiceflow — Dark Theme v1.0
+   Lead Magnet Stripper × Voiceflow — Dark Theme v2.0
    
    Design : Anti-bullshit AI — Provocateur, Dark, Factuel
    Couleurs : Red #FF3333 + Yellow #FFD600 + Black #0A0A0A
    Fonts : Space Mono (titres/accents) + Outfit (corps)
    
-   Palette :
-   - bg-deep      : #0A0A0A
-   - bg-surface   : #151515
-   - bg-elevated  : #1E1E1E
-   - accent       : #FF3333
-   - accent-hover : #FF5555
-   - accent-dark  : #CC2929
-   - yellow       : #FFD600
-   - green-done   : #00E676
-   - purple       : #B388FF
-   - text-primary : #F5F0EB
-   - text-secondary: #888888
-   - text-muted   : #555555
-   - border       : #2A2A2A
-   - border-light : #3A3A3A
+   Mode : Embedded (pas d'avatar, pas de header)
+   
+   v2.0 : Fix padding gauche, suppression marges avatar,
+          livrable HTML full-width, embedded-first
    
    Auteur : Revolution Agency
    ========================================================== */
@@ -37,10 +26,13 @@
   display: flex !important;
   flex-direction: column !important;
 }
+
 .vfrc-chat-dialog__container {
   flex: 1 !important;
   min-height: 0 !important;
   overflow-y: auto !important;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
 }
 
 /* ==========================================================
@@ -60,7 +52,7 @@
 }
 
 /* ==========================================================
-   HEADER — COMPLÈTEMENT MASQUÉ
+   HEADER — COMPLÈTEMENT MASQUÉ (embedded mode)
    ========================================================== */
 .vfrc-header,
 .vfrc-header--container,
@@ -89,13 +81,24 @@
 }
 
 /* ==========================================================
+   AVATAR — Masqué en embedded (pas de décalage 52px)
+   ========================================================== */
+.vfrc-avatar,
+img.vfrc-avatar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* ==========================================================
    CHAT CONTAINER RESET
    ========================================================== */
 .vfrc-chat,
 .vfrc-chat__container,
 .vfrc-chat__container-inner,
 .vfrc-chat-dialog,
-.vfrc-chat-dialog__container,
 .vfrc-chat--dialog {
   padding-left: 0 !important;
   padding-right: 0 !important;
@@ -108,51 +111,31 @@
 }
 
 /* ==========================================================
-   AVATAR — Red glow
+   SYSTEM RESPONSE — No avatar offset
    ========================================================== */
 .vfrc-system-response,
 div.vfrc-system-response {
   display: flex !important;
   align-items: flex-start !important;
   padding-left: 0 !important;
-  padding-right: 8px !important;
-}
-
-.vfrc-avatar,
-img.vfrc-avatar {
-  flex-shrink: 0 !important;
-  width: 40px !important;
-  height: 40px !important;
-  margin-right: 12px !important;
-  margin-top: 12px !important;
-  align-self: flex-start !important;
-  border-radius: 50% !important;
-  border: 2px solid #FF3333 !important;
-  box-shadow: 0 0 16px rgba(255, 51, 51, 0.3), 0 0 4px rgba(255, 51, 51, 0.15) !important;
-  transition: all 0.3s ease !important;
-}
-
-.vfrc-avatar:hover,
-img.vfrc-avatar:hover {
-  transform: scale(1.05) !important;
-  box-shadow: 0 0 24px rgba(255, 51, 51, 0.45), 0 0 8px rgba(255, 51, 51, 0.25) !important;
+  padding-right: 0 !important;
 }
 
 /* ==========================================================
-   BOUTONS D'ACTION (conteneur) - ALIGNÉ AVEC BULLES
+   BOUTONS D'ACTION (conteneur) — No avatar offset
    ========================================================== */
 .vfrc-system-response--actions,
 .vfrc-system-response--actions.g3dqfd6 {
-  margin-left: 52px !important;
+  margin-left: 0 !important;
   padding-left: 0 !important;
-  padding-right: 8px !important;
-  width: calc(100% - 60px) !important;
-  max-width: calc(100% - 60px) !important;
+  padding-right: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
   box-sizing: border-box !important;
 }
 
 /* ==========================================================
-   FOOTER — FOND SOMBRE + FLEX SHRINK 0
+   FOOTER — No avatar offset
    ========================================================== */
 .vfrc-footer {
   background: #0A0A0A !important;
@@ -161,7 +144,7 @@ img.vfrc-avatar:hover {
   box-shadow: none !important;
   border: none !important;
   border-top: 1px solid #2A2A2A !important;
-  padding: 12px 8px 12px 0 !important;
+  padding: 12px 16px !important;
   margin: 0 !important;
   width: 100% !important;
   max-width: 100% !important;
@@ -175,9 +158,9 @@ img.vfrc-avatar:hover {
   border: none !important;
   padding: 0 !important;
   margin: 0 !important;
-  margin-left: 52px !important;
-  width: calc(100% - 52px) !important;
-  max-width: calc(100% - 52px) !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
   box-sizing: border-box !important;
 }
 
@@ -303,8 +286,6 @@ button.vfrc-button:not(.vfrc-header--button) {
   width: 44px !important;
   height: 44px !important;
   min-width: 44px !important;
-  text-align: center;
-  user-select: none;
   flex-shrink: 0 !important;
   margin-left: 12px !important;
 }
@@ -324,11 +305,6 @@ button.vfrc-button:not(.vfrc-header--button) {
   background: linear-gradient(135deg, #FF5555, #FF3333) !important;
   box-shadow: 0 6px 20px rgba(255, 51, 51, 0.4) !important;
   transform: scale(1.05) !important;
-}
-
-#vfrc-send-message:not([disabled]):hover svg,
-.vfrc-chat-input__send:not([disabled]):hover svg {
-  transform: translateX(2px) !important;
 }
 
 #vfrc-send-message:not([disabled]):active,
@@ -365,7 +341,7 @@ button.vfrc-button:not(.vfrc-header--button) {
   border: 1px solid #2A2A2A !important;
   border-radius: 14px !important;
   padding: 12px 16px !important;
-  max-width: 85%;
+  max-width: 90% !important;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
   position: relative !important;
@@ -379,18 +355,10 @@ button.vfrc-button:not(.vfrc-header--button) {
   border-color: #3A3A3A !important;
 }
 
-/* Triangle bulle agent */
+/* Pas de triangle en embedded sans avatar */
 .vfrc-system-response .vfrc-message:not([class*="extension"])::before {
-  content: "" !important;
-  position: absolute !important;
-  left: -6px !important;
-  top: 16px !important;
-  width: 0 !important;
-  height: 0 !important;
-  border-style: solid !important;
-  border-width: 6px 6px 6px 0 !important;
-  border-color: transparent rgba(21, 21, 21, 0.95) transparent transparent !important;
-  filter: drop-shadow(-1px 0 0 #2A2A2A) !important;
+  display: none !important;
+  content: none !important;
 }
 
 .vfrc-system-response .vfrc-message:not([class*="extension"]) p,
@@ -400,6 +368,33 @@ button.vfrc-button:not(.vfrc-header--button) {
   font-weight: 400 !important;
   line-height: 1.6 !important;
   color: #F5F0EB !important;
+}
+
+/* ==========================================================
+   LIVRABLE HTML — Full-width dans la bulle
+   ========================================================== */
+/* Bulle contenant le livrable : full-width, transparent */
+.vfrc-system-response .vfrc-message:not([class*="extension"]):has(div[style*="border-radius: 12px"]),
+.vfrc-system-response .vfrc-message:not([class*="extension"]):has(div[style*="BULLSHIT SCORE"]) {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+.vfrc-system-response .vfrc-message:not([class*="extension"]):has(div[style*="border-radius: 12px"]):hover,
+.vfrc-system-response .vfrc-message:not([class*="extension"]):has(div[style*="BULLSHIT SCORE"]):hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Fallback sans :has() — cible le markdown wrapper */
+.vfrc-message._11kfxpg0 > .markdown._11kfxpg1 > div[style*="border-radius"] {
+  width: 100% !important;
+  max-width: 100% !important;
 }
 
 /* ==========================================================
@@ -440,15 +435,9 @@ button.vfrc-button:not(.vfrc-header--button) {
   color: #FFD600 !important;
 }
 
-.vfrc-message h4,
-.vfrc-message h5,
-.vfrc-message h6,
-.vfrc-message .markdown h4,
-.vfrc-message .markdown h5,
-.vfrc-message .markdown h6,
-._11kfxpg0 h4,
-._11kfxpg0 h5,
-._11kfxpg0 h6 {
+.vfrc-message h4, .vfrc-message h5, .vfrc-message h6,
+.vfrc-message .markdown h4, .vfrc-message .markdown h5, .vfrc-message .markdown h6,
+._11kfxpg0 h4, ._11kfxpg0 h5, ._11kfxpg0 h6 {
   font-family: 'Space Mono', monospace !important;
   font-weight: 700 !important;
   font-size: 14px !important;
@@ -457,14 +446,10 @@ button.vfrc-button:not(.vfrc-header--button) {
   color: #888888 !important;
 }
 
-.vfrc-message h1:first-child,
-.vfrc-message h2:first-child,
-.vfrc-message h3:first-child,
-.vfrc-message h4:first-child,
-.vfrc-message .markdown h1:first-child,
-.vfrc-message .markdown h2:first-child,
-.vfrc-message .markdown h3:first-child,
-.vfrc-message .markdown h4:first-child {
+.vfrc-message h1:first-child, .vfrc-message h2:first-child,
+.vfrc-message h3:first-child, .vfrc-message h4:first-child,
+.vfrc-message .markdown h1:first-child, .vfrc-message .markdown h2:first-child,
+.vfrc-message .markdown h3:first-child, .vfrc-message .markdown h4:first-child {
   margin-top: 0 !important;
 }
 
@@ -491,34 +476,25 @@ button.vfrc-button:not(.vfrc-header--button) {
 }
 
 /* ==========================================================
-   LISTES (ul/ol) - FIX ALIGNEMENT PUCES
+   LISTES (ul/ol)
    ========================================================== */
-.vfrc-message ul,
-.vfrc-message ol,
-.vfrc-message .markdown ul,
-.vfrc-message .markdown ol,
-._11kfxpg0 ul,
-._11kfxpg0 ol {
+.vfrc-message ul, .vfrc-message ol,
+.vfrc-message .markdown ul, .vfrc-message .markdown ol,
+._11kfxpg0 ul, ._11kfxpg0 ol {
   margin: 10px 0 !important;
   padding-left: 24px !important;
   list-style-position: outside !important;
 }
 
-.vfrc-message ul,
-.vfrc-message .markdown ul,
-._11kfxpg0 ul {
+.vfrc-message ul, .vfrc-message .markdown ul, ._11kfxpg0 ul {
   list-style-type: none !important;
 }
 
-.vfrc-message ol,
-.vfrc-message .markdown ol,
-._11kfxpg0 ol {
+.vfrc-message ol, .vfrc-message .markdown ol, ._11kfxpg0 ol {
   list-style-type: decimal !important;
 }
 
-.vfrc-message li,
-.vfrc-message .markdown li,
-._11kfxpg0 li {
+.vfrc-message li, .vfrc-message .markdown li, ._11kfxpg0 li {
   font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif !important;
   font-size: 15px !important;
   font-weight: 400 !important;
@@ -531,9 +507,7 @@ button.vfrc-button:not(.vfrc-header--button) {
   color: #F5F0EB !important;
 }
 
-.vfrc-message li:last-child,
-.vfrc-message .markdown li:last-child,
-._11kfxpg0 li:last-child {
+.vfrc-message li:last-child, .vfrc-message .markdown li:last-child, ._11kfxpg0 li:last-child {
   margin-bottom: 0 !important;
 }
 
@@ -589,8 +563,8 @@ button.vfrc-button:not(.vfrc-header--button) {
 }
 
 .vfrc-user-response {
-  padding-left: 52px !important;
-  padding-right: 8px !important;
+  padding-left: 16px !important;
+  padding-right: 0 !important;
 }
 
 /* ==========================================================
@@ -666,7 +640,7 @@ textarea._1gdvh9ta::placeholder {
 }
 
 /* ==========================================================
-   TYPING INDICATOR — Dark compact bubble
+   TYPING INDICATOR — Dark compact, no avatar offset
    ========================================================== */
 .vfrc-typing-indicator--container,
 ._1ayyscc0 {
@@ -684,7 +658,7 @@ textarea._1gdvh9ta::placeholder {
   border-radius: 14px !important;
   padding: 12px 16px !important;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
-  margin-left: 52px !important;
+  margin-left: 0 !important;
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
 }
@@ -711,21 +685,14 @@ textarea._1gdvh9ta::placeholder {
 .vfrc-typing-indicator span:nth-child(3) { animation-delay: 0.4s !important; }
 
 @keyframes typingBounce {
-  0%, 60%, 100% {
-    transform: translateY(0);
-    background: #555555;
-  }
-  30% {
-    transform: translateY(-8px);
-    background: #FF3333;
-  }
+  0%, 60%, 100% { transform: translateY(0); background: #555555; }
+  30% { transform: translateY(-8px); background: #FF3333; }
 }
 
 /* ==========================================================
    CAROUSELS & CARDS — Dark
    ========================================================== */
-.vfrc-carousel,
-.vfrc-card {
+.vfrc-carousel, .vfrc-card {
   background: #151515 !important;
   border: 1px solid #2A2A2A !important;
   border-radius: 16px !important;
@@ -734,8 +701,7 @@ textarea._1gdvh9ta::placeholder {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
 }
 
-.vfrc-carousel:hover,
-.vfrc-card:hover {
+.vfrc-carousel:hover, .vfrc-card:hover {
   border-color: rgba(255, 51, 51, 0.4) !important;
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5), 0 0 12px rgba(255, 51, 51, 0.08) !important;
   transform: translateY(-4px) !important;
@@ -746,32 +712,20 @@ textarea._1gdvh9ta::placeholder {
   font-weight: 700 !important;
   font-size: 17px !important;
   color: #F5F0EB !important;
-  margin-bottom: 8px !important;
 }
 
 .vfrc-card__description {
-  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-family: 'Outfit', sans-serif !important;
   font-size: 14px !important;
   color: #888888 !important;
   line-height: 1.6 !important;
-}
-
-.vfrc-card__image {
-  border-radius: 16px 16px 0 0 !important;
-  transition: opacity 0.3s ease !important;
-}
-
-.vfrc-card:hover .vfrc-card__image {
-  opacity: 0.95 !important;
 }
 
 /* ==========================================================
    EXTENSIONS PLEINE LARGEUR
    ========================================================== */
 .vfrc-message[class*="extension"],
-[class*="extension"].vfrc-message,
-.vfrc-message--extension-Calendly,
-.vfrc-message--extension-Carousel {
+[class*="extension"].vfrc-message {
   width: 100% !important;
   max-width: 100% !important;
   margin-left: 0 !important;
@@ -785,22 +739,12 @@ textarea._1gdvh9ta::placeholder {
   overflow: visible !important;
 }
 
-.vfrc-message[class*="extension"]::before,
-.vfrc-message--extension-Calendly::before,
-.vfrc-message--extension-Carousel::before {
+.vfrc-message[class*="extension"]::before {
   display: none !important;
   content: none !important;
 }
 
-.vfrc-message[class*="extension"] > *,
-.vfrc-message--extension-Calendly > *,
-.vfrc-message--extension-Carousel > *,
-.vfrc-message[class*="extension"] > span,
-.vfrc-message[class*="extension"] > div,
-.vfrc-message--extension-Calendly > span,
-.vfrc-message--extension-Calendly > div,
-.vfrc-message--extension-Carousel > span,
-.vfrc-message--extension-Carousel > div {
+.vfrc-message[class*="extension"] > * {
   width: 100% !important;
   max-width: 100% !important;
   margin: 0 !important;
@@ -809,35 +753,20 @@ textarea._1gdvh9ta::placeholder {
   overflow: visible !important;
 }
 
-.vfrc-system-response:has(.vfrc-message[class*="extension"]),
-.vfrc-system-response:has(.vfrc-message--extension-Calendly),
-.vfrc-system-response:has(.vfrc-message--extension-Carousel) {
+.vfrc-system-response:has(.vfrc-message[class*="extension"]) {
   flex-wrap: wrap !important;
 }
 
-.vfrc-system-response:has(.vfrc-message[class*="extension"]) > div:not(.vfrc-avatar):not(img),
-.vfrc-system-response:has(.vfrc-message--extension-Calendly) > div:not(.vfrc-avatar):not(img),
-.vfrc-system-response:has(.vfrc-message--extension-Carousel) > div:not(.vfrc-avatar):not(img) {
+.vfrc-system-response:has(.vfrc-message[class*="extension"]) > div:not(.vfrc-avatar):not(img) {
   width: 100% !important;
   max-width: 100% !important;
   flex: 0 0 100% !important;
 }
 
-@supports not selector(:has(*)) {
-  .vfrc-message[class*="extension"],
-  .vfrc-message--extension-Calendly,
-  .vfrc-message--extension-Carousel {
-    width: calc(100vw - 32px) !important;
-    max-width: 800px !important;
-    margin-left: -52px !important;
-  }
-}
-
 /* ==========================================================
    BLOCKQUOTES — Red accent
    ========================================================== */
-.vfrc-message blockquote,
-._11kfxpg0 blockquote {
+.vfrc-message blockquote, ._11kfxpg0 blockquote {
   border-left: 4px solid #FF3333 !important;
   background: rgba(255, 51, 51, 0.05) !important;
   padding: 12px 16px !important;
@@ -850,9 +779,8 @@ textarea._1gdvh9ta::placeholder {
 /* ==========================================================
    CODE BLOCKS — Dark elevated
    ========================================================== */
-.vfrc-message code,
-._11kfxpg0 code {
-  font-family: 'Space Mono', 'Fira Code', 'Consolas', monospace !important;
+.vfrc-message code, ._11kfxpg0 code {
+  font-family: 'Space Mono', 'Fira Code', monospace !important;
   font-size: 13px !important;
   background: #1E1E1E !important;
   border: 1px solid #2A2A2A !important;
@@ -861,8 +789,7 @@ textarea._1gdvh9ta::placeholder {
   color: #FFD600 !important;
 }
 
-.vfrc-message pre,
-._11kfxpg0 pre {
+.vfrc-message pre, ._11kfxpg0 pre {
   background: #1E1E1E !important;
   border: 1px solid #2A2A2A !important;
   border-radius: 10px !important;
@@ -878,21 +805,16 @@ textarea._1gdvh9ta::placeholder {
 }
 
 /* ==========================================================
-   LIGNE HORIZONTALE
+   HR + IMAGES
    ========================================================== */
-.vfrc-message hr,
-._11kfxpg0 hr {
+.vfrc-message hr, ._11kfxpg0 hr {
   border: none !important;
   height: 2px !important;
   background: linear-gradient(90deg, transparent 0%, #FF3333 50%, transparent 100%) !important;
   margin: 20px 0 !important;
 }
 
-/* ==========================================================
-   IMAGES
-   ========================================================== */
-.vfrc-message img,
-._11kfxpg0 img {
+.vfrc-message img, ._11kfxpg0 img {
   max-width: 100% !important;
   border-radius: 12px !important;
   margin: 12px 0 !important;
@@ -903,14 +825,8 @@ textarea._1gdvh9ta::placeholder {
    ANIMATIONS
    ========================================================== */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .vfrc-message:not([class*="extension"]) {
@@ -920,8 +836,7 @@ textarea._1gdvh9ta::placeholder {
 /* ==========================================================
    BOUTON "START NEW CHAT"
    ========================================================== */
-#vfrc-start-chat,
-button#vfrc-start-chat {
+#vfrc-start-chat, button#vfrc-start-chat {
   font-size: 0 !important;
   color: transparent !important;
   background: linear-gradient(135deg, #FF3333, #CC2929) !important;
@@ -933,35 +848,25 @@ button#vfrc-start-chat {
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-#vfrc-start-chat::after,
-button#vfrc-start-chat::after {
+#vfrc-start-chat::after, button#vfrc-start-chat::after {
   content: "🔄 Nouvelle analyse" !important;
   font-size: 13px !important;
   font-weight: 500 !important;
   color: #ffffff !important;
   white-space: nowrap !important;
-  letter-spacing: -0.01em !important;
 }
 
-#vfrc-start-chat:hover,
-button#vfrc-start-chat:hover {
+#vfrc-start-chat:hover, button#vfrc-start-chat:hover {
   background: linear-gradient(135deg, #FF5555, #FF3333) !important;
   box-shadow: 0 6px 20px rgba(255, 51, 51, 0.4) !important;
   transform: translateY(-2px) !important;
 }
 
-#vfrc-start-chat:active,
-button#vfrc-start-chat:active {
-  transform: translateY(0) scale(0.97) !important;
-}
-
 /* ==========================================================
-   LABEL "CHAT HAS ENDED"
+   CHAT ENDED LABEL
    ========================================================== */
-.vfrc-chat--ended-label,
-.vfrc-chat-ended,
-div[class*="ended"] {
-  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif !important;
+.vfrc-chat--ended-label, .vfrc-chat-ended, div[class*="ended"] {
+  font-family: 'Outfit', sans-serif !important;
   font-size: 12px !important;
   color: #555555 !important;
   border-color: #2A2A2A !important;
@@ -971,33 +876,14 @@ div[class*="ended"] {
    RESPONSIVE MOBILE (< 640px)
    ========================================================== */
 @media (max-width: 640px) {
-  .vfrc-avatar,
-  img.vfrc-avatar {
-    width: 36px !important;
-    height: 36px !important;
-    margin-right: 10px !important;
+  .vfrc-chat-dialog__container {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
   }
-  .vfrc-system-response--actions,
-  .vfrc-system-response--actions.g3dqfd6 {
-    margin-left: 46px !important;
-    width: calc(100% - 54px) !important;
-    max-width: calc(100% - 54px) !important;
+  .vfrc-footer {
+    padding: 10px 12px !important;
   }
-  .vfrc-footer__content {
-    margin-left: 46px !important;
-    width: calc(100% - 46px) !important;
-    max-width: calc(100% - 46px) !important;
-  }
-  .vfrc-user-response {
-    padding-left: 46px !important;
-  }
-  .vfrc-typing-indicator--container-inner,
-  ._1ayyscc1 {
-    margin-left: 46px !important;
-    padding: 10px 14px !important;
-  }
-  textarea.vfrc-chat-input,
-  textarea._1gdvh9ta {
+  textarea.vfrc-chat-input, textarea._1gdvh9ta {
     min-height: 40px !important;
     padding: 10px 12px !important;
     font-size: 14px !important;
@@ -1006,45 +892,23 @@ div[class*="ended"] {
     padding: 10px 16px !important;
     font-size: 12px !important;
   }
-  #vfrc-send-message,
-  .vfrc-chat-input__send {
+  #vfrc-send-message, .vfrc-chat-input__send {
     width: 40px !important;
     height: 40px !important;
     min-width: 40px !important;
   }
-  .vfrc-message[class*="extension"],
-  .vfrc-message--extension-Calendly,
-  .vfrc-message--extension-Carousel {
-    margin-left: 0 !important;
-  }
 }
 
 /* ==========================================================
-   RESPONSIVE TRÈS PETIT ÉCRAN (< 400px)
+   RESPONSIVE TRÈS PETIT (< 400px)
    ========================================================== */
 @media (max-width: 400px) {
-  .vfrc-avatar,
-  img.vfrc-avatar {
-    width: 32px !important;
-    height: 32px !important;
+  .vfrc-chat-dialog__container {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
   }
-  .vfrc-system-response--actions,
-  .vfrc-system-response--actions.g3dqfd6 {
-    margin-left: 40px !important;
-    width: calc(100% - 48px) !important;
-    max-width: calc(100% - 48px) !important;
-  }
-  .vfrc-footer__content {
-    margin-left: 40px !important;
-    width: calc(100% - 40px) !important;
-    max-width: calc(100% - 40px) !important;
-  }
-  .vfrc-user-response {
-    padding-left: 40px !important;
-  }
-  .vfrc-typing-indicator--container-inner,
-  ._1ayyscc1 {
-    margin-left: 40px !important;
+  .vfrc-footer {
+    padding: 8px !important;
   }
 }
 
@@ -1054,7 +918,6 @@ div[class*="ended"] {
 @media (prefers-reduced-motion: reduce) {
   .vfrc-message:not([class*="extension"]),
   .vfrc-button,
-  .vfrc-avatar,
   .vfrc-typing-indicator span {
     animation: none !important;
     transition: none !important;
@@ -1093,12 +956,8 @@ div[class*="spacer"] {
 .vfrc-chat--bottom-spacer,
 .vfrc-footer__content-scroll-to-bottom,
 .vfrc-footer__links,
-.s9t60i2,
-.s9t60i4,
-.oq48l92,
-._1cosygz0,
-.jsli361,
-.jsli363 {
+.s9t60i2, .s9t60i4, .oq48l92,
+._1cosygz0, .jsli361, .jsli363 {
   display: none !important;
   height: 0 !important;
   padding: 0 !important;
@@ -1107,25 +966,8 @@ div[class*="spacer"] {
 }
 
 .vfrc-system-response--container,
-div.vfrc-system-response--container {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-}
-
+div.vfrc-system-response--container,
 .vfrc-system-response {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-}
-
-
-/* Livrable HTML full-width */
-.vfrc-system-response .vfrc-message:not([class*="extension"]):has(> div[style*="BULLSHIT SCORE"]),
-.vfrc-system-response .vfrc-message:not([class*="extension"]):has(> div > div[style*="BULLSHIT SCORE"]) {
-  max-width: 100% !important;
-  width: 100% !important;
-  padding: 4px !important;
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
