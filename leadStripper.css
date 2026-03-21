@@ -1118,3 +1118,15 @@ div.vfrc-system-response--container {
   border: none !important;
   box-shadow: none !important;
 }
+
+
+/* Livrable HTML full-width */
+.vfrc-system-response .vfrc-message:not([class*="extension"]):has(> div[style*="BULLSHIT SCORE"]),
+.vfrc-system-response .vfrc-message:not([class*="extension"]):has(> div > div[style*="BULLSHIT SCORE"]) {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding: 4px !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
