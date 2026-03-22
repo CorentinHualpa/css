@@ -1,14 +1,16 @@
 /* ==========================================================
-   Lead Magnet Stripper × Voiceflow — Dark Theme v2.0
+   Lead Magnet Stripper × Voiceflow — Dark Theme v3.0
    
    Design : Anti-bullshit AI — Provocateur, Dark, Factuel
    Couleurs : Red #FF3333 + Yellow #FFD600 + Black #0A0A0A
    Fonts : Space Mono (titres/accents) + Outfit (corps)
    
-   Mode : Embedded (pas d'avatar, pas de header)
+   Mode : Embedded AVEC AVATAR
    
    v2.0 : Fix padding gauche, suppression marges avatar,
           livrable HTML full-width, embedded-first
+   v3.0 : Avatar réactivé + tous décalages 52px recalculés
+          (avatar 40px + margin-right 12px = 52px)
    
    Auteur : Revolution Agency
    ========================================================== */
@@ -81,15 +83,28 @@
 }
 
 /* ==========================================================
-   AVATAR — Masqué en embedded (pas de décalage 52px)
+   AVATAR — VISIBLE avec bordure rouge
+   (40px + 12px margin-right = 52px de décalage)
    ========================================================== */
 .vfrc-avatar,
 img.vfrc-avatar {
-  display: none !important;
-  width: 0 !important;
-  height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
+  display: block !important;
+  flex-shrink: 0 !important;
+  width: 40px !important;
+  height: 40px !important;
+  margin-right: 12px !important;
+  margin-top: 12px !important;
+  align-self: flex-start !important;
+  border-radius: 50% !important;
+  border: 2px solid #FF3333 !important;
+  box-shadow: 0 4px 12px rgba(255, 51, 51, 0.25) !important;
+  transition: all 0.3s ease !important;
+}
+
+.vfrc-avatar:hover,
+img.vfrc-avatar:hover {
+  transform: scale(1.05) !important;
+  box-shadow: 0 6px 16px rgba(255, 51, 51, 0.35) !important;
 }
 
 /* ==========================================================
@@ -111,31 +126,31 @@ img.vfrc-avatar {
 }
 
 /* ==========================================================
-   SYSTEM RESPONSE — No avatar offset
+   SYSTEM RESPONSE — Avec avatar
    ========================================================== */
 .vfrc-system-response,
 div.vfrc-system-response {
   display: flex !important;
   align-items: flex-start !important;
   padding-left: 0 !important;
-  padding-right: 0 !important;
+  padding-right: 8px !important;
 }
 
 /* ==========================================================
-   BOUTONS D'ACTION (conteneur) — No avatar offset
+   BOUTONS D'ACTION (conteneur) — ALIGNÉ AVEC BULLES (52px)
    ========================================================== */
 .vfrc-system-response--actions,
 .vfrc-system-response--actions.g3dqfd6 {
-  margin-left: 0 !important;
+  margin-left: 52px !important;
   padding-left: 0 !important;
-  padding-right: 0 !important;
-  width: 100% !important;
-  max-width: 100% !important;
+  padding-right: 8px !important;
+  width: calc(100% - 60px) !important;
+  max-width: calc(100% - 60px) !important;
   box-sizing: border-box !important;
 }
 
 /* ==========================================================
-   FOOTER — No avatar offset
+   FOOTER — Avec décalage avatar
    ========================================================== */
 .vfrc-footer {
   background: #0A0A0A !important;
@@ -144,7 +159,7 @@ div.vfrc-system-response {
   box-shadow: none !important;
   border: none !important;
   border-top: 1px solid #2A2A2A !important;
-  padding: 12px 16px !important;
+  padding: 12px 16px 12px 0 !important;
   margin: 0 !important;
   width: 100% !important;
   max-width: 100% !important;
@@ -158,9 +173,9 @@ div.vfrc-system-response {
   border: none !important;
   padding: 0 !important;
   margin: 0 !important;
-  margin-left: 0 !important;
-  width: 100% !important;
-  max-width: 100% !important;
+  margin-left: 52px !important;
+  width: calc(100% - 52px) !important;
+  max-width: calc(100% - 52px) !important;
   box-sizing: border-box !important;
 }
 
@@ -341,7 +356,7 @@ button.vfrc-button:not(.vfrc-header--button) {
   border: 1px solid #2A2A2A !important;
   border-radius: 14px !important;
   padding: 12px 16px !important;
-  max-width: 90% !important;
+  max-width: 85% !important;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
   position: relative !important;
@@ -355,10 +370,18 @@ button.vfrc-button:not(.vfrc-header--button) {
   border-color: #3A3A3A !important;
 }
 
-/* Pas de triangle en embedded sans avatar */
+/* Petit triangle bulle (pointe vers l'avatar) */
 .vfrc-system-response .vfrc-message:not([class*="extension"])::before {
-  display: none !important;
-  content: none !important;
+  content: "" !important;
+  position: absolute !important;
+  left: -6px !important;
+  top: 16px !important;
+  width: 0 !important;
+  height: 0 !important;
+  border-style: solid !important;
+  border-width: 6px 6px 6px 0 !important;
+  border-color: transparent rgba(21, 21, 21, 0.95) transparent transparent !important;
+  filter: drop-shadow(-1px 0 0 #2A2A2A) !important;
 }
 
 .vfrc-system-response .vfrc-message:not([class*="extension"]) p,
@@ -373,7 +396,6 @@ button.vfrc-button:not(.vfrc-header--button) {
 /* ==========================================================
    LIVRABLE HTML — Full-width dans la bulle
    ========================================================== */
-/* Bulle contenant le livrable : full-width, transparent */
 .vfrc-system-response .vfrc-message:not([class*="extension"]):has(div[style*="border-radius: 12px"]),
 .vfrc-system-response .vfrc-message:not([class*="extension"]):has(div[style*="BULLSHIT SCORE"]) {
   max-width: 100% !important;
@@ -391,7 +413,6 @@ button.vfrc-button:not(.vfrc-header--button) {
   box-shadow: none !important;
 }
 
-/* Fallback sans :has() — cible le markdown wrapper */
 .vfrc-message._11kfxpg0 > .markdown._11kfxpg1 > div[style*="border-radius"] {
   width: 100% !important;
   max-width: 100% !important;
@@ -533,7 +554,7 @@ button.vfrc-button:not(.vfrc-header--button) {
 }
 
 /* ==========================================================
-   BULLES UTILISATEUR — Red gradient
+   BULLES UTILISATEUR — Red gradient + décalage avatar
    ========================================================== */
 .vfrc-user-response > div,
 .vfrc-user-response .vfrc-message,
@@ -563,8 +584,8 @@ button.vfrc-button:not(.vfrc-header--button) {
 }
 
 .vfrc-user-response {
-  padding-left: 16px !important;
-  padding-right: 0 !important;
+  padding-left: 52px !important;
+  padding-right: 8px !important;
 }
 
 /* ==========================================================
@@ -640,7 +661,7 @@ textarea._1gdvh9ta::placeholder {
 }
 
 /* ==========================================================
-   TYPING INDICATOR — Dark compact, no avatar offset
+   TYPING INDICATOR — Dark compact, avec décalage avatar
    ========================================================== */
 .vfrc-typing-indicator--container,
 ._1ayyscc0 {
@@ -658,7 +679,7 @@ textarea._1gdvh9ta::placeholder {
   border-radius: 14px !important;
   padding: 12px 16px !important;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
-  margin-left: 0 !important;
+  margin-left: 52px !important;
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
 }
@@ -876,22 +897,56 @@ textarea._1gdvh9ta::placeholder {
    RESPONSIVE MOBILE (< 640px)
    ========================================================== */
 @media (max-width: 640px) {
+  .vfrc-avatar,
+  img.vfrc-avatar {
+    width: 36px !important;
+    height: 36px !important;
+    margin-right: 10px !important;
+  }
+
   .vfrc-chat-dialog__container {
     padding-left: 12px !important;
     padding-right: 12px !important;
   }
-  .vfrc-footer {
-    padding: 10px 12px !important;
+
+  .vfrc-system-response--actions,
+  .vfrc-system-response--actions.g3dqfd6 {
+    margin-left: 46px !important;
+    width: calc(100% - 54px) !important;
+    max-width: calc(100% - 54px) !important;
   }
+
+  .vfrc-footer {
+    padding: 10px 12px 10px 0 !important;
+  }
+
+  .vfrc-footer__content {
+    margin-left: 46px !important;
+    width: calc(100% - 46px) !important;
+    max-width: calc(100% - 46px) !important;
+  }
+
+  .vfrc-user-response {
+    padding-left: 46px !important;
+  }
+
+  .vfrc-typing-indicator--container-inner,
+  ._1ayyscc1 {
+    margin-left: 46px !important;
+    padding: 10px 14px !important;
+  }
+
   textarea.vfrc-chat-input, textarea._1gdvh9ta {
     min-height: 40px !important;
     padding: 10px 12px !important;
     font-size: 14px !important;
   }
+
   .vfrc-button:not(.vfrc-header--button) {
     padding: 10px 16px !important;
     font-size: 12px !important;
   }
+
   #vfrc-send-message, .vfrc-chat-input__send {
     width: 40px !important;
     height: 40px !important;
@@ -903,12 +958,41 @@ textarea._1gdvh9ta::placeholder {
    RESPONSIVE TRÈS PETIT (< 400px)
    ========================================================== */
 @media (max-width: 400px) {
+  .vfrc-avatar,
+  img.vfrc-avatar {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
   .vfrc-chat-dialog__container {
     padding-left: 8px !important;
     padding-right: 8px !important;
   }
+
+  .vfrc-system-response--actions,
+  .vfrc-system-response--actions.g3dqfd6 {
+    margin-left: 40px !important;
+    width: calc(100% - 48px) !important;
+    max-width: calc(100% - 48px) !important;
+  }
+
   .vfrc-footer {
-    padding: 8px !important;
+    padding: 8px 8px 8px 0 !important;
+  }
+
+  .vfrc-footer__content {
+    margin-left: 40px !important;
+    width: calc(100% - 40px) !important;
+    max-width: calc(100% - 40px) !important;
+  }
+
+  .vfrc-user-response {
+    padding-left: 40px !important;
+  }
+
+  .vfrc-typing-indicator--container-inner,
+  ._1ayyscc1 {
+    margin-left: 40px !important;
   }
 }
 
@@ -918,6 +1002,7 @@ textarea._1gdvh9ta::placeholder {
 @media (prefers-reduced-motion: reduce) {
   .vfrc-message:not([class*="extension"]),
   .vfrc-button,
+  .vfrc-avatar,
   .vfrc-typing-indicator span {
     animation: none !important;
     transition: none !important;
