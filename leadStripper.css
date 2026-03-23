@@ -1,5 +1,5 @@
 /* ==========================================================
-   Lead Magnet Stripper × Voiceflow — Dark Theme v3.1
+   Lead Magnet Stripper × Voiceflow — Dark Theme v3.2
    
    Design : Anti-bullshit AI — Provocateur, Dark, Factuel
    Couleurs : Red #FF3333 + Yellow #FFD600 + Black #0A0A0A
@@ -12,6 +12,7 @@
    v3.0 : Avatar réactivé + tous décalages 52px recalculés
    v3.1 : Bulles agent "Full Dark Premium" — fond noir pur,
           bordure rouge fine, ombre rouge diffuse
+   v3.2 : Fix typing indicator double décalage (margin-left: 0)
    
    Auteur : Revolution Agency
    ========================================================== */
@@ -666,7 +667,8 @@ textarea._1gdvh9ta::placeholder {
 }
 
 /* ==========================================================
-   TYPING INDICATOR — Dark premium avec glow rouge
+   TYPING INDICATOR — Dark premium, pas de double décalage
+   L'avatar dans le system-response crée déjà le décalage
    ========================================================== */
 .vfrc-typing-indicator--container,
 ._1ayyscc0 {
@@ -686,7 +688,7 @@ textarea._1gdvh9ta::placeholder {
   box-shadow: 
     0 0 18px rgba(255, 51, 51, 0.08),
     0 4px 16px rgba(0, 0, 0, 0.4) !important;
-  margin-left: 52px !important;
+  margin-left: 0 !important;
 }
 
 .vfrc-typing-indicator,
@@ -937,7 +939,7 @@ textarea._1gdvh9ta::placeholder {
 
   .vfrc-typing-indicator--container-inner,
   ._1ayyscc1 {
-    margin-left: 46px !important;
+    margin-left: 0 !important;
     padding: 10px 14px !important;
   }
 
@@ -997,7 +999,7 @@ textarea._1gdvh9ta::placeholder {
 
   .vfrc-typing-indicator--container-inner,
   ._1ayyscc1 {
-    margin-left: 40px !important;
+    margin-left: 0 !important;
   }
 }
 
