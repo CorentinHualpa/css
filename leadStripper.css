@@ -1,5 +1,5 @@
 /* ==========================================================
-   Lead Magnet Stripper × Voiceflow — Dark Theme v3.2
+   Lead Magnet Stripper × Voiceflow — Dark Theme v3.3
    
    Design : Anti-bullshit AI — Provocateur, Dark, Factuel
    Couleurs : Red #FF3333 + Yellow #FFD600 + Black #0A0A0A
@@ -7,12 +7,11 @@
    
    Mode : Embedded AVEC AVATAR
    
-   v2.0 : Fix padding gauche, suppression marges avatar,
-          livrable HTML full-width, embedded-first
-   v3.0 : Avatar réactivé + tous décalages 52px recalculés
-   v3.1 : Bulles agent "Full Dark Premium" — fond noir pur,
-          bordure rouge fine, ombre rouge diffuse
-   v3.2 : Fix typing indicator double décalage (margin-left: 0)
+   v3.0 : Avatar réactivé + tous décalages 52px
+   v3.1 : Bulles "Full Dark Premium"
+   v3.2 : Fix typing indicator double décalage
+   v3.3 : Réduction globale tailles (fonts, paddings, margins,
+          avatar 32px, bulles compactes)
    
    Auteur : Revolution Agency
    ========================================================== */
@@ -35,8 +34,8 @@
   flex: 1 !important;
   min-height: 0 !important;
   overflow-y: auto !important;
-  padding-left: 16px !important;
-  padding-right: 16px !important;
+  padding-left: 12px !important;
+  padding-right: 12px !important;
 }
 
 /* ==========================================================
@@ -85,28 +84,28 @@
 }
 
 /* ==========================================================
-   AVATAR — VISIBLE avec bordure rouge + glow
-   (40px + 12px margin-right = 52px de décalage)
+   AVATAR — 32px compact + bordure rouge + glow
+   (32px + 10px margin-right = 42px de décalage)
    ========================================================== */
 .vfrc-avatar,
 img.vfrc-avatar {
   display: block !important;
   flex-shrink: 0 !important;
-  width: 40px !important;
-  height: 40px !important;
-  margin-right: 12px !important;
-  margin-top: 12px !important;
+  width: 32px !important;
+  height: 32px !important;
+  margin-right: 10px !important;
+  margin-top: 8px !important;
   align-self: flex-start !important;
   border-radius: 50% !important;
-  border: 2px solid #FF3333 !important;
-  box-shadow: 0 0 12px rgba(255, 51, 51, 0.3), 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+  border: 1.5px solid #FF3333 !important;
+  box-shadow: 0 0 10px rgba(255, 51, 51, 0.25), 0 3px 8px rgba(0, 0, 0, 0.4) !important;
   transition: all 0.3s ease !important;
 }
 
 .vfrc-avatar:hover,
 img.vfrc-avatar:hover {
   transform: scale(1.05) !important;
-  box-shadow: 0 0 20px rgba(255, 51, 51, 0.45), 0 6px 16px rgba(0, 0, 0, 0.5) !important;
+  box-shadow: 0 0 16px rgba(255, 51, 51, 0.4), 0 4px 12px rgba(0, 0, 0, 0.5) !important;
 }
 
 /* ==========================================================
@@ -135,19 +134,19 @@ div.vfrc-system-response {
   display: flex !important;
   align-items: flex-start !important;
   padding-left: 0 !important;
-  padding-right: 8px !important;
+  padding-right: 6px !important;
 }
 
 /* ==========================================================
-   BOUTONS D'ACTION (conteneur) — ALIGNÉ AVEC BULLES (52px)
+   BOUTONS D'ACTION (conteneur) — ALIGNÉ AVEC BULLES (42px)
    ========================================================== */
 .vfrc-system-response--actions,
 .vfrc-system-response--actions.g3dqfd6 {
-  margin-left: 52px !important;
+  margin-left: 42px !important;
   padding-left: 0 !important;
-  padding-right: 8px !important;
-  width: calc(100% - 60px) !important;
-  max-width: calc(100% - 60px) !important;
+  padding-right: 6px !important;
+  width: calc(100% - 48px) !important;
+  max-width: calc(100% - 48px) !important;
   box-sizing: border-box !important;
 }
 
@@ -161,7 +160,7 @@ div.vfrc-system-response {
   box-shadow: none !important;
   border: none !important;
   border-top: 1px solid #2A2A2A !important;
-  padding: 12px 16px 12px 0 !important;
+  padding: 8px 12px 8px 0 !important;
   margin: 0 !important;
   width: 100% !important;
   max-width: 100% !important;
@@ -175,9 +174,9 @@ div.vfrc-system-response {
   border: none !important;
   padding: 0 !important;
   margin: 0 !important;
-  margin-left: 52px !important;
-  width: calc(100% - 52px) !important;
-  max-width: calc(100% - 52px) !important;
+  margin-left: 42px !important;
+  width: calc(100% - 42px) !important;
+  max-width: calc(100% - 42px) !important;
   box-sizing: border-box !important;
 }
 
@@ -217,33 +216,33 @@ div.vfrc-input-container {
 }
 
 /* ==========================================================
-   BOUTONS CHOIX — Dark glassmorphism
+   BOUTONS CHOIX — Dark glassmorphism compact
    ========================================================== */
 .vfrc-button:not(.vfrc-header--button),
 button.vfrc-button:not(.vfrc-header--button) {
   font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif !important;
   font-weight: 500 !important;
-  font-size: 13px !important;
+  font-size: 12px !important;
   line-height: 1.4 !important;
   letter-spacing: -0.01em !important;
-  padding: 12px 18px !important;
+  padding: 8px 14px !important;
   background: rgba(10, 10, 10, 0.95) !important;
   border: 1.5px solid #2A2A2A !important;
   color: #F5F0EB !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3) !important;
   border-radius: 50px !important;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
   cursor: pointer !important;
-  margin-top: 6px !important;
-  margin-bottom: 6px !important;
-  margin-right: 8px !important;
+  margin-top: 4px !important;
+  margin-bottom: 4px !important;
+  margin-right: 6px !important;
   width: auto !important;
   max-width: fit-content !important;
   text-align: left !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: flex-start !important;
-  gap: 8px !important;
+  gap: 6px !important;
   white-space: nowrap !important;
   backdrop-filter: blur(8px) !important;
   -webkit-backdrop-filter: blur(8px) !important;
@@ -253,8 +252,8 @@ button.vfrc-button:not(.vfrc-header--button) {
   background: rgba(255, 51, 51, 0.1) !important;
   border-color: #FF3333 !important;
   color: #FF5555 !important;
-  box-shadow: 0 0 16px rgba(255, 51, 51, 0.2), 0 4px 16px rgba(0, 0, 0, 0.3) !important;
-  transform: translateY(-2px) !important;
+  box-shadow: 0 0 14px rgba(255, 51, 51, 0.2), 0 3px 12px rgba(0, 0, 0, 0.3) !important;
+  transform: translateY(-1px) !important;
 }
 
 .vfrc-button:not(.vfrc-header--button):active {
@@ -267,18 +266,18 @@ button.vfrc-button:not(.vfrc-header--button) {
   display: flex !important;
   flex-direction: column !important;
   align-items: flex-start !important;
-  gap: 8px !important;
-  padding: 8px 0 !important;
+  gap: 4px !important;
+  padding: 4px 0 !important;
 }
 
 /* ==========================================================
-   BOUTON ENVOYER — Red gradient
+   BOUTON ENVOYER — Red gradient compact
    ========================================================== */
 #vfrc-send-message svg,
 .vfrc-chat-input__send svg {
   display: block !important;
-  width: 20px !important;
-  height: 20px !important;
+  width: 16px !important;
+  height: 16px !important;
 }
 
 #vfrc-send-message::after,
@@ -291,8 +290,8 @@ button.vfrc-button:not(.vfrc-header--button) {
 .vfrc-chat-input__send {
   background: rgba(255, 51, 51, 0.08) !important;
   border: 1px solid rgba(255, 51, 51, 0.2) !important;
-  border-radius: 10px !important;
-  padding: 10px 14px !important;
+  border-radius: 8px !important;
+  padding: 8px 10px !important;
   color: rgba(255, 51, 51, 0.4) !important;
   box-shadow: none !important;
   transition: all 0.25s ease-in-out !important;
@@ -300,11 +299,11 @@ button.vfrc-button:not(.vfrc-header--button) {
   display: flex !important;
   align-items: center;
   justify-content: center;
-  width: 44px !important;
-  height: 44px !important;
-  min-width: 44px !important;
+  width: 36px !important;
+  height: 36px !important;
+  min-width: 36px !important;
   flex-shrink: 0 !important;
-  margin-left: 12px !important;
+  margin-left: 8px !important;
 }
 
 #vfrc-send-message:not([disabled]),
@@ -312,7 +311,7 @@ button.vfrc-button:not(.vfrc-header--button) {
   background: linear-gradient(135deg, #FF3333, #CC2929) !important;
   border: none !important;
   color: #ffffff !important;
-  box-shadow: 0 4px 16px rgba(255, 51, 51, 0.3) !important;
+  box-shadow: 0 3px 12px rgba(255, 51, 51, 0.3) !important;
   cursor: pointer;
   opacity: 1;
 }
@@ -320,7 +319,7 @@ button.vfrc-button:not(.vfrc-header--button) {
 #vfrc-send-message:not([disabled]):hover,
 .vfrc-chat-input__send:not([disabled]):hover {
   background: linear-gradient(135deg, #FF5555, #FF3333) !important;
-  box-shadow: 0 0 20px rgba(255, 51, 51, 0.4), 0 6px 20px rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0 0 16px rgba(255, 51, 51, 0.4), 0 4px 16px rgba(0, 0, 0, 0.3) !important;
   transform: scale(1.05) !important;
 }
 
@@ -343,22 +342,21 @@ button.vfrc-button:not(.vfrc-header--button) {
 }
 
 /* ==========================================================
-   BULLES AGENT — FULL DARK PREMIUM
-   Fond noir pur + bordure rouge fine + glow rouge diffus
+   BULLES AGENT — FULL DARK PREMIUM COMPACT
    ========================================================== */
 .vfrc-system-response .vfrc-message:not([class*="extension"]),
 .vfrc-message._11kfxpg0 {
   font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif !important;
   font-weight: 400 !important;
-  font-size: 15px !important;
-  line-height: 1.6 !important;
+  font-size: 13px !important;
+  line-height: 1.55 !important;
   letter-spacing: -0.01em !important;
   display: inline-block !important;
   background: #0A0A0A !important;
   color: #F5F0EB !important;
   border: 1px solid rgba(255, 51, 51, 0.35) !important;
-  border-radius: 14px !important;
-  padding: 14px 18px !important;
+  border-radius: 12px !important;
+  padding: 10px 14px !important;
   max-width: 85% !important;
   box-shadow: 
     0 0 18px rgba(255, 51, 51, 0.08),
@@ -381,12 +379,12 @@ button.vfrc-button:not(.vfrc-header--button) {
 .vfrc-system-response .vfrc-message:not([class*="extension"])::before {
   content: "" !important;
   position: absolute !important;
-  left: -6px !important;
-  top: 16px !important;
+  left: -5px !important;
+  top: 12px !important;
   width: 0 !important;
   height: 0 !important;
   border-style: solid !important;
-  border-width: 6px 6px 6px 0 !important;
+  border-width: 5px 5px 5px 0 !important;
   border-color: transparent #0A0A0A transparent transparent !important;
   filter: drop-shadow(-1px 0 0 rgba(255, 51, 51, 0.35)) !important;
 }
@@ -394,9 +392,9 @@ button.vfrc-button:not(.vfrc-header--button) {
 .vfrc-system-response .vfrc-message:not([class*="extension"]) p,
 .vfrc-system-response .vfrc-message:not([class*="extension"]) li {
   font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif !important;
-  font-size: 15px !important;
+  font-size: 13px !important;
   font-weight: 400 !important;
-  line-height: 1.6 !important;
+  line-height: 1.55 !important;
   color: #F5F0EB !important;
 }
 
@@ -425,29 +423,29 @@ button.vfrc-button:not(.vfrc-header--button) {
 }
 
 /* ==========================================================
-   TITRES MARKDOWN DANS LES BULLES
+   TITRES MARKDOWN DANS LES BULLES — tailles réduites
    ========================================================== */
 .vfrc-message h1,
 .vfrc-message .markdown h1,
 ._11kfxpg0 h1 {
   font-family: 'Space Mono', monospace !important;
-  font-size: 20px !important;
+  font-size: 16px !important;
   font-weight: 700 !important;
   line-height: 1.3 !important;
-  margin: 16px 0 10px 0 !important;
+  margin: 12px 0 8px 0 !important;
   color: #FF3333 !important;
-  padding-bottom: 8px !important;
-  border-bottom: 3px solid rgba(255, 51, 51, 0.4) !important;
+  padding-bottom: 6px !important;
+  border-bottom: 2px solid rgba(255, 51, 51, 0.4) !important;
 }
 
 .vfrc-message h2,
 .vfrc-message .markdown h2,
 ._11kfxpg0 h2 {
   font-family: 'Space Mono', monospace !important;
-  font-size: 17px !important;
+  font-size: 14px !important;
   font-weight: 700 !important;
   line-height: 1.3 !important;
-  margin: 14px 0 8px 0 !important;
+  margin: 10px 0 6px 0 !important;
   color: #FF5555 !important;
 }
 
@@ -455,10 +453,10 @@ button.vfrc-button:not(.vfrc-header--button) {
 .vfrc-message .markdown h3,
 ._11kfxpg0 h3 {
   font-family: 'Space Mono', monospace !important;
-  font-size: 15px !important;
+  font-size: 13px !important;
   font-weight: 700 !important;
   line-height: 1.4 !important;
-  margin: 12px 0 6px 0 !important;
+  margin: 8px 0 4px 0 !important;
   color: #FFD600 !important;
 }
 
@@ -467,9 +465,9 @@ button.vfrc-button:not(.vfrc-header--button) {
 ._11kfxpg0 h4, ._11kfxpg0 h5, ._11kfxpg0 h6 {
   font-family: 'Space Mono', monospace !important;
   font-weight: 700 !important;
-  font-size: 14px !important;
+  font-size: 12px !important;
   line-height: 1.4 !important;
-  margin: 10px 0 6px 0 !important;
+  margin: 8px 0 4px 0 !important;
   color: #888888 !important;
 }
 
@@ -503,13 +501,13 @@ button.vfrc-button:not(.vfrc-header--button) {
 }
 
 /* ==========================================================
-   LISTES (ul/ol)
+   LISTES (ul/ol) — compact
    ========================================================== */
 .vfrc-message ul, .vfrc-message ol,
 .vfrc-message .markdown ul, .vfrc-message .markdown ol,
 ._11kfxpg0 ul, ._11kfxpg0 ol {
-  margin: 10px 0 !important;
-  padding-left: 24px !important;
+  margin: 6px 0 !important;
+  padding-left: 20px !important;
   list-style-position: outside !important;
 }
 
@@ -523,11 +521,11 @@ button.vfrc-button:not(.vfrc-header--button) {
 
 .vfrc-message li, .vfrc-message .markdown li, ._11kfxpg0 li {
   font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif !important;
-  font-size: 15px !important;
+  font-size: 13px !important;
   font-weight: 400 !important;
-  line-height: 1.6 !important;
-  margin-bottom: 6px !important;
-  padding-left: 6px !important;
+  line-height: 1.55 !important;
+  margin-bottom: 4px !important;
+  padding-left: 4px !important;
   display: list-item !important;
   position: relative !important;
   list-style: none !important;
@@ -538,20 +536,20 @@ button.vfrc-button:not(.vfrc-header--button) {
   margin-bottom: 0 !important;
 }
 
-/* Puce custom rouge */
+/* Puce custom rouge — plus petite */
 .vfrc-message .markdown ul li::before,
 .vfrc-message ul li::before,
 ._11kfxpg0 ul li::before,
 .markdown ul li::before {
   content: "" !important;
-  height: 6px !important;
-  width: 6px !important;
+  height: 5px !important;
+  width: 5px !important;
   background-color: #FF3333 !important;
   border-radius: 50% !important;
   position: absolute !important;
   left: 0 !important;
-  top: 0.7em !important;
-  transform: translateX(-16px) !important;
+  top: 0.65em !important;
+  transform: translateX(-14px) !important;
 }
 
 .vfrc-message ol li::marker {
@@ -560,22 +558,22 @@ button.vfrc-button:not(.vfrc-header--button) {
 }
 
 /* ==========================================================
-   BULLES UTILISATEUR — Red gradient plein + décalage avatar
+   BULLES UTILISATEUR — Red gradient plein compact
    ========================================================== */
 .vfrc-user-response > div,
 .vfrc-user-response .vfrc-message,
 ._15emaa40 {
   font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif !important;
   font-weight: 400 !important;
-  font-size: 15px !important;
-  line-height: 1.6 !important;
+  font-size: 13px !important;
+  line-height: 1.55 !important;
   color: #ffffff !important;
   background: linear-gradient(135deg, #FF3333 0%, #CC2929 100%) !important;
   border: none !important;
-  border-radius: 14px !important;
-  padding: 12px 16px !important;
+  border-radius: 12px !important;
+  padding: 10px 14px !important;
   max-width: 85%;
-  box-shadow: 0 0 16px rgba(255, 51, 51, 0.2), 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+  box-shadow: 0 0 14px rgba(255, 51, 51, 0.2), 0 3px 12px rgba(0, 0, 0, 0.4) !important;
   margin-left: auto !important;
 }
 
@@ -586,35 +584,35 @@ button.vfrc-button:not(.vfrc-header--button) {
 }
 
 .vfrc-message:not([class*="extension"]) {
-  margin: 12px 0 !important;
+  margin: 8px 0 !important;
 }
 
 .vfrc-user-response {
-  padding-left: 52px !important;
-  padding-right: 8px !important;
+  padding-left: 42px !important;
+  padding-right: 6px !important;
 }
 
 /* ==========================================================
-   TEXTAREA — Dark input avec glow rouge au focus
+   TEXTAREA — Dark input compact
    ========================================================== */
 textarea.vfrc-chat-input,
 textarea._1gdvh9ta {
   font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif !important;
   font-weight: 400 !important;
-  font-size: 14px !important;
-  line-height: 1.5 !important;
+  font-size: 13px !important;
+  line-height: 1.45 !important;
   width: 100% !important;
   min-width: 200px !important;
-  min-height: 44px !important;
-  max-height: 120px !important;
+  min-height: 36px !important;
+  max-height: 100px !important;
   overflow-y: auto !important;
   resize: vertical !important;
   background: #0E0E0E !important;
   border: 1.5px solid #2A2A2A !important;
-  border-radius: 10px !important;
+  border-radius: 8px !important;
   outline: none !important;
   box-shadow: none !important;
-  padding: 12px 14px !important;
+  padding: 8px 12px !important;
   box-sizing: border-box !important;
   flex: 1 1 auto !important;
   margin-left: 0 !important;
@@ -628,7 +626,7 @@ textarea._1gdvh9ta:focus,
 textarea._1gdvh9ta:focus-visible {
   border: 1.5px solid rgba(255, 51, 51, 0.5) !important;
   outline: none !important;
-  box-shadow: 0 0 12px rgba(255, 51, 51, 0.1), 0 0 0 3px rgba(255, 51, 51, 0.05) !important;
+  box-shadow: 0 0 10px rgba(255, 51, 51, 0.1), 0 0 0 2px rgba(255, 51, 51, 0.05) !important;
   background: #121212 !important;
 }
 
@@ -636,6 +634,7 @@ textarea.vfrc-chat-input::placeholder,
 textarea._1gdvh9ta::placeholder {
   color: #555555 !important;
   font-weight: 400 !important;
+  font-size: 13px !important;
 }
 
 /* ==========================================================
@@ -648,7 +647,7 @@ textarea._1gdvh9ta::placeholder {
 }
 
 .vfrc-chat-dialog__container::-webkit-scrollbar {
-  width: 6px !important;
+  width: 4px !important;
   -webkit-appearance: none !important;
   display: block !important;
 }
@@ -667,8 +666,7 @@ textarea._1gdvh9ta::placeholder {
 }
 
 /* ==========================================================
-   TYPING INDICATOR — Dark premium, pas de double décalage
-   L'avatar dans le system-response crée déjà le décalage
+   TYPING INDICATOR — Dark premium compact
    ========================================================== */
 .vfrc-typing-indicator--container,
 ._1ayyscc0 {
@@ -683,11 +681,11 @@ textarea._1gdvh9ta::placeholder {
 ._1ayyscc1 {
   background: #0A0A0A !important;
   border: 1px solid rgba(255, 51, 51, 0.35) !important;
-  border-radius: 14px !important;
-  padding: 12px 16px !important;
+  border-radius: 10px !important;
+  padding: 8px 12px !important;
   box-shadow: 
-    0 0 18px rgba(255, 51, 51, 0.08),
-    0 4px 16px rgba(0, 0, 0, 0.4) !important;
+    0 0 14px rgba(255, 51, 51, 0.08),
+    0 3px 12px rgba(0, 0, 0, 0.4) !important;
   margin-left: 0 !important;
 }
 
@@ -695,14 +693,14 @@ textarea._1gdvh9ta::placeholder {
 .vfrc-typing-indicator.xaffbq1 {
   display: flex !important;
   align-items: center !important;
-  gap: 5px !important;
+  gap: 4px !important;
 }
 
 .vfrc-typing-indicator span,
 .vfrc-typing-indicator span.xaffbq2 {
   display: block !important;
-  width: 8px !important;
-  height: 8px !important;
+  width: 6px !important;
+  height: 6px !important;
   background: #555555 !important;
   border-radius: 50% !important;
   animation: typingBounce 1.4s ease-in-out infinite !important;
@@ -714,39 +712,39 @@ textarea._1gdvh9ta::placeholder {
 
 @keyframes typingBounce {
   0%, 60%, 100% { transform: translateY(0); background: #555555; }
-  30% { transform: translateY(-8px); background: #FF3333; }
+  30% { transform: translateY(-6px); background: #FF3333; }
 }
 
 /* ==========================================================
-   CAROUSELS & CARDS — Dark premium
+   CAROUSELS & CARDS — Dark premium compact
    ========================================================== */
 .vfrc-carousel, .vfrc-card {
   background: #0A0A0A !important;
   border: 1px solid rgba(255, 51, 51, 0.25) !important;
-  border-radius: 16px !important;
+  border-radius: 12px !important;
   overflow: hidden !important;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  box-shadow: 0 0 18px rgba(255, 51, 51, 0.06), 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+  box-shadow: 0 0 14px rgba(255, 51, 51, 0.06), 0 3px 12px rgba(0, 0, 0, 0.4) !important;
 }
 
 .vfrc-carousel:hover, .vfrc-card:hover {
   border-color: rgba(255, 51, 51, 0.5) !important;
-  box-shadow: 0 0 28px rgba(255, 51, 51, 0.1), 0 8px 28px rgba(0, 0, 0, 0.5) !important;
-  transform: translateY(-4px) !important;
+  box-shadow: 0 0 24px rgba(255, 51, 51, 0.1), 0 6px 20px rgba(0, 0, 0, 0.5) !important;
+  transform: translateY(-3px) !important;
 }
 
 .vfrc-card__title {
   font-family: 'Space Mono', monospace !important;
   font-weight: 700 !important;
-  font-size: 17px !important;
+  font-size: 14px !important;
   color: #F5F0EB !important;
 }
 
 .vfrc-card__description {
   font-family: 'Outfit', sans-serif !important;
-  font-size: 14px !important;
+  font-size: 12px !important;
   color: #888888 !important;
-  line-height: 1.6 !important;
+  line-height: 1.5 !important;
 }
 
 /* ==========================================================
@@ -792,38 +790,39 @@ textarea._1gdvh9ta::placeholder {
 }
 
 /* ==========================================================
-   BLOCKQUOTES — Red accent
+   BLOCKQUOTES — Red accent compact
    ========================================================== */
 .vfrc-message blockquote, ._11kfxpg0 blockquote {
-  border-left: 4px solid #FF3333 !important;
+  border-left: 3px solid #FF3333 !important;
   background: rgba(255, 51, 51, 0.05) !important;
-  padding: 12px 16px !important;
-  margin: 12px 0 !important;
-  border-radius: 0 10px 10px 0 !important;
+  padding: 8px 12px !important;
+  margin: 8px 0 !important;
+  border-radius: 0 8px 8px 0 !important;
   font-style: italic !important;
   color: #888888 !important;
+  font-size: 12px !important;
 }
 
 /* ==========================================================
-   CODE BLOCKS — Dark elevated
+   CODE BLOCKS — Dark elevated compact
    ========================================================== */
 .vfrc-message code, ._11kfxpg0 code {
   font-family: 'Space Mono', 'Fira Code', monospace !important;
-  font-size: 13px !important;
+  font-size: 11px !important;
   background: #151515 !important;
   border: 1px solid rgba(255, 51, 51, 0.2) !important;
-  border-radius: 6px !important;
-  padding: 2px 6px !important;
+  border-radius: 4px !important;
+  padding: 1px 5px !important;
   color: #FFD600 !important;
 }
 
 .vfrc-message pre, ._11kfxpg0 pre {
   background: #0E0E0E !important;
   border: 1px solid rgba(255, 51, 51, 0.2) !important;
-  border-radius: 10px !important;
-  padding: 16px !important;
+  border-radius: 8px !important;
+  padding: 12px !important;
   overflow-x: auto !important;
-  margin: 12px 0 !important;
+  margin: 8px 0 !important;
 }
 
 .vfrc-message pre code {
@@ -837,28 +836,28 @@ textarea._1gdvh9ta::placeholder {
    ========================================================== */
 .vfrc-message hr, ._11kfxpg0 hr {
   border: none !important;
-  height: 2px !important;
+  height: 1px !important;
   background: linear-gradient(90deg, transparent 0%, #FF3333 50%, transparent 100%) !important;
-  margin: 20px 0 !important;
+  margin: 14px 0 !important;
 }
 
 .vfrc-message img, ._11kfxpg0 img {
   max-width: 100% !important;
-  border-radius: 12px !important;
-  margin: 12px 0 !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+  border-radius: 10px !important;
+  margin: 8px 0 !important;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.4) !important;
 }
 
 /* ==========================================================
    ANIMATIONS
    ========================================================== */
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(12px); }
+  from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 .vfrc-message:not([class*="extension"]) {
-  animation: fadeInUp 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  animation: fadeInUp 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 /* ==========================================================
@@ -870,15 +869,15 @@ textarea._1gdvh9ta::placeholder {
   background: linear-gradient(135deg, #FF3333, #CC2929) !important;
   border: none !important;
   border-radius: 50px !important;
-  padding: 12px 24px !important;
-  box-shadow: 0 0 16px rgba(255, 51, 51, 0.25), 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+  padding: 8px 18px !important;
+  box-shadow: 0 0 12px rgba(255, 51, 51, 0.25), 0 3px 12px rgba(0, 0, 0, 0.3) !important;
   cursor: pointer !important;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 #vfrc-start-chat::after, button#vfrc-start-chat::after {
   content: "🔄 Nouvelle analyse" !important;
-  font-size: 13px !important;
+  font-size: 11px !important;
   font-weight: 500 !important;
   color: #ffffff !important;
   white-space: nowrap !important;
@@ -886,8 +885,8 @@ textarea._1gdvh9ta::placeholder {
 
 #vfrc-start-chat:hover, button#vfrc-start-chat:hover {
   background: linear-gradient(135deg, #FF5555, #FF3333) !important;
-  box-shadow: 0 0 24px rgba(255, 51, 51, 0.35), 0 6px 20px rgba(0, 0, 0, 0.4) !important;
-  transform: translateY(-2px) !important;
+  box-shadow: 0 0 20px rgba(255, 51, 51, 0.35), 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+  transform: translateY(-1px) !important;
 }
 
 /* ==========================================================
@@ -895,7 +894,7 @@ textarea._1gdvh9ta::placeholder {
    ========================================================== */
 .vfrc-chat--ended-label, .vfrc-chat-ended, div[class*="ended"] {
   font-family: 'Outfit', sans-serif !important;
-  font-size: 12px !important;
+  font-size: 11px !important;
   color: #555555 !important;
   border-color: #2A2A2A !important;
 }
@@ -906,69 +905,9 @@ textarea._1gdvh9ta::placeholder {
 @media (max-width: 640px) {
   .vfrc-avatar,
   img.vfrc-avatar {
-    width: 36px !important;
-    height: 36px !important;
-    margin-right: 10px !important;
-  }
-
-  .vfrc-chat-dialog__container {
-    padding-left: 12px !important;
-    padding-right: 12px !important;
-  }
-
-  .vfrc-system-response--actions,
-  .vfrc-system-response--actions.g3dqfd6 {
-    margin-left: 46px !important;
-    width: calc(100% - 54px) !important;
-    max-width: calc(100% - 54px) !important;
-  }
-
-  .vfrc-footer {
-    padding: 10px 12px 10px 0 !important;
-  }
-
-  .vfrc-footer__content {
-    margin-left: 46px !important;
-    width: calc(100% - 46px) !important;
-    max-width: calc(100% - 46px) !important;
-  }
-
-  .vfrc-user-response {
-    padding-left: 46px !important;
-  }
-
-  .vfrc-typing-indicator--container-inner,
-  ._1ayyscc1 {
-    margin-left: 0 !important;
-    padding: 10px 14px !important;
-  }
-
-  textarea.vfrc-chat-input, textarea._1gdvh9ta {
-    min-height: 40px !important;
-    padding: 10px 12px !important;
-    font-size: 14px !important;
-  }
-
-  .vfrc-button:not(.vfrc-header--button) {
-    padding: 10px 16px !important;
-    font-size: 12px !important;
-  }
-
-  #vfrc-send-message, .vfrc-chat-input__send {
-    width: 40px !important;
-    height: 40px !important;
-    min-width: 40px !important;
-  }
-}
-
-/* ==========================================================
-   RESPONSIVE TRÈS PETIT (< 400px)
-   ========================================================== */
-@media (max-width: 400px) {
-  .vfrc-avatar,
-  img.vfrc-avatar {
-    width: 32px !important;
-    height: 32px !important;
+    width: 28px !important;
+    height: 28px !important;
+    margin-right: 8px !important;
   }
 
   .vfrc-chat-dialog__container {
@@ -978,23 +917,84 @@ textarea._1gdvh9ta::placeholder {
 
   .vfrc-system-response--actions,
   .vfrc-system-response--actions.g3dqfd6 {
-    margin-left: 40px !important;
-    width: calc(100% - 48px) !important;
-    max-width: calc(100% - 48px) !important;
+    margin-left: 36px !important;
+    width: calc(100% - 42px) !important;
+    max-width: calc(100% - 42px) !important;
   }
 
   .vfrc-footer {
-    padding: 8px 8px 8px 0 !important;
+    padding: 6px 8px 6px 0 !important;
   }
 
   .vfrc-footer__content {
-    margin-left: 40px !important;
-    width: calc(100% - 40px) !important;
-    max-width: calc(100% - 40px) !important;
+    margin-left: 36px !important;
+    width: calc(100% - 36px) !important;
+    max-width: calc(100% - 36px) !important;
   }
 
   .vfrc-user-response {
-    padding-left: 40px !important;
+    padding-left: 36px !important;
+  }
+
+  .vfrc-typing-indicator--container-inner,
+  ._1ayyscc1 {
+    margin-left: 0 !important;
+    padding: 6px 10px !important;
+  }
+
+  textarea.vfrc-chat-input, textarea._1gdvh9ta {
+    min-height: 32px !important;
+    padding: 7px 10px !important;
+    font-size: 12px !important;
+  }
+
+  .vfrc-button:not(.vfrc-header--button) {
+    padding: 7px 12px !important;
+    font-size: 11px !important;
+  }
+
+  #vfrc-send-message, .vfrc-chat-input__send {
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+  }
+}
+
+/* ==========================================================
+   RESPONSIVE TRÈS PETIT (< 400px)
+   ========================================================== */
+@media (max-width: 400px) {
+  .vfrc-avatar,
+  img.vfrc-avatar {
+    width: 24px !important;
+    height: 24px !important;
+    margin-right: 6px !important;
+  }
+
+  .vfrc-chat-dialog__container {
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+  }
+
+  .vfrc-system-response--actions,
+  .vfrc-system-response--actions.g3dqfd6 {
+    margin-left: 30px !important;
+    width: calc(100% - 36px) !important;
+    max-width: calc(100% - 36px) !important;
+  }
+
+  .vfrc-footer {
+    padding: 6px !important;
+  }
+
+  .vfrc-footer__content {
+    margin-left: 30px !important;
+    width: calc(100% - 30px) !important;
+    max-width: calc(100% - 30px) !important;
+  }
+
+  .vfrc-user-response {
+    padding-left: 30px !important;
   }
 
   .vfrc-typing-indicator--container-inner,
