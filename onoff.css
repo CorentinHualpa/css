@@ -47,28 +47,25 @@
 :host {
   background: transparent !important;
 }
+/* Cadre du widget : fond + coins arrondis + clipping.
+ * On NE force PAS height:100% ni flex column : VF V4 gère déjà sa propre hauteur
+ * (popover = panneau dimensionné par VF ; embedded = hauteur du contenu). Forcer
+ * height:100% étirait le widget sur toute la hauteur du conteneur → grand vide au
+ * milieu + hauteur déformée. overflow:hidden + border-radius suffisent pour
+ * arrondir les coins ; le scroll des messages reste géré nativement par VF
+ * (scroll sur un descendant, non bloqué par l'overflow:hidden du cadre). */
 .vfrc-chat,
 .vfrc-chat__container,
 .vfrc-chat__container-inner {
   background: linear-gradient(150deg, #fafafa 0%, #bae6fd 100%) !important;
   border-radius: 20px !important;
   overflow: hidden !important;
-  /* Chaîne fill-height (sinon le widget VF se dimensionne à la hauteur du CONTENU
-   * en export sans dragon-theme → carte trop courte + overflow:hidden qui clippe
-   * les messages). Réplique dragon-theme lignes 162-189. */
-  height: 100% !important;
-  min-height: 0 !important;
-  display: flex !important;
-  flex-direction: column !important;
 }
-/* La liste des messages scrolle DANS le cadre (flex:1 + son propre overflow),
- * au lieu de pousser le footer hors écran. */
+/* Pas de débordement horizontal dans la liste des messages. */
 .vfrc-chat--dialog,
 .vfrc-chat-dialog,
 .vfrc-chat-dialog__container {
-  flex: 1 1 auto !important;
-  min-height: 0 !important;
-  overflow-y: auto !important;
+  overflow-x: hidden !important;
 }
 
 
@@ -235,6 +232,7 @@ div.vfrc-input-container {
   align-items: center !important;
   min-width: 0 !important;
   padding: 2px 4px 2px 10px !important;
+  overflow: hidden !important;
 }
 /* Wrappers internes : centrage vertical du textarea et du send */
 .vfrc-chat-input__container-inner,
@@ -243,6 +241,7 @@ div.vfrc-input-container {
   display: flex !important;
   align-items: center !important;
   min-width: 0 !important;
+  overflow: hidden !important;
 }
 .vfrc-chat-input__actions,
 ._1gdvh9td {
@@ -290,6 +289,10 @@ textarea._1gdvh9ta,
   border: none !important;
   border-radius: 0 !important;
   resize: none !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
   caret-color: #4B70FA !important;
   outline: none !important;
   box-shadow: none !important;
