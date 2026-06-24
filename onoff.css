@@ -47,24 +47,31 @@
 :host {
   background: transparent !important;
 }
-/* Cadre du widget : fond + coins arrondis + clipping.
- * On NE force PAS height:100% ni flex column : VF V4 gère déjà sa propre hauteur
- * (popover = panneau dimensionné par VF ; embedded = hauteur du contenu). Forcer
- * height:100% étirait le widget sur toute la hauteur du conteneur → grand vide au
- * milieu + hauteur déformée. overflow:hidden + border-radius suffisent pour
- * arrondir les coins ; le scroll des messages reste géré nativement par VF
- * (scroll sur un descendant, non bloqué par l'overflow:hidden du cadre). */
+/* Cadre du widget : fond + coins arrondis + clipping + hauteur = CONTENU.
+ * height:auto (au lieu de 100%) → le cadre épouse la hauteur de son contenu au
+ * lieu de remplir tout le conteneur VF (souvent très haut → grand vide). Le bg
+ * du thème n'est donc peint que sur la zone réellement occupée.
+ * max-height:100% + liste de messages scrollable → si la conversation s'allonge,
+ * c'est la liste qui scrolle, le cadre ne déborde pas du conteneur.
+ * flex column garde le footer (saisie) collé juste sous les messages. */
 .vfrc-chat,
 .vfrc-chat__container,
 .vfrc-chat__container-inner {
   background: linear-gradient(150deg, #fafafa 0%, #bae6fd 100%) !important;
   border-radius: 20px !important;
   overflow: hidden !important;
+  height: auto !important;
+  max-height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
 }
-/* Pas de débordement horizontal dans la liste des messages. */
+/* Liste des messages : prend la place dispo, scroll vertical si besoin, jamais
+ * horizontal. flex-shrink permet de scroller quand le cadre atteint max-height. */
 .vfrc-chat--dialog,
 .vfrc-chat-dialog,
 .vfrc-chat-dialog__container {
+  min-height: 0 !important;
+  overflow-y: auto !important;
   overflow-x: hidden !important;
 }
 
