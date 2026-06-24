@@ -35,13 +35,40 @@
   color: #121521 !important;
 }
 
-/* ── Background widget
- * .vfrc-widget n'existe pas dans VF V4 — on cible :host (shadow host) +
- * .vfrc-chat (container principal) + .vfrc-chat__container-inner (wrapper VF) */
-:host,
+/* ── Background widget + transparence des coins (mode flottant)
+ * IMPORTANT : :host doit rester TRANSPARENT. En mode popover/widget flottant,
+ * le host est un rectangle ; s'il porte le fond, ses coins carrés débordent
+ * derrière le cadre arrondi VF → "coins pas transparents" (bug récurrent en prod).
+ * Le fond va donc sur le cadre (.vfrc-chat / __container-inner), qui reçoit AUSSI
+ * border-radius + overflow:hidden pour clipper son contenu à la forme arrondie.
+ * En mode embedded plein conteneur, .vfrc-chat remplit le host (height:100%) →
+ * aucun écart visible. Cette règle est AUTONOME : sans dragon-theme en base,
+ * c'est elle qui dessine le fond ET l'arrondi du cadre. */
+:host {
+  background: transparent !important;
+}
 .vfrc-chat,
+.vfrc-chat__container,
 .vfrc-chat__container-inner {
   background: linear-gradient(150deg, #fafafa 0%, #bae6fd 100%) !important;
+  border-radius: 20px !important;
+  overflow: hidden !important;
+  /* Chaîne fill-height (sinon le widget VF se dimensionne à la hauteur du CONTENU
+   * en export sans dragon-theme → carte trop courte + overflow:hidden qui clippe
+   * les messages). Réplique dragon-theme lignes 162-189. */
+  height: 100% !important;
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+/* La liste des messages scrolle DANS le cadre (flex:1 + son propre overflow),
+ * au lieu de pousser le footer hors écran. */
+.vfrc-chat--dialog,
+.vfrc-chat-dialog,
+.vfrc-chat-dialog__container {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  overflow-y: auto !important;
 }
 
 
@@ -177,11 +204,23 @@ button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-cha
 }
 
 /* ── Zone de saisie */
-/* ── Input zone — bg + border sur le CONTENEUR (pas le textarea)
- * Structure VF V4 : ._1gdvh9t2 (.vfrc-input-container) est le bloc visuel.
- * Il contient ._1gdvh9tc (inner flex:1 → textarea) + ._1gdvh9td (actions → send).
- * En mettant le fond/bordure sur le conteneur, l'encart est TOUJOURS pleine
- * largeur même si la classe hachée du textarea a changé. */
+/* ── Zone de saisie — layout AUTONOME (ne dépend pas de dragon-theme)
+ * VF V4 imbrique 3 niveaux :
+ *   .vfrc-chat-input__container (._1gdvh9t0)  → la ROW [encart + send]
+ *   .vfrc-input-container       (._1gdvh9t2)  → l'encart bordé (textarea)
+ *   .vfrc-chat-input__container-inner (._1gdvh9tc) → wrap du textarea
+ *   .vfrc-chat-input__actions   (._1gdvh9td)  → wrap du bouton send
+ * Il faut poser display:flex + align-items:center sur CHAQUE niveau, sinon le
+ * placeholder "Message…" n'est pas centré verticalement (bug en prod sans la
+ * base dragon-theme qui posait ce layout). */
+.vfrc-chat-input__container,
+._1gdvh9t0 {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+/* Encart bordé — fond/bordure sur le CONTENEUR (pas le textarea), toujours
+ * pleine largeur même si la classe hachée du textarea a changé. */
 .vfrc-input-container,
 ._1gdvh9t2,
 ._1gdvh9t3,
@@ -195,9 +234,22 @@ div.vfrc-input-container {
   flex: 1 1 auto !important;
   align-items: center !important;
   min-width: 0 !important;
-  padding: 4px !important;
+  padding: 2px 4px 2px 10px !important;
 }
-/* Kill shimmer ::before de dragon-theme */
+/* Wrappers internes : centrage vertical du textarea et du send */
+.vfrc-chat-input__container-inner,
+._1gdvh9tc {
+  flex: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  min-width: 0 !important;
+}
+.vfrc-chat-input__actions,
+._1gdvh9td {
+  display: flex !important;
+  align-items: center !important;
+}
+/* Kill shimmer ::before (animation inputShine de dragon-theme) */
 .vfrc-input-container::before,
 ._1gdvh9t2::before,
 ._1gdvh9t3::before {
@@ -215,8 +267,9 @@ div.vfrc-input-container {
   outline: none !important;
   animation: none !important;
 }
-/* ── Textarea — transparent, fond/bordure viennent du conteneur.
- * Sélecteurs multiples : classe stable + classe hachée + fallbacks descendants */
+/* ── Textarea — transparent + texte VERTICALEMENT CENTRÉ.
+ * min-height + padding symétrique + line-height = "Message…" au milieu de
+ * l'encart, quelle que soit la hauteur du bouton send à côté. */
 textarea.vfrc-chat-input,
 textarea._1gdvh9ta,
 .vfrc-input-container textarea,
@@ -225,12 +278,18 @@ textarea._1gdvh9ta,
 .vfrc-chat-input__container-inner textarea {
   flex: 1 !important;
   min-width: 0 !important;
+  min-height: 40px !important;
+  max-height: 120px !important;
   background: transparent !important;
   color: #121521 !important;
   font-family: 'DM Sans', sans-serif !important;
   font-size: 14px !important;
+  line-height: 1.5 !important;
+  padding: 10px 8px !important;
+  margin: 0 !important;
   border: none !important;
   border-radius: 0 !important;
+  resize: none !important;
   caret-color: #4B70FA !important;
   outline: none !important;
   box-shadow: none !important;
@@ -285,15 +344,60 @@ textarea._1gdvh9ta::placeholder,
 }
 
 /* ── Loader "Thinking…" */
-/* ── Loader "Thinking…" — recoloré aux couleurs du thème */
-/* Dragon-theme l'imposait en violet/orange hardcodé. On remplace */
-/* le fond, le ring conic-gradient et le dot central. */
-.vfrc-loader-with-text {
+@keyframes framlyLoaderSpin { to { transform: rotate(360deg); } }
+.vfrc-loader-with-text,
+[class*="loader-with-text"] {
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0 !important;
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  min-height: 32px !important;
+  max-width: 32px !important;
+  max-height: 32px !important;
+  padding: 0 !important;
+  margin: 8px 0 !important;
   background: rgba(250, 250, 250, 0.95) !important;
+  border: none !important;
+  border-radius: 50% !important;
   box-shadow: 0 0 16px -4px rgba(75, 112, 250, 0.5), 0 0 0 1px rgba(75, 112, 250, 0.22) !important;
+  overflow: hidden !important;
+  font-size: 0 !important;
+  color: transparent !important;
   animation: none !important;
 }
-.vfrc-loader-with-text::before {
+/* Masque le contenu natif VF (texte "Thinking…" + spinner img/svg par défaut)
+ * que dragon-theme cachait. En export sans dragon-theme, font-size:0 sur le
+ * ROOT seul ne suffit pas : un enfant peut redéclarer font-size, et ça ne cache
+ * pas une <img>/<svg>. On collapse les enfants + on tue le spinner natif.
+ * (> * ne matche jamais ::before/::after → l'anneau + le dot survivent.) */
+.vfrc-loader-with-text > *,
+[class*="loader-with-text"] > * {
+  font-size: 0 !important;
+  color: transparent !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  visibility: hidden !important;
+}
+.vfrc-loader-with-text img,
+.vfrc-loader-with-text svg,
+[class*="loader-with-text"] img,
+[class*="loader-with-text"] svg {
+  display: none !important;
+}
+/* L'anneau conique qui tourne (le "loader") */
+.vfrc-loader-with-text::before,
+[class*="loader-with-text"]::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 4px !important;
+  border-radius: 50% !important;
   background: conic-gradient(
     from 0deg,
     transparent 0deg,
@@ -302,10 +406,24 @@ textarea._1gdvh9ta::placeholder,
     #4B70FA 300deg,
     #4B70FA 360deg
   ) !important;
+  -webkit-mask: radial-gradient(circle, transparent 55%, #000 57%) !important;
+  mask: radial-gradient(circle, transparent 55%, #000 57%) !important;
+  animation: framlyLoaderSpin 1.1s linear infinite !important;
 }
-.vfrc-loader-with-text::after {
+/* Point central plein pour le contraste */
+.vfrc-loader-with-text::after,
+[class*="loader-with-text"]::after {
+  content: "" !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: 4px !important;
+  height: 4px !important;
+  margin: -2px 0 0 -2px !important;
+  border-radius: 50% !important;
   background: #4B70FA !important;
   box-shadow: 0 0 8px -1px rgba(75, 112, 250, 0.8) !important;
+  animation: none !important;
 }
 
 /* ── Scrollbar */
