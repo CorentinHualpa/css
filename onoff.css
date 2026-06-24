@@ -1,0 +1,387 @@
+/* Framly stylesheet — Voiceflow widget overrides
+ * Sélecteurs alignés sur le DOM réel VF V4 (référence : dragon-theme.css).
+ * Ce bloc est injecté APRÈS dragon-theme dans le blob stylesheet —
+ * source-order + spécificité identique = Framly gagne sur toutes les props !important.
+ *
+ * Règle clé sur les backgrounds : les backgrounds CSS ne s'héritent PAS.
+ * Il faut cibler CHAQUE élément qui a son propre background dans dragon-theme. */
+
+/* ── Typo + couleur de texte globale (shadow DOM)
+ *
+ * Dragon-theme définit --font-body / --font-heading sur
+ * ":host, :root, .vfrc-widget, .vfrc-chat" et les réutilise avec
+ * "font-family: var(--font-body) !important" sur des dizaines d'éléments.
+ * Pour override la police partout :
+ *   1. Cibler le MÊME ensemble de sélecteurs (incl. :root = shadow root)
+ *   2. Redéfinir --font-body + --font-heading → tous les var() prennent
+ *      la police du thème sans avoir à lister chaque élément.
+ *   3. Source order : notre CSS vient après dragon-theme dans le blob → gain.
+ *
+ * :host = shadow host (hors shadow tree)
+ * :root = shadow root (racine du shadow tree — parent direct de tous les éléments)
+ * .vfrc-chat = container principal VF V4
+ *
+ * color ici override le texte non explicitement stylé (timestamps, labels, etc.)
+ * — critique pour les thèmes light. */
+:host,
+:root,
+.vfrc-chat {
+  --font-body: 'DM Sans', sans-serif;
+  --font-heading: 'DM Sans', sans-serif;
+  --text-primary: #121521;
+  --text-secondary: rgba(18, 21, 33, 0.65);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: #121521 !important;
+}
+
+/* ── Background widget
+ * .vfrc-widget n'existe pas dans VF V4 — on cible :host (shadow host) +
+ * .vfrc-chat (container principal) + .vfrc-chat__container-inner (wrapper VF) */
+:host,
+.vfrc-chat,
+.vfrc-chat__container-inner {
+  background: linear-gradient(150deg, #fafafa 0%, #bae6fd 100%) !important;
+}
+
+
+/* ── Bulles bot */
+/* Dragon-theme injecte backdrop-filter: blur(14px) sur les bulles bot via son
+ * effet glass (même avec un fond opaque la valeur computed reste "blur(14px)").
+ * Sélecteur renforcé à spécificité 0,4,0 (dragon = 0,3,0) via :not([class*="vfrc-user"])
+ * toujours vrai pour les bulles bot → victoire garantie sur le backdrop-filter
+ * quelle que soit la position dans le blob stylesheet. */
+.vfrc-system-response .vfrc-message:not([class*="extension"]):not([class*="vfrc-user"]),
+._11kfxpg0 {
+  background: #ececee !important;
+  color: #121521 !important;
+  border-radius: 20px 20px 20px 4px !important;
+  border: 1px solid rgba(18, 21, 33, 0.1) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* ── Bulles bot : enfants p / span / strong
+ * Dragon-theme force color via var(--text-primary) sur les <p> (spécificité 0,4,1)
+ * et color: #ffffff hardcodé sur <strong> (pas de variable → var() ne suffit pas).
+ * L'override de --text-primary dans le bloc :root ci-dessus couvre les var(),
+ * mais on ajoute aussi des sélecteurs directs pour éviter tout cache stale
+ * et pour écraser le #ffffff hardcodé sur <strong>. */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) p,
+.vfrc-system-response .vfrc-message:not([class*="extension"]) span,
+._11kfxpg0 p,
+._11kfxpg0 span {
+  color: #121521 !important;
+}
+.vfrc-system-response .vfrc-message:not([class*="extension"]) strong,
+._11kfxpg0 strong {
+  color: #4B70FA !important;
+}
+
+/* ── Bulles bot : hover
+ * Dragon-theme injecte rgba(124,58,237,0.4) au hover — violet hardcodé.
+ * On le neutralise en gardant exactement la même border-color que le
+ * state normal (text @ 10 %) → aucun changement visuel au hover.
+ * Le sélecteur reste obligatoire pour écraser dragon avec !important. */
+.vfrc-system-response .vfrc-message:not([class*="extension"]):not([class*="vfrc-user"]):hover,
+._11kfxpg0:hover {
+  border-color: rgba(18, 21, 33, 0.1) !important;
+}
+
+/* ── Overlay background (mode chat flottant)
+ * Dragon-theme applique backdrop-filter: blur(4px) sur l'overlay derrière
+ * le widget en mode "chat". Contribue au "trop de blur" général.
+ * On supprime systématiquement — l'overlay garde son fond semi-opaque
+ * (rgba(10,10,11,0.8)) mais sans blur. */
+.vfrc-chat--overlay,
+._5x612k3,
+._5x612k4 {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* ── Bulles utilisateur */
+.vfrc-user-response > div,
+.vfrc-user-response .vfrc-message,
+._15emaa40 {
+  border-radius: 20px !important;
+  box-shadow: none !important;
+  background: rgba(75, 112, 250, 0.15) !important;
+  border: 1px solid rgba(75, 112, 250, 0.45) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  color: #121521 !important;
+}
+/* Les éléments enfants des bulles user (p, span, a…) héritent la couleur
+ * du container. On force ici pour éviter que dragon-theme override avec
+ * color:#ffffff sur .vfrc-user-response > div * */
+.vfrc-user-response > div *,
+.vfrc-user-response .vfrc-message * {
+  color: #121521 !important;
+}
+
+/* ── Footer background
+ * ATTENTION : il faut cibler .vfrc-footer__content (enfant) en plus de
+ * .vfrc-footer (parent) — dragon-theme met le gradient dark sur __content,
+ * pas sur .vfrc-footer lui-même. Les backgrounds ne s'héritent pas. */
+.vfrc-footer,
+.vfrc-footer__content,
+._1vj16245 {
+  background: #fafafa !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border-top: 1px solid rgba(18, 21, 33, 0.08) !important;
+}
+/* Masquer le trait gradient "Cosmic Premium" que dragon-theme injecte via ::before */
+.vfrc-footer__content::before,
+._1vj16245::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* ── Boutons / choices
+ * Sélecteur miroir de dragon-theme lignes 1027-1028 : même spécificité (1,7,0)
+ * → source-order fait gagner Framly (qui arrive après dragon-theme dans le blob).
+ * box-shadow: none — efface le glow violet de dragon sur thèmes sans glow.
+ * backdrop-filter: none (sauf glass) — supprime le blur violet de dragon sur tous les boutons. */
+.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3),
+button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3),
+[class*="dragon-ask-btn"],
+[class*="dragon-choice"] {
+  background: rgba(75, 112, 250, 0.12) !important;
+  border: 1px solid rgba(75, 112, 250, 0.4) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  color: #121521 !important;
+  border-radius: 999px !important;
+  font-weight: 600 !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+}
+
+/* ── Boutons hover — même sélecteur + :hover
+ * Dragon-theme hover = violet gradient + text blanc + glow orange → complètement
+ * hors-thème sur light presets (Ghost, Miel, Silk…) et dark non-dragon.
+ * On override avec les couleurs du thème ; le translateY(-2px) de dragon est conservé. */
+.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3):hover,
+button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3):hover,
+[class*="dragon-ask-btn"]:hover,
+[class*="dragon-choice"]:hover {
+  background: rgba(75, 112, 250, 0.22) !important;
+  border: 1px solid rgba(75, 112, 250, 0.6) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  color: #121521 !important;
+  box-shadow: 0 4px 12px -4px rgba(75, 112, 250, 0.28) !important;
+}
+
+/* ── Zone de saisie */
+/* ── Input zone — bg + border sur le CONTENEUR (pas le textarea)
+ * Structure VF V4 : ._1gdvh9t2 (.vfrc-input-container) est le bloc visuel.
+ * Il contient ._1gdvh9tc (inner flex:1 → textarea) + ._1gdvh9td (actions → send).
+ * En mettant le fond/bordure sur le conteneur, l'encart est TOUJOURS pleine
+ * largeur même si la classe hachée du textarea a changé. */
+.vfrc-input-container,
+._1gdvh9t2,
+._1gdvh9t3,
+div.vfrc-input-container {
+  background: rgba(250, 250, 250, 0.95) !important;
+  border: 1px solid rgba(75, 112, 250, 0.28) !important;
+  border-radius: 18px !important;
+  box-shadow: none !important;
+  animation: none !important;
+  display: flex !important;
+  flex: 1 1 auto !important;
+  align-items: center !important;
+  min-width: 0 !important;
+  padding: 4px !important;
+}
+/* Kill shimmer ::before de dragon-theme */
+.vfrc-input-container::before,
+._1gdvh9t2::before,
+._1gdvh9t3::before {
+  display: none !important;
+  animation: none !important;
+  content: none !important;
+}
+/* Focus ring sur le conteneur (pas le textarea) */
+.vfrc-input-container:focus-within,
+._1gdvh9t2:focus-within,
+._1gdvh9t3:focus-within {
+  border-color: #4B70FA !important;
+  box-shadow: 0 0 0 3px rgba(75, 112, 250, 0.12) !important;
+  background: rgba(250, 250, 250, 0.95) !important;
+  outline: none !important;
+  animation: none !important;
+}
+/* ── Textarea — transparent, fond/bordure viennent du conteneur.
+ * Sélecteurs multiples : classe stable + classe hachée + fallbacks descendants */
+textarea.vfrc-chat-input,
+textarea._1gdvh9ta,
+.vfrc-input-container textarea,
+._1gdvh9t2 textarea,
+._1gdvh9tc textarea,
+.vfrc-chat-input__container-inner textarea {
+  flex: 1 !important;
+  min-width: 0 !important;
+  background: transparent !important;
+  color: #121521 !important;
+  font-family: 'DM Sans', sans-serif !important;
+  font-size: 14px !important;
+  border: none !important;
+  border-radius: 0 !important;
+  caret-color: #4B70FA !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+textarea.vfrc-chat-input:focus,
+textarea.vfrc-chat-input:focus-visible,
+textarea._1gdvh9ta:focus,
+textarea._1gdvh9ta:focus-visible,
+.vfrc-input-container textarea:focus,
+._1gdvh9t2 textarea:focus {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+textarea.vfrc-chat-input::placeholder,
+textarea._1gdvh9ta::placeholder,
+.vfrc-input-container textarea::placeholder,
+._1gdvh9t2 textarea::placeholder {
+  color: rgba(18, 21, 33, 0.42) !important;
+}
+
+/* ── Bouton envoi */
+/* ._1gdvh9tf = classe hachée VF du send button, ciblée par dragon-theme */
+#vfrc-send-message:not([disabled]),
+.vfrc-chat-input__send:not(.vfrc-chat-input__voice-mode):not([disabled]),
+._1gdvh9tf:not([disabled]) {
+  background: #4B70FA !important;
+  border: none !important;
+  border-radius: 14px !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+  animation: none !important;
+}
+#vfrc-send-message:not([disabled]):hover,
+.vfrc-chat-input__send:not([disabled]):hover,
+._1gdvh9tf:not([disabled]):hover {
+  box-shadow: 0 4px 12px -4px rgba(75, 112, 250, 0.35) !important;
+}
+#vfrc-send-message[disabled],
+.vfrc-chat-input__send:not(.vfrc-chat-input__voice-mode)[disabled],
+._1gdvh9tf[disabled] {
+  background: rgba(75, 112, 250, 0.1) !important;
+  border: 1px solid rgba(75, 112, 250, 0.18) !important;
+  border-radius: 14px !important;
+  animation: none !important;
+}
+
+/* ── Typing indicator */
+.vfrc-typing-indicator > *,
+.vfrc-typing-indicator span {
+  background: #4B70FA !important;
+}
+
+/* ── Loader "Thinking…" */
+/* ── Loader "Thinking…" — recoloré aux couleurs du thème */
+/* Dragon-theme l'imposait en violet/orange hardcodé. On remplace */
+/* le fond, le ring conic-gradient et le dot central. */
+.vfrc-loader-with-text {
+  background: rgba(250, 250, 250, 0.95) !important;
+  box-shadow: 0 0 16px -4px rgba(75, 112, 250, 0.5), 0 0 0 1px rgba(75, 112, 250, 0.22) !important;
+  animation: none !important;
+}
+.vfrc-loader-with-text::before {
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(75, 112, 250, 0.15) 60deg,
+    rgba(75, 112, 250, 0.55) 180deg,
+    #4B70FA 300deg,
+    #4B70FA 360deg
+  ) !important;
+}
+.vfrc-loader-with-text::after {
+  background: #4B70FA !important;
+  box-shadow: 0 0 8px -1px rgba(75, 112, 250, 0.8) !important;
+}
+
+/* ── Scrollbar */
+.vfrc-chat--dialog,
+.vfrc-chat-dialog,
+.vfrc-chat-dialog__container {
+  scrollbar-width: none !important;
+}
+.vfrc-chat--dialog::-webkit-scrollbar,
+.vfrc-chat-dialog::-webkit-scrollbar,
+.vfrc-chat-dialog__container::-webkit-scrollbar {
+  width: 0 !important;
+  display: none !important;
+}
+
+/* ── Launcher (mode "chat" flottant uniquement) */
+.vfrc-launcher {
+  background: #4B70FA !important;
+  border-radius: 40px;
+}
+
+/* ── Éléments d'interface (preset: soft-light) */
+.vfrc-system-response .vfrc-message:not([class*="extension"]):not([class*="vfrc-user"]),
+._11kfxpg0 {
+  background: #FFFFFF !important;
+  color: #1a1a2e !important;
+  border: 1px solid rgba(0,0,0,0.09) !important;
+  border-radius: 20px !important;
+}
+.vfrc-system-response .vfrc-message:not([class*="extension"]) p,
+.vfrc-system-response .vfrc-message:not([class*="extension"]) span,
+.vfrc-system-response .vfrc-message:not([class*="extension"]) strong {
+  color: #1a1a2e !important;
+}
+.vfrc-user-response > div,
+.vfrc-user-response .vfrc-message {
+  background: #4B70FA !important;
+  color: #ffffff !important;
+  border: 0px solid transparent !important;
+  border-radius: 20px !important;
+}
+.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3) {
+  background: #4B70FA !important;
+  color: #FFFFFF !important;
+  border: 1px solid #fcfcfc !important;
+  border-radius: 999px !important;
+  transition: all 0.15s ease !important;
+}
+.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3):hover {
+  filter: brightness(0.82) !important;
+}
+.vfrc-input-container,
+._1gdvh9t2,
+._1gdvh9t3,
+div.vfrc-input-container {
+  background: #ffffff !important;
+  border: 1px solid rgba(75, 112, 250, 0.35) !important;
+  border-radius: 14px !important;
+}
+.vfrc-input-container:focus-within,
+._1gdvh9t2:focus-within {
+  border-color: #4B70FA !important;
+  box-shadow: 0 0 0 3px rgba(75, 112, 250, 0.12) !important;
+}
+textarea.vfrc-chat-input,
+textarea._1gdvh9ta,
+.vfrc-input-container textarea {
+  color: #1a1a2e !important;
+}
+textarea.vfrc-chat-input::placeholder,
+textarea._1gdvh9ta::placeholder {
+  color: rgba(26, 26, 46, 0.4) !important;
+}
+
+/* Bordure subtile pour garder les bulles bot visibles sur fond glacé */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) {
+  border: 1px solid rgba(14,165,233,0.20) !important;
+  box-shadow: 0 1px 6px rgba(14,165,233,0.10) !important;
+}
