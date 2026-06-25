@@ -47,29 +47,35 @@
 :host {
   background: transparent !important;
 }
-/* Cadre du widget : fond + coins arrondis + clipping + hauteur = CONTENU.
- * height:auto (au lieu de 100%) → le cadre épouse la hauteur de son contenu au
- * lieu de remplir tout le conteneur VF (souvent très haut → grand vide). Le bg
- * du thème n'est donc peint que sur la zone réellement occupée.
- * max-height:100% + liste de messages scrollable → si la conversation s'allonge,
- * c'est la liste qui scrolle, le cadre ne déborde pas du conteneur.
- * flex column garde le footer (saisie) collé juste sous les messages. */
+/* Cadre du widget : fond + coins arrondis + clipping + layout chat STANDARD.
+ * height:100% + flex column + dialog flex:1 → la SAISIE est collée en bas, la
+ * liste de messages remplit le haut et scrolle si besoin. Comportement standard
+ * de tout widget de chat ; le "vide" quand il y a peu de messages est normal.
+ * La HAUTEUR GLOBALE du widget vient de son conteneur (container.height en
+ * embedded ; panneau VF en popover) — pas de ce CSS. */
 .vfrc-chat,
 .vfrc-chat__container,
 .vfrc-chat__container-inner {
   background: linear-gradient(150deg, #fafafa 0%, #bae6fd 100%) !important;
   border-radius: 20px !important;
   overflow: hidden !important;
-  height: auto !important;
-  max-height: 100% !important;
+  height: 100% !important;
+  /* Plafond de hauteur = hauteur configurée du widget (borné au viewport).
+   * Empêche le widget de s'étirer démesurément quand son conteneur/panneau VF
+   * est très haut (popover plein écran) tout en laissant le layout standard
+   * (saisie en bas, messages qui scrollent). Sans ça, height:100% suit
+   * aveuglément un conteneur trop grand → hauteur "déformée". */
+  max-height: min(600px, 92vh) !important;
+  min-height: 0 !important;
   display: flex !important;
   flex-direction: column !important;
 }
-/* Liste des messages : prend la place dispo, scroll vertical si besoin, jamais
- * horizontal. flex-shrink permet de scroller quand le cadre atteint max-height. */
+/* Liste des messages : remplit l'espace dispo, scroll vertical si besoin,
+ * jamais horizontal. */
 .vfrc-chat--dialog,
 .vfrc-chat-dialog,
 .vfrc-chat-dialog__container {
+  flex: 1 1 auto !important;
   min-height: 0 !important;
   overflow-y: auto !important;
   overflow-x: hidden !important;
