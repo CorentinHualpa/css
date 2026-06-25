@@ -60,12 +60,6 @@
   border-radius: 20px !important;
   overflow: hidden !important;
   height: 100% !important;
-  /* Plafond de hauteur = hauteur configurée du widget (borné au viewport).
-   * Empêche le widget de s'étirer démesurément quand son conteneur/panneau VF
-   * est très haut (popover plein écran) tout en laissant le layout standard
-   * (saisie en bas, messages qui scrollent). Sans ça, height:100% suit
-   * aveuglément un conteneur trop grand → hauteur "déformée". */
-  max-height: min(600px, 92vh) !important;
   min-height: 0 !important;
   display: flex !important;
   flex-direction: column !important;
