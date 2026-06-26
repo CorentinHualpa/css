@@ -1,4 +1,4 @@
-/* Framly build ce0ae85 — colle ce CSS tel quel. Le tag ci-dessus = la version (identique à celle affichée en haut à gauche de Framly). */
+/* Framly build d3c1554 — colle ce CSS tel quel. Le tag ci-dessus = la version (identique à celle affichée en haut à gauche de Framly). */
 /* Framly stylesheet — Voiceflow widget overrides
  * Sélecteurs alignés sur le DOM réel VF V4 (référence : dragon-theme.css).
  * Ce bloc est injecté APRÈS dragon-theme dans le blob stylesheet —
@@ -73,6 +73,22 @@
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+}
+/* PANNEAU popover : en prod VF le positionne en ABSOLUTE avec un inset (top:0 →
+ * collé en haut, quasi pleine hauteur). Deux conséquences :
+ *   1. .vfrc-widget flex-center NE PEUT PAS le recentrer (un absolute est hors du
+ *      flux flex) → popover collé en haut.
+ *   2. Ses bornes décalées par l'inset font que cliquer la zone de SAISIE tombe
+ *      sur l'overlay (.vfrc-popper__overlay) → le popup se FERME au clic.
+ * Fix unique : on le repasse en STATIC + on efface inset/transform. Il redevient
+ * un enfant flex de .vfrc-widget → centré par le bloc ci-dessus, et ses bornes =
+ * son visuel (la saisie est cliquable sans fermer). En embedded (aperçu) il est
+ * déjà static → aucun effet, la boîte centrée reste intacte. */
+.vfrc-chat__container,
+.vfrc-chat__container-inner {
+  position: static !important;
+  inset: auto !important;
+  transform: none !important;
 }
 .vfrc-chat,
 .vfrc-chat__container,
