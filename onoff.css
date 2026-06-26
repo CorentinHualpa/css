@@ -1,3 +1,4 @@
+/* Framly build 82f01e9 — colle ce CSS tel quel. Le tag ci-dessus = la version (identique à celle affichée en haut à gauche de Framly). */
 /* Framly stylesheet — Voiceflow widget overrides
  * Sélecteurs alignés sur le DOM réel VF V4 (référence : dragon-theme.css).
  * Ce bloc est injecté APRÈS dragon-theme dans le blob stylesheet —
@@ -73,7 +74,7 @@
   max-height: min(600px, 92vh) !important;
   min-height: 0 !important;
   width: 100% !important;
-  max-width: 100% !important;
+  max-width: min(100%, 480px) !important;
   padding: 0 !important;
   margin: 0 !important;
   gap: 0 !important;
