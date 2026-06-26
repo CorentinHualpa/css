@@ -1,1175 +1,399 @@
-/* ==========================================================
-   Revolution Agency × Voiceflow — Thème Fondu v1.9
-   
-   Design : Intégration seamless dans landing page sombre
-   Couleurs : Violet → Fuchsia → Rose → Orange
-   Fonts : Syne (titres) + Outfit (corps)
-   Style : Glassmorphism, pas de header, pas de bordures
-   
-   v1.7 - Questions distinctives avec classe .revo-question
-   v1.8 - Barre de progression avec classe .revo-progress
-   v1.9 - Typing indicator stylisé + points progress plus visibles
-   ========================================================== */
+/* Framly build e9b60c8 — colle ce CSS tel quel. Le tag ci-dessus = la version (identique à celle affichée en haut à gauche de Framly). */
+/* Framly stylesheet — Voiceflow widget overrides
+ * Sélecteurs alignés sur le DOM réel VF V4 (référence : dragon-theme.css).
+ * Ce bloc est injecté APRÈS dragon-theme dans le blob stylesheet —
+ * source-order + spécificité identique = Framly gagne sur toutes les props !important.
+ *
+ * Règle clé sur les backgrounds : les backgrounds CSS ne s'héritent PAS.
+ * Il faut cibler CHAQUE élément qui a son propre background dans dragon-theme. */
 
-/* ==========================================================
-   Import des polices
-   ========================================================== */
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap');
-
-/* ==========================================================
-   Variables du thème Revolution Agency
-   ========================================================== */
-:root {
-  /* Fonts */
-  --font-heading: 'Syne', sans-serif;
-  --font-body: 'Outfit', sans-serif;
-  
-  /* Couleurs fond */
-  --bg-primary: #0a0a0b;
-  --bg-secondary: #0f0f11;
-  --bg-card: #141416;
-  --bg-card-hover: #1a1a1d;
-  
-  /* Gradient signature */
-  --gradient-main: linear-gradient(135deg, #7c3aed 0%, #c026d3 35%, #e11d48 65%, #f97316 100%);
-  --gradient-subtle: linear-gradient(135deg, rgba(124,58,237,0.15) 0%, rgba(192,38,211,0.15) 50%, rgba(249,115,22,0.15) 100%);
-  
-  /* Accents */
-  --accent-violet: #7c3aed;
-  --accent-fuchsia: #c026d3;
-  --accent-rose: #e11d48;
-  --accent-orange: #f97316;
-  
-  /* Glow */
-  --glow-violet: rgba(124, 58, 237, 0.4);
-  --glow-fuchsia: rgba(192, 38, 211, 0.4);
-  
-  /* Texte */
-  --text-primary: #fafafa;
-  --text-secondary: #a1a1aa;
-  --text-muted: #71717a;
-  
-  /* Glass & Borders */
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-glow: rgba(255, 255, 255, 0.15);
-  --glass: rgba(255, 255, 255, 0.03);
-  --glass-strong: rgba(255, 255, 255, 0.06);
-  
-  /* Tailles */
-  --fs-h1: 24px;
-  --fs-h2: 20px;
-  --fs-h3: 16px;
-  --fs-body: 14px;
-  --fs-small: 12px;
-  --fs-button: 13px;
+/* ── Typo + couleur de texte globale (shadow DOM)
+ *
+ * Dragon-theme définit --font-body / --font-heading sur
+ * ":host, :root, .vfrc-widget, .vfrc-chat" et les réutilise avec
+ * "font-family: var(--font-body) !important" sur des dizaines d'éléments.
+ * Pour override la police partout :
+ *   1. Cibler le MÊME ensemble de sélecteurs (incl. :root = shadow root)
+ *   2. Redéfinir --font-body + --font-heading → tous les var() prennent
+ *      la police du thème sans avoir à lister chaque élément.
+ *   3. Source order : notre CSS vient après dragon-theme dans le blob → gain.
+ *
+ * :host = shadow host (hors shadow tree)
+ * :root = shadow root (racine du shadow tree — parent direct de tous les éléments)
+ * .vfrc-chat = container principal VF V4
+ *
+ * color ici override le texte non explicitement stylé (timestamps, labels, etc.)
+ * — critique pour les thèmes light. */
+:host,
+:root,
+.vfrc-chat {
+  --font-body: 'DM Sans', sans-serif;
+  --font-heading: 'DM Sans', sans-serif;
+  --text-primary: #121521;
+  --text-secondary: rgba(18, 21, 33, 0.65);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: #121521 !important;
 }
 
-/* ==========================================================
-   RESET COMPLET - Fond transparent, pas de conteneur visible
-   ========================================================== */
-.vfrc-widget,
-.vfrc-chat,
-.vfrc-chat__container,
-.vfrc-chat__container-inner,
-.vfrc-chat-dialog,
-.vfrc-chat-dialog__container,
-.vfrc-chat--dialog {
+/* ── Background widget + transparence des coins (mode flottant)
+ * IMPORTANT : :host doit rester TRANSPARENT. En mode popover/widget flottant,
+ * le host est un rectangle ; s'il porte le fond, ses coins carrés débordent
+ * derrière le cadre arrondi VF → "coins pas transparents" (bug récurrent en prod).
+ * Le fond va donc sur le cadre (.vfrc-chat / __container-inner), qui reçoit AUSSI
+ * border-radius + overflow:hidden pour clipper son contenu à la forme arrondie.
+ * En mode embedded plein conteneur, .vfrc-chat remplit le host (height:100%) →
+ * aucun écart visible. Cette règle est AUTONOME : sans dragon-theme en base,
+ * c'est elle qui dessine le fond ET l'arrondi du cadre. */
+:host {
   background: transparent !important;
-  box-shadow: none !important;
-  border: none !important;
-  border-radius: 0 !important;
 }
-
-/* ==========================================================
-   HEADER - Minimaliste, juste pour le bouton restart
-   ========================================================== */
-
-/* Header principal - VISIBLE mais compact */
-.vfrc-header,
-.vfrc-header.jyiuei2,
-.vfrc-header.jyiuei3,
-.jyiuei2.jyiuei3 {
-  display: flex !important;
-  visibility: visible !important;
-  height: 36px !important;
-  min-height: 36px !important;
-  max-height: 36px !important;
-  overflow: visible !important;
-  opacity: 1 !important;
-  pointer-events: auto !important;
-  margin: 0 !important;
-  padding: 4px 0 !important;
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  justify-content: center !important;
-  align-items: center !important;
-}
-
-/* Avatar du header - MASQUER */
-.vfrc-header > .vfrc-avatar,
-.vfrc-header > img,
-.vfrc-header .g931q10,
-.vfrc-header .g931q11 {
-  display: none !important;
-  visibility: hidden !important;
-  width: 0 !important;
-  height: 0 !important;
-  opacity: 0 !important;
-}
-
-/* Container inner - centré */
-.vfrc-header--container-inner,
-.jyiuei5 {
-  display: flex !important;
-  visibility: visible !important;
-  justify-content: center !important;
-  align-items: center !important;
-  flex: 1 !important;
-  background: transparent !important;
-  pointer-events: auto !important;
+/* Cadre du widget : fond + coins arrondis + clipping + layout chat STANDARD.
+ * height:100% + flex column + dialog flex:1 → la SAISIE est collée en bas, la
+ * liste de messages remplit le haut et scrolle si besoin. Comportement standard
+ * de tout widget de chat ; le "vide" quand il y a peu de messages est normal.
+ * La HAUTEUR GLOBALE du widget vient de son conteneur (container.height en
+ * embedded ; panneau VF en popover) — pas de ce CSS. */
+/* .vfrc-widget = racine VF V4 ; on l'inclut dans la chaîne flex/fill-height,
+ * sinon en prod (sans dragon-theme) la racine ne propage pas la hauteur → footer
+ * qui flotte. */
+/* .vfrc-widget = wrapper de POSITIONNEMENT du popover VF (position:fixed; inset:0;
+ * z-index élevé). Il porte l'overlay + le panneau flottant et les place (coin).
+ * On NE le borne PAS et on ne lui met NI fond NI flex : sinon, en popover, il
+ * devient une boîte 480×600 collée en HAUT-GAUCHE (inset:0) et l'overlay rétrécit
+ * avec lui (bug prod OnOff). On lui donne juste height:100% pour la propagation de
+ * hauteur en embedded (sans casser le positionnement popover). */
+/* .vfrc-widget : juste height:100% pour la propagation de hauteur en embedded
+ * (sans dragon-theme, la racine ne propage pas la hauteur sinon). On NE touche NI
+ * à sa position NI à un flex/centrage : c'est VF (ou la page hôte, ex. la webview
+ * OnOff) qui POSITIONNE et DIMENSIONNE le popover. Pattern éprouvé des CSS
+ * Infortive / Revo / Pulpy : styler l'apparence, remplir le conteneur de VF, ne
+ * JAMAIS se battre avec son layout (placement, taille). */
+.vfrc-widget {
   height: 100% !important;
 }
-
-/* Titre du header - MASQUER */
-.vfrc-header--title,
-.jyiuei6,
-.jyiuei8,
-.fptyqm0,
-.fptyqm1 {
-  display: none !important;
-  visibility: hidden !important;
-  width: 0 !important;
-  height: 0 !important;
-  opacity: 0 !important;
-  font-size: 0 !important;
-}
-
-/* Actions container - visible et centré */
-.vfrc-header--actions,
-.jyiueia {
-  display: flex !important;
-  visibility: visible !important;
-  justify-content: center !important;
-  align-items: center !important;
-  width: 100% !important;
-  height: 100% !important;
-  pointer-events: auto !important;
-}
-
-/* ==========================================================
-   BOUTON RESTART HEADER - Zone cliquable + trait visuel
-   ========================================================== */
-.vfrc-header--button,
-button.vfrc-header--button,
-.vfrc-header--actions button,
-.jyiueia button {
-  display: flex !important;
-  visibility: visible !important;
-  width: 60px !important;
-  height: 28px !important;
-  min-width: 60px !important;
-  max-width: 60px !important;
-  min-height: 28px !important;
-  max-height: 28px !important;
-  padding: 0 !important;
-  margin: 0 auto !important;
-  background: transparent !important;
-  border: none !important;
-  border-radius: 0 !important;
-  font-size: 0 !important;
-  line-height: 0 !important;
-  text-indent: -9999px !important;
-  color: transparent !important;
-  cursor: pointer !important;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  overflow: visible !important;
-  letter-spacing: -9999px !important;
-  align-items: center !important;
-  justify-content: center !important;
-  position: relative !important;
-  pointer-events: auto !important;
-  z-index: 100 !important;
-}
-
-/* Trait visuel via pseudo-élément */
-.vfrc-header--button::after,
-button.vfrc-header--button::after,
-.vfrc-header--actions button::after,
-.jyiueia button::after {
-  content: "" !important;
-  display: block !important;
-  position: absolute !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) !important;
-  width: 50px !important;
-  height: 5px !important;
-  background: linear-gradient(90deg, var(--accent-violet), var(--accent-fuchsia)) !important;
-  border-radius: 3px !important;
-  opacity: 0.35 !important;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  pointer-events: none !important;
-}
-
-/* Masquer l'icône SVG et la div interne du bouton header */
-.vfrc-header--button *,
-.vfrc-header--button svg,
-.vfrc-header--button .vfrc-icon,
-.vfrc-header--button .vfrc-header--icon,
-.vfrc-header--button div,
-.vfrc-header--actions button *,
-.jyiueia button *,
-.jyiueih,
-._1t7e06e0,
-.vfrc-header--icon {
-  display: none !important;
-  visibility: hidden !important;
-  width: 0 !important;
-  height: 0 !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-
-/* Hover - Trait plus visible et élargi */
-.vfrc-header--button:hover::after,
-button.vfrc-header--button:hover::after,
-.vfrc-header--actions button:hover::after,
-.jyiueia button:hover::after {
-  opacity: 1 !important;
-  width: 80px !important;
-  height: 6px !important;
-  background: linear-gradient(90deg, var(--accent-violet), var(--accent-fuchsia), var(--accent-rose)) !important;
-  box-shadow: 
-    0 0 20px -4px var(--glow-fuchsia),
-    0 0 40px -8px var(--glow-violet) !important;
-}
-
-/* Active - Press effect */
-.vfrc-header--button:active::after,
-button.vfrc-header--button:active::after,
-.vfrc-header--actions button:active::after,
-.jyiueia button:active::after {
-  transform: translate(-50%, -50%) scaleX(0.9) !important;
-  opacity: 0.8 !important;
-}
-
-/* ==========================================================
-   CONTENEUR PRINCIPAL - Bord à bord, transparent, COMPACT
-   ========================================================== */
 .vfrc-chat,
 .vfrc-chat__container,
 .vfrc-chat__container-inner {
-  padding: 0 !important;
-  margin: 0 !important;
+  background: linear-gradient(150deg, #fafafa 0%, #bae6fd 100%) !important;
+  border-radius: 20px !important;
+  overflow: hidden !important;
+  /* isolation:isolate = fix bug Chrome : un descendant en backdrop-filter (le
+   * footer en blur) casse le clipping border-radius+overflow → coins carrés.
+   * Forcer un contexte d'empilement rétablit l'arrondi. */
+  isolation: isolate !important;
+  /* REMPLIR le conteneur de VF (pattern Infortive/Revo) : height/width 100% +
+   * max 100%, AUCUN plafond px, AUCUN centrage, AUCUN reset de position. La taille
+   * ET la position du popover viennent de VF / de la config d'embed (comme tous
+   * les autres projets clients), jamais d'ici. C'est ce qui évite les bugs de
+   * placement / clic-qui-ferme / tiroir géant qu'on avait en imposant
+   * max-width:560 + max-height:600 + centrage + position:static. */
+  height: 100% !important;
+  max-height: 100% !important;
+  min-height: 0 !important;
   width: 100% !important;
   max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
   gap: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
 }
-
+/* Liste des messages : remplit l'espace dispo, scroll vertical si besoin,
+ * jamais horizontal. Padding interne pour que les bulles ne collent pas aux bords. */
 .vfrc-chat--dialog,
 .vfrc-chat-dialog,
 .vfrc-chat-dialog__container {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
   padding: 12px 10px 6px 10px !important;
   margin: 0 !important;
-  background: transparent !important;
   gap: 0 !important;
 }
 
-/* FIX : Réduire l'espace après les messages/boutons */
-.vfrc-system-response,
-.vfrc-user-response {
-  margin-bottom: 4px !important;
+
+/* ── Bulles bot */
+/* Dragon-theme injecte backdrop-filter: blur(14px) sur les bulles bot via son
+ * effet glass (même avec un fond opaque la valeur computed reste "blur(14px)").
+ * Sélecteur renforcé à spécificité 0,4,0 (dragon = 0,3,0) via :not([class*="vfrc-user"])
+ * toujours vrai pour les bulles bot → victoire garantie sur le backdrop-filter
+ * quelle que soit la position dans le blob stylesheet. */
+.vfrc-system-response .vfrc-message:not([class*="extension"]):not([class*="vfrc-user"]),
+._11kfxpg0 {
+  background: #ececee !important;
+  color: #121521 !important;
+  border-radius: 20px 20px 20px 4px !important;
+  border: 1px solid rgba(18, 21, 33, 0.1) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  /* La bulle ne s'étale pas sur toute la largeur (sinon en prod elle prend 100%). */
+  display: inline-block !important;
+  max-width: 78% !important;
+  box-sizing: border-box !important;
+  line-height: 1.55 !important;
+  overflow-wrap: break-word !important;
 }
 
-.vfrc-system-response:last-child,
-.vfrc-user-response:last-child {
-  margin-bottom: 2px !important;
+/* ── Bulles bot : enfants p / span / strong
+ * Dragon-theme force color via var(--text-primary) sur les <p> (spécificité 0,4,1)
+ * et color: #ffffff hardcodé sur <strong> (pas de variable → var() ne suffit pas).
+ * L'override de --text-primary dans le bloc :root ci-dessus couvre les var(),
+ * mais on ajoute aussi des sélecteurs directs pour éviter tout cache stale
+ * et pour écraser le #ffffff hardcodé sur <strong>. */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) p,
+.vfrc-system-response .vfrc-message:not([class*="extension"]) span,
+._11kfxpg0 p,
+._11kfxpg0 span {
+  color: #121521 !important;
+}
+.vfrc-system-response .vfrc-message:not([class*="extension"]) strong,
+._11kfxpg0 strong {
+  color: #4B70FA !important;
 }
 
-/* ==========================================================
-   FIX ESPACE VIDE FOOTER - Masquer éléments superflus
-   ========================================================== */
-
-/* Spacer bottom - MASQUER COMPLÈTEMENT */
-.vfrc-chat--bottom-spacer,
-div[class*="bottom-spacer"],
-.s9t60i2,
-.s9t60i4 {
-  display: none !important;
-  height: 0 !important;
-  min-height: 0 !important;
-  max-height: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  visibility: hidden !important;
+/* ── Bulles bot : hover
+ * Dragon-theme injecte rgba(124,58,237,0.4) au hover — violet hardcodé.
+ * On le neutralise en gardant exactement la même border-color que le
+ * state normal (text @ 10 %) → aucun changement visuel au hover.
+ * Le sélecteur reste obligatoire pour écraser dragon avec !important. */
+.vfrc-system-response .vfrc-message:not([class*="extension"]):not([class*="vfrc-user"]):hover,
+._11kfxpg0:hover {
+  border-color: rgba(18, 21, 33, 0.1) !important;
 }
 
-/* ==========================================================
-   BOUTON RESTART - Fallback pour autres emplacements
-   ========================================================== */
-
-/* Si le bouton est ailleurs que dans le header */
-.vfrc-footer__start-button,
-div[class*="start-button"],
-#vfrc-start-chat {
-  display: block !important;
-  visibility: visible !important;
-  width: 50px !important;
-  height: 5px !important;
-  min-width: 50px !important;
-  max-width: 50px !important;
-  min-height: 5px !important;
-  max-height: 5px !important;
-  padding: 0 !important;
-  margin: 0 auto 12px auto !important;
-  background: linear-gradient(90deg, var(--accent-violet), var(--accent-fuchsia)) !important;
-  border: none !important;
-  border-radius: 3px !important;
-  font-size: 0 !important;
-  line-height: 0 !important;
-  text-indent: -9999px !important;
-  color: transparent !important;
-  cursor: pointer !important;
-  opacity: 0.35 !important;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  overflow: hidden !important;
-}
-
-.vfrc-footer__start-button *,
-div[class*="start-button"] *,
-#vfrc-start-chat * {
-  display: none !important;
-  visibility: hidden !important;
-}
-
-.vfrc-footer__start-button:hover,
-div[class*="start-button"]:hover,
-#vfrc-start-chat:hover {
-  opacity: 1 !important;
-  width: 80px !important;
-  max-width: 80px !important;
-  height: 6px !important;
-  background: linear-gradient(90deg, var(--accent-violet), var(--accent-fuchsia), var(--accent-rose)) !important;
-  box-shadow: 
-    0 0 20px -4px var(--glow-fuchsia),
-    0 0 40px -8px var(--glow-violet) !important;
-}
-
-/* Bouton scroll to bottom - MASQUER */
-.vfrc-footer__content-scroll-to-bottom,
-div[class*="scroll-to-bottom"],
-.oq48l92,
-._1cosygz0 {
-  display: none !important;
-  height: 0 !important;
-  min-height: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  visibility: hidden !important;
-}
-
-/* Footer links vide - MASQUER */
-.vfrc-footer__links,
-.jsli361,
-.jsli363 {
-  display: none !important;
-  height: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-/* Overlay - semi-transparent */
+/* ── Overlay background (mode chat flottant)
+ * Dragon-theme applique backdrop-filter: blur(4px) sur l'overlay derrière
+ * le widget en mode "chat". Contribue au "trop de blur" général.
+ * On supprime systématiquement — l'overlay garde son fond semi-opaque
+ * (rgba(10,10,11,0.8)) mais sans blur. */
 .vfrc-chat--overlay,
+.vfrc-popper__overlay,
+[class*="popper__overlay"],
+[class*="vfrc-chat--overlay"],
 ._5x612k3,
 ._5x612k4 {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  filter: none !important;
+}
+
+/* ── Bulles utilisateur — alignées à droite, largeur bornée (sinon en prod
+ * elles s'étalent à 100% et ne sont plus à droite). */
+.vfrc-user-response {
   display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  pointer-events: auto !important;
-  background: rgba(10, 10, 11, 0.8) !important;
-  backdrop-filter: blur(4px) !important;
-  -webkit-backdrop-filter: blur(4px) !important;
+  text-align: right !important;
+  width: 100% !important;
 }
-
-/* ==========================================================
-   POPUP CONFIRMATION RESTART - Stylisé
-   ========================================================== */
-.vfrc-prompt,
-._5x612k0,
-._5x612k1 {
-  display: flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  pointer-events: auto !important;
-  flex-direction: column !important;
-  gap: 12px !important;
-  padding: 20px !important;
-  margin: 0 auto !important;
-  background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(20,20,22,0.95) 100%) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-  border: 1px solid rgba(124, 58, 237, 0.3) !important;
-  border-radius: 16px !important;
-  box-shadow: 
-    0 0 40px -10px var(--glow-violet),
-    0 8px 32px -8px rgba(0, 0, 0, 0.5) !important;
-  max-width: 280px !important;
-}
-
-/* Bouton Start new chat - Style principal */
-.vfrc-prompt button:first-child,
-.vfrc-prompt .vfrc-button:first-child,
-._5x612k0 button:first-child,
-._5x612k1 button:first-child,
-button._1q15b0b2:not(.vfrc-header--button):not(.vfrc-chat-input__send) {
-  font-family: var(--font-body) !important;
-  font-weight: 500 !important;
-  font-size: var(--fs-button) !important;
-  color: #ffffff !important;
-  background: var(--gradient-main) !important;
-  border: none !important;
-  border-radius: 12px !important;
-  padding: 14px 24px !important;
-  cursor: pointer !important;
-  transition: all 0.3s ease !important;
-  box-shadow: 
-    0 4px 20px -4px var(--glow-fuchsia),
-    0 0 30px -10px var(--glow-violet) !important;
-  text-indent: 0 !important;
-  font-size: var(--fs-button) !important;
-  letter-spacing: normal !important;
-  width: auto !important;
-  height: auto !important;
-  min-height: auto !important;
-  max-height: none !important;
-  opacity: 1 !important;
-}
-
-.vfrc-prompt button:first-child:hover,
-._5x612k0 button:first-child:hover,
-._5x612k1 button:first-child:hover {
-  transform: translateY(-2px) !important;
-  box-shadow: 
-    0 6px 25px -4px var(--glow-fuchsia),
-    0 0 40px -10px var(--glow-violet) !important;
-}
-
-/* Bouton Cancel - Style secondaire */
-.vfrc-prompt button:last-child,
-.vfrc-prompt .vfrc-button:last-child,
-._5x612k0 button:last-child,
-._5x612k1 button:last-child,
-button._1q15b0b3 {
-  font-family: var(--font-body) !important;
-  font-weight: 500 !important;
-  font-size: var(--fs-button) !important;
-  color: var(--text-secondary) !important;
-  background: transparent !important;
-  border: 1px solid rgba(124, 58, 237, 0.3) !important;
-  border-radius: 12px !important;
-  padding: 12px 24px !important;
-  cursor: pointer !important;
-  transition: all 0.3s ease !important;
-  text-indent: 0 !important;
-  font-size: var(--fs-button) !important;
-  letter-spacing: normal !important;
-  width: auto !important;
-  height: auto !important;
-  min-height: auto !important;
-  max-height: none !important;
-  opacity: 1 !important;
-}
-
-.vfrc-prompt button:last-child:hover,
-._5x612k0 button:last-child:hover,
-._5x612k1 button:last-child:hover {
-  color: var(--text-primary) !important;
-  border-color: rgba(124, 58, 237, 0.5) !important;
-  background: rgba(124, 58, 237, 0.1) !important;
-}
-
-/* ==========================================================
-   FOOTER PRINCIPAL - Zone de saisie DISTINCTE et ÉPURÉE
-   ========================================================== */
-.vfrc-footer,
-._1vj16242 {
-  padding: 0 !important;
-  margin: 0 !important;
-  gap: 0 !important;
-  min-height: auto !important;
-  background: transparent !important;
-  position: relative !important;
-}
-
-.vfrc-footer__content,
-._1vj16245 {
-  padding: 12px !important;
-  margin: 0 !important;
-  gap: 10px !important;
-  display: flex !important;
-  flex-direction: column !important;
-  background: linear-gradient(180deg, transparent 0%, rgba(10,10,11,0.8) 30%, rgba(10,10,11,0.95) 100%) !important;
-  border-top: 1px solid rgba(124, 58, 237, 0.15) !important;
-  position: relative !important;
-}
-
-/* Ligne de séparation subtile avec gradient */
-.vfrc-footer__content::before,
-._1vj16245::before {
-  content: "" !important;
-  position: absolute !important;
-  top: 0 !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  width: 80% !important;
-  height: 1px !important;
-  background: linear-gradient(90deg, 
-    transparent 0%, 
-    rgba(124, 58, 237, 0.4) 20%, 
-    rgba(192, 38, 211, 0.5) 50%, 
-    rgba(124, 58, 237, 0.4) 80%, 
-    transparent 100%) !important;
-}
-
-/* ==========================================================
-   BULLES SYSTÈME (Bot) - Glassmorphism avec glow violet
-   ========================================================== */
-.vfrc-system-response .vfrc-message:not([class*="extension"]) {
-  font-family: var(--font-body) !important;
-  font-weight: 400 !important;
-  font-size: var(--fs-body) !important;
-  line-height: 1.55 !important;
-  color: var(--text-primary) !important;
-  background: linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(192,38,211,0.05) 50%, rgba(20,20,22,0.9) 100%) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-  border: 1px solid rgba(124, 58, 237, 0.2) !important;
-  border-radius: 16px !important;
-  padding: 12px 14px !important;
-  max-width: 92% !important;
-  margin: 6px 0 !important;
-  box-shadow: 
-    0 0 25px -10px var(--glow-violet),
-    0 4px 16px -8px rgba(0, 0, 0, 0.4),
-    inset 0 0 20px rgba(124, 58, 237, 0.03) !important;
-  transition: all 0.3s ease !important;
-}
-
-/* Hover - Glow plus intense */
-.vfrc-system-response .vfrc-message:not([class*="extension"]):hover {
-  border-color: rgba(124, 58, 237, 0.4) !important;
-  box-shadow: 
-    0 0 35px -10px var(--glow-fuchsia),
-    0 6px 24px -8px rgba(0, 0, 0, 0.5),
-    inset 0 0 30px rgba(192, 38, 211, 0.05) !important;
-  transform: translateY(-1px) !important;
-}
-
-/* ==========================================================
-   BULLES UTILISATEUR - Gradient signature
-   ========================================================== */
 .vfrc-user-response > div,
-.vfrc-user-response .vfrc-message {
-  font-family: var(--font-body) !important;
-  font-weight: 400 !important;
-  font-size: var(--fs-body) !important;
-  line-height: 1.55 !important;
-  color: #ffffff !important;
-  background: var(--gradient-main) !important;
-  border: none !important;
-  border-radius: 14px !important;
-  padding: 10px 14px !important;
-  max-width: 88% !important;
-  margin: 6px 0 !important;
-  box-shadow: 
-    0 4px 16px -4px var(--glow-fuchsia),
-    0 0 30px -10px var(--glow-violet) !important;
+.vfrc-user-response .vfrc-message,
+._15emaa40 {
+  border-radius: 20px !important;
+  box-shadow: none !important;
+  background: rgba(75, 112, 250, 0.15) !important;
+  border: 1px solid rgba(75, 112, 250, 0.45) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  color: #121521 !important;
+  display: inline-block !important;
+  max-width: 78% !important;
+  text-align: left !important;
+  box-sizing: border-box !important;
+  overflow-wrap: break-word !important;
 }
-
+/* Les éléments enfants des bulles user (p, span, a…) héritent la couleur
+ * du container. On force ici pour éviter que dragon-theme override avec
+ * color:#ffffff sur .vfrc-user-response > div * */
 .vfrc-user-response > div *,
 .vfrc-user-response .vfrc-message * {
-  color: #ffffff !important;
+  color: #121521 !important;
 }
 
-/* ==========================================================
-   ⭐ QUESTIONS DISTINCTIVES - Classe .revo-question
-   ========================================================== */
+/* ── Footer background
+ * ATTENTION : il faut cibler .vfrc-footer__content (enfant) en plus de
+ * .vfrc-footer (parent) — dragon-theme met le gradient dark sur __content,
+ * pas sur .vfrc-footer lui-même. Les backgrounds ne s'héritent pas. */
+.vfrc-footer,
+.vfrc-footer__content,
+._1vj16245 {
+  background: #fafafa !important;
+  /* PAS de backdrop-filter sur le footer : sur fond opaque le flou est invisible,
+   * ET il casse le clip des coins arrondis du bas (bug Chrome : un descendant en
+   * backdrop-filter s'échappe du overflow:hidden + border-radius de l'ancêtre,
+   * que isolation:isolate ne suffit pas à contenir ici). Force none. */
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-top: 1px solid rgba(18, 21, 33, 0.08) !important;
+  /* Footer ancré en bas du cadre flex (sinon il flotte après le dernier message). */
+  flex: 0 0 auto !important;
+  min-height: auto !important;
+}
+/* Masquer le trait gradient "Cosmic Premium" que dragon-theme injecte via ::before */
+.vfrc-footer__content::before,
+._1vj16245::before {
+  display: none !important;
+  content: none !important;
+}
 
-/* Style principal des questions */
-.vfrc-system-response .vfrc-message .revo-question,
-.vfrc-message .revo-question,
-.revo-question {
-  display: block !important;
-  font-family: var(--font-heading) !important;
+/* ── Boutons / choices
+ * Sélecteur miroir de dragon-theme lignes 1027-1028 : même spécificité (1,7,0)
+ * → source-order fait gagner Framly (qui arrive après dragon-theme dans le blob).
+ * box-shadow: none — efface le glow violet de dragon sur thèmes sans glow.
+ * backdrop-filter: none (sauf glass) — supprime le blur violet de dragon sur tous les boutons. */
+.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3),
+button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3),
+[class*="dragon-ask-btn"],
+[class*="dragon-choice"] {
+  background: rgba(75, 112, 250, 0.12) !important;
+  border: 1px solid rgba(75, 112, 250, 0.4) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  color: #121521 !important;
+  border-radius: 999px !important;
   font-weight: 600 !important;
-  font-size: 15px !important;
-  line-height: 1.4 !important;
-  color: #ffffff !important;
-  margin-top: 14px !important;
-  margin-bottom: 4px !important;
-  padding: 12px 16px !important;
-  background: linear-gradient(135deg, rgba(124,58,237,0.18) 0%, rgba(192,38,211,0.12) 50%, rgba(249,115,22,0.08) 100%) !important;
-  border: 1px solid rgba(192, 38, 211, 0.35) !important;
-  border-left: 4px solid var(--accent-fuchsia) !important;
-  border-radius: 0 12px 12px 0 !important;
-  position: relative !important;
-  box-shadow: 
-    0 4px 20px -8px var(--glow-fuchsia),
-    inset 0 0 30px rgba(124, 58, 237, 0.05) !important;
-  animation: questionPulse 3s ease-in-out infinite !important;
-}
-
-/* Animation subtile de pulsation */
-@keyframes questionPulse {
-  0%, 100% {
-    box-shadow: 
-      0 4px 20px -8px var(--glow-fuchsia),
-      inset 0 0 30px rgba(124, 58, 237, 0.05);
-    border-left-color: var(--accent-fuchsia);
-  }
-  50% {
-    box-shadow: 
-      0 6px 28px -8px var(--glow-violet),
-      inset 0 0 40px rgba(192, 38, 211, 0.08);
-    border-left-color: var(--accent-violet);
-  }
-}
-
-/* Hover sur la question */
-.vfrc-system-response .vfrc-message .revo-question:hover,
-.vfrc-message .revo-question:hover,
-.revo-question:hover {
-  background: linear-gradient(135deg, rgba(124,58,237,0.25) 0%, rgba(192,38,211,0.18) 50%, rgba(249,115,22,0.12) 100%) !important;
-  border-color: rgba(192, 38, 211, 0.5) !important;
-  box-shadow: 
-    0 8px 30px -8px var(--glow-fuchsia),
-    0 0 50px -15px var(--glow-violet),
-    inset 0 0 40px rgba(192, 38, 211, 0.08) !important;
-  animation: none !important;
-}
-
-/* ==========================================================
-   ⭐ BARRE DE PROGRESSION - Classe .revo-progress
-   ========================================================== */
-
-/* Container de la barre */
-.vfrc-system-response .vfrc-message .revo-progress,
-.vfrc-message .revo-progress,
-.revo-progress {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 6px !important;
-  padding: 10px 16px !important;
-  margin-bottom: 14px !important;
-  background: linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(20,20,22,0.6) 100%) !important;
-  border: 1px solid rgba(124, 58, 237, 0.2) !important;
-  border-radius: 12px !important;
-  position: relative !important;
-}
-
-/* Label de la barre (ex: "3/7 piliers") */
-.vfrc-system-response .vfrc-message .revo-progress::after,
-.vfrc-message .revo-progress::after,
-.revo-progress::after {
-  content: attr(data-label) !important;
-  position: absolute !important;
-  right: 12px !important;
-  font-family: var(--font-body) !important;
-  font-size: 11px !important;
-  font-weight: 500 !important;
-  color: var(--text-secondary) !important;
-  letter-spacing: 0.02em !important;
-}
-
-/* Points de progression - Base commune */
-.vfrc-system-response .vfrc-message .revo-progress span,
-.vfrc-message .revo-progress span,
-.revo-progress span {
-  display: block !important;
-  width: 12px !important;
-  height: 12px !important;
-  border-radius: 50% !important;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-}
-
-/* Points complétés (done) - TRÈS VISIBLE avec couleur solide */
-.vfrc-system-response .vfrc-message .revo-progress span.done,
-.vfrc-message .revo-progress span.done,
-.revo-progress span.done {
-  background: #c026d3 !important;  /* Fuchsia solide, pas de gradient */
-  box-shadow: 
-    0 0 6px 2px rgba(192, 38, 211, 0.8),
-    0 0 12px 4px rgba(124, 58, 237, 0.5),
-    inset 0 0 4px rgba(255, 255, 255, 0.3) !important;
-  animation: progressPulse 2s ease-in-out infinite !important;
-  border: 1px solid rgba(255, 255, 255, 0.4) !important;
-}
-
-/* Points en attente (pending) - Gris subtil */
-.vfrc-system-response .vfrc-message .revo-progress span.pending,
-.vfrc-message .revo-progress span.pending,
-.revo-progress span.pending {
-  background: rgba(255, 255, 255, 0.1) !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  text-shadow: none !important;
   box-shadow: none !important;
 }
 
-/* Animation des points complétés - plus visible */
-@keyframes progressPulse {
-  0%, 100% {
-    box-shadow: 
-      0 0 6px 2px rgba(192, 38, 211, 0.8),
-      0 0 12px 4px rgba(124, 58, 237, 0.5),
-      inset 0 0 4px rgba(255, 255, 255, 0.3);
-    transform: scale(1);
-  }
-  50% {
-    box-shadow: 
-      0 0 10px 3px rgba(192, 38, 211, 1),
-      0 0 20px 6px rgba(124, 58, 237, 0.7),
-      inset 0 0 6px rgba(255, 255, 255, 0.5);
-    transform: scale(1.15);
-  }
-}
-
-/* Hover sur la barre - Effet glow */
-.vfrc-system-response .vfrc-message .revo-progress:hover,
-.vfrc-message .revo-progress:hover,
-.revo-progress:hover {
-  border-color: rgba(124, 58, 237, 0.4) !important;
-  box-shadow: 0 0 20px -8px var(--glow-violet) !important;
-}
-
-/* Quand tous les points sont done - Effet spécial */
-.revo-progress:has(span:nth-child(7).done) {
-  background: linear-gradient(135deg, rgba(124,58,237,0.15) 0%, rgba(192,38,211,0.1) 50%, rgba(249,115,22,0.08) 100%) !important;
-  border-color: rgba(192, 38, 211, 0.4) !important;
-}
-
-.revo-progress:has(span:nth-child(7).done)::after {
-  color: var(--accent-fuchsia) !important;
-}
-
-/* ==========================================================
-   TYPOGRAPHIE - Titres avec gradient (compacts)
-   ========================================================== */
-/* H1 - Grand titre gradient */
-.vfrc-system-response .vfrc-message:not([class*="extension"]) h1,
-.vfrc-system-response .vfrc-message:not([class*="extension"]) .markdown h1,
-._11kfxpg1 h1,
-._11kfxpg3 h1 {
-  font-family: var(--font-heading) !important;
-  font-weight: 700 !important;
-  font-size: var(--fs-h1) !important;
-  line-height: 1.2 !important;
-  background: var(--gradient-main) !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  background-clip: text !important;
-  margin: 0 0 8px 0 !important;
-  padding: 0 !important;
-}
-
-/* H2 - Titre secondaire gradient */
-.vfrc-system-response .vfrc-message:not([class*="extension"]) h2,
-.vfrc-system-response .vfrc-message:not([class*="extension"]) .markdown h2,
-._11kfxpg1 h2,
-._11kfxpg3 h2 {
-  font-family: var(--font-heading) !important;
-  font-weight: 600 !important;
-  font-size: var(--fs-h2) !important;
-  line-height: 1.3 !important;
-  background: var(--gradient-main) !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  background-clip: text !important;
-  margin: 10px 0 6px 0 !important;
-  padding: 0 !important;
-}
-
-/* H3 - Sous-titre violet */
-.vfrc-system-response .vfrc-message:not([class*="extension"]) h3,
-.vfrc-system-response .vfrc-message:not([class*="extension"]) .markdown h3,
-._11kfxpg1 h3,
-._11kfxpg3 h3 {
-  font-family: var(--font-heading) !important;
-  font-weight: 600 !important;
-  font-size: var(--fs-h3) !important;
-  line-height: 1.3 !important;
-  color: var(--accent-violet) !important;
-  margin: 8px 0 4px 0 !important;
-  padding: 0 !important;
-}
-
-/* H4, H5, H6 - Fuchsia */
-.vfrc-system-response .vfrc-message:not([class*="extension"]) h4,
-.vfrc-system-response .vfrc-message:not([class*="extension"]) h5,
-.vfrc-system-response .vfrc-message:not([class*="extension"]) h6,
-._11kfxpg1 h4, ._11kfxpg1 h5, ._11kfxpg1 h6,
-._11kfxpg3 h4, ._11kfxpg3 h5, ._11kfxpg3 h6 {
-  font-family: var(--font-heading) !important;
-  font-weight: 600 !important;
-  font-size: 14px !important;
-  line-height: 1.4 !important;
-  color: var(--accent-fuchsia) !important;
-  margin: 6px 0 4px 0 !important;
-}
-
-/* ==========================================================
-   PARAGRAPHES & TEXTE (compacts)
-   ========================================================== */
-.vfrc-system-response .vfrc-message:not([class*="extension"]) p,
-.vfrc-system-response .vfrc-message:not([class*="extension"]) .markdown p,
-._11kfxpg1 p,
-._11kfxpg3 p {
-  font-family: var(--font-body) !important;
-  font-size: var(--fs-body) !important;
-  font-weight: 400 !important;
-  line-height: 1.55 !important;
-  color: var(--text-primary) !important;
-  margin: 4px 0 !important;
-}
-
-/* Premier paragraphe - pas de margin top */
-.vfrc-system-response .vfrc-message:not([class*="extension"]) p:first-child,
-._11kfxpg1 p:first-child,
-._11kfxpg3 p:first-child {
-  margin-top: 0 !important;
-}
-
-/* Dernier paragraphe - pas de margin bottom */
-.vfrc-system-response .vfrc-message:not([class*="extension"]) p:last-child,
-._11kfxpg1 p:last-child,
-._11kfxpg3 p:last-child {
-  margin-bottom: 0 !important;
-}
-
-/* Texte en gras - Blanc pur (mais pas les questions) */
-.vfrc-system-response .vfrc-message:not([class*="extension"]) strong:not(.revo-question),
-._11kfxpg1 strong:not(.revo-question),
-._11kfxpg3 strong:not(.revo-question) {
-  font-weight: 600 !important;
-  color: #ffffff !important;
-}
-
-/* Liens - Gradient au hover */
-.vfrc-system-response .vfrc-message:not([class*="extension"]) a,
-._11kfxpg1 a,
-._11kfxpg3 a {
-  color: var(--accent-fuchsia) !important;
-  text-decoration: none !important;
-  border-bottom: 1px solid transparent !important;
-  transition: all 0.3s ease !important;
-}
-
-.vfrc-system-response .vfrc-message:not([class*="extension"]) a:hover,
-._11kfxpg1 a:hover,
-._11kfxpg3 a:hover {
-  color: var(--accent-violet) !important;
-  border-bottom-color: var(--accent-violet) !important;
-}
-
-/* ==========================================================
-   LISTES - Puces stylées (compactes)
-   ========================================================== */
-.vfrc-system-response .vfrc-message:not([class*="extension"]) ul,
-._11kfxpg1 ul,
-._11kfxpg3 ul {
-  list-style: none !important;
-  padding-left: 1.2em !important;
-  margin: 6px 0 !important;
-}
-
-.vfrc-system-response .vfrc-message:not([class*="extension"]) ul li,
-._11kfxpg1 ul li,
-._11kfxpg3 ul li {
-  position: relative !important;
-  margin: 3px 0 !important;
-  padding-left: 6px !important;
-  font-size: var(--fs-body) !important;
-  line-height: 1.5 !important;
-}
-
-/* Puce custom gradient */
-.vfrc-system-response .vfrc-message:not([class*="extension"]) ul li::before,
-._11kfxpg1 ul li::before,
-._11kfxpg3 ul li::before {
-  content: "▸" !important;
-  position: absolute !important;
-  left: -1em !important;
-  color: var(--accent-fuchsia) !important;
-  font-size: 0.9em !important;
-}
-
-/* Listes numérotées */
-.vfrc-system-response .vfrc-message:not([class*="extension"]) ol,
-._11kfxpg1 ol,
-._11kfxpg3 ol {
-  padding-left: 1.2em !important;
-  margin: 6px 0 !important;
-}
-
-.vfrc-system-response .vfrc-message:not([class*="extension"]) ol li,
-._11kfxpg1 ol li,
-._11kfxpg3 ol li {
-  margin: 3px 0 !important;
-  font-size: var(--fs-body) !important;
-  line-height: 1.5 !important;
-}
-
-/* ==========================================================
-   BOUTONS DE RÉPONSE - Style épuré et compact
-   ========================================================== */
-
-/* Container des boutons - ZONE DISTINCTE */
-.vfrc-system-response--actions,
-.vfrc-button-container,
-.vfrc-card--buttons {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  gap: 8px !important;
-  padding: 8px 2px !important;
-  justify-content: flex-start !important;
-  margin: 4px 0 2px 0 !important;
-  position: relative !important;
-}
-
-/* Boutons de choix - Style pill compact */
-.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3),
-button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3) {
-  font-family: var(--font-body) !important;
-  font-weight: 500 !important;
-  font-size: var(--fs-button) !important;
-  line-height: 1.3 !important;
-  letter-spacing: 0.01em !important;
-  background: rgba(20, 20, 22, 0.8) !important;
-  border: 1px solid rgba(124, 58, 237, 0.3) !important;
-  color: var(--text-primary) !important;
-  border-radius: 10px !important;
-  padding: 9px 14px !important;
-  margin: 0 !important;
-  cursor: pointer !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  position: relative !important;
-  overflow: hidden !important;
-  box-shadow: 
-    0 2px 6px -4px rgba(0, 0, 0, 0.3),
-    inset 0 0 15px rgba(124, 58, 237, 0.05) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
-  animation: none !important;
-}
-
-/* Hover - Bordure gradient + glow */
+/* ── Boutons hover — même sélecteur + :hover
+ * Dragon-theme hover = violet gradient + text blanc + glow orange → complètement
+ * hors-thème sur light presets (Ghost, Miel, Silk…) et dark non-dragon.
+ * On override avec les couleurs du thème ; le translateY(-2px) de dragon est conservé. */
 .vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3):hover,
-button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3):hover {
-  background: linear-gradient(135deg, rgba(124,58,237,0.15) 0%, rgba(192,38,211,0.1) 100%) !important;
-  border-color: rgba(192, 38, 211, 0.5) !important;
-  color: #ffffff !important;
-  box-shadow: 
-    0 4px 20px -4px var(--glow-violet),
-    0 0 30px -10px var(--glow-fuchsia),
-    inset 0 0 30px rgba(124, 58, 237, 0.1) !important;
-  transform: translateY(-2px) !important;
+button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3):hover,
+[class*="dragon-ask-btn"]:hover,
+[class*="dragon-choice"]:hover {
+  background: rgba(75, 112, 250, 0.22) !important;
+  border: 1px solid rgba(75, 112, 250, 0.6) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  color: #121521 !important;
+  box-shadow: 0 4px 12px -4px rgba(75, 112, 250, 0.28) !important;
 }
 
-/* Active - Press effect */
-.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3):active,
-button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3):active {
-  transform: translateY(0) scale(0.98) !important;
-  box-shadow: 
-    0 2px 10px -4px var(--glow-fuchsia) !important;
-}
-
-/* ==========================================================
-   ZONE DE SAISIE - Conteneur ATTRACTIF avec animations
-   ========================================================== */
-
-/* Wrapper principal de l'input */
-._1gdvh9t0,
-.vfrc-chat-input__container {
+/* ── Zone de saisie */
+/* ── Zone de saisie — layout AUTONOME (ne dépend pas de dragon-theme)
+ * VF V4 imbrique 3 niveaux :
+ *   .vfrc-chat-input__container (._1gdvh9t0)  → la ROW [encart + send]
+ *   .vfrc-input-container       (._1gdvh9t2)  → l'encart bordé (textarea)
+ *   .vfrc-chat-input__container-inner (._1gdvh9tc) → wrap du textarea
+ *   .vfrc-chat-input__actions   (._1gdvh9td)  → wrap du bouton send
+ * Il faut poser display:flex + align-items:center sur CHAQUE niveau, sinon le
+ * placeholder "Message…" n'est pas centré verticalement (bug en prod sans la
+ * base dragon-theme qui posait ce layout). */
+.vfrc-chat-input__container,
+._1gdvh9t0 {
   display: flex !important;
   align-items: center !important;
-  gap: 12px !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  background: transparent !important;
+  gap: 8px !important;
 }
-
-/* Input container - Avec bordure gradient animée */
+/* Encart bordé — fond/bordure sur le CONTENEUR (pas le textarea), toujours
+ * pleine largeur même si la classe hachée du textarea a changé. */
 .vfrc-input-container,
 ._1gdvh9t2,
-._1gdvh9t3 {
-  flex: 1 !important;
+._1gdvh9t3,
+div.vfrc-input-container {
+  background: rgba(250, 250, 250, 0.95) !important;
+  border: 1px solid rgba(75, 112, 250, 0.28) !important;
+  border-radius: 18px !important;
+  box-shadow: none !important;
+  animation: none !important;
   display: flex !important;
+  flex: 1 1 auto !important;
   align-items: center !important;
-  background: rgba(15, 15, 17, 0.95) !important;
-  border: 2px solid transparent !important;
-  border-radius: 18px !important;
-  padding: 4px !important;
-  transition: all 0.4s ease !important;
-  position: relative !important;
-  /* Gradient border via background */
-  background: 
-    linear-gradient(rgba(15, 15, 17, 0.95), rgba(15, 15, 17, 0.95)) padding-box,
-    linear-gradient(135deg, rgba(124, 58, 237, 0.5), rgba(192, 38, 211, 0.5), rgba(124, 58, 237, 0.5)) border-box !important;
-  box-shadow: 
-    0 4px 24px -8px rgba(124, 58, 237, 0.3),
-    0 0 40px -15px var(--glow-fuchsia),
-    inset 0 0 20px rgba(124, 58, 237, 0.03) !important;
-  animation: inputGlow 3s ease-in-out infinite !important;
+  min-width: 0 !important;
+  padding: 2px 4px 2px 10px !important;
+  overflow: hidden !important;
 }
-
-/* Animation du glow pulsant */
-@keyframes inputGlow {
-  0%, 100% {
-    box-shadow: 
-      0 4px 24px -8px rgba(124, 58, 237, 0.3),
-      0 0 40px -15px var(--glow-fuchsia),
-      inset 0 0 20px rgba(124, 58, 237, 0.03);
-  }
-  50% {
-    box-shadow: 
-      0 4px 30px -8px rgba(192, 38, 211, 0.5),
-      0 0 60px -10px var(--glow-violet),
-      inset 0 0 30px rgba(192, 38, 211, 0.05);
-  }
-}
-
-/* Effet shine qui passe sur l'input */
-.vfrc-input-container::before,
-._1gdvh9t2::before,
-._1gdvh9t3::before {
-  content: "" !important;
-  position: absolute !important;
-  top: 0 !important;
-  left: -100% !important;
-  width: 100% !important;
-  height: 100% !important;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.05),
-    transparent
-  ) !important;
-  border-radius: 18px !important;
-  animation: inputShine 4s ease-in-out infinite !important;
-  pointer-events: none !important;
-}
-
-@keyframes inputShine {
-  0% {
-    left: -100%;
-  }
-  50%, 100% {
-    left: 100%;
-  }
-}
-
-/* Focus - Bordure plus intense + arrêt des animations */
-.vfrc-input-container:focus-within,
-._1gdvh9t2:focus-within,
-._1gdvh9t3:focus-within {
-  background: 
-    linear-gradient(rgba(15, 15, 17, 0.98), rgba(15, 15, 17, 0.98)) padding-box,
-    linear-gradient(135deg, var(--accent-violet), var(--accent-fuchsia), var(--accent-rose)) border-box !important;
-  box-shadow: 
-    0 0 0 4px rgba(124, 58, 237, 0.15),
-    0 8px 40px -10px var(--glow-fuchsia),
-    0 0 60px -15px var(--glow-violet),
-    inset 0 0 30px rgba(124, 58, 237, 0.05) !important;
-  animation: none !important;
-}
-
-.vfrc-input-container:focus-within::before,
-._1gdvh9t2:focus-within::before,
-._1gdvh9t3:focus-within::before {
-  animation: none !important;
-  opacity: 0 !important;
-}
-
-/* Focus ring - masquer */
-.vfrc-chat-focus-ring,
-._1gdvh9t7,
-._1gdvh9t8,
-._1gdvh9t9 {
-  display: none !important;
-}
-
-/* Container inner */
+/* Wrappers internes : centrage vertical du textarea et du send */
 .vfrc-chat-input__container-inner,
 ._1gdvh9tc {
   flex: 1 !important;
   display: flex !important;
   align-items: center !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
 }
-
-/* Textarea - Style épuré */
-.vfrc-chat-input textarea,
-.vfrc-chat-input input,
-textarea.vfrc-chat-input,
-textarea._1gdvh9ta,
-.vfrc-chat-input__input {
-  font-family: var(--font-body) !important;
-  font-weight: 400 !important;
-  font-size: var(--fs-body) !important;
-  line-height: 1.5 !important;
-  color: #ffffff !important;
-  background: transparent !important;
-  border: none !important;
-  border-radius: 12px !important;
-  padding: 12px 14px !important;
-  min-height: 44px !important;
-  max-height: 120px !important;
-  resize: none !important;
-  transition: all 0.3s ease !important;
-  flex: 1 !important;
-  box-shadow: none !important;
-}
-
-.vfrc-chat-input textarea:focus,
-textarea._1gdvh9ta:focus,
-.vfrc-chat-input__input:focus {
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-/* Placeholder avec animation subtile */
-.vfrc-chat-input textarea::placeholder,
-textarea._1gdvh9ta::placeholder,
-.vfrc-chat-input__input::placeholder {
-  color: rgba(167, 139, 250, 0.6) !important;
-  font-style: normal !important;
-  font-weight: 400 !important;
-  transition: all 0.3s ease !important;
-}
-
-/* Placeholder disparaît au focus */
-.vfrc-chat-input textarea:focus::placeholder,
-textarea._1gdvh9ta:focus::placeholder,
-.vfrc-chat-input__input:focus::placeholder {
-  color: rgba(167, 139, 250, 0.3) !important;
-  transform: translateX(10px) !important;
-}
-
-/* Actions container (bouton send) */
 .vfrc-chat-input__actions,
 ._1gdvh9td {
   display: flex !important;
   align-items: center !important;
-  padding-right: 8px !important;
+}
+/* Kill shimmer ::before (animation inputShine de dragon-theme) */
+.vfrc-input-container::before,
+._1gdvh9t2::before,
+._1gdvh9t3::before {
+  display: none !important;
+  animation: none !important;
+  content: none !important;
+}
+/* Focus ring sur le conteneur (pas le textarea) */
+.vfrc-input-container:focus-within,
+._1gdvh9t2:focus-within,
+._1gdvh9t3:focus-within {
+  border-color: #4B70FA !important;
+  box-shadow: 0 0 0 3px rgba(75, 112, 250, 0.12) !important;
+  background: rgba(250, 250, 250, 0.95) !important;
+  outline: none !important;
+  animation: none !important;
+}
+/* ── Textarea — transparent + texte VERTICALEMENT CENTRÉ.
+ * min-height + padding symétrique + line-height = "Message…" au milieu de
+ * l'encart, quelle que soit la hauteur du bouton send à côté. */
+textarea.vfrc-chat-input,
+textarea._1gdvh9ta,
+.vfrc-input-container textarea,
+._1gdvh9t2 textarea,
+._1gdvh9tc textarea,
+.vfrc-chat-input__container-inner textarea {
+  flex: 1 !important;
+  min-width: 0 !important;
+  min-height: 40px !important;
+  max-height: 120px !important;
+  background: transparent !important;
+  color: #121521 !important;
+  font-family: 'DM Sans', sans-serif !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+  padding: 10px 8px !important;
+  margin: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  resize: none !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+  caret-color: #4B70FA !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+textarea.vfrc-chat-input:focus,
+textarea.vfrc-chat-input:focus-visible,
+textarea._1gdvh9ta:focus,
+textarea._1gdvh9ta:focus-visible,
+.vfrc-input-container textarea:focus,
+._1gdvh9t2 textarea:focus {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+textarea.vfrc-chat-input::placeholder,
+textarea._1gdvh9ta::placeholder,
+.vfrc-input-container textarea::placeholder,
+._1gdvh9t2 textarea::placeholder {
+  color: rgba(18, 21, 33, 0.42) !important;
 }
 
-/* ==========================================================
-   BOUTON ENVOYER - Style attractif avec animation
-   ========================================================== */
+/* ── Bouton envoi */
+/* Géométrie du bouton envoi (44×44 + icône 20px) — absente sans dragon-theme.
+ * On garde :not(.vfrc-chat-input__voice-mode) pour ne pas voler le bouton voice. */
 #vfrc-send-message,
-.vfrc-chat-input__send,
+.vfrc-chat-input__send:not(.vfrc-chat-input__voice-mode),
 ._1gdvh9tf,
-button[class*="send"] {
+button[class*="send"]:not([class*="voice"]) {
   width: 44px !important;
   height: 44px !important;
   min-width: 44px !important;
@@ -1177,541 +401,446 @@ button[class*="send"] {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  background: rgba(124, 58, 237, 0.15) !important;
-  border: 1px solid rgba(124, 58, 237, 0.25) !important;
-  border-radius: 14px !important;
-  color: rgba(167, 139, 250, 0.4) !important;
-  cursor: not-allowed !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  flex-shrink: 0 !important;
 }
-
-/* Afficher l'icône SVG */
 #vfrc-send-message svg,
 .vfrc-chat-input__send svg,
 ._1gdvh9tf svg {
   display: block !important;
   width: 20px !important;
   height: 20px !important;
-  transition: transform 0.3s ease !important;
 }
-
-/* Masquer le texte ajouté */
 #vfrc-send-message::after,
 .vfrc-chat-input__send::after,
 ._1gdvh9tf::after {
   content: none !important;
   display: none !important;
 }
-
-/* État actif - Gradient avec glow pulsant */
+/* ._1gdvh9tf = classe hachée VF du send button, ciblée par dragon-theme */
 #vfrc-send-message:not([disabled]),
-.vfrc-chat-input__send:not([disabled]),
+.vfrc-chat-input__send:not(.vfrc-chat-input__voice-mode):not([disabled]),
 ._1gdvh9tf:not([disabled]) {
-  background: var(--gradient-main) !important;
+  background: #4B70FA !important;
   border: none !important;
+  border-radius: 14px !important;
   color: #ffffff !important;
-  cursor: pointer !important;
-  box-shadow: 
-    0 4px 20px -4px var(--glow-fuchsia),
-    0 0 30px -10px var(--glow-violet) !important;
-  animation: sendButtonPulse 2s ease-in-out infinite !important;
+  box-shadow: none !important;
+  animation: none !important;
 }
-
-@keyframes sendButtonPulse {
-  0%, 100% {
-    box-shadow: 
-      0 4px 20px -4px var(--glow-fuchsia),
-      0 0 30px -10px var(--glow-violet);
-    transform: scale(1);
-  }
-  50% {
-    box-shadow: 
-      0 6px 30px -4px var(--glow-fuchsia),
-      0 0 50px -5px var(--glow-violet);
-    transform: scale(1.05);
-  }
-}
-
 #vfrc-send-message:not([disabled]):hover,
 .vfrc-chat-input__send:not([disabled]):hover,
 ._1gdvh9tf:not([disabled]):hover {
-  transform: scale(1.1) !important;
-  box-shadow: 
-    0 6px 30px -4px var(--glow-fuchsia),
-    0 0 50px -10px var(--glow-violet) !important;
+  box-shadow: 0 4px 12px -4px rgba(75, 112, 250, 0.35) !important;
+}
+#vfrc-send-message[disabled],
+.vfrc-chat-input__send:not(.vfrc-chat-input__voice-mode)[disabled],
+._1gdvh9tf[disabled] {
+  background: rgba(75, 112, 250, 0.1) !important;
+  border: 1px solid rgba(75, 112, 250, 0.18) !important;
+  border-radius: 14px !important;
   animation: none !important;
 }
 
-#vfrc-send-message:not([disabled]):hover svg,
-.vfrc-chat-input__send:not([disabled]):hover svg,
-._1gdvh9tf:not([disabled]):hover svg {
-  transform: translateX(2px) !important;
+/* ── Typing indicator */
+.vfrc-typing-indicator > *,
+.vfrc-typing-indicator span {
+  background: #4B70FA !important;
 }
 
-#vfrc-send-message:not([disabled]):active,
-.vfrc-chat-input__send:not([disabled]):active,
-._1gdvh9tf:not([disabled]):active {
-  transform: scale(0.95) !important;
+/* ── Loader "Thinking…" */
+@keyframes framlyLoaderSpin { to { transform: rotate(360deg); } }
+.vfrc-loader-with-text,
+[class*="loader-with-text"] {
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0 !important;
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  min-height: 32px !important;
+  max-width: 32px !important;
+  max-height: 32px !important;
+  padding: 0 !important;
+  margin: 8px 0 !important;
+  background: rgba(250, 250, 250, 0.95) !important;
+  border: none !important;
+  border-radius: 50% !important;
+  box-shadow: 0 0 16px -4px rgba(75, 112, 250, 0.5), 0 0 0 1px rgba(75, 112, 250, 0.22) !important;
+  overflow: hidden !important;
+  font-size: 0 !important;
+  color: transparent !important;
+  animation: none !important;
+}
+/* Masque le contenu natif VF (texte "Thinking…" + spinner img/svg par défaut)
+ * que dragon-theme cachait. En export sans dragon-theme, font-size:0 sur le
+ * ROOT seul ne suffit pas : un enfant peut redéclarer font-size, et ça ne cache
+ * pas une <img>/<svg>. On collapse les enfants + on tue le spinner natif.
+ * (> * ne matche jamais ::before/::after → l'anneau + le dot survivent.) */
+.vfrc-loader-with-text > *,
+[class*="loader-with-text"] > * {
+  font-size: 0 !important;
+  color: transparent !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  visibility: hidden !important;
+}
+.vfrc-loader-with-text img,
+.vfrc-loader-with-text svg,
+[class*="loader-with-text"] img,
+[class*="loader-with-text"] svg {
+  display: none !important;
+}
+/* L'anneau conique qui tourne (le "loader") */
+.vfrc-loader-with-text::before,
+[class*="loader-with-text"]::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 4px !important;
+  border-radius: 50% !important;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(75, 112, 250, 0.15) 60deg,
+    rgba(75, 112, 250, 0.55) 180deg,
+    #4B70FA 300deg,
+    #4B70FA 360deg
+  ) !important;
+  -webkit-mask: radial-gradient(circle, transparent 55%, #000 57%) !important;
+  mask: radial-gradient(circle, transparent 55%, #000 57%) !important;
+  animation: framlyLoaderSpin 1.1s linear infinite !important;
+}
+/* Point central plein pour le contraste */
+.vfrc-loader-with-text::after,
+[class*="loader-with-text"]::after {
+  content: "" !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: 4px !important;
+  height: 4px !important;
+  margin: -2px 0 0 -2px !important;
+  border-radius: 50% !important;
+  background: #4B70FA !important;
+  box-shadow: 0 0 8px -1px rgba(75, 112, 250, 0.8) !important;
   animation: none !important;
 }
 
-/* ==========================================================
-   SCROLLBAR - Fine et subtile
-   ========================================================== */
+/* ── Scrollbar */
 .vfrc-chat--dialog,
 .vfrc-chat-dialog,
 .vfrc-chat-dialog__container {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(124, 58, 237, 0.4) transparent;
+  scrollbar-width: none !important;
 }
-
 .vfrc-chat--dialog::-webkit-scrollbar,
-.vfrc-chat-dialog::-webkit-scrollbar {
-  width: 4px;
-}
-
-.vfrc-chat--dialog::-webkit-scrollbar-thumb,
-.vfrc-chat-dialog::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--accent-violet), var(--accent-fuchsia));
-  border-radius: 10px;
-  opacity: 0.6;
-}
-
-.vfrc-chat--dialog::-webkit-scrollbar-thumb:hover,
-.vfrc-chat-dialog::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, var(--accent-fuchsia), var(--accent-rose));
-}
-
-.vfrc-chat--dialog::-webkit-scrollbar-track,
-.vfrc-chat-dialog::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-/* ==========================================================
-   BLOCKQUOTES - Style élégant
-   ========================================================== */
-.vfrc-system-response .vfrc-message:not([class*="extension"]) blockquote,
-._11kfxpg1 blockquote,
-._11kfxpg3 blockquote {
-  border-left: 3px solid var(--accent-fuchsia) !important;
-  background: rgba(192, 38, 211, 0.08) !important;
-  padding: 12px 16px !important;
-  margin: 12px 0 !important;
-  border-radius: 0 8px 8px 0 !important;
-  font-style: italic !important;
-  color: var(--text-secondary) !important;
-}
-
-/* ==========================================================
-   CODE BLOCKS
-   ========================================================== */
-.vfrc-system-response .vfrc-message:not([class*="extension"]) code,
-._11kfxpg1 code,
-._11kfxpg3 code {
-  font-family: 'Fira Code', 'Monaco', monospace !important;
-  font-size: 12px !important;
-  background: var(--bg-card) !important;
-  border: 1px solid var(--border-subtle) !important;
-  border-radius: 6px !important;
-  padding: 2px 6px !important;
-  color: var(--accent-orange) !important;
-}
-
-.vfrc-system-response .vfrc-message:not([class*="extension"]) pre,
-._11kfxpg1 pre,
-._11kfxpg3 pre {
-  background: var(--bg-card) !important;
-  border: 1px solid var(--border-subtle) !important;
-  border-radius: 12px !important;
-  padding: 16px !important;
-  overflow-x: auto !important;
-  margin: 12px 0 !important;
-}
-
-/* ==========================================================
-   LIGNE HORIZONTALE
-   ========================================================== */
-.vfrc-system-response .vfrc-message:not([class*="extension"]) hr,
-._11kfxpg1 hr,
-._11kfxpg3 hr {
-  border: none !important;
-  height: 1px !important;
-  background: var(--gradient-main) !important;
-  opacity: 0.3 !important;
-  margin: 20px 0 !important;
-}
-
-/* ==========================================================
-   IMAGES
-   ========================================================== */
-.vfrc-system-response .vfrc-message:not([class*="extension"]) img,
-._11kfxpg1 img,
-._11kfxpg3 img {
-  max-width: 100% !important;
-  border-radius: 12px !important;
-  margin: 12px 0 !important;
-  box-shadow: 0 4px 20px -8px rgba(0, 0, 0, 0.4) !important;
-}
-
-/* ==========================================================
-   CAROUSELS & CARDS - Matching landing style
-   ========================================================== */
-.vfrc-carousel,
-.vfrc-card {
-  background: linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(20,20,22,0.95) 100%) !important;
-  backdrop-filter: blur(10px) !important;
-  border: 1px solid rgba(124, 58, 237, 0.2) !important;
-  border-radius: 20px !important;
-  overflow: hidden !important;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  box-shadow: 0 0 30px -15px var(--glow-violet) !important;
-}
-
-.vfrc-carousel:hover,
-.vfrc-card:hover {
-  border-color: rgba(192, 38, 211, 0.4) !important;
-  box-shadow: 
-    0 8px 40px -10px var(--glow-fuchsia),
-    0 0 60px -20px var(--glow-violet) !important;
-  transform: translateY(-6px) !important;
-}
-
-.vfrc-card__title {
-  font-family: var(--font-heading) !important;
-  font-weight: 600 !important;
-  font-size: 16px !important;
-  color: var(--text-primary) !important;
-  margin-bottom: 8px !important;
-}
-
-.vfrc-card__description {
-  font-family: var(--font-body) !important;
-  font-size: 13px !important;
-  color: var(--text-secondary) !important;
-  line-height: 1.5 !important;
-}
-
-.vfrc-card__image {
-  border-radius: 16px 16px 0 0 !important;
-  opacity: 0.9 !important;
-  transition: opacity 0.3s ease !important;
-}
-
-.vfrc-card:hover .vfrc-card__image {
-  opacity: 1 !important;
-}
-
-/* ==========================================================
-   PROTECTION EXTENSIONS
-   ========================================================== */
-.vfrc-message[class*="extension"] {
-  background: transparent !important;
-  padding: 0 !important;
-  border: none !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-}
-
-/* ==========================================================
-   OVERRIDE COMPLET - Suppression fonds blancs/gris
-   ========================================================== */
-.vfrc-widget *,
-.vfrc-chat *,
-#voiceflow-chat-container * {
-  --vf-bg: transparent;
-  --vf-input-bg: transparent;
-}
-
-/* Footer et input wrapper - FORCER transparent */
-.vfrc-footer *:not(.vfrc-input-container):not(._1gdvh9t2):not(._1gdvh9t3):not(textarea):not(button),
-.vfrc-chat-input__wrapper,
-.vfrc-chat-input__inner {
-  background: transparent !important;
-  background-color: transparent !important;
-}
-
-/* FIX : Supprimer TOUT espace/padding/margin excessif */
-.vfrc-chat,
-.vfrc-chat__container,
-.vfrc-chat__container-inner,
-.vfrc-widget {
-  display: flex !important;
-  flex-direction: column !important;
-}
-
-.vfrc-chat--dialog,
-.vfrc-chat-dialog {
-  flex: 1 !important;
-  min-height: 0 !important;
-}
-
-/* FIX : Le spacer ou élément vide */
-.vfrc-chat > div:empty,
-.vfrc-chat__container > div:empty,
-.vfrc-chat__container-inner > div:empty,
-.vfrc-spacer,
-div[class*="spacer"] {
+.vfrc-chat-dialog::-webkit-scrollbar,
+.vfrc-chat-dialog__container::-webkit-scrollbar {
+  width: 0 !important;
   display: none !important;
+}
+
+/* ── Launcher (mode "chat" flottant uniquement) */
+.vfrc-launcher {
+  background: #4B70FA !important;
+  border-radius: 40px;
+}
+
+/* ── Éléments d'interface (preset: soft-light) */
+.vfrc-system-response .vfrc-message:not([class*="extension"]):not([class*="vfrc-user"]),
+._11kfxpg0 {
+  background: #FFFFFF !important;
+  color: #1a1a2e !important;
+  border: 1px solid rgba(0,0,0,0.09) !important;
+  border-radius: 20px !important;
+}
+.vfrc-system-response .vfrc-message:not([class*="extension"]) p,
+.vfrc-system-response .vfrc-message:not([class*="extension"]) span,
+.vfrc-system-response .vfrc-message:not([class*="extension"]) strong {
+  color: #1a1a2e !important;
+}
+.vfrc-user-response > div,
+.vfrc-user-response .vfrc-message {
+  background: #4B70FA !important;
+  color: #ffffff !important;
+  border: 0px solid transparent !important;
+  border-radius: 20px !important;
+}
+.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3) {
+  background: #4B70FA !important;
+  color: #FFFFFF !important;
+  border: 1px solid #fcfcfc !important;
+  border-radius: 999px !important;
+  transition: all 0.15s ease !important;
+}
+.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3):hover {
+  filter: brightness(0.82) !important;
+}
+.vfrc-input-container,
+._1gdvh9t2,
+._1gdvh9t3,
+div.vfrc-input-container {
+  background: #ffffff !important;
+  border: 1px solid rgba(75, 112, 250, 0.35) !important;
+  border-radius: 14px !important;
+}
+.vfrc-input-container:focus-within,
+._1gdvh9t2:focus-within {
+  border-color: #4B70FA !important;
+  box-shadow: 0 0 0 3px rgba(75, 112, 250, 0.12) !important;
+}
+textarea.vfrc-chat-input,
+textarea._1gdvh9ta,
+.vfrc-input-container textarea {
+  color: #1a1a2e !important;
+}
+textarea.vfrc-chat-input::placeholder,
+textarea._1gdvh9ta::placeholder {
+  color: rgba(26, 26, 46, 0.4) !important;
+}
+
+/* ── Chrome VF (parité prod ⇄ aperçu) : splash masqué + header allégé + choices/avatar */
+/* ── Chrome VF : masquage du superflu (parité avec l'aperçu) */
+.vfrc-assistant-info,
+.vfrc-assistant-info *,
+[class*="vfrc-assistant-info"],
+[class*="assistant-info"],
+[class*="powered-by"],
+#vfrc-start-chat,
+[id*="vfrc-start-chat"],
+.vfrc-footer__start-button,
+[class*="vfrc-footer__start-button"],
+[class*="start-button"],
+.vfrc-footer__content-scroll-to-bottom,
+[class*="scroll-to-bottom"],
+.vfrc-footer__links,
+[class*="vfrc-footer__links"],
+.vfrc-privacy,
+[class*="vfrc-privacy"],
+[class*="privacy"],
+.vfrc-prompt,
+[class*="vfrc-prompt"],
+.vfrc-more-menu,
+[class*="vfrc-more-menu"],
+.vfrc-chat--bottom-spacer,
+div[class*="bottom-spacer"],
+.vfrc-chat-focus-ring,
+[class*="chat-focus-ring"],
+._1gdvh9t7, ._1gdvh9t8, ._1gdvh9t9 {
+  display: none !important;
+  visibility: hidden !important;
   height: 0 !important;
   min-height: 0 !important;
+  max-height: 0 !important;
   padding: 0 !important;
   margin: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  overflow: hidden !important;
 }
-
-/* ==========================================================
-   ⭐ TYPING INDICATOR - Animation "Revo écrit..."
-   ========================================================== */
-
-/* Container du typing indicator */
-.vfrc-typing-indicator--container,
-.vfrc-typing-indicator--container-inner,
-._1ayyscc0,
-._1ayyscc1 {
-  background: linear-gradient(135deg, rgba(124,58,237,0.12) 0%, rgba(20,20,22,0.85) 100%) !important;
-  border: 1px solid rgba(124, 58, 237, 0.3) !important;
-  border-radius: 16px !important;
-  padding: 14px 20px !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
-  box-shadow: 
-    0 0 20px -8px var(--glow-violet),
-    inset 0 0 20px rgba(124, 58, 237, 0.05) !important;
-}
-
-/* Container des points */
-.vfrc-typing-indicator,
-.vfrc-typing-indicator.xaffbq1 {
+/* ── Header allégé : fond clair, titre lisible, bouton fermeture/restart visible */
+.vfrc-header {
   display: flex !important;
+  visibility: visible !important;
   align-items: center !important;
-  gap: 6px !important;
+  justify-content: space-between !important;
+  height: auto !important;
+  min-height: 44px !important;
+  max-height: none !important;
+  padding: 8px 14px !important;
+  margin: 0 !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  background: #4B70FA !important;
+  border-bottom: 1px solid rgba(18, 21, 33, 0.1) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
-
-/* Points individuels - Base */
-.vfrc-typing-indicator span,
-.vfrc-typing-indicator span.xaffbq2 {
+.vfrc-header--container-inner {
+  display: flex !important;
+  visibility: visible !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  flex: 1 !important;
+  background: transparent !important;
+  height: auto !important;
+  max-height: none !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+.vfrc-header--title,
+[class*="vfrc-header--title"] {
   display: block !important;
-  width: 10px !important;
-  height: 10px !important;
-  background: rgba(124, 58, 237, 0.3) !important;
+  visibility: visible !important;
+  width: auto !important;
+  height: auto !important;
+  max-height: none !important;
+  opacity: 1 !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: #ffffff !important;
+  font-family: var(--font-heading) !important;
+}
+.vfrc-header--actions,
+[class*="vfrc-header--actions"] {
+  display: flex !important;
+  visibility: visible !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 4px !important;
+  width: auto !important;
+  height: auto !important;
+  max-height: none !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+.vfrc-header--button,
+button.vfrc-header--button,
+.vfrc-header--actions button {
+  display: flex !important;
+  visibility: visible !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 28px !important;
+  min-width: 28px !important;
+  max-width: 28px !important;
+  height: 28px !important;
+  min-height: 28px !important;
+  max-height: 28px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 8px !important;
+  color: #ffffff !important;
+  cursor: pointer !important;
+  opacity: 0.7 !important;
+  pointer-events: auto !important;
+  transition: opacity 0.2s ease, background 0.2s ease !important;
+}
+.vfrc-header--button:hover {
+  opacity: 1 !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+}
+.vfrc-header--button::after,
+.vfrc-header--actions button::after {
+  content: none !important;
+  display: none !important;
+}
+.vfrc-header--button svg,
+.vfrc-header--icon,
+[class*="vfrc-header--icon"],
+.vfrc-header--button .vfrc-icon {
+  display: block !important;
+  visibility: visible !important;
+  width: 18px !important;
+  height: 18px !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  color: #ffffff !important;
+}
+/* Avatar du header masqué (header compact) */
+.vfrc-header > .vfrc-avatar,
+.vfrc-header > img,
+.vfrc-header [class*="avatar"] {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  opacity: 0 !important;
+}
+/* Bulle bot vide pendant le stream → pas de cadre vide qui flashe */
+.vfrc-system-response .vfrc-message:empty {
+  display: none !important;
+}
+/* Conteneurs de boutons / choices : layout flex (sinon empilement collé en prod) */
+.vfrc-button-container,
+.vfrc-card--buttons,
+[class*="vfrc-card--buttons"],
+.vfrc-system-response--actions,
+[class*="system-response--actions"] {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+  padding: 2px 0 !important;
+  margin: 0 0 2px 0 !important;
+  justify-content: flex-start !important;
+  align-items: flex-start !important;
+}
+/* Chaque wrapper de bouton à la largeur de SON contenu (sinon full-width →
+ * les choices s'empilent verticalement au lieu de flotter en ligne). */
+.vfrc-system-response--action,
+[class*="system-response--action"]:not([class*="actions"]) {
+  display: inline-flex !important;
+  width: auto !important;
+  max-width: 100% !important;
+  flex: 0 0 auto !important;
+}
+/* Choices : padding + taille texte (absents de buildButtonCss → empilement serré en prod) */
+.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3),
+button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3) {
+  padding: 9px 18px !important;
+  font-size: 14px !important;
+  line-height: 1.3 !important;
+  letter-spacing: 0.01em !important;
+  cursor: pointer !important;
+}
+/* ── Header barre : espacement + taille/placement du titre (toggle Framly) */
+.vfrc-header {
+  gap: 10px !important;
+}
+.vfrc-header--title,
+[class*="vfrc-header--title"] {
+  font-size: 15px !important;
+  text-align: left !important;
+  width: auto !important;
+}
+.vfrc-header--container-inner {
+  justify-content: flex-start !important;
+}
+/* Avatar du header — injecté depuis l'URL de l'avatar du projet */
+.vfrc-header::before {
+  content: "" !important;
+  display: block !important;
+  flex-shrink: 0 !important;
+  width: 26px !important;
+  height: 26px !important;
   border-radius: 50% !important;
-  animation: typingGlowPulse 1.5s ease-in-out infinite !important;
+  background-image: url("https://cm4-production-assets.s3.amazonaws.com/1775075370750-logo-onoff.png") !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.55) !important;
+  margin: 0 !important;
+}
+.vfrc-header > .vfrc-avatar,
+.vfrc-header > img {
+  display: none !important;
 }
 
-/* Délais pour effet de vague */
-.vfrc-typing-indicator span.xaffbq3,
-.vfrc-typing-indicator span:nth-child(1) {
-  animation-delay: 0s !important;
-}
+/* ── Markdown bulles bot */
+/* ── Markdown bulles bot (autonome) */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) h1, ._11kfxpg0 h1 { font-size: 22px !important; font-weight: 700 !important; line-height: 1.2 !important; margin: 0 0 8px 0 !important; color: #4B70FA !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) h2, ._11kfxpg0 h2 { font-size: 18px !important; font-weight: 600 !important; line-height: 1.3 !important; margin: 10px 0 6px 0 !important; color: #4B70FA !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) h3, ._11kfxpg0 h3 { font-size: 15px !important; font-weight: 600 !important; margin: 8px 0 4px 0 !important; color: #4B70FA !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) h4, ._11kfxpg0 h4, .vfrc-system-response .vfrc-message:not([class*="extension"]) h5, ._11kfxpg0 h5, .vfrc-system-response .vfrc-message:not([class*="extension"]) h6, ._11kfxpg0 h6 { font-size: 14px !important; font-weight: 600 !important; margin: 6px 0 4px 0 !important; color: #121521 !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) ul, ._11kfxpg0 ul { list-style: none !important; padding-left: 1.2em !important; margin: 6px 0 !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) ul li, ._11kfxpg0 ul li { position: relative !important; margin: 3px 0 !important; padding-left: 6px !important; line-height: 1.5 !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) ul li, ._11kfxpg0 ul li::before { content: "\25B8" !important; position: absolute !important; left: -1em !important; color: #4B70FA !important; font-size: 0.9em !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) ol, ._11kfxpg0 ol { padding-left: 1.2em !important; margin: 6px 0 !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) ol li, ._11kfxpg0 ol li { margin: 3px 0 !important; line-height: 1.5 !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) a, ._11kfxpg0 a { color: #4B70FA !important; text-decoration: none !important; border-bottom: 1px solid transparent !important; transition: border-color 0.2s ease !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) a, ._11kfxpg0 a:hover { border-bottom-color: #4B70FA !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) code, ._11kfxpg0 code { font-family: 'Fira Code','Monaco',monospace !important; font-size: 0.85em !important; background: rgba(18, 21, 33, 0.08) !important; border: 1px solid rgba(18, 21, 33, 0.15) !important; border-radius: 6px !important; padding: 2px 6px !important; color: #4B70FA !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) pre, ._11kfxpg0 pre { background: rgba(18, 21, 33, 0.06) !important; border: 1px solid rgba(18, 21, 33, 0.12) !important; border-radius: 12px !important; padding: 16px !important; overflow-x: auto !important; margin: 12px 0 !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) pre code, ._11kfxpg0 pre code { background: transparent !important; border: none !important; padding: 0 !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) blockquote, ._11kfxpg0 blockquote { border-left: 3px solid #4B70FA !important; background: rgba(75, 112, 250, 0.08) !important; padding: 12px 16px !important; margin: 12px 0 !important; border-radius: 0 8px 8px 0 !important; font-style: italic !important; color: rgba(18, 21, 33, 0.85) !important; }
 
-.vfrc-typing-indicator span.xaffbq4,
-.vfrc-typing-indicator span:nth-child(2) {
-  animation-delay: 0.3s !important;
-}
-
-.vfrc-typing-indicator span.xaffbq5,
-.vfrc-typing-indicator span:nth-child(3) {
-  animation-delay: 0.6s !important;
-}
-
-/* Animation Glow Pulse */
-@keyframes typingGlowPulse {
-  0%, 100% { 
-    background: rgba(124, 58, 237, 0.3) !important;
-    box-shadow: none;
-    transform: scale(1);
-  }
-  50% { 
-    background: #c026d3 !important;
-    box-shadow: 
-      0 0 8px 2px rgba(192, 38, 211, 0.9),
-      0 0 16px 4px rgba(124, 58, 237, 0.6);
-    transform: scale(1.4);
-  }
-}
-
-/* ==========================================================
-   ANIMATIONS D'ENTRÉE
-   ========================================================== */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.vfrc-message:not([class*="extension"]) { 
-  margin: 4px 0 !important;
-  animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
-}
-
-/* ==========================================================
-   RESPONSIVE - Mobile optimizations
-   ========================================================== */
-@media (max-width: 768px) {
-  .vfrc-system-response .vfrc-message:not([class*="extension"]),
-  .vfrc-user-response > div,
-  .vfrc-user-response .vfrc-message {
-    max-width: 96% !important;
-    padding: 10px 12px !important;
-    font-size: 13px !important;
-    border-radius: 12px !important;
-  }
-  
-  .vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]) {
-    padding: 8px 12px !important;
-    font-size: 12px !important;
-    border-radius: 8px !important;
-  }
-  
-  .vfrc-footer__content,
-  ._1vj16245 {
-    padding: 10px !important;
-  }
-  
-  .vfrc-chat--dialog,
-  .vfrc-chat-dialog,
-  .vfrc-chat-dialog__container {
-    padding: 10px 8px 4px 8px !important;
-  }
-  
-  :root {
-    --fs-h1: 20px;
-    --fs-h2: 17px;
-    --fs-h3: 14px;
-    --fs-body: 13px;
-    --fs-button: 12px;
-  }
-  
-  /* Questions responsive */
-  .vfrc-system-response .vfrc-message .revo-question,
-  .vfrc-message .revo-question,
-  .revo-question {
-    font-size: 14px !important;
-    padding: 10px 14px !important;
-    margin-top: 10px !important;
-  }
-  
-  /* Progress bar responsive */
-  .vfrc-system-response .vfrc-message .revo-progress,
-  .vfrc-message .revo-progress,
-  .revo-progress {
-    gap: 5px !important;
-    padding: 8px 12px !important;
-    margin-bottom: 10px !important;
-  }
-  
-  .revo-progress span {
-    width: 10px !important;
-    height: 10px !important;
-  }
-  
-  .revo-progress::after {
-    font-size: 10px !important;
-    right: 10px !important;
-  }
-  
-  .revo-progress span.done {
-    animation: none !important;
-  }
-  
-  /* Typing indicator responsive */
-  .vfrc-typing-indicator--container-inner,
-  ._1ayyscc1 {
-    padding: 10px 14px !important;
-    border-radius: 12px !important;
-  }
-  
-  .vfrc-typing-indicator span,
-  .vfrc-typing-indicator span.xaffbq2 {
-    width: 8px !important;
-    height: 8px !important;
-  }
-  
-  /* Bouton restart mobile - zone cliquable plus grande */
-  .vfrc-header--button,
-  button.vfrc-header--button,
-  .vfrc-header--actions button,
-  .jyiueia button {
-    width: 70px !important;
-    max-width: 70px !important;
-    height: 32px !important;
-    min-width: 70px !important;
-    min-height: 32px !important;
-    max-height: 32px !important;
-  }
-  
-  .vfrc-header--button::after,
-  button.vfrc-header--button::after,
-  .vfrc-header--actions button::after,
-  .jyiueia button::after {
-    width: 60px !important;
-    height: 6px !important;
-    opacity: 0.4 !important;
-  }
-  
-  .vfrc-footer__start-button,
-  div[class*="start-button"],
-  #vfrc-start-chat {
-    width: 60px !important;
-    max-width: 60px !important;
-    height: 6px !important;
-    min-width: 60px !important;
-    min-height: 6px !important;
-    max-height: 6px !important;
-    opacity: 0.4 !important;
-  }
-  
-  /* Réduire les animations sur mobile pour performance */
-  .vfrc-input-container,
-  ._1gdvh9t2,
-  ._1gdvh9t3 {
-    animation: none !important;
-  }
-  
-  .vfrc-input-container::before,
-  ._1gdvh9t2::before,
-  ._1gdvh9t3::before {
-    animation: none !important;
-    display: none !important;
-  }
-  
-  #vfrc-send-message:not([disabled]),
-  .vfrc-chat-input__send:not([disabled]),
-  ._1gdvh9tf:not([disabled]) {
-    animation: none !important;
-  }
-  
-  /* Réduire animation question sur mobile */
-  .vfrc-system-response .vfrc-message .revo-question,
-  .vfrc-message .revo-question,
-  .revo-question {
-    animation: none !important;
-  }
-}
-
-/* ==========================================================
-   PREFERS-REDUCED-MOTION - Respect accessibilité
-   ========================================================== */
-@media (prefers-reduced-motion: reduce) {
-  .vfrc-input-container,
-  ._1gdvh9t2,
-  ._1gdvh9t3,
-  .vfrc-input-container::before,
-  ._1gdvh9t2::before,
-  ._1gdvh9t3::before,
-  #vfrc-send-message:not([disabled]),
-  .vfrc-chat-input__send:not([disabled]),
-  ._1gdvh9tf:not([disabled]),
-  .vfrc-message:not([class*="extension"]),
-  .revo-question,
-  .revo-progress span.done,
-  .vfrc-typing-indicator span,
-  .vfrc-typing-indicator span.xaffbq2 {
-    animation: none !important;
-    transition: none !important;
-  }
+/* Bordure subtile pour garder les bulles bot visibles sur fond glacé */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) {
+  border: 1px solid rgba(14,165,233,0.20) !important;
+  box-shadow: 0 1px 6px rgba(14,165,233,0.10) !important;
 }
