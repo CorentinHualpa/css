@@ -53,19 +53,35 @@
  * de tout widget de chat ; le "vide" quand il y a peu de messages est normal.
  * La HAUTEUR GLOBALE du widget vient de son conteneur (container.height en
  * embedded ; panneau VF en popover) — pas de ce CSS. */
+/* .vfrc-widget = racine VF V4 ; on l'inclut dans la chaîne flex/fill-height,
+ * sinon en prod (sans dragon-theme) la racine ne propage pas la hauteur → footer
+ * qui flotte. */
+.vfrc-widget,
 .vfrc-chat,
 .vfrc-chat__container,
 .vfrc-chat__container-inner {
   background: linear-gradient(150deg, #fafafa 0%, #bae6fd 100%) !important;
   border-radius: 20px !important;
   overflow: hidden !important;
+  /* isolation:isolate = fix bug Chrome : un descendant en backdrop-filter (le
+   * footer en blur) casse le clipping border-radius+overflow → coins carrés.
+   * Forcer un contexte d'empilement rétablit l'arrondi. */
+  isolation: isolate !important;
+  /* height:100% (layout chat standard, saisie en bas) borné par max-height.
+   * NB : height:auto cassait la flex (input/footer étirés) → on garde 100%. */
   height: 100% !important;
+  max-height: min(600px, 92vh) !important;
   min-height: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  gap: 0 !important;
   display: flex !important;
   flex-direction: column !important;
 }
 /* Liste des messages : remplit l'espace dispo, scroll vertical si besoin,
- * jamais horizontal. */
+ * jamais horizontal. Padding interne pour que les bulles ne collent pas aux bords. */
 .vfrc-chat--dialog,
 .vfrc-chat-dialog,
 .vfrc-chat-dialog__container {
@@ -73,6 +89,9 @@
   min-height: 0 !important;
   overflow-y: auto !important;
   overflow-x: hidden !important;
+  padding: 12px 10px 6px 10px !important;
+  margin: 0 !important;
+  gap: 0 !important;
 }
 
 
@@ -91,6 +110,12 @@
   box-shadow: none !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
+  /* La bulle ne s'étale pas sur toute la largeur (sinon en prod elle prend 100%). */
+  display: inline-block !important;
+  max-width: 78% !important;
+  box-sizing: border-box !important;
+  line-height: 1.55 !important;
+  overflow-wrap: break-word !important;
 }
 
 /* ── Bulles bot : enfants p / span / strong
@@ -132,7 +157,13 @@
   -webkit-backdrop-filter: none !important;
 }
 
-/* ── Bulles utilisateur */
+/* ── Bulles utilisateur — alignées à droite, largeur bornée (sinon en prod
+ * elles s'étalent à 100% et ne sont plus à droite). */
+.vfrc-user-response {
+  display: block !important;
+  text-align: right !important;
+  width: 100% !important;
+}
 .vfrc-user-response > div,
 .vfrc-user-response .vfrc-message,
 ._15emaa40 {
@@ -143,6 +174,11 @@
   backdrop-filter: blur(10px) !important;
   -webkit-backdrop-filter: blur(10px) !important;
   color: #121521 !important;
+  display: inline-block !important;
+  max-width: 78% !important;
+  text-align: left !important;
+  box-sizing: border-box !important;
+  overflow-wrap: break-word !important;
 }
 /* Les éléments enfants des bulles user (p, span, a…) héritent la couleur
  * du container. On force ici pour éviter que dragon-theme override avec
@@ -160,9 +196,16 @@
 .vfrc-footer__content,
 ._1vj16245 {
   background: #fafafa !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
+  /* PAS de backdrop-filter sur le footer : sur fond opaque le flou est invisible,
+   * ET il casse le clip des coins arrondis du bas (bug Chrome : un descendant en
+   * backdrop-filter s'échappe du overflow:hidden + border-radius de l'ancêtre,
+   * que isolation:isolate ne suffit pas à contenir ici). Force none. */
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
   border-top: 1px solid rgba(18, 21, 33, 0.08) !important;
+  /* Footer ancré en bas du cadre flex (sinon il flotte après le dernier message). */
+  flex: 0 0 auto !important;
+  min-height: auto !important;
 }
 /* Masquer le trait gradient "Cosmic Premium" que dragon-theme injecte via ::before */
 .vfrc-footer__content::before,
@@ -322,6 +365,34 @@ textarea._1gdvh9ta::placeholder,
 }
 
 /* ── Bouton envoi */
+/* Géométrie du bouton envoi (44×44 + icône 20px) — absente sans dragon-theme.
+ * On garde :not(.vfrc-chat-input__voice-mode) pour ne pas voler le bouton voice. */
+#vfrc-send-message,
+.vfrc-chat-input__send:not(.vfrc-chat-input__voice-mode),
+._1gdvh9tf,
+button[class*="send"]:not([class*="voice"]) {
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+}
+#vfrc-send-message svg,
+.vfrc-chat-input__send svg,
+._1gdvh9tf svg {
+  display: block !important;
+  width: 20px !important;
+  height: 20px !important;
+}
+#vfrc-send-message::after,
+.vfrc-chat-input__send::after,
+._1gdvh9tf::after {
+  content: none !important;
+  display: none !important;
+}
 /* ._1gdvh9tf = classe hachée VF du send button, ciblée par dragon-theme */
 #vfrc-send-message:not([disabled]),
 .vfrc-chat-input__send:not(.vfrc-chat-input__voice-mode):not([disabled]),
@@ -507,6 +578,243 @@ textarea.vfrc-chat-input::placeholder,
 textarea._1gdvh9ta::placeholder {
   color: rgba(26, 26, 46, 0.4) !important;
 }
+
+/* ── Chrome VF (parité prod ⇄ aperçu) : splash masqué + header allégé + choices/avatar */
+/* ── Chrome VF : masquage du superflu (parité avec l'aperçu) */
+.vfrc-assistant-info,
+.vfrc-assistant-info *,
+[class*="vfrc-assistant-info"],
+[class*="assistant-info"],
+[class*="powered-by"],
+#vfrc-start-chat,
+[id*="vfrc-start-chat"],
+.vfrc-footer__start-button,
+[class*="vfrc-footer__start-button"],
+[class*="start-button"],
+.vfrc-footer__content-scroll-to-bottom,
+[class*="scroll-to-bottom"],
+.vfrc-footer__links,
+[class*="vfrc-footer__links"],
+.vfrc-privacy,
+[class*="vfrc-privacy"],
+[class*="privacy"],
+.vfrc-prompt,
+[class*="vfrc-prompt"],
+.vfrc-more-menu,
+[class*="vfrc-more-menu"],
+.vfrc-chat--bottom-spacer,
+div[class*="bottom-spacer"],
+.vfrc-chat-focus-ring,
+[class*="chat-focus-ring"],
+._1gdvh9t7, ._1gdvh9t8, ._1gdvh9t9 {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  overflow: hidden !important;
+}
+/* ── Header allégé : fond clair, titre lisible, bouton fermeture/restart visible */
+.vfrc-header {
+  display: flex !important;
+  visibility: visible !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  height: auto !important;
+  min-height: 44px !important;
+  max-height: none !important;
+  padding: 8px 14px !important;
+  margin: 0 !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  background: linear-gradient(135deg, #4B70FA, #1c3497) !important;
+  border-bottom: 1px solid rgba(18, 21, 33, 0.1) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.vfrc-header--container-inner {
+  display: flex !important;
+  visibility: visible !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  flex: 1 !important;
+  background: transparent !important;
+  height: auto !important;
+  max-height: none !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+.vfrc-header--title,
+[class*="vfrc-header--title"] {
+  display: block !important;
+  visibility: visible !important;
+  width: auto !important;
+  height: auto !important;
+  max-height: none !important;
+  opacity: 1 !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: #ffffff !important;
+  font-family: var(--font-heading) !important;
+}
+.vfrc-header--actions,
+[class*="vfrc-header--actions"] {
+  display: flex !important;
+  visibility: visible !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 4px !important;
+  width: auto !important;
+  height: auto !important;
+  max-height: none !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+.vfrc-header--button,
+button.vfrc-header--button,
+.vfrc-header--actions button {
+  display: flex !important;
+  visibility: visible !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 28px !important;
+  min-width: 28px !important;
+  max-width: 28px !important;
+  height: 28px !important;
+  min-height: 28px !important;
+  max-height: 28px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 8px !important;
+  color: #ffffff !important;
+  cursor: pointer !important;
+  opacity: 0.7 !important;
+  pointer-events: auto !important;
+  transition: opacity 0.2s ease, background 0.2s ease !important;
+}
+.vfrc-header--button:hover {
+  opacity: 1 !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+}
+.vfrc-header--button::after,
+.vfrc-header--actions button::after {
+  content: none !important;
+  display: none !important;
+}
+.vfrc-header--button svg,
+.vfrc-header--icon,
+[class*="vfrc-header--icon"],
+.vfrc-header--button .vfrc-icon {
+  display: block !important;
+  visibility: visible !important;
+  width: 18px !important;
+  height: 18px !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  color: #ffffff !important;
+}
+/* Avatar du header masqué (header compact) */
+.vfrc-header > .vfrc-avatar,
+.vfrc-header > img,
+.vfrc-header [class*="avatar"] {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  opacity: 0 !important;
+}
+/* Bulle bot vide pendant le stream → pas de cadre vide qui flashe */
+.vfrc-system-response .vfrc-message:empty {
+  display: none !important;
+}
+/* Conteneurs de boutons / choices : layout flex (sinon empilement collé en prod) */
+.vfrc-button-container,
+.vfrc-card--buttons,
+[class*="vfrc-card--buttons"],
+.vfrc-system-response--actions,
+[class*="system-response--actions"] {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+  padding: 2px 0 !important;
+  margin: 0 0 2px 0 !important;
+  justify-content: flex-start !important;
+  align-items: flex-start !important;
+}
+/* Chaque wrapper de bouton à la largeur de SON contenu (sinon full-width →
+ * les choices s'empilent verticalement au lieu de flotter en ligne). */
+.vfrc-system-response--action,
+[class*="system-response--action"]:not([class*="actions"]) {
+  display: inline-flex !important;
+  width: auto !important;
+  max-width: 100% !important;
+  flex: 0 0 auto !important;
+}
+/* Choices : padding + taille texte (absents de buildButtonCss → empilement serré en prod) */
+.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3),
+button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3) {
+  padding: 9px 18px !important;
+  font-size: 14px !important;
+  line-height: 1.3 !important;
+  letter-spacing: 0.01em !important;
+  cursor: pointer !important;
+}
+/* ── Header barre : espacement + taille/placement du titre (toggle Framly) */
+.vfrc-header {
+  gap: 10px !important;
+}
+.vfrc-header--title,
+[class*="vfrc-header--title"] {
+  font-size: 15px !important;
+  text-align: left !important;
+  width: auto !important;
+}
+.vfrc-header--container-inner {
+  justify-content: flex-start !important;
+}
+/* Avatar du header — injecté depuis l'URL de l'avatar du projet */
+.vfrc-header::before {
+  content: "" !important;
+  display: block !important;
+  flex-shrink: 0 !important;
+  width: 26px !important;
+  height: 26px !important;
+  border-radius: 50% !important;
+  background-image: url("https://cm4-production-assets.s3.amazonaws.com/1775075370750-logo-onoff.png") !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.55) !important;
+  margin: 0 !important;
+}
+.vfrc-header > .vfrc-avatar,
+.vfrc-header > img {
+  display: none !important;
+}
+
+/* ── Markdown bulles bot */
+/* ── Markdown bulles bot (autonome) */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) h1, ._11kfxpg0 h1 { font-size: 22px !important; font-weight: 700 !important; line-height: 1.2 !important; margin: 0 0 8px 0 !important; color: #4B70FA !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) h2, ._11kfxpg0 h2 { font-size: 18px !important; font-weight: 600 !important; line-height: 1.3 !important; margin: 10px 0 6px 0 !important; color: #4B70FA !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) h3, ._11kfxpg0 h3 { font-size: 15px !important; font-weight: 600 !important; margin: 8px 0 4px 0 !important; color: #4B70FA !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) h4, ._11kfxpg0 h4, .vfrc-system-response .vfrc-message:not([class*="extension"]) h5, ._11kfxpg0 h5, .vfrc-system-response .vfrc-message:not([class*="extension"]) h6, ._11kfxpg0 h6 { font-size: 14px !important; font-weight: 600 !important; margin: 6px 0 4px 0 !important; color: #121521 !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) ul, ._11kfxpg0 ul { list-style: none !important; padding-left: 1.2em !important; margin: 6px 0 !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) ul li, ._11kfxpg0 ul li { position: relative !important; margin: 3px 0 !important; padding-left: 6px !important; line-height: 1.5 !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) ul li, ._11kfxpg0 ul li::before { content: "\25B8" !important; position: absolute !important; left: -1em !important; color: #4B70FA !important; font-size: 0.9em !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) ol, ._11kfxpg0 ol { padding-left: 1.2em !important; margin: 6px 0 !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) ol li, ._11kfxpg0 ol li { margin: 3px 0 !important; line-height: 1.5 !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) a, ._11kfxpg0 a { color: #4B70FA !important; text-decoration: none !important; border-bottom: 1px solid transparent !important; transition: border-color 0.2s ease !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) a, ._11kfxpg0 a:hover { border-bottom-color: #4B70FA !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) code, ._11kfxpg0 code { font-family: 'Fira Code','Monaco',monospace !important; font-size: 0.85em !important; background: rgba(18, 21, 33, 0.08) !important; border: 1px solid rgba(18, 21, 33, 0.15) !important; border-radius: 6px !important; padding: 2px 6px !important; color: #4B70FA !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) pre, ._11kfxpg0 pre { background: rgba(18, 21, 33, 0.06) !important; border: 1px solid rgba(18, 21, 33, 0.12) !important; border-radius: 12px !important; padding: 16px !important; overflow-x: auto !important; margin: 12px 0 !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) pre code, ._11kfxpg0 pre code { background: transparent !important; border: none !important; padding: 0 !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) blockquote, ._11kfxpg0 blockquote { border-left: 3px solid #4B70FA !important; background: rgba(75, 112, 250, 0.08) !important; padding: 12px 16px !important; margin: 12px 0 !important; border-radius: 0 8px 8px 0 !important; font-style: italic !important; color: rgba(18, 21, 33, 0.85) !important; }
 
 /* Bordure subtile pour garder les bulles bot visibles sur fond glacé */
 .vfrc-system-response .vfrc-message:not([class*="extension"]) {
