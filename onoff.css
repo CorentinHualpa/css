@@ -1,4 +1,4 @@
-/* Framly build eebac55 — colle ce CSS tel quel. Le tag ci-dessus = la version (identique à celle affichée en haut à gauche de Framly). */
+/* Framly build ce0ae85 — colle ce CSS tel quel. Le tag ci-dessus = la version (identique à celle affichée en haut à gauche de Framly). */
 /* Framly stylesheet — Voiceflow widget overrides
  * Sélecteurs alignés sur le DOM réel VF V4 (référence : dragon-theme.css).
  * Ce bloc est injecté APRÈS dragon-theme dans le blob stylesheet —
@@ -65,6 +65,14 @@
  * hauteur en embedded (sans casser le positionnement popover). */
 .vfrc-widget {
   height: 100% !important;
+  /* CENTRAGE du popover : en popover natif, .vfrc-widget est le calque plein écran
+   * (position:fixed; inset:0) qui porte l'overlay + le panneau. On en fait un flex
+   * center → le panneau (.vfrc-chat, borné) est centré au milieu de l'écran, comme
+   * l'aperçu modal de Framly (au lieu d'être collé en haut). L'overlay reste plein
+   * écran (position:absolute, non affecté par le flex). */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 .vfrc-chat,
 .vfrc-chat__container,
@@ -82,7 +90,7 @@
   max-height: min(600px, 92vh) !important;
   min-height: 0 !important;
   width: 100% !important;
-  max-width: min(100%, 480px) !important;
+  max-width: min(100%, 560px) !important;
   padding: 0 !important;
   margin: 0 !important;
   gap: 0 !important;
