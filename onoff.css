@@ -1,4 +1,4 @@
-/* Framly build 82f01e9 — colle ce CSS tel quel. Le tag ci-dessus = la version (identique à celle affichée en haut à gauche de Framly). */
+/* Framly build eebac55 — colle ce CSS tel quel. Le tag ci-dessus = la version (identique à celle affichée en haut à gauche de Framly). */
 /* Framly stylesheet — Voiceflow widget overrides
  * Sélecteurs alignés sur le DOM réel VF V4 (référence : dragon-theme.css).
  * Ce bloc est injecté APRÈS dragon-theme dans le blob stylesheet —
@@ -57,7 +57,15 @@
 /* .vfrc-widget = racine VF V4 ; on l'inclut dans la chaîne flex/fill-height,
  * sinon en prod (sans dragon-theme) la racine ne propage pas la hauteur → footer
  * qui flotte. */
-.vfrc-widget,
+/* .vfrc-widget = wrapper de POSITIONNEMENT du popover VF (position:fixed; inset:0;
+ * z-index élevé). Il porte l'overlay + le panneau flottant et les place (coin).
+ * On NE le borne PAS et on ne lui met NI fond NI flex : sinon, en popover, il
+ * devient une boîte 480×600 collée en HAUT-GAUCHE (inset:0) et l'overlay rétrécit
+ * avec lui (bug prod OnOff). On lui donne juste height:100% pour la propagation de
+ * hauteur en embedded (sans casser le positionnement popover). */
+.vfrc-widget {
+  height: 100% !important;
+}
 .vfrc-chat,
 .vfrc-chat__container,
 .vfrc-chat__container-inner {
@@ -152,10 +160,14 @@
  * On supprime systématiquement — l'overlay garde son fond semi-opaque
  * (rgba(10,10,11,0.8)) mais sans blur. */
 .vfrc-chat--overlay,
+.vfrc-popper__overlay,
+[class*="popper__overlay"],
+[class*="vfrc-chat--overlay"],
 ._5x612k3,
 ._5x612k4 {
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
+  filter: none !important;
 }
 
 /* ── Bulles utilisateur — alignées à droite, largeur bornée (sinon en prod
