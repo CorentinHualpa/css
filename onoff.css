@@ -1,4 +1,4 @@
-/* Framly build b2fce25 — colle ce CSS tel quel. Le tag ci-dessus = la version (identique à celle affichée en haut à gauche de Framly). */
+/* Framly build 74cbf3a — colle ce CSS tel quel. Le tag ci-dessus = la version (identique à celle affichée en haut à gauche de Framly). */
 /* Framly stylesheet — Voiceflow widget overrides
  * Sélecteurs alignés sur le DOM réel VF V4 (référence : dragon-theme.css).
  * Ce bloc est injecté APRÈS dragon-theme dans le blob stylesheet —
@@ -159,6 +159,10 @@
   display: inline-block !important;
   max-width: 78% !important;
   box-sizing: border-box !important;
+  /* Padding interne explicite : sans dragon-theme, VF ne pose ~aucun padding
+   * horizontal (texte collé aux bords) tout en gardant ~14px en vertical →
+   * asymétrie moche. On force un padding symétrique propre. */
+  padding: 10px 14px !important;
   line-height: 1.55 !important;
   overflow-wrap: break-word !important;
 }
@@ -227,6 +231,9 @@
   max-width: 78% !important;
   text-align: left !important;
   box-sizing: border-box !important;
+  /* Padding interne explicite (cf. bulle bot) : sinon "Hey" se retrouve dans
+   * une pastille de 25px collée au texte. */
+  padding: 9px 14px !important;
   overflow-wrap: break-word !important;
 }
 /* Les éléments enfants des bulles user (p, span, a…) héritent la couleur
@@ -846,6 +853,50 @@ button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-cha
 .vfrc-header > img {
   display: none !important;
 }
+/* Avatar des bulles bot — borné à un petit cercle (sinon 512px, taille naturelle de l'<img>, sans dragon-theme) */
+.vfrc-system-response .vfrc-avatar,
+.vfrc-system-response img.vfrc-avatar,
+.vfrc-system-response--container .vfrc-avatar,
+.vfrc-message .vfrc-avatar {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  max-width: 32px !important;
+  min-height: 32px !important;
+  max-height: 32px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  flex-shrink: 0 !important;
+  align-self: flex-start !important;
+  margin-top: 4px !important;
+}
+/* Message bot : avatar + bulle sur la MÊME ligne (pas l'avatar au-dessus) */
+.vfrc-system-response {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start !important;
+  gap: 8px !important;
+}
+.vfrc-system-response > div:not(.vfrc-avatar):not([class*="avatar"]) {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+}
+/* Boutons d'action du header (reset/restart, close) → toujours à DROITE */
+.vfrc-header--actions {
+  margin-left: auto !important;
+  order: 9 !important;
+}
+.vfrc-header--container-inner .vfrc-header--button,
+.vfrc-header--container-inner > button {
+  margin-left: auto !important;
+  order: 9 !important;
+}
+/* Encart de saisie : marge vs bords du popover (padding footer, absent sans dragon-theme) */
+.vfrc-footer__content,
+._1vj16245 {
+  padding: 8px 12px 12px 12px !important;
+  box-sizing: border-box !important;
+}
 
 /* ── Markdown bulles bot */
 /* ── Markdown bulles bot (autonome) */
@@ -855,11 +906,11 @@ button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-cha
 .vfrc-system-response .vfrc-message:not([class*="extension"]) h4, ._11kfxpg0 h4, .vfrc-system-response .vfrc-message:not([class*="extension"]) h5, ._11kfxpg0 h5, .vfrc-system-response .vfrc-message:not([class*="extension"]) h6, ._11kfxpg0 h6 { font-size: 14px !important; font-weight: 600 !important; margin: 6px 0 4px 0 !important; color: #121521 !important; }
 .vfrc-system-response .vfrc-message:not([class*="extension"]) ul, ._11kfxpg0 ul { list-style: none !important; padding-left: 1.2em !important; margin: 6px 0 !important; }
 .vfrc-system-response .vfrc-message:not([class*="extension"]) ul li, ._11kfxpg0 ul li { position: relative !important; margin: 3px 0 !important; padding-left: 6px !important; line-height: 1.5 !important; }
-.vfrc-system-response .vfrc-message:not([class*="extension"]) ul li, ._11kfxpg0 ul li::before { content: "\25B8" !important; position: absolute !important; left: -1em !important; color: #4B70FA !important; font-size: 0.9em !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) ul li::before, ._11kfxpg0 ul li::before { content: "\25B8" !important; position: absolute !important; left: -1em !important; color: #4B70FA !important; font-size: 0.9em !important; }
 .vfrc-system-response .vfrc-message:not([class*="extension"]) ol, ._11kfxpg0 ol { padding-left: 1.2em !important; margin: 6px 0 !important; }
 .vfrc-system-response .vfrc-message:not([class*="extension"]) ol li, ._11kfxpg0 ol li { margin: 3px 0 !important; line-height: 1.5 !important; }
 .vfrc-system-response .vfrc-message:not([class*="extension"]) a, ._11kfxpg0 a { color: #4B70FA !important; text-decoration: none !important; border-bottom: 1px solid transparent !important; transition: border-color 0.2s ease !important; }
-.vfrc-system-response .vfrc-message:not([class*="extension"]) a, ._11kfxpg0 a:hover { border-bottom-color: #4B70FA !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) a:hover, ._11kfxpg0 a:hover { border-bottom-color: #4B70FA !important; }
 .vfrc-system-response .vfrc-message:not([class*="extension"]) code, ._11kfxpg0 code { font-family: 'Fira Code','Monaco',monospace !important; font-size: 0.85em !important; background: rgba(18, 21, 33, 0.08) !important; border: 1px solid rgba(18, 21, 33, 0.15) !important; border-radius: 6px !important; padding: 2px 6px !important; color: #4B70FA !important; }
 .vfrc-system-response .vfrc-message:not([class*="extension"]) pre, ._11kfxpg0 pre { background: rgba(18, 21, 33, 0.06) !important; border: 1px solid rgba(18, 21, 33, 0.12) !important; border-radius: 12px !important; padding: 16px !important; overflow-x: auto !important; margin: 12px 0 !important; }
 .vfrc-system-response .vfrc-message:not([class*="extension"]) pre code, ._11kfxpg0 pre code { background: transparent !important; border: none !important; padding: 0 !important; }
