@@ -1,4 +1,4 @@
-/* Framly build 89bd91c — colle ce CSS tel quel. Le tag ci-dessus = la version (identique à celle affichée en haut à gauche de Framly). */
+/* Framly build ddf9d45 — colle ce CSS tel quel. Le tag ci-dessus = la version (identique à celle affichée en haut à gauche de Framly). */
 /* Framly stylesheet — Voiceflow widget overrides
  * Sélecteurs alignés sur le DOM réel VF V4 (référence : dragon-theme.css).
  * Ce bloc est injecté APRÈS dragon-theme dans le blob stylesheet —
@@ -107,13 +107,24 @@
   width: 100% !important;
   max-width: 100% !important;
 }
-/* BORNER la boîte popover à la taille de design (centrée par VF) → la boîte ne
- * remplit plus tout l'écran : marge en haut et en bas, comme l'aperçu Framly.
- * max- UNIQUEMENT (pas de height/width fixes ni de position) → pas de tiroir, pas
- * de bagarre de placement. En embedded, .vfrc-chat__container n'existe pas → no-op. */
+/* CENTRER + dimensionner la boîte popover, de façon DÉTERMINISTE.
+ * .vfrc-chat__container n'existe QU'en popover (prod) : en embedded (aperçu Framly)
+ * il n'existe pas → cette règle est un no-op là-bas, l'aperçu n'est jamais touché.
+ * VF ancrait cette boîte à GAUCHE (d'où le popover "décalé" qui rebougeait à chaque
+ * changement de largeur). On la passe en position:fixed + translate(-50%,-50%) :
+ * elle est centrée à l'écran, point fixe → ça ne dérive plus. Taille = config
+ * container (réglable dans Framly), bornée à 96vw/92vh pour la marge haut/bas. */
 .vfrc-chat__container {
-  max-width: min(100%, 560px) !important;
-  max-height: min(600px, 90vh) !important;
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: translate(-50%, -50%) !important;
+  width: 560px !important;
+  height: 600px !important;
+  max-width: 96vw !important;
+  max-height: 92vh !important;
 }
 /* Liste des messages : remplit l'espace dispo, scroll vertical si besoin,
  * jamais horizontal. Padding interne pour que les bulles ne collent pas aux bords. */
