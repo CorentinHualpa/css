@@ -1,4 +1,4 @@
-/* Framly build 74cbf3a — colle ce CSS tel quel. Le tag ci-dessus = la version (identique à celle affichée en haut à gauche de Framly). */
+/* Framly build 89ede90 — colle ce CSS tel quel. Le tag ci-dessus = la version (identique à celle affichée en haut à gauche de Framly). */
 /* Framly stylesheet — Voiceflow widget overrides
  * Sélecteurs alignés sur le DOM réel VF V4 (référence : dragon-theme.css).
  * Ce bloc est injecté APRÈS dragon-theme dans le blob stylesheet —
@@ -137,6 +137,15 @@
   padding: 12px 10px 6px 10px !important;
   margin: 0 !important;
   gap: 0 !important;
+}
+/* Espacement vertical entre les lignes de message. Sans dragon-theme, les
+ * rangées se collent (bulle user quasi collée aux bulles bot). On met une marge
+ * BASSE sur chaque conteneur de rangée → rythme régulier. Le bloc "bulle bot +
+ * ses boutons de choix" reste groupé car il partage le même --container. */
+.vfrc-system-response--container,
+.vfrc-user-response,
+.vfrc-typing-indicator--container {
+  margin: 0 0 14px 0 !important;
 }
 
 
@@ -900,6 +909,9 @@ button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-cha
 
 /* ── Markdown bulles bot */
 /* ── Markdown bulles bot (autonome) */
+.vfrc-system-response .vfrc-message:not([class*="extension"]) p, ._11kfxpg0 p { margin: 0 0 0.5em 0 !important; line-height: 1.55 !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) p:last-child, ._11kfxpg0 p:last-child { margin-bottom: 0 !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) p:first-child, ._11kfxpg0 p:first-child { margin-top: 0 !important; }
 .vfrc-system-response .vfrc-message:not([class*="extension"]) h1, ._11kfxpg0 h1 { font-size: 22px !important; font-weight: 700 !important; line-height: 1.2 !important; margin: 0 0 8px 0 !important; color: #4B70FA !important; }
 .vfrc-system-response .vfrc-message:not([class*="extension"]) h2, ._11kfxpg0 h2 { font-size: 18px !important; font-weight: 600 !important; line-height: 1.3 !important; margin: 10px 0 6px 0 !important; color: #4B70FA !important; }
 .vfrc-system-response .vfrc-message:not([class*="extension"]) h3, ._11kfxpg0 h3 { font-size: 15px !important; font-weight: 600 !important; margin: 8px 0 4px 0 !important; color: #4B70FA !important; }
