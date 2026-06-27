@@ -1,4 +1,4 @@
-/* Framly build ddf9d45 — colle ce CSS tel quel. Le tag ci-dessus = la version (identique à celle affichée en haut à gauche de Framly). */
+/* Framly build b2fce25 — colle ce CSS tel quel. Le tag ci-dessus = la version (identique à celle affichée en haut à gauche de Framly). */
 /* Framly stylesheet — Voiceflow widget overrides
  * Sélecteurs alignés sur le DOM réel VF V4 (référence : dragon-theme.css).
  * Ce bloc est injecté APRÈS dragon-theme dans le blob stylesheet —
@@ -122,9 +122,8 @@
   bottom: auto !important;
   transform: translate(-50%, -50%) !important;
   width: 560px !important;
-  height: 600px !important;
-  max-width: 96vw !important;
-  max-height: 92vh !important;
+  max-width: calc(100vw - 40px) !important;
+  height: min(600px, calc(100vh - 56px)) !important;
 }
 /* Liste des messages : remplit l'espace dispo, scroll vertical si besoin,
  * jamais horizontal. Padding interne pour que les bulles ne collent pas aux bords. */
