@@ -1,4 +1,4 @@
-/* Framly build 89ede90 — colle ce CSS tel quel. Le tag ci-dessus = la version (identique à celle affichée en haut à gauche de Framly). */
+/* Framly build 8104088 — colle ce CSS tel quel. Le tag ci-dessus = la version (identique à celle affichée en haut à gauche de Framly). */
 /* Framly stylesheet — Voiceflow widget overrides
  * Sélecteurs alignés sur le DOM réel VF V4 (référence : dragon-theme.css).
  * Ce bloc est injecté APRÈS dragon-theme dans le blob stylesheet —
@@ -76,7 +76,7 @@
 .vfrc-chat__container,
 .vfrc-chat__container-inner {
   background: linear-gradient(150deg, #fafafa 0%, #c9e4f3 100%) !important;
-  border-radius: 20px !important;
+  border-radius: 0px !important;
   overflow: hidden !important;
   /* isolation:isolate = fix bug Chrome : un descendant en backdrop-filter (le
    * footer en blur) casse le clipping border-radius+overflow → coins carrés.
@@ -124,6 +124,9 @@
   width: 560px !important;
   max-width: calc(100vw - 40px) !important;
   height: min(600px, calc(100vh - 56px)) !important;
+  /* Coins de la boîte flottante (popover/widget) — réglables indépendamment de
+   * l'embed via config.frameRadius.floating. */
+  border-radius: 20px !important;
 }
 /* Liste des messages : remplit l'espace dispo, scroll vertical si besoin,
  * jamais horizontal. Padding interne pour que les bulles ne collent pas aux bords. */
@@ -591,13 +594,13 @@ button[class*="send"]:not([class*="voice"]) {
   border-radius: 40px;
 }
 
-/* ── Éléments d'interface (preset: soft-light) */
+/* ── Éléments d'interface (preset: solid-dark) */
 .vfrc-system-response .vfrc-message:not([class*="extension"]):not([class*="vfrc-user"]),
 ._11kfxpg0 {
-  background: #FFFFFF !important;
+  background: #eff1f6 !important;
   color: #1a1a2e !important;
-  border: 1px solid rgba(0,0,0,0.09) !important;
-  border-radius: 20px !important;
+  border: 0px solid transparent !important;
+  border-radius: 10px !important;
 }
 .vfrc-system-response .vfrc-message:not([class*="extension"]) p,
 .vfrc-system-response .vfrc-message:not([class*="extension"]) span,
@@ -609,25 +612,26 @@ button[class*="send"]:not([class*="voice"]) {
   background: #4B70FA !important;
   color: #ffffff !important;
   border: 0px solid transparent !important;
-  border-radius: 20px !important;
+  border-radius: 10px !important;
+  box-shadow: 0 2px 8px rgba(75, 112, 250, 0.32) !important;
 }
 .vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3) {
-  background: #4B70FA !important;
-  color: #FFFFFF !important;
-  border: 1px solid #fcfcfc !important;
-  border-radius: 999px !important;
+  background: rgba(75, 112, 250, 0.1) !important;
+  color: #4B70FA !important;
+  border: 1px solid rgba(75, 112, 250, 0.28) !important;
+  border-radius: 10px !important;
   transition: all 0.15s ease !important;
 }
 .vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3):hover {
-  filter: brightness(0.82) !important;
+  transform: scale(1.03) !important;
 }
 .vfrc-input-container,
 ._1gdvh9t2,
 ._1gdvh9t3,
 div.vfrc-input-container {
   background: #ffffff !important;
-  border: 1px solid rgba(75, 112, 250, 0.35) !important;
-  border-radius: 14px !important;
+  border: 1px solid rgba(75, 112, 250, 0.32) !important;
+  border-radius: 10px !important;
 }
 .vfrc-input-container:focus-within,
 ._1gdvh9t2:focus-within {
