@@ -675,8 +675,11 @@ textarea._1gdvh9ta::placeholder {
 .vfrc-privacy,
 [class*="vfrc-privacy"],
 [class*="privacy"],
-.vfrc-prompt,
-[class*="vfrc-prompt"],
+/* ⚠️ NE PAS remettre .vfrc-prompt / [class*="vfrc-prompt"] dans cette liste :
+ * c'est le popup de confirmation du bouton "redémarrer la conversation" du header
+ * (boutons "Start new chat" / "Cancel"). Le masquer rend le redémarrage IMPOSSIBLE :
+ * le clic fonctionne, mais rien ne s'affiche et l'user reste bloqué.
+ * Anti-récidive 2026-07-17. */
 .vfrc-more-menu,
 [class*="vfrc-more-menu"],
 .vfrc-chat--bottom-spacer,
