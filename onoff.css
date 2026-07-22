@@ -698,6 +698,15 @@ div[class*="bottom-spacer"],
   pointer-events: none !important;
   overflow: hidden !important;
 }
+/* Popup de confirmation du restart : VF l'ouvre/ferme via la HAUTEUR (0 → 126px,
+ * avec overflow:hidden), et non via l'opacité. Mais son animation d'entrée qui
+ * remonte l'opacité à 1 ne se joue pas ici → le popup restait invisible même
+ * ouvert. On force donc l'opacité. Sans risque : replié, height:0 + overflow:hidden
+ * clippent totalement le contenu. Anti-récidive 2026-07-17. */
+.vfrc-prompt,
+[class*="vfrc-prompt"] {
+  opacity: 1 !important;
+}
 /* ── Header allégé : fond clair, titre lisible, bouton fermeture/restart visible */
 .vfrc-header {
   display: flex !important;
