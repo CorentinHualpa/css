@@ -367,6 +367,13 @@ div.vfrc-input-container {
   align-items: center !important;
   align-self: center !important; /* le bouton envoi reste centré verticalement (VF met flex-end) */
 }
+/* VF empile un spacer VIDE (._1gdvh9td, direct enfant de l'encart) en flex-column
+ * sous la ligne de saisie : ~21px de hauteur fantôme qui décentrent le bouton et
+ * gonflent l'encart. On le masque -> encart compact + bouton parfaitement centré.
+ * (ciblé en enfant direct pour ne PAS toucher le vrai wrap du bouton envoi.) */
+.vfrc-input-container > ._1gdvh9td {
+  display: none !important;
+}
 /* Kill shimmer ::before (animation inputShine de dragon-theme) */
 .vfrc-input-container::before,
 ._1gdvh9t2::before,
