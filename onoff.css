@@ -937,3 +937,18 @@ button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-cha
   border: 1px solid rgba(14,165,233,0.20) !important;
   box-shadow: 0 1px 6px rgba(14,165,233,0.10) !important;
 }
+
+/* ── FIX : champ de saisie masqué sur les étapes à boutons (17/07/2026) ──────
+ * Le widget VF (widget-next) met display:none sur le <textarea> dès qu'une
+ * étape affiche des boutons — l'user ne peut plus taper. Or le flow accepte la
+ * saisie libre (testé : question tapée -> le bot répond). On force donc l'input
+ * toujours visible. En état "fin de chat" le conteneur parent reste masqué par
+ * VF, donc pas de textarea parasite. */
+textarea.vfrc-chat-input,
+.vfrc-input-container textarea,
+.vfrc-chat-input__container-inner textarea {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
