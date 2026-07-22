@@ -365,6 +365,7 @@ div.vfrc-input-container {
 ._1gdvh9td {
   display: flex !important;
   align-items: center !important;
+  align-self: center !important; /* le bouton envoi reste centré verticalement (VF met flex-end) */
 }
 /* Kill shimmer ::before (animation inputShine de dragon-theme) */
 .vfrc-input-container::before,
@@ -395,14 +396,14 @@ textarea._1gdvh9ta,
 .vfrc-chat-input__container-inner textarea {
   flex: 1 !important;
   min-width: 0 !important;
-  min-height: 40px !important;
+  min-height: 24px !important;
   max-height: 120px !important;
   background: transparent !important;
   color: #121521 !important;
   font-family: 'DM Sans', sans-serif !important;
   font-size: 14px !important;
-  line-height: 1.5 !important;
-  padding: 10px 8px !important;
+  line-height: 1.4 !important;
+  padding: 6px 8px !important;
   margin: 0 !important;
   border: none !important;
   border-radius: 0 !important;
