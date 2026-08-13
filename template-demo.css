@@ -779,7 +779,7 @@ div[class*="_16eqxif"]:has(.vfrc-message[class*="extension"]) {
   margin: var(--space-sm) 0 !important;
 }
 
-.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3) {
+.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(.vfrc-launcher):not([class*="vfrc-launcher"]):not([class*="privacy__"]):not([id*="restart"]):not([class*="more-menu"]) {
   font-family: var(--font-body) !important;
   font-weight: 500 !important;
   font-size: var(--fs-button) !important;
@@ -797,7 +797,7 @@ div[class*="_16eqxif"]:has(.vfrc-message[class*="extension"]) {
   -webkit-backdrop-filter: blur(8px) !important;
 }
 
-.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3):hover {
+.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(.vfrc-launcher):not([class*="vfrc-launcher"]):not([class*="privacy__"]):not([id*="restart"]):not([class*="more-menu"]):hover {
   background: rgba(255, 140, 0, 0.06) !important;
   border-color: rgba(255, 184, 0, 0.45) !important;
   color: #ffffff !important;
@@ -805,7 +805,7 @@ div[class*="_16eqxif"]:has(.vfrc-message[class*="extension"]) {
   transform: translateY(-2px) !important;
 }
 
-.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3):active {
+.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(.vfrc-launcher):not([class*="vfrc-launcher"]):not([class*="privacy__"]):not([id*="restart"]):not([class*="more-menu"]):active {
   transform: translateY(0) scale(0.98) !important;
 }
 
@@ -1365,4 +1365,35 @@ div[class*="_16eqxif"] {
 div.o231sh2 {
   margin: 0 !important;
   padding: 0 !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+ * HOTFIX bundle Voiceflow widget-next 2.194.2
+ * ------------------------------------------------------------------------
+ * Voiceflow a regenere son namespace CSS-Modules. Les hashes _1q15b0b2 et
+ * _1q15b0b3 n existent plus. Ils servaient d exclusions dans la regle
+ * "Boutons / choices" : ne matchant plus rien, ils n excluaient plus rien et
+ * la regle debordait sur le launcher (affiche en carre bleu au lieu d un
+ * bouton rond a fond de marque), sur #restart-chat et sur les boutons
+ * .vfrc-privacy__*.
+ *
+ * Exclusions reecrites sur classes STABLES vfrc-*. Ne pas reintroduire de
+ * hash dans un :not() : dans une liste de selecteurs un hash mort est inerte,
+ * dans une exclusion il ELARGIT la portee de la regle.
+ * ══════════════════════════════════════════════════════════════════════════ */
+
+/* Popup de confirmation "Start new chat / Cancel" : hors du flux des messages,
+ * ce ne sont pas des choices et ils ne doivent pas heriter de leur geometrie.
+ * Ne jamais masquer .vfrc-prompt lui-meme : ca rend le redemarrage de
+ * conversation impossible (anti-recidive 2026-07-17). */
+.vfrc-prompt .vfrc-button {
+  width: auto !important;
+  min-width: 0 !important;
+  height: auto !important;
+  min-height: 32px !important;
+  padding: 8px 14px !important;
+  font-size: 14px !important;
+  line-height: 1.3 !important;
+  white-space: nowrap !important;
 }
