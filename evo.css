@@ -691,7 +691,7 @@ button._1q15b0b3 {
 .vfrc-system-response .vfrc-message:not([class*="extension"]) ul,
 ._11kfxpg1 ul {
   list-style: none !important;
-  padding-left: 1.2em !important;
+  padding-left: 14px !important;
   margin: 6px 0 !important;
 }
 
@@ -699,7 +699,7 @@ button._1q15b0b3 {
 ._11kfxpg1 ul li {
   position: relative !important;
   margin: 3px 0 !important;
-  padding-left: 6px !important;
+  padding-left: 0 !important;
   font-size: var(--fs-body) !important;
   line-height: 1.5 !important;
 }
@@ -708,7 +708,7 @@ button._1q15b0b3 {
 ._11kfxpg1 ul li::before {
   content: "▸" !important;
   position: absolute !important;
-  left: -1em !important;
+  left: -14px !important; width: 14px !important;
   color: var(--accent-orange) !important;
   font-size: 0.9em !important;
 }
@@ -1291,4 +1291,23 @@ div[class*="spacer"] {
  *
  * REGLE : ne cibler QUE des classes stables vfrc-*. Un hash n est jamais un
  * contrat, ni quand il disparait, ni quand il survit.
+ * ══════════════════════════════════════════════════════════════════════════ */
+
+/* ══════════════════════════════════════════════════════════════════════════
+ * HOTFIX 3 : puces de liste detachees du texte
+ * ------------------------------------------------------------------------
+ * Piege d unites. Le ::before des <li> portait A LA FOIS font-size: 0.9em ET
+ * left: -1em. Un "em" dans "left" se calcule sur le font-size de l element
+ * LUI-MEME, donc sur la taille deja reduite : -1em valait -12.6px, pas -14px.
+ * La gouttiere du ul valait de son cote 1.2em calcule sur 14px, soit 16.8px.
+ * Les deux ne tombaient pas en face, et les 6px de padding-left du li
+ * creusaient encore l ecart : 19px entre la puce et le texte pour un glyphe de
+ * 10.4px, d ou des puces flottant loin a gauche de leur item.
+ *
+ * Gouttiere et decalage cales sur la meme valeur en px : 14px, ce qui laisse
+ * 3.6px de blanc apres le glyphe. Ne pas descendre sous 12px, le glyphe fait
+ * 10.4px et toucherait le texte. Le ol garde 1.2em (numerotation native).
+ *
+ * REGLE : ne jamais melanger font-size en em et left/right en em sur un meme
+ * pseudo-element. Caler le decalage sur la meme unite que la gouttiere.
  * ══════════════════════════════════════════════════════════════════════════ */
