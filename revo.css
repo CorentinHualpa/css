@@ -392,7 +392,6 @@ textarea._1gdvh9ta::placeholder,
  * On garde :not(.vfrc-chat-input__voice-mode) pour ne pas voler le bouton voice. */
 #vfrc-send-message,
 .vfrc-chat-input__send:not(.vfrc-chat-input__voice-mode),
-._1gdvh9tf,
 button[class*="send"]:not([class*="voice"]) {
   width: 44px !important;
   height: 44px !important;
@@ -404,22 +403,19 @@ button[class*="send"]:not([class*="voice"]) {
   flex-shrink: 0 !important;
 }
 #vfrc-send-message svg,
-.vfrc-chat-input__send svg,
-._1gdvh9tf svg {
+.vfrc-chat-input__send svg{
   display: block !important;
   width: 20px !important;
   height: 20px !important;
 }
 #vfrc-send-message::after,
-.vfrc-chat-input__send::after,
-._1gdvh9tf::after {
+.vfrc-chat-input__send::after{
   content: none !important;
   display: none !important;
 }
 /* ._1gdvh9tf = classe hachée VF du send button, ciblée par dragon-theme */
 #vfrc-send-message:not([disabled]),
-.vfrc-chat-input__send:not(.vfrc-chat-input__voice-mode):not([disabled]),
-._1gdvh9tf:not([disabled]) {
+.vfrc-chat-input__send:not(.vfrc-chat-input__voice-mode):not([disabled]){
   background: #4B70FA !important;
   border: none !important;
   border-radius: 14px !important;
@@ -428,13 +424,11 @@ button[class*="send"]:not([class*="voice"]) {
   animation: none !important;
 }
 #vfrc-send-message:not([disabled]):hover,
-.vfrc-chat-input__send:not([disabled]):hover,
-._1gdvh9tf:not([disabled]):hover {
+.vfrc-chat-input__send:not([disabled]):hover{
   box-shadow: 0 4px 12px -4px rgba(75, 112, 250, 0.35) !important;
 }
 #vfrc-send-message[disabled],
-.vfrc-chat-input__send:not(.vfrc-chat-input__voice-mode)[disabled],
-._1gdvh9tf[disabled] {
+.vfrc-chat-input__send:not(.vfrc-chat-input__voice-mode)[disabled]{
   background: rgba(75, 112, 250, 0.1) !important;
   border: 1px solid rgba(75, 112, 250, 0.18) !important;
   border-radius: 14px !important;
@@ -628,8 +622,7 @@ textarea._1gdvh9ta::placeholder {
 .vfrc-chat--bottom-spacer,
 div[class*="bottom-spacer"],
 .vfrc-chat-focus-ring,
-[class*="chat-focus-ring"],
-._1gdvh9t7, ._1gdvh9t8, ._1gdvh9t9 {
+[class*="chat-focus-ring"]{
   display: none !important;
   visibility: hidden !important;
   height: 0 !important;
@@ -875,3 +868,25 @@ button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-cha
   line-height: 1.3 !important;
   white-space: nowrap !important;
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+ * HOTFIX 2 bundle Voiceflow widget-next 2.194.2 : hashes REASSIGNES
+ * ------------------------------------------------------------------------
+ * Un hash CSS-Modules peut survivre a une release en changeant de cible. C est
+ * le cas le plus vicieux : le selecteur matche toujours, mais il peint le
+ * mauvais element.
+ *
+ *   ._1gdvh9tf : etait le bouton d envoi, designe maintenant un conteneur grid
+ *                de hauteur 0 au-dessus de la zone de saisie. Nos regles lui
+ *                donnaient 44x44 + fond de marque + rayon 14px, ce qui produisait
+ *                un carre bleu flottant au-dessus du champ "Message...", et un
+ *                bloc de saisie a 101px de haut au lieu de 57.
+ *   ._1gdvh9t9 : designe maintenant le TEXTAREA de saisie, alors qu il figurait
+ *                dans la regle de masquage du chrome (display:none).
+ *
+ * Ces hashes sont retires. Les regles gardent leurs selecteurs stables
+ * (#vfrc-send-message, .vfrc-chat-input__send, [class*="..."]).
+ *
+ * REGLE : ne cibler QUE des classes stables vfrc-*. Un hash n est jamais un
+ * contrat, ni quand il disparait, ni quand il survit.
+ * ══════════════════════════════════════════════════════════════════════════ */
