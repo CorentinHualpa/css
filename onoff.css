@@ -933,9 +933,9 @@ button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-cha
 .vfrc-system-response .vfrc-message:not([class*="extension"]) h2, ._11kfxpg0 h2 { font-size: 18px !important; font-weight: 600 !important; line-height: 1.3 !important; margin: 10px 0 6px 0 !important; color: #4B70FA !important; }
 .vfrc-system-response .vfrc-message:not([class*="extension"]) h3, ._11kfxpg0 h3 { font-size: 15px !important; font-weight: 600 !important; margin: 8px 0 4px 0 !important; color: #4B70FA !important; }
 .vfrc-system-response .vfrc-message:not([class*="extension"]) h4, ._11kfxpg0 h4, .vfrc-system-response .vfrc-message:not([class*="extension"]) h5, ._11kfxpg0 h5, .vfrc-system-response .vfrc-message:not([class*="extension"]) h6, ._11kfxpg0 h6 { font-size: 14px !important; font-weight: 600 !important; margin: 6px 0 4px 0 !important; color: #121521 !important; }
-.vfrc-system-response .vfrc-message:not([class*="extension"]) ul, ._11kfxpg0 ul { list-style: none !important; padding-left: 1.2em !important; margin: 6px 0 !important; }
-.vfrc-system-response .vfrc-message:not([class*="extension"]) ul li, ._11kfxpg0 ul li { position: relative !important; margin: 3px 0 !important; padding-left: 6px !important; line-height: 1.5 !important; }
-.vfrc-system-response .vfrc-message:not([class*="extension"]) ul li::before, ._11kfxpg0 ul li::before { content: "\25B8" !important; position: absolute !important; left: -1em !important; color: #4B70FA !important; font-size: 0.9em !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) ul, ._11kfxpg0 ul { list-style: none !important; padding-left: 14px !important; margin: 6px 0 !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) ul li, ._11kfxpg0 ul li { position: relative !important; margin: 3px 0 !important; padding-left: 0 !important; line-height: 1.5 !important; }
+.vfrc-system-response .vfrc-message:not([class*="extension"]) ul li::before, ._11kfxpg0 ul li::before { content: "\25B8" !important; position: absolute !important; left: -14px !important; width: 14px !important; color: #4B70FA !important; font-size: 0.9em !important; }
 .vfrc-system-response .vfrc-message:not([class*="extension"]) ol, ._11kfxpg0 ol { padding-left: 1.2em !important; margin: 6px 0 !important; }
 .vfrc-system-response .vfrc-message:not([class*="extension"]) ol li, ._11kfxpg0 ol li { margin: 3px 0 !important; line-height: 1.5 !important; }
 .vfrc-system-response .vfrc-message:not([class*="extension"]) a, ._11kfxpg0 a { color: #4B70FA !important; text-decoration: none !important; border-bottom: 1px solid transparent !important; transition: border-color 0.2s ease !important; }
@@ -1028,4 +1028,23 @@ textarea.vfrc-chat-input,
  *
  * REGLE : ne cibler QUE des classes stables vfrc-*. Un hash n est jamais un
  * contrat, ni quand il disparait, ni quand il survit.
+ * ══════════════════════════════════════════════════════════════════════════ */
+
+/* ══════════════════════════════════════════════════════════════════════════
+ * HOTFIX 3 : puces de liste detachees du texte
+ * ------------------------------------------------------------------------
+ * Piege d unites. Le ::before portait A LA FOIS font-size: 0.9em ET left: -1em.
+ * Or un "em" dans "left" se calcule sur le font-size de l element LUI-MEME,
+ * donc sur la taille deja reduite : -1em valait -12.6px, pas -14px. La
+ * gouttiere du ul valait de son cote 1.2em calcule sur 14px, soit 16.8px. Les
+ * deux ne tombaient pas en face, et les 6px de padding-left du li creusaient
+ * encore l ecart : 19px entre la puce et le texte pour un glyphe de 10.4px,
+ * soit 8.6px de blanc, d ou des puces flottant loin a gauche.
+ *
+ * Corrige en px pour que gouttiere et decalage soient la meme valeur : 14px,
+ * ce qui laisse 3.6px de blanc apres le glyphe. Ne pas descendre sous 12px :
+ * le glyphe ▸ fait 10.4px et commencerait a toucher le texte.
+ *
+ * REGLE : ne jamais melanger font-size en em et left/right en em sur un meme
+ * pseudo-element. Caler le decalage sur la meme unite que la gouttiere.
  * ══════════════════════════════════════════════════════════════════════════ */
