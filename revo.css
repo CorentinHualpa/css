@@ -242,8 +242,8 @@
  * → source-order fait gagner Framly (qui arrive après dragon-theme dans le blob).
  * box-shadow: none — efface le glow violet de dragon sur thèmes sans glow.
  * backdrop-filter: none (sauf glass) — supprime le blur violet de dragon sur tous les boutons. */
-.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3),
-button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3),
+.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(.vfrc-launcher):not([class*="vfrc-launcher"]):not([class*="privacy__"]):not([id*="restart"]):not([class*="more-menu"]),
+button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]):not(.vfrc-launcher):not([class*="vfrc-launcher"]):not([class*="privacy__"]):not([id*="restart"]):not([class*="more-menu"]),
 [class*="dragon-ask-btn"],
 [class*="dragon-choice"] {
   background: rgba(75, 112, 250, 0.12) !important;
@@ -261,8 +261,8 @@ button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-cha
  * Dragon-theme hover = violet gradient + text blanc + glow orange → complètement
  * hors-thème sur light presets (Ghost, Miel, Silk…) et dark non-dragon.
  * On override avec les couleurs du thème ; le translateY(-2px) de dragon est conservé. */
-.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3):hover,
-button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3):hover,
+.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(.vfrc-launcher):not([class*="vfrc-launcher"]):not([class*="privacy__"]):not([id*="restart"]):not([class*="more-menu"]):hover,
+button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([class*="start-button"]):not(.vfrc-launcher):not([class*="vfrc-launcher"]):not([class*="privacy__"]):not([id*="restart"]):not([class*="more-menu"]):hover,
 [class*="dragon-ask-btn"]:hover,
 [class*="dragon-choice"]:hover {
   background: rgba(75, 112, 250, 0.22) !important;
@@ -569,14 +569,14 @@ button[class*="send"]:not([class*="voice"]) {
   border: 0px solid transparent !important;
   border-radius: 20px !important;
 }
-.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3) {
+.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(.vfrc-launcher):not([class*="vfrc-launcher"]):not([class*="privacy__"]):not([id*="restart"]):not([class*="more-menu"]) {
   background: #4B70FA !important;
   color: #FFFFFF !important;
   border: 1px solid #fcfcfc !important;
   border-radius: 999px !important;
   transition: all 0.15s ease !important;
 }
-.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3):hover {
+.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(.vfrc-launcher):not([class*="vfrc-launcher"]):not([class*="privacy__"]):not([id*="restart"]):not([class*="more-menu"]):hover {
   filter: brightness(0.82) !important;
 }
 .vfrc-input-container,
@@ -780,8 +780,8 @@ button.vfrc-header--button,
   flex: 0 0 auto !important;
 }
 /* Choices : padding + taille texte (absents de buildButtonCss → empilement serré en prod) */
-.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3),
-button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(._1q15b0b2):not(._1q15b0b3) {
+.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(.vfrc-launcher):not([class*="vfrc-launcher"]):not([class*="privacy__"]):not([id*="restart"]):not([class*="more-menu"]),
+button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-chat-input__send):not([id*="send"]):not([class*="start-button"]):not(.vfrc-launcher):not([class*="vfrc-launcher"]):not([class*="privacy__"]):not([id*="restart"]):not([class*="more-menu"]) {
   padding: 9px 18px !important;
   font-size: 14px !important;
   line-height: 1.3 !important;
@@ -843,4 +843,35 @@ button.vfrc-button:not(.vfrc-header--button):not(#vfrc-start-chat):not(.vfrc-cha
 .vfrc-system-response .vfrc-message:not([class*="extension"]) {
   border: 1px solid rgba(14,165,233,0.20) !important;
   box-shadow: 0 1px 6px rgba(14,165,233,0.10) !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+ * HOTFIX bundle Voiceflow widget-next 2.194.2
+ * ------------------------------------------------------------------------
+ * Voiceflow a regenere son namespace CSS-Modules. Les hashes _1q15b0b2 et
+ * _1q15b0b3 n existent plus. Ils servaient d exclusions dans la regle
+ * "Boutons / choices" : ne matchant plus rien, ils n excluaient plus rien et
+ * la regle debordait sur le launcher (affiche en carre bleu au lieu d un
+ * bouton rond a fond de marque), sur #restart-chat et sur les boutons
+ * .vfrc-privacy__*.
+ *
+ * Exclusions reecrites sur classes STABLES vfrc-*. Ne pas reintroduire de
+ * hash dans un :not() : dans une liste de selecteurs un hash mort est inerte,
+ * dans une exclusion il ELARGIT la portee de la regle.
+ * ══════════════════════════════════════════════════════════════════════════ */
+
+/* Popup de confirmation "Start new chat / Cancel" : hors du flux des messages,
+ * ce ne sont pas des choices et ils ne doivent pas heriter de leur geometrie.
+ * Ne jamais masquer .vfrc-prompt lui-meme : ca rend le redemarrage de
+ * conversation impossible (anti-recidive 2026-07-17). */
+.vfrc-prompt .vfrc-button {
+  width: auto !important;
+  min-width: 0 !important;
+  height: auto !important;
+  min-height: 32px !important;
+  padding: 8px 14px !important;
+  font-size: 14px !important;
+  line-height: 1.3 !important;
+  white-space: nowrap !important;
 }
